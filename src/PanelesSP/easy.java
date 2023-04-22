@@ -8,11 +8,16 @@ import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Point;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.Random;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
+import javax.swing.Timer;
 
 /**
  *
@@ -20,9 +25,24 @@ import javax.swing.SwingUtilities;
  */
 public class easy extends javax.swing.JPanel {
 
-    /**
-     * Creates new form easy
-     */
+    //SUBRUTINA PARA HACER QUE EL BOTON TENGA UN SOMBREADO
+    private void cambiarcolor(JButton boton) {
+    boton.addMouseListener(new MouseAdapter() {
+        @Override
+        public void mouseEntered(MouseEvent evt) {
+            boton.setBackground(new Color(255, 153, 255));
+             Timer timer = new Timer(2000, new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        boton.setBackground(new Color(255,255,255));
+                    }
+                });
+                timer.setRepeats(false); // hacemos que el temporizador se ejecute solo una vez
+                timer.start(); // iniciamos el temporizador
+        }
+
+        
+    });
+}
     private String name = null;
     public easy(String user) {
         initComponents();
@@ -38,13 +58,14 @@ public class easy extends javax.swing.JPanel {
         {boton61, boton62, boton63, boton64, boton65},
         {boton71, boton72, boton73, boton74, boton75},};//matriz de botones
 
+        
         //Vector de planetas [4] pero solo se usan 3 espacios
         String[] planetas = {"TIERRA", "CERES", "VENUS", ""};
 
         //Asignacion de letras a texto de la matriz de botones
         for (i = 0; i < 7; i++) {
             for (j = 0; j < 5; j++) {
-
+                cambiarcolor(botones[i][j]);//EJECUTAR LA SUBRUTINA
                 //Letras aleatorias mayusculas usando Random
                 Random random = new Random();
                 char letra = (char) (random.nextInt(26) + 'A');
