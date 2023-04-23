@@ -1184,7 +1184,7 @@ int BEAM = 0;
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         contenido5.removeAll();
-        hardanime h = new hardanime(name);
+        hardmusica h = new hardmusica(name);
         h.setSize(800, 496);
         h.setLocation(0, 0);
         h.setOpaque(false);
