@@ -96,8 +96,12 @@ public class CarreraPANELcarros extends javax.swing.JPanel {
 
         InicioBTN = new javax.swing.JButton();
         Mensajito = new javax.swing.JLabel();
-        VERDEc = new javax.swing.JLabel();
+        ObsRojo1 = new javax.swing.JLabel();
+        ObsRojo2 = new javax.swing.JLabel();
+        BonoAzul2 = new javax.swing.JLabel();
+        BonoAzul1 = new javax.swing.JLabel();
         NARANJAc = new javax.swing.JLabel();
+        VERDEc = new javax.swing.JLabel();
         AZULc = new javax.swing.JLabel();
         pistafondo = new javax.swing.JLabel();
 
@@ -121,13 +125,25 @@ public class CarreraPANELcarros extends javax.swing.JPanel {
 
         Mensajito.setFont(new java.awt.Font("Swis721 Blk BT", 0, 14)); // NOI18N
         Mensajito.setForeground(new java.awt.Color(204, 204, 255));
-        add(Mensajito, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 120, 180, 30));
+        add(Mensajito, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 130, 180, 30));
 
-        VERDEc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGcars/verdecarro (2).png"))); // NOI18N
-        add(VERDEc, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 130, 70));
+        ObsRojo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGcars/BolaRoja60.png"))); // NOI18N
+        add(ObsRojo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 190, 60, 50));
+
+        ObsRojo2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGcars/BolaRoja60.png"))); // NOI18N
+        add(ObsRojo2, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 50, 60, 50));
+
+        BonoAzul2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGcars/BolaAzu60l.png"))); // NOI18N
+        add(BonoAzul2, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 260, 60, 50));
+
+        BonoAzul1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGcars/BolaAzu60l.png"))); // NOI18N
+        add(BonoAzul1, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 120, 60, 50));
 
         NARANJAc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGcars/naranjacarro_1.png"))); // NOI18N
         add(NARANJAc, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 240, -1, 70));
+
+        VERDEc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGcars/verdecarro (2).png"))); // NOI18N
+        add(VERDEc, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 130, 70));
 
         AZULc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGcars/axullcarro (1).png"))); // NOI18N
         AZULc.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -141,33 +157,52 @@ public class CarreraPANELcarros extends javax.swing.JPanel {
         add(pistafondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 780, 390));
     }// </editor-fold>//GEN-END:initComponents
 
+//    private int[] PosBolitas(int x1, int y1, int x2, int y2) {
+//        int[] nuevaPOs=new int[4];
+//      
+//        if ((x1 == x2) & (y1 == y2)) {
+//            x2 = ran.nextInt(limiteF - 2) + 1;
+//            y2 = ran.nextInt(limiteC - 2) + 1;
+//        }
+//        nuevaPOs[0]=x1;
+//        nuevaPOs[1]=y1;
+//        nuevaPOs[2]=x2;
+//        nuevaPOs[3]=y2;
+//        return nuevaPOs;
+//    }
 
+    int rx1, rx2, ry1, ry2, ax1, ax2, ay1, ay2;
+
+    int PermisoParaMover = 1;
     private void InicioBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InicioBTNActionPerformed
         InicioBTN.setVisible(false);
         Mensajito.setText("");
-        
+        PermisoParaMover = 0;
+
         //Primero la ubicacion de inicio para todas las naves
         AZULc.setLocation(0, AZULc.getLocation().y);
         NARANJAc.setLocation(0, NARANJAc.getLocation().y);
-        VERDEc.setLocation(0, VERDEc.getLocation().y);
+        VERDEc.setLocation(0,VERDEc.getLocation().y);
+
+     
 
         espaciopista = Hacerespaciopista(); //llamar al que crea la matriz
+
         AZULc.requestFocus(); //CENTRAR EL MOVIMIENTO CON TECLAS A LA NAVE DEL USUARIO
-        //Fin.setLocation(WIDTH, WIDTH);
         timer.start(); //Iniciar el timer para las otras dos naves competidores
 
     }//GEN-LAST:event_InicioBTNActionPerformed
-    
+
 // auto del usuario
-private KeyListener AZULcKeyListener;
+    private KeyListener AZULcKeyListener;
     private void AZULcKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_AZULcKeyReleased
 
         int x = AZULc.getX(), y = AZULc.getY();
         //En la matriz si es 0 el auto se movera, si no, no avanzara en esa casilla.
-        
+
 //        if ((AZULc.getLocation().x < (limiteC - 1) * casilla) && (NARANJAc.getLocation().x < (limiteC - 1) * casilla)
 //                    && (VERDEc.getLocation().x < (limiteC - 1) * casilla)) {
-
+        if (PermisoParaMover == 0) {
             switch (evt.getKeyCode()) {
                 case KeyEvent.VK_RIGHT: //DERECHA
                     Mensajito.setText("");
@@ -205,7 +240,7 @@ private KeyListener AZULcKeyListener;
             System.out.println("Casilla de la derecha = " + espaciopista[y / casilla][(x / casilla) + 1]);
             System.out.println("Casilla de la UP = " + espaciopista[(y / casilla) - 1][x / casilla]);
             System.out.println("Casilla de la Abajo = " + espaciopista[(y / casilla) + 1][x / casilla]);
-        
+        }
     }//GEN-LAST:event_AZULcKeyReleased
 
     //Naves Competencia
@@ -241,8 +276,8 @@ private KeyListener AZULcKeyListener;
             int AX = AZULc.getX(), AY = AZULc.getY();
             int NX = NARANJAc.getX(), NY = NARANJAc.getY();//Obtener Componentes de las coordenadas
             int VX = VERDEc.getX(), VY = VERDEc.getY(); //Obtener Componentes de las coordenadas
-            if ((AZULc.getLocation().x < (limiteC - 1) * casilla) && (NARANJAc.getLocation().x < (limiteC - 2) * casilla)
-                    && (VERDEc.getLocation().x < (limiteC - 2) * casilla)) {
+            if ((AZULc.getLocation().x < (limiteC) * casilla) && (NARANJAc.getLocation().x < (limiteC) * casilla)
+                    && (VERDEc.getLocation().x < (limiteC) * casilla)) {
                 /* Condicianl para que se muevan si aun no ha
                     llegado a la linea de meta( o al final de la matriz */
 
@@ -264,35 +299,35 @@ private KeyListener AZULcKeyListener;
                 System.out.println("\n VERDE VX= " + VX + " , y= " + VY); //Valor Coorenada VERDE
                 System.out.println("casila  V " + espaciopista[VY / casilla][(VX / casilla)]);
 
+            } else {
+
+                PermisoParaMover = 1;
             }
-//                if((AZULc.getLocation().x >= (limiteC - 1) * casilla)
-//                        | (VERDEc.getLocation().x >= (limiteC - 1) * casilla)
-//                        | (NARANJAc.getLocation().x >= (limiteC - 1) * casilla)){
-//               
-//                }
-            if (espaciopista[AY / casilla][(AX / casilla)] == 2 | espaciopista[VY / casilla][(VX / casilla)] == 2 | espaciopista[NY / casilla][(NX / casilla)] == 2) {
-                AZULc.removeKeyListener(AZULcKeyListener);
-               
+
+            if ((espaciopista[AY / casilla][(AX / casilla)] == 2) || (espaciopista[VY / casilla][(VX / casilla)] == 2) || (espaciopista[NY / casilla][(NX / casilla)] == 2)) {
+
                 if (AX > VX & AX > NX) {
                     JOptionPane.showMessageDialog(null, "\t!FELICIDADES " + user + "\n! HA GANADO LA CARRERA:D");
 
-                } else {
-                    if (NX > VX & NX > AX | VX > AX & VX > NX | VX == NX) {
-                        JOptionPane.showMessageDialog(null, "\t Game Over " + user);
-
-                    } else {
-                        if (AX == NX) {
-                            JOptionPane.showMessageDialog(null, "\t Empate " + user);
-                        } else if (AX == VX) {
-                            JOptionPane.showMessageDialog(null, "\t Empate " + user);
-
-                        }
-                    }
-
                 }
+                if ((NX > VX & NX > AX) | (VX > AX & VX > NX) | (VX == NX)) {
+                    JOptionPane.showMessageDialog(null, "\t Game Over " + user);
+
+                } else {
+                    if (AX == NX) {
+                        JOptionPane.showMessageDialog(null, "\t Empate " + user);
+                    } else if (AX == VX) {
+                        JOptionPane.showMessageDialog(null, "\t Empate " + user);
+
+                    }
+                }
+
                 timer.stop();
+
+                PermisoParaMover = 1;
+                InicioBTN.setText("Reiniciar");
                 InicioBTN.setVisible(true);
-               
+
             }
 
         }
@@ -312,9 +347,13 @@ private KeyListener AZULcKeyListener;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel AZULc;
+    private javax.swing.JLabel BonoAzul1;
+    private javax.swing.JLabel BonoAzul2;
     private javax.swing.JButton InicioBTN;
     private javax.swing.JLabel Mensajito;
     private javax.swing.JLabel NARANJAc;
+    private javax.swing.JLabel ObsRojo1;
+    private javax.swing.JLabel ObsRojo2;
     private javax.swing.JLabel VERDEc;
     private javax.swing.JLabel pistafondo;
     // End of variables declaration//GEN-END:variables
