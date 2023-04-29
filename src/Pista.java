@@ -28,7 +28,7 @@ public class Pista extends javax.swing.JFrame {
         SeleccionNavePanel NavePanel=new SeleccionNavePanel(user);
         ShowPanel(NavePanel);   
         
-        CarreraPANELcarros Cpanel=new CarreraPANELcarros();
+        CarreraPANELcarros Cpanel=new CarreraPANELcarros(user);
         add(Cpanel);
         
         //cursor
@@ -72,6 +72,7 @@ public class Pista extends javax.swing.JFrame {
         fondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Carrera");
         setResizable(false);
 
         Visible.setBackground(new java.awt.Color(0, 0, 51));
@@ -186,7 +187,7 @@ public class Pista extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartActionPerformed
-       CarreraPANELcarros Cpanel=new CarreraPANELcarros();
+       CarreraPANELcarros Cpanel=new CarreraPANELcarros(user);
        ShowPanel(Cpanel); //Llamar el metodo para mostrar el panel 
     }//GEN-LAST:event_btnStartActionPerformed
 
