@@ -15,9 +15,11 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 
 public class CarreraPANELcarros extends javax.swing.JPanel {
+
     private String user;
+
     public CarreraPANELcarros(int[][] espaciopista) {
-       
+
         initComponents();
         this.setFocusable(true);
         this.requestFocusInWindow();
@@ -59,7 +61,6 @@ public class CarreraPANELcarros extends javax.swing.JPanel {
         return VERDEc;
     }
 
-
     Random ran = new Random();
     private final int limiteF = 17, limiteC = 34; //Limites de la matriz
     private int casilla = 20;//Lo que medira nuestras casillas imaginarias de la matriz
@@ -73,7 +74,7 @@ public class CarreraPANELcarros extends javax.swing.JPanel {
     public int[][] Hacerespaciopista() {
         int F = 0, C = 0;
         int espaciopista[][] = new int[800][500];
-         for (F = 0; F < limiteF; F++) {
+        for (F = 0; F < limiteF; F++) {
             for (C = 0; C < limiteC; C++) {
                 if (F == limiteF - 1 || F == 0 || C == 0) {
                     espaciopista[F][C] = 1; //Bordes de la pista
@@ -144,6 +145,7 @@ public class CarreraPANELcarros extends javax.swing.JPanel {
     private void InicioBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InicioBTNActionPerformed
         InicioBTN.setVisible(false);
         Mensajito.setText("");
+        
         //Primero la ubicacion de inicio para todas las naves
         AZULc.setLocation(0, AZULc.getLocation().y);
         NARANJAc.setLocation(0, NARANJAc.getLocation().y);
@@ -155,139 +157,147 @@ public class CarreraPANELcarros extends javax.swing.JPanel {
         timer.start(); //Iniciar el timer para las otras dos naves competidores
 
     }//GEN-LAST:event_InicioBTNActionPerformed
-private KeyListener AZULcKeyListener;
+    
 // auto del usuario
-  
+private KeyListener AZULcKeyListener;
     private void AZULcKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_AZULcKeyReleased
-        
+
         int x = AZULc.getX(), y = AZULc.getY();
         //En la matriz si es 0 el auto se movera, si no, no avanzara en esa casilla.
-
+        
 //        if ((AZULc.getLocation().x < (limiteC - 1) * casilla) && (NARANJAc.getLocation().x < (limiteC - 1) * casilla)
 //                    && (VERDEc.getLocation().x < (limiteC - 1) * casilla)) {
-        switch (evt.getKeyCode()) {
-            case KeyEvent.VK_RIGHT: //DERECHA
-                Mensajito.setText("");
-                //(que no cruce el limite de la matriz) Y (verificar el valor dentro de la matriz sea valido (!=1))
-                //Si cumple las condiciones, podra moverse
-                if (x < (limiteC - 1) * casilla & espaciopista[y / casilla][(x / casilla) + 1] != 1) {
-                    AZULc.setLocation(x + casilla, y);
-                }
-                break;
-            case KeyEvent.VK_UP: //ARRIBA
-                Mensajito.setText("");
-                if (y > 0 & espaciopista[(y / casilla) - 1][x / casilla] != 1) {
-                    AZULc.setLocation(x, y - casilla);
 
-                }
-                break;
-            case KeyEvent.VK_DOWN: //ABAJO
-                Mensajito.setText("");
-                if (y < (limiteF - 1) * casilla & espaciopista[(y / casilla) + 1][x / casilla] != 1) {
-                    AZULc.setLocation(x, y + casilla);
+            switch (evt.getKeyCode()) {
+                case KeyEvent.VK_RIGHT: //DERECHA
+                    Mensajito.setText("");
+                    //(que no cruce el limite de la matriz) Y (verificar el valor dentro de la matriz sea valido (!=1))
+                    //Si cumple las condiciones, podra moverse
+                    if (x < (limiteC - 1) * casilla & espaciopista[y / casilla][(x / casilla) + 1] != 1) {
+                        AZULc.setLocation(x + casilla, y);
+                    }
+                    break;
+                case KeyEvent.VK_UP: //ARRIBA
+                    Mensajito.setText("");
+                    if (y > 0 & espaciopista[(y / casilla) - 1][x / casilla] != 1) {
+                        AZULc.setLocation(x, y - casilla);
 
-                }
-                break;
-            case KeyEvent.VK_LEFT: //Izquierda No PODRA retroceder, si lo hace empieza desde el inicio XD
-                Mensajito.setText(" No puedes retroceder !");
-                AZULc.setLocation(x, y);
-                 InicioBTN.setVisible(true);
-                 timer.stop();
-                break;
+                    }
+                    break;
+                case KeyEvent.VK_DOWN: //ABAJO
+                    Mensajito.setText("");
+                    if (y < (limiteF - 1) * casilla & espaciopista[(y / casilla) + 1][x / casilla] != 1) {
+                        AZULc.setLocation(x, y + casilla);
 
-        }
-        System.out.println("\n USUARIO x= " + x + " , y= " + y); //Valor Coorenada Usuario
+                    }
+                    break;
+                case KeyEvent.VK_LEFT: //Izquierda No PODRA retroceder, si lo hace empieza desde el inicio XD
+                    Mensajito.setText(" No puedes retroceder !");
+                    AZULc.setLocation(x, y);
+                    InicioBTN.setVisible(true);
+                    timer.stop();
+                    break;
+
+            }
+            System.out.println("\n USUARIO x= " + x + " , y= " + y); //Valor Coorenada Usuario
+
+            //valor de casilla en la matriz
+            System.out.println("Casilla de la derecha = " + espaciopista[y / casilla][(x / casilla) + 1]);
+            System.out.println("Casilla de la UP = " + espaciopista[(y / casilla) - 1][x / casilla]);
+            System.out.println("Casilla de la Abajo = " + espaciopista[(y / casilla) + 1][x / casilla]);
         
-         //valor de casilla en la matriz
-        System.out.println("Casilla de la derecha = " + espaciopista[y / casilla][(x / casilla) + 1]);
-        System.out.println("Casilla de la UP = " + espaciopista[(y / casilla) - 1][x / casilla]);
-        System.out.println("Casilla de la Abajo = " + espaciopista[(y / casilla) + 1][x / casilla]);
-
     }//GEN-LAST:event_AZULcKeyReleased
 
     //Naves Competencia
     int Pos[] = {1, -1};
     int Vel[] = {0, 1, 2, 3};
-    //Funcion para calcular las nuevas coordenadas del movimiento
-    private int []movimiento(int X,int Y,int casilla, int[][]espaciopista,int[]Pos,int[]Vel){
-        int []xy=new int [2];
-         //(Movimiento horizontal)
-                int i=0,j=0 ;
-                i= ran.nextInt(4);
-                X = X + casilla * Vel[i];//Actualizar Coordenada X
 
-                //( Movimiento vertical )
-                j = ran.nextInt(2);
-                if (espaciopista[(Y / casilla) - 1][X / casilla] != 0) {
-                    j = 0;
-                }
-                if (espaciopista[(Y / casilla) + 1][Y / casilla] != 0) {
-                    j = 1;
-                }
-                Y = Y + casilla * Pos[j]; //Actualizar Coordenada Y
-                
-                xy[0]=X;
-                xy[1]=Y;
-               return xy;
+    //Funcion para calcular las nuevas coordenadas del movimiento
+    private int[] movimiento(int X, int Y, int casilla, int[][] espaciopista, int[] Pos, int[] Vel) {
+        int[] xy = new int[2];
+        //(Movimiento horizontal)
+        int i = 0, j = 0;
+        i = ran.nextInt(4);
+        X = X + casilla * Vel[i];//Actualizar Coordenada X
+
+        //( Movimiento vertical )
+        j = ran.nextInt(2);
+        if (espaciopista[(Y / casilla) - 1][X / casilla] != 0) {
+            j = 0;
+        }
+        if (espaciopista[(Y / casilla) + 1][Y / casilla] != 0) {
+            j = 1;
+        }
+        Y = Y + casilla * Pos[j]; //Actualizar Coordenada Y
+
+        xy[0] = X;
+        xy[1] = Y;
+        return xy;
     }
 //Iteracion
     Timer timer = new Timer(500, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                int AX = AZULc.getX(), AY = AZULc.getY();
-                int NX = NARANJAc.getX(), NY = NARANJAc.getY();//Obtener Componentes de las coordenadas
-                int VX = VERDEc.getX(), VY = VERDEc.getY(); //Obtener Componentes de las coordenadas
-                if ((AZULc.getLocation().x < (limiteC - 1) * casilla) && (NARANJAc.getLocation().x < (limiteC - 2) * casilla)
-                        && (VERDEc.getLocation().x < (limiteC - 2) * casilla)) {
-                    /* Condicianl para que se muevan si aun no ha
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            int AX = AZULc.getX(), AY = AZULc.getY();
+            int NX = NARANJAc.getX(), NY = NARANJAc.getY();//Obtener Componentes de las coordenadas
+            int VX = VERDEc.getX(), VY = VERDEc.getY(); //Obtener Componentes de las coordenadas
+            if ((AZULc.getLocation().x < (limiteC - 1) * casilla) && (NARANJAc.getLocation().x < (limiteC - 2) * casilla)
+                    && (VERDEc.getLocation().x < (limiteC - 2) * casilla)) {
+                /* Condicianl para que se muevan si aun no ha
                     llegado a la linea de meta( o al final de la matriz */
-                    
-                    //Nave Naranja ---------------------
-                    int[]xy= movimiento(NX,NY,casilla,espaciopista,Pos, Vel);
-                    NX=xy[0];  NY=xy[1];
-                    NARANJAc.setLocation(NX, NY);//Actualizar Ubicacion
-                    
-                    //Nave Verde ---------------------
-                    xy= movimiento(VX,VY,casilla,espaciopista,Pos, Vel);
-                    VX=xy[0];  VY=xy[1];
-                    VERDEc.setLocation(VX, VY);//Actualizar Ubicacion
-                    
-                    System.out.println("\n NARANJA NX= " + NX + " , y= " + NY); //Valor Coorenada NARANJA
-                    System.out.println("\n VERDE VX= " + VX + " , y= " + VY); //Valor Coorenada VERDE
-                    
-                }
+
+                //Nave Naranja ---------------------
+                int[] xy = movimiento(NX, NY, casilla, espaciopista, Pos, Vel);
+                NX = xy[0];
+                NY = xy[1];
+                NARANJAc.setLocation(NX, NY);//Actualizar Ubicacion
+
+                //Nave Verde ---------------------
+                xy = movimiento(VX, VY, casilla, espaciopista, Pos, Vel);
+                VX = xy[0];
+                VY = xy[1];
+                VERDEc.setLocation(VX, VY);//Actualizar Ubicacion
+
+                System.out.println("\n NARANJA NX= " + NX + " , y= " + NY); //Valor Coorenada NARANJA
+                System.out.println(" casilla N " + espaciopista[NY / casilla][(NX / casilla)]);
+
+                System.out.println("\n VERDE VX= " + VX + " , y= " + VY); //Valor Coorenada VERDE
+                System.out.println("casila  V " + espaciopista[VY / casilla][(VX / casilla)]);
+
+            }
 //                if((AZULc.getLocation().x >= (limiteC - 1) * casilla)
 //                        | (VERDEc.getLocation().x >= (limiteC - 1) * casilla)
 //                        | (NARANJAc.getLocation().x >= (limiteC - 1) * casilla)){
 //               
 //                }
-            if(espaciopista[AY / casilla][(AX / casilla)] == 2 | espaciopista[VY / casilla][(VX / casilla)] == 2 | espaciopista[NY / casilla][(NX / casilla)] == 2){
-                
-//                AZULc.removeKeyListener(AZULcKeyListener);
-                if( AX>VX &AX>NX){
+            if (espaciopista[AY / casilla][(AX / casilla)] == 2 | espaciopista[VY / casilla][(VX / casilla)] == 2 | espaciopista[NY / casilla][(NX / casilla)] == 2) {
+                AZULc.removeKeyListener(AZULcKeyListener);
+               
+                if (AX > VX & AX > NX) {
                     JOptionPane.showMessageDialog(null, "\t!FELICIDADES " + user + "\n! HA GANADO LA CARRERA:D");
-           
-                }else{
-                    if( NX>VX &NX>AX | VX>AX & VX>NX | VX==NX){
-                        JOptionPane.showMessageDialog(null, "\t Game Over " + user );
-           
-                    }else{ 
-                        if(AX==NX ){
-                            JOptionPane.showMessageDialog(null, "\t Empate " + user );
-                        }else if( AX==VX){
-                            JOptionPane.showMessageDialog(null, "\t Empate " + user );
-                    
+
+                } else {
+                    if (NX > VX & NX > AX | VX > AX & VX > NX | VX == NX) {
+                        JOptionPane.showMessageDialog(null, "\t Game Over " + user);
+
+                    } else {
+                        if (AX == NX) {
+                            JOptionPane.showMessageDialog(null, "\t Empate " + user);
+                        } else if (AX == VX) {
+                            JOptionPane.showMessageDialog(null, "\t Empate " + user);
+
                         }
                     }
-                   
+
                 }
                 timer.stop();
                 InicioBTN.setVisible(true);
+               
             }
-                
-            }
-            
-        });
+
+        }
+
+    });
 
     //Obstaculos y bonus 
     /*Exisitiran unos obtaculos y premios que aumentaran o disminuiran la velocidad de TODAS las naves
