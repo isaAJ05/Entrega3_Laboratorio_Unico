@@ -202,7 +202,6 @@ public class CarreraPANELcarros extends javax.swing.JPanel {
 //        ax2 = BonoAzul2.getX();
 //        ay1 = BonoAzul1.getY();
 //        ay2 = BonoAzul2.getY();
-
         //  reubicarBolitas(BonoAzul1);
         espaciopista = Hacerespaciopista(); //llamar al que crea la matriz
 
@@ -219,7 +218,6 @@ public class CarreraPANELcarros extends javax.swing.JPanel {
 
 //        if ((AZULc.getLocation().x < (limiteC - 1) * casilla) && (NARANJAc.getLocation().x < (limiteC - 1) * casilla)
 //                    && (VERDEc.getLocation().x < (limiteC - 1) * casilla)) {
-       
         if (PermisoParaMover == 0) {
 
             switch (evt.getKeyCode()) {
@@ -227,16 +225,16 @@ public class CarreraPANELcarros extends javax.swing.JPanel {
                     Mensajito.setText("");
                     //(que no cruce el limite de la matriz) Y (verificar el valor dentro de la matriz sea valido (!=1))
                     //Si cumple las condiciones, podra moverse
-                   
+
                     if (x < (limiteC - 1) * casilla & espaciopista[y / casilla][(x / casilla) + 1] != 1) {
-                        bolita=1; //Obstaculos y Bonos
-                        if (AZULc.getBounds().intersects(BonoAzul1.getBounds())||AZULc.getBounds().intersects(BonoAzul2.getBounds())) {
+                        bolita = 1; //Obstaculos y Bonos
+                        if (AZULc.getBounds().intersects(BonoAzul1.getBounds()) || AZULc.getBounds().intersects(BonoAzul2.getBounds())) {
                             bolita = 3; // Si toca una boolita AZUL obtiene bono se movera el triple de casillas
                         }
-                        if (AZULc.getBounds().intersects(ObsRojo1.getBounds())||AZULc.getBounds().intersects(ObsRojo2.getBounds())) {
+                        if (AZULc.getBounds().intersects(ObsRojo1.getBounds()) || AZULc.getBounds().intersects(ObsRojo2.getBounds())) {
                             bolita = -1; // Si toca una boolita ROJA obtiene retrocedara una casilla y no podra avanzar si vuelve a tocarla
                         }
-                        AZULc.setLocation(x + (casilla*bolita), y);
+                        AZULc.setLocation(x + (casilla * bolita), y);
                     }
                     break;
                 case KeyEvent.VK_UP: //ARRIBA
@@ -329,47 +327,36 @@ public class CarreraPANELcarros extends javax.swing.JPanel {
             } else {
 
                 PermisoParaMover = 1;
-            
-            //si llegan a una casilla con valor 2 ( linea de meta)
-            if ((espaciopista[AY / casilla][(AX / casilla)] == 2) || (espaciopista[VY / casilla][(VX / casilla)] == 2) || (espaciopista[NY / casilla][(NX / casilla)] == 2)) {
-
-                if (AX > VX & AX > NX) {
-                    JOptionPane.showMessageDialog(null, "\t!FELICIDADES " + user + "\n! HA GANADO LA CARRERA:D");
-
-                }
-                if ((NX > VX & NX > AX) | (VX > AX & VX > NX) | (VX == NX)) {
-                    JOptionPane.showMessageDialog(null, "\t Game Over " + user);
-
-                } else {
-                    if (AX == NX) {
-                        JOptionPane.showMessageDialog(null, "\t Empate " + user);
-                    } else if (AX == VX) {
-                        JOptionPane.showMessageDialog(null, "\t Empate " + user);
+                timer.stop(); 
+            }
+                //si llegan a una casilla con valor 2 ( linea de meta)
+                if ((espaciopista[AY / casilla][(AX / casilla)] == 2) || (espaciopista[VY / casilla][(VX / casilla)] == 2) || (espaciopista[NY / casilla][(NX / casilla)] == 2)) {
+                    timer.stop();
+                    if (AX > VX & AX > NX) {
+                        JOptionPane.showMessageDialog(null, "\t!FELICIDADES " + user + "\n! HA GANADO LA CARRERA:D");
 
                     }
+                    if ((NX > VX & NX > AX) | (VX > AX & VX > NX) | (VX == NX)) {
+                        JOptionPane.showMessageDialog(null, "\t Game Over " + user);
+
+                    } else {
+                        if (AX == NX) {
+                            JOptionPane.showMessageDialog(null, "\t Empate " + user);
+                        } else if (AX == VX) {
+                            JOptionPane.showMessageDialog(null, "\t Empate " + user);
+
+                        }
+                    }
+
+                    InicioBTN.setText("Reiniciar");
+                    InicioBTN.setVisible(true);
                 }
-
-                timer.stop();
-
-                PermisoParaMover = 1;
-                InicioBTN.setText("Reiniciar");
-                InicioBTN.setVisible(true);
-            }
-            }
+            
 
         }
 
     });
 
-    //Obstaculos y bonus 
-    /*Exisitiran unos obtaculos y premios que aumentaran o disminuiran la velocidad de TODAS las naves
-    si pasan por cierta sona de la pista*/
-//    Timer timer1 = new Timer(500, new ActionListener() {
-//        @Override
-//        public void actionPerformed(ActionEvent e) {
-//            
-//            }
-//    });
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel AZULc;
