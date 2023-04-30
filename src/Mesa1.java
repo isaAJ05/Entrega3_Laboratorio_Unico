@@ -28,9 +28,9 @@ private String user;
 
       
     }
-     public void paint(Graphics gr) {
+     public void paint(Graphics gr) { 
         super.paint(gr);
-        Graphics u = jPanel1.getGraphics();
+        Graphics u = MesaCartas.getGraphics();
         Font f = new Font("Berlin Sans FB Demi",Font.PLAIN,35);
         u.setFont(f);
         u.setColor(new Color(102,255,153));
@@ -39,26 +39,54 @@ private String user;
         u.drawString(user, 20, 290);
      }
     int as = 11; //Variable as que puede cambiar dependiendo de la situción
-    //Creacion de matriz 2 Barajas
-    int baraja[][] = {
-        //Cartas rojas [0-3]
-        {as, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10}, //Corazones     
-        {as, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10}, //Picas
-        {as, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10}, //Treboles
-        {as, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10}, // Diamantes
-
-        //Cartas azules [4-7]
-        {as, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10},//Corazones 
-        {as, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10},//Picas
-        {as, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10}, //Treboles
-        {as, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10}};// Diamantes
-
-    //Filas = tipo de carta
-    int n = 8, m = 13;
-    int C = n * m; //Numero de cartas por cajara ( fila x columnas -> 8 x 13)
+    
+    int NumerodeMasos=1; // validar que este numero no sea ni negativo ni se mayor a 3
+    //Solo se aceptaran 3 barajas para jugar
+    
+    int baraja[][];
+     //Filas = tipo de carta
+    int n = 4, m = 13;
+    int C = n * m; //Numero de cartas por baraja ( fila x columnas -> 8 x 13)
     int cont = 0;
     //Vector de las dos barajas usando las filas de la matriz como referencia
     String Ccolor[] = {"r", "r", "r", "r", "n", "n", "n", "n"};
+    void maso (int NumerodeMasos){
+       int i,j;
+       n=n*NumerodeMasos;
+       C = n * m;
+       int contvalorcarta;
+       for (i = 0; i < n; i++) {
+            contvalorcarta = 2;
+            for (j = 0; j < m; j++) {
+                if (j == 0) {
+                    baraja[i][j] = as;
+                } else {
+                    if (j >= 10) {
+                        baraja[i][j] = 10;
+                    } else {
+                        baraja[i][j] = contvalorcarta;
+                        contvalorcarta = contvalorcarta + 1;
+                    }
+                }
+
+            }
+        }
+    }
+    //Creacion de matriz 2 Barajas
+//    int baraja[][] = {
+//        //Cartas rojas [0-3]
+//        {as, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10}, //Corazones     
+//        {as, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10}, //Picas
+//        {as, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10}, //Treboles
+//        {as, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10}, // Diamantes
+//
+//        //Cartas azules [4-7]
+//        {as, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10},//Corazones 
+//        {as, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10},//Picas
+//        {as, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10}, //Treboles
+//        {as, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10}};// Diamantes
+
+   
 
     //Corazones = fila 0 y 4
     //Picas= fila 1 y 5
@@ -71,14 +99,11 @@ private String user;
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        SumCartasUs = new javax.swing.JLabel();
-        C2DE = new javax.swing.JLabel();
-        C1DE = new javax.swing.JLabel();
-        C1US = new javax.swing.JLabel();
-        C2US = new javax.swing.JLabel();
-        SumCartasDE = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
+        MovJugadas = new javax.swing.JPanel();
+        Ajustespanel = new javax.swing.JPanel();
+        AjustesBlackJack1 = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        jSpinner1 = new javax.swing.JSpinner();
         AjustesBlackJack = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         Repartir = new javax.swing.JButton();
@@ -91,6 +116,13 @@ private String user;
         jLabel4 = new javax.swing.JLabel();
         btnVolver1 = new javax.swing.JButton();
         labelvolver = new javax.swing.JLabel();
+        MesaCartas = new javax.swing.JPanel();
+        SumCartasUs = new javax.swing.JLabel();
+        C2DE = new javax.swing.JLabel();
+        C1DE = new javax.swing.JLabel();
+        C1US = new javax.swing.JLabel();
+        C2US = new javax.swing.JLabel();
+        SumCartasDE = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(36, 39, 38));
@@ -99,30 +131,56 @@ private String user;
         setSize(new java.awt.Dimension(800, 500));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBackground(new java.awt.Color(49, 79, 67));
-        jPanel1.setEnabled(false);
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        MovJugadas.setBackground(new java.awt.Color(107, 138, 91));
+        MovJugadas.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        SumCartasUs.setFont(new java.awt.Font("Swis721 Cn BT", 0, 14)); // NOI18N
-        jPanel1.add(SumCartasUs, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 379, 39, 39));
+        Ajustespanel.setBackground(new java.awt.Color(80, 113, 64));
 
-        C2DE.setFont(new java.awt.Font("Snap ITC", 0, 14)); // NOI18N
-        jPanel1.add(C2DE, new org.netbeans.lib.awtextra.AbsoluteConstraints(394, 67, 77, 58));
-        jPanel1.add(C1DE, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 133, 18, 29));
+        AjustesBlackJack1.setBackground(new java.awt.Color(102, 255, 153));
+        AjustesBlackJack1.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
+        AjustesBlackJack1.setText("Ajustes");
+        AjustesBlackJack1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        AjustesBlackJack1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AjustesBlackJack1ActionPerformed(evt);
+            }
+        });
 
-        C1US.setFont(new java.awt.Font("Snap ITC", 0, 14)); // NOI18N
-        jPanel1.add(C1US, new org.netbeans.lib.awtextra.AbsoluteConstraints(306, 375, 39, 52));
+        jLabel3.setFont(new java.awt.Font("Engravers MT", 1, 25)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 204, 0));
+        jLabel3.setText("STAR GAMES");
 
-        C2US.setFont(new java.awt.Font("Snap ITC", 0, 14)); // NOI18N
-        jPanel1.add(C2US, new org.netbeans.lib.awtextra.AbsoluteConstraints(477, 385, 42, 42));
+        javax.swing.GroupLayout AjustespanelLayout = new javax.swing.GroupLayout(Ajustespanel);
+        Ajustespanel.setLayout(AjustespanelLayout);
+        AjustespanelLayout.setHorizontalGroup(
+            AjustespanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(AjustespanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(AjustespanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AjustespanelLayout.createSequentialGroup()
+                        .addGroup(AjustespanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addGroup(AjustespanelLayout.createSequentialGroup()
+                                .addGap(9, 9, 9)
+                                .addComponent(AjustesBlackJack1)))
+                        .addGap(16, 16, 16))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AjustespanelLayout.createSequentialGroup()
+                        .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(27, 27, 27))))
+        );
+        AjustespanelLayout.setVerticalGroup(
+            AjustespanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AjustespanelLayout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addComponent(jLabel3)
+                .addGap(55, 55, 55)
+                .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 304, Short.MAX_VALUE)
+                .addComponent(AjustesBlackJack1)
+                .addGap(24, 24, 24))
+        );
 
-        SumCartasDE.setFont(new java.awt.Font("Swis721 Cn BT", 0, 14)); // NOI18N
-        jPanel1.add(SumCartasDE, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 90, 38, 35));
-
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 540, 500));
-
-        jPanel2.setBackground(new java.awt.Color(107, 138, 91));
-        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        MovJugadas.add(Ajustespanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 0, 260, 500));
 
         AjustesBlackJack.setBackground(new java.awt.Color(102, 255, 153));
         AjustesBlackJack.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
@@ -133,11 +191,11 @@ private String user;
                 AjustesBlackJackActionPerformed(evt);
             }
         });
-        jPanel2.add(AjustesBlackJack, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 460, -1, -1));
+        MovJugadas.add(AjustesBlackJack, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 450, -1, -1));
 
-        jLabel2.setFont(new java.awt.Font("Engravers MT", 0, 14)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Engravers MT", 0, 18)); // NOI18N
         jLabel2.setText("Cartas");
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(69, 12, -1, -1));
+        MovJugadas.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 10, -1, -1));
 
         Repartir.setBackground(new java.awt.Color(0, 102, 51));
         Repartir.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
@@ -149,7 +207,7 @@ private String user;
                 RepartirActionPerformed(evt);
             }
         });
-        jPanel2.add(Repartir, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 130, 102, 33));
+        MovJugadas.add(Repartir, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 130, 102, 33));
 
         Pedir1Carta.setBackground(new java.awt.Color(96, 211, 98));
         Pedir1Carta.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
@@ -160,11 +218,12 @@ private String user;
                 Pedir1CartaActionPerformed(evt);
             }
         });
-        jPanel2.add(Pedir1Carta, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 180, -1, 36));
+        MovJugadas.add(Pedir1Carta, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 180, -1, 36));
 
-        ConteoCartas.setFont(new java.awt.Font("Engravers MT", 0, 14)); // NOI18N
+        ConteoCartas.setFont(new java.awt.Font("Engravers MT", 0, 18)); // NOI18N
         ConteoCartas.setText("104");
-        jPanel2.add(ConteoCartas, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 6, 41, 30));
+        ConteoCartas.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        MovJugadas.add(ConteoCartas, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 10, 41, 20));
 
         Parar.setBackground(new java.awt.Color(102, 255, 153));
         Parar.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
@@ -176,13 +235,13 @@ private String user;
                 PararActionPerformed(evt);
             }
         });
-        jPanel2.add(Parar, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 290, 120, 34));
+        MovJugadas.add(Parar, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 290, 120, 34));
 
         Doble.setBackground(new java.awt.Color(102, 255, 153));
         Doble.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
         Doble.setText("Doble (+2)");
         Doble.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jPanel2.add(Doble, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 240, 120, 36));
+        MovJugadas.add(Doble, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 240, 120, 36));
 
         Slipt.setBackground(new java.awt.Color(102, 255, 153));
         Slipt.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
@@ -193,15 +252,15 @@ private String user;
                 SliptActionPerformed(evt);
             }
         });
-        jPanel2.add(Slipt, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 340, 120, 34));
+        MovJugadas.add(Slipt, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 340, 120, 34));
 
         valdRepartir.setFont(new java.awt.Font("Monospaced", 0, 14)); // NOI18N
-        jPanel2.add(valdRepartir, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 54, 260, 21));
+        MovJugadas.add(valdRepartir, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 50, 260, 21));
 
         jLabel4.setFont(new java.awt.Font("Engravers MT", 1, 24)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 204, 0));
         jLabel4.setText("STAR GAMES");
-        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 220, -1));
+        MovJugadas.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 80, 220, -1));
 
         btnVolver1.setBackground(new java.awt.Color(107, 138, 91));
         btnVolver1.setFont(new java.awt.Font("Monospaced", 1, 12)); // NOI18N
@@ -228,12 +287,34 @@ private String user;
                 btnVolver1ActionPerformed(evt);
             }
         });
-        jPanel2.add(btnVolver1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 450, -1, -1));
+        MovJugadas.add(btnVolver1, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 440, -1, -1));
 
         labelvolver.setFont(new java.awt.Font("Monospaced", 1, 12)); // NOI18N
-        jPanel2.add(labelvolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 460, 70, 20));
+        MovJugadas.add(labelvolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 460, 70, 20));
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 0, 260, 500));
+        MesaCartas.setBackground(new java.awt.Color(49, 79, 67));
+        MesaCartas.setEnabled(false);
+        MesaCartas.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        SumCartasUs.setFont(new java.awt.Font("Swis721 Cn BT", 0, 14)); // NOI18N
+        MesaCartas.add(SumCartasUs, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 379, 39, 39));
+
+        C2DE.setFont(new java.awt.Font("Snap ITC", 0, 14)); // NOI18N
+        MesaCartas.add(C2DE, new org.netbeans.lib.awtextra.AbsoluteConstraints(394, 67, 77, 58));
+        MesaCartas.add(C1DE, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 133, 18, 29));
+
+        C1US.setFont(new java.awt.Font("Snap ITC", 0, 14)); // NOI18N
+        MesaCartas.add(C1US, new org.netbeans.lib.awtextra.AbsoluteConstraints(306, 375, 39, 52));
+
+        C2US.setFont(new java.awt.Font("Snap ITC", 0, 14)); // NOI18N
+        MesaCartas.add(C2US, new org.netbeans.lib.awtextra.AbsoluteConstraints(477, 385, 42, 42));
+
+        SumCartasDE.setFont(new java.awt.Font("Swis721 Cn BT", 0, 14)); // NOI18N
+        MesaCartas.add(SumCartasDE, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 90, 38, 35));
+
+        MovJugadas.add(MesaCartas, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 540, 500));
+
+        getContentPane().add(MovJugadas, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 500));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -244,11 +325,11 @@ private String user;
     int a = 0;
     private void RepartirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RepartirActionPerformed
         if (a == 0) {
-            Graphics g = jPanel1.getGraphics();
+            Graphics g = MesaCartas.getGraphics();
            
             repartir = true;
             Pedir1Carta.setVisible(false);
-
+            
             //Usuario Cartas Iniales
             int CartaUs1 = 0, CartaUs2 = 0, Sum0Us;
             String clr, cB1 = "r", cB2 = "n";
@@ -558,8 +639,27 @@ private String user;
     }//GEN-LAST:event_SliptActionPerformed
 
     private void AjustesBlackJackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AjustesBlackJackActionPerformed
-        AjustesBJk cambio = new AjustesBJk();
-        cambio.setVisible(true);
+//        AjustesBJk cambio = new AjustesBJk();
+//        cambio.setVisible(true);
+h=1;
+             if(h==1){
+            //Ajustespanel.setSize(260,500);
+            Thread th=new Thread(){
+              @Override
+              public void run(){
+                  try{
+                      for (int i =0;i>=Ajustespanel.getWidth();i++){
+                          Thread.sleep(1);
+                          Ajustespanel.setSize(i,Ajustespanel.getHeight());
+                          Ajustespanel.setLocation(Ajustespanel.getLocation().x-1,Ajustespanel.getLocation().y);
+                      }
+                  }catch(Exception e){
+                      e.printStackTrace();
+                  }
+              }
+            }; th.start();
+            h=0;
+        }
     }//GEN-LAST:event_AjustesBlackJackActionPerformed
 
     private void btnVolver1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVolver1MouseEntered
@@ -575,6 +675,29 @@ private String user;
         p.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnVolver1ActionPerformed
+int h;
+    private void AjustesBlackJack1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AjustesBlackJack1ActionPerformed
+       h=0;
+        if(h==0){
+//            Ajustespanel.setSize(260,500);
+            Thread th=new Thread(){
+              @Override
+              public void run(){
+                  try{
+                      for (int i =Ajustespanel.getWidth();i>=0;i--){
+                          Thread.sleep(1);
+                          Ajustespanel.setSize(i,Ajustespanel.getHeight());
+                          Ajustespanel.setLocation(Ajustespanel.getLocation().x+1,Ajustespanel.getLocation().y);
+                      }
+                  }catch(Exception e){
+                      e.printStackTrace();
+                  }
+              }
+            }; th.start();
+            h=1;
+        }
+                  
+    }//GEN-LAST:event_AjustesBlackJack1ActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -618,12 +741,16 @@ private String user;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AjustesBlackJack;
+    private javax.swing.JButton AjustesBlackJack1;
+    private javax.swing.JPanel Ajustespanel;
     private javax.swing.JLabel C1DE;
     private javax.swing.JLabel C1US;
     private javax.swing.JLabel C2DE;
     private javax.swing.JLabel C2US;
     private javax.swing.JLabel ConteoCartas;
     private javax.swing.JButton Doble;
+    private javax.swing.JPanel MesaCartas;
+    private javax.swing.JPanel MovJugadas;
     private javax.swing.JButton Parar;
     private javax.swing.JButton Pedir1Carta;
     private javax.swing.JButton Repartir;
@@ -632,9 +759,9 @@ private String user;
     private javax.swing.JLabel SumCartasUs;
     private javax.swing.JButton btnVolver1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
+    private javax.swing.JSpinner jSpinner1;
     private javax.swing.JLabel labelvolver;
     private javax.swing.JLabel valdRepartir;
     // End of variables declaration//GEN-END:variables
