@@ -15,6 +15,10 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 import javax.swing.JFrame;
 
+/**
+ *
+ * @author Paula Núñez, Isabella Arrieta y Natalia Carpintero
+ */
 public class CarreraPANELcarros extends javax.swing.JPanel {
 
     private String user;
@@ -137,7 +141,7 @@ public class CarreraPANELcarros extends javax.swing.JPanel {
         add(AZULc, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, 140, 70));
 
         ObsRojo2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGcars/BolaRoja40.png"))); // NOI18N
-        add(ObsRojo2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 150, 40, 40));
+        add(ObsRojo2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 150, 40, 40));
 
         BonoAzul2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGcars/BolaAzu60l.png"))); // NOI18N
         add(BonoAzul2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 250, 60, 50));
@@ -189,15 +193,15 @@ public class CarreraPANELcarros extends javax.swing.JPanel {
         NARANJAc.setLocation(0, NARANJAc.getLocation().y);
         VERDEc.setLocation(0, VERDEc.getLocation().y);
 
-        rx1 = ObsRojo1.getX();
-        rx2 = ObsRojo2.getX();
-        ry1 = ObsRojo1.getY();
-        ry2 = ObsRojo2.getY();
-
-        ax1 = BonoAzul1.getX();
-        ax2 = BonoAzul2.getX();
-        ay1 = BonoAzul1.getY();
-        ay2 = BonoAzul2.getY();
+//        rx1 = ObsRojo1.getX();
+//        rx2 = ObsRojo2.getX();
+//        ry1 = ObsRojo1.getY();
+//        ry2 = ObsRojo2.getY();
+//
+//        ax1 = BonoAzul1.getX();
+//        ax2 = BonoAzul2.getX();
+//        ay1 = BonoAzul1.getY();
+//        ay2 = BonoAzul2.getY();
 
         //  reubicarBolitas(BonoAzul1);
         espaciopista = Hacerespaciopista(); //llamar al que crea la matriz
@@ -325,8 +329,8 @@ public class CarreraPANELcarros extends javax.swing.JPanel {
             } else {
 
                 PermisoParaMover = 1;
-            }
-
+            
+            //si llegan a una casilla con valor 2 ( linea de meta)
             if ((espaciopista[AY / casilla][(AX / casilla)] == 2) || (espaciopista[VY / casilla][(VX / casilla)] == 2) || (espaciopista[NY / casilla][(NX / casilla)] == 2)) {
 
                 if (AX > VX & AX > NX) {
@@ -350,7 +354,7 @@ public class CarreraPANELcarros extends javax.swing.JPanel {
                 PermisoParaMover = 1;
                 InicioBTN.setText("Reiniciar");
                 InicioBTN.setVisible(true);
-
+            }
             }
 
         }
