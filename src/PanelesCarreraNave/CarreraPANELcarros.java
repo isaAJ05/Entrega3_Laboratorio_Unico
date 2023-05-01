@@ -121,14 +121,16 @@ public class CarreraPANELcarros extends javax.swing.JPanel {
         setRequestFocusEnabled(false);
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        InicioBTN.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
+        InicioBTN.setBackground(new java.awt.Color(153, 153, 255));
+        InicioBTN.setFont(new java.awt.Font("Monospaced", 1, 18)); // NOI18N
+        InicioBTN.setForeground(new java.awt.Color(51, 51, 51));
         InicioBTN.setText("Comenzar!");
         InicioBTN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 InicioBTNActionPerformed(evt);
             }
         });
-        add(InicioBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 150, 120, 70));
+        add(InicioBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 150, 140, 70));
 
         VERDEc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGcars/verdecarro (2).png"))); // NOI18N
         add(VERDEc, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 130, 70));
@@ -146,24 +148,24 @@ public class CarreraPANELcarros extends javax.swing.JPanel {
 
         BonoAzul1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         BonoAzul1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGcars/BolaAzu60l.png"))); // NOI18N
-        add(BonoAzul1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 120, 60, 50));
+        add(BonoAzul1, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 90, 60, 50));
 
         BonoAzul2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         BonoAzul2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGcars/BolaAzul40.png"))); // NOI18N
-        add(BonoAzul2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 240, 60, 50));
+        add(BonoAzul2, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 250, 60, 50));
 
         ObsRojo2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGcars/BolaRoja40.png"))); // NOI18N
-        add(ObsRojo2, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 100, -1, -1));
+        add(ObsRojo2, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 230, -1, -1));
 
         ObsRojo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGcars/BolaRoja60.png"))); // NOI18N
-        add(ObsRojo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 240, -1, 50));
+        add(ObsRojo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 130, -1, 50));
 
         Mensajito.setFont(new java.awt.Font("Swis721 Blk BT", 0, 14)); // NOI18N
         Mensajito.setForeground(new java.awt.Color(204, 204, 255));
         add(Mensajito, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 110, 180, 40));
 
         pistafondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGcars/fondoPistaSinFOndo.png"))); // NOI18N
-        add(pistafondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, -10, 780, 390));
+        add(pistafondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 780, 390));
     }// </editor-fold>//GEN-END:initComponents
 
      int PermisoParaMover = 1;
