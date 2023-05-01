@@ -21,7 +21,7 @@ import javax.swing.JFrame;
  */
 public class CarreraPANELcarros extends javax.swing.JPanel {
 
-    private String user;
+    private String name = null;
 
     public CarreraPANELcarros(int[][] espaciopista) {
 
@@ -44,8 +44,8 @@ public class CarreraPANELcarros extends javax.swing.JPanel {
         });
     }
 
-    public CarreraPANELcarros(String name) {
-        this.user = name;
+    public CarreraPANELcarros(String user) {
+        this.name = user;
         initComponents();
         this.setFocusable(true);
         this.requestFocusInWindow();
@@ -322,17 +322,17 @@ public class CarreraPANELcarros extends javax.swing.JPanel {
                 if ((espaciopista[AY / casilla][(AX / casilla)] == 2) || (espaciopista[VY / casilla][(VX / casilla)] == 2) || (espaciopista[NY / casilla][(NX / casilla)] == 2)) {
                     timer.stop();
                     if (AX > VX & AX > NX) {
-                        JOptionPane.showMessageDialog(null, "\t!FELICIDADES " + user + "\n! HA GANADO LA CARRERA:D");
+                        JOptionPane.showMessageDialog(null, "\t!FELICIDADES " + name + "\n! HA GANADO LA CARRERA:D");
 
                     }
                     if ((NX > VX & NX > AX) | (VX > AX & VX > NX) | (VX == NX)) {
-                        JOptionPane.showMessageDialog(null, "\t Game Over " + user);
+                        JOptionPane.showMessageDialog(null, "\t Game Over " + name);
 
                     } else {
                         if (AX == NX) {
-                            JOptionPane.showMessageDialog(null, "\t Empate " + user);
+                            JOptionPane.showMessageDialog(null, "\t Empate " + name);
                         } else if (AX == VX) {
-                            JOptionPane.showMessageDialog(null, "\t Empate " + user);
+                            JOptionPane.showMessageDialog(null, "\t Empate " + name);
 
                         }
                     }
