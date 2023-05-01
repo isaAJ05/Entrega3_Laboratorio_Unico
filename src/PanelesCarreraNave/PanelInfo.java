@@ -1,9 +1,9 @@
 package PanelesCarreraNave;
 
-public class InfoCarrerasPanel extends javax.swing.JPanel {
+public class PanelInfo extends javax.swing.JPanel {
 
    
-    public InfoCarrerasPanel() {
+    public PanelInfo() {
         initComponents();
     }
 
