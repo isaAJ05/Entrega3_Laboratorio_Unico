@@ -35,10 +35,10 @@ public class SerpienteGAME extends javax.swing.JFrame {
     }
 
     private void ShowPanel(JPanel p){ //Cambio de paneles metodo
-        p.setSize(765,401);
+        p.setSize(765,400);
         p.setLocation(0, 0);
         visible.removeAll();
-        visible.add(p, BorderLayout.CENTER);
+        visible.add(p);
         visible.revalidate();
         visible.repaint();
     }
