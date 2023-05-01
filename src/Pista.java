@@ -1,5 +1,5 @@
 
-import PanelesCarreraNave.InfoCarrerasPanel;
+import PanelesCarreraNave.PanelInfo;
 import PanelesCarreraNave.CarreraPANELcarros;
 import java.awt.BorderLayout;
 import java.awt.Cursor;
@@ -192,7 +192,7 @@ public class Pista extends javax.swing.JFrame {
     }//GEN-LAST:event_btnStartActionPerformed
 
     private void InfoBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InfoBTNActionPerformed
-        InfoCarrerasPanel InfoPANEL=new InfoCarrerasPanel();
+        PanelInfo InfoPANEL=new PanelInfo();
         ShowPanel(InfoPANEL);//Llamar el metodo para mostrar el panel 
     }//GEN-LAST:event_InfoBTNActionPerformed
 
