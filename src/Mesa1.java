@@ -1,4 +1,3 @@
-
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Font;
@@ -33,11 +32,7 @@ public class Mesa1 extends javax.swing.JFrame {
 //        MovJugadas.setEnabled(false);
         Ajustespanel.setVisible(true);
         
-        Repartir.setEnabled(false);
-        Pedir1Carta.setEnabled(false);
-        Parar.setEnabled(false);
-        Doble.setEnabled(false);
-        Slipt.setEnabled(false);
+       deshabilitarbtnGame();
         
 
     }
@@ -393,7 +388,7 @@ public class Mesa1 extends javax.swing.JFrame {
     
     int a = 0;
     private void RepartirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RepartirActionPerformed
-        ocultarAjustes();
+        ocultarPanelAjustes();
         if (a == 0) {
             Graphics g = MesaCartas.getGraphics();
 
@@ -771,8 +766,24 @@ public class Mesa1 extends javax.swing.JFrame {
         th.start();
 
     }
+    
+    private void deshabilitarbtnGame(){
+        Repartir.setEnabled(false);
+        Pedir1Carta.setEnabled(false);
+        Parar.setEnabled(false);
+        Doble.setEnabled(false);
+        Slipt.setEnabled(false);
+    }
+    private void HabilitarbtnGame(){
+         Repartir.setEnabled(true);
+        Pedir1Carta.setEnabled(true);
+        Parar.setEnabled(true);
+        Doble.setEnabled(true);
+        Slipt.setEnabled(true);
+    }
     private void MostrarAjustesBlackJackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MostrarAjustesBlackJackActionPerformed
        h=1;
+        deshabilitarbtnGame();
         if (h == 0) { //Se ve y se oculta
             ocultarA();
             h = 1;// Estado del panel A : No visible
@@ -818,12 +829,12 @@ public class Mesa1 extends javax.swing.JFrame {
         mostrarnummaso.setText(String.valueOf(NumerodeMasos));
     }//GEN-LAST:event_menosbtnActionPerformed
 
-    void mostrarAjustes() { //Subrutina HabilitarAjustes del todo
+    void mostrarPanelAjustes() { //Subrutina HabilitarAjustes del todo
         Ajustespanel.setEnabled(true);
         Ajustespanel.setVisible(true);
     }
 
-    void ocultarAjustes() { //Subrutina Deshabiliatar Ajustes del todo 
+    void ocultarPanelAjustes() { //Subrutina Deshabiliatar Ajustes del todo 
         Ajustespanel.setEnabled(false);
         Ajustespanel.setVisible(false);
     }
@@ -854,11 +865,7 @@ public class Mesa1 extends javax.swing.JFrame {
             }
         }
         ocultarA();
-         Repartir.setEnabled(true);
-        Pedir1Carta.setEnabled(true);
-        Parar.setEnabled(true);
-        Doble.setEnabled(true);
-        Slipt.setEnabled(true);
+        HabilitarbtnGame();
         //Creacion de matriz 2 Barajas EJEMPLO
 //    int baraja[][] = {
 //        //Cartas rojas [0-3]
