@@ -13,14 +13,14 @@ import java.awt.Toolkit;
 
 public class GamePanel11 extends javax.swing.JPanel {
 
-    private final int limiteF = 5, limiteC = 7; //Limites de la matriz
+    private final int limiteF = 7, limiteC = 9; //Limites de la matriz
     
     public static int cont=0;
     //El numero de columanas y filas multiplicado por el valor de la casilla debe dar valores 
     //cercanos o aproximas (segun el gusto) a las dimensiones del panel (Ancho, alto )
     
     
-    public static int casilla=80;//Lo que medira nuestras casillas imaginarias de la matriz
+    public static int casilla=83;//Lo que medira nuestras casillas imaginarias de la matriz
     
     public static int dado;
     
@@ -42,6 +42,7 @@ public class GamePanel11 extends javax.swing.JPanel {
         TirarDados = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         NumDado = new javax.swing.JLabel();
+        pantallagamePanel = new javax.swing.JPanel();
         AlienU = new javax.swing.JLabel();
         Fondo = new javax.swing.JLabel();
 
@@ -79,6 +80,8 @@ public class GamePanel11 extends javax.swing.JPanel {
         NumDado.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         add(NumDado, new org.netbeans.lib.awtextra.AbsoluteConstraints(645, 174, 72, 46));
 
+        pantallagamePanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
         AlienU.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         AlienU.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGescaleraSerp/AlienVerdeMini.png"))); // NOI18N
         AlienU.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -86,10 +89,12 @@ public class GamePanel11 extends javax.swing.JPanel {
                 AlienUKeyPressed(evt);
             }
         });
-        add(AlienU, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 300, 90, 90));
+        pantallagamePanel.add(AlienU, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 290, 90, 90));
 
         Fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGescaleraSerp/tablero serp 1.png"))); // NOI18N
-        add(Fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 400));
+        pantallagamePanel.add(Fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 400));
+
+        add(pantallagamePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 400));
     }// </editor-fold>//GEN-END:initComponents
   
     Random ran = new Random();
@@ -114,25 +119,25 @@ public class GamePanel11 extends javax.swing.JPanel {
                
                 //(que no cruce el limite de la matriz) Y (verificar el valor dentro de la matriz sea valido (!=1))
                 //Si cumple las condiciones, podra moverse
-                if (x < (limiteC - 1) * casilla & tablero[y / casilla][(x / casilla) + 1] != -1) {
+                if (x < (limiteC - 1) * casilla & tablero[y / casilla][(x / casilla) + 1] != 1) {
                     AlienU.setLocation(x + casilla, y);
                 }
                 break;
             case KeyEvent.VK_UP: //ARRIBA
               
-                if (y > 0 & tablero[(y / casilla) - 1][x / casilla] != -11) {
+                if (y > 0 & tablero[(y / casilla) - 1][x / casilla] != 1) {
                     AlienU.setLocation(x, y - casilla);
 
                 }
                 break;
             case KeyEvent.VK_DOWN: //ABAJO
-                if (y < (limiteF - 1) * casilla & tablero[(y / casilla) + 1][x / casilla] !=- 1) {
+                if (y < (limiteF - 1) * casilla & tablero[(y / casilla) + 1][x / casilla] != 1) {
                     AlienU.setLocation(x, y + casilla);
 
                 }
                 break;
             case KeyEvent.VK_LEFT: //Izquierda 
-                 if (x>0 * casilla & tablero[y / casilla][(x / casilla)-1] != -1) {
+                 if (x>0 * casilla & tablero[y / casilla][(x / casilla)-1] != 1) {
                     AlienU.setLocation(x-casilla, y );
 
                 }
@@ -154,19 +159,16 @@ public class GamePanel11 extends javax.swing.JPanel {
     private int [][] tablero=new  int[1000][10000] ;
     public int[][] Hacertablero() {
         int F = 0, C = 0, cont= 0;
-        for (F = 0; F < limiteF; F++) {
-            if ((F+1)% 2 != 0) {
-                for (C = 0; C < limiteC; C++) {
-                    tablero[F][C] = cont;
-                    cont++;
-                }
-            } else {
-                for (C = limiteC-1; C >= 0; C--) {
-                    tablero[F][C] = cont;
-                    cont++;
+       for (F = 0; F < limiteF; F++) {
+            for (C = limiteC - 1; C >= 0; C--) {
+                if (F == limiteF - 1 || F == 0 || C == 0 || C == limiteC - 1) {
+                    tablero[F][C] = 1; //Bordes de la pista
+                } else {
+
+                    tablero[F][C] = 0; //Espacio donde los carritos se moveran 
                 }
             }
- 
+
         }
        return tablero;
        /*
@@ -234,5 +236,6 @@ public class GamePanel11 extends javax.swing.JPanel {
     private javax.swing.JButton TirarDados;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel pantallagamePanel;
     // End of variables declaration//GEN-END:variables
 }
