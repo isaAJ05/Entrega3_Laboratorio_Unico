@@ -67,7 +67,7 @@ public class rompecabezas01 extends javax.swing.JFrame implements ActionListener
         this.setLocationRelativeTo(null);
     }
 
-    int contador = 0, f, c;
+    int contador, f, c;
     JButton btn;
 
     public void actionPerformed(ActionEvent e) {
@@ -91,16 +91,19 @@ public class rompecabezas01 extends javax.swing.JFrame implements ActionListener
 
         }
 
-        rompecabezas();
-
+        rompecabezas(contador, status, imagenes, piezas);
+        if (contador == 9) {
+            contador = 0;
+        }
     }
 
-    public void rompecabezas() {
+    public void rompecabezas(int c, JLabel [][] labels, ImageIcon [][] images, JButton [][] buttons) {
         boolean k = true;
-        if (contador == 9) {
-            for (int i = 0; i < 3; i++) {
-                for (int j = 0; j < 3; j++) {
-                    if (status[i][j].getIcon() != imagenes[i][j]) {
+        int i, j;
+        if (c == 9) {
+            for (i = 0; i < 3; i++) {
+                for (j = 0; j < 3; j++) {
+                    if (labels[i][j].getIcon() != images[i][j]) {
                         k = false;
                     }
                 }
@@ -109,23 +112,23 @@ public class rompecabezas01 extends javax.swing.JFrame implements ActionListener
             if (k) {
                 ImageIcon ganaste = new ImageIcon(CL.getResource("imagenes/happy.gif"));
                 JOptionPane.showMessageDialog(null, "¡FELICIDADES!\nEres todo un ganador.", "ROMPECABEZAS", JOptionPane.PLAIN_MESSAGE, ganaste);
-                for (int i = 0; i < 3; i++) {
-                    for (int j = 0; j < 3; j++) {
-                        piezas[i][j].setEnabled(true);
-                        status[i][j].setIcon(null);
-                        contador = 0;
+                for (i = 0; i < 3; i++) {
+                    for (j = 0; j < 3; j++) {
+                        buttons[i][j].setEnabled(true);
+                        labels[i][j].setIcon(null);
                     }
                 }
+                c = 0;
             } else {
                 ImageIcon perdiste = new ImageIcon(CL.getResource("imagenes/sad.gif"));
                 JOptionPane.showMessageDialog(null, "GAME OVER\nPerdiste esta vez,\nsuerte para la próxima.", "ROMPECABEZAS", JOptionPane.PLAIN_MESSAGE, perdiste);
-                for (int i = 0; i < 3; i++) {
-                    for (int j = 0; j < 3; j++) {
-                        piezas[i][j].setEnabled(true);
-                        status[i][j].setIcon(null);
-                        contador = 0;
+                for (i = 0; i < 3; i++) {
+                    for (j = 0; j < 3; j++) {
+                        buttons[i][j].setEnabled(true);
+                        labels[i][j].setIcon(null);
                     }
                 }
+                c = 0;
             }
         }
     }

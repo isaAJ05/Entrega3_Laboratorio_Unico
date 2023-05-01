@@ -1,5 +1,4 @@
 
-
 import java.awt.Cursor;
 import rompecabezas.*;
 import java.awt.Font;
@@ -14,10 +13,8 @@ import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 
 // Créditos de la imagen: https://www.nationalgeographic.com.es/ciencia/sistema-solar-que-es-como-se-formo-y-datos-principales_18430
-
 // Créditos gif ganador: https://tenor.com/view/cute-panda-happy-love-yay-gif-16763329
 // Créditos gif perdedor: https://images.app.goo.gl/FLzFLSCFVXRhy6NX8
-
 public class rompecabezas02 extends javax.swing.JFrame implements ActionListener {
 
     JLabel[][] status;
@@ -36,17 +33,18 @@ public class rompecabezas02 extends javax.swing.JFrame implements ActionListener
     ImageIcon pp10 = new ImageIcon(CL.getResource("imagenes/3.jpg"));
     ImageIcon pp11 = new ImageIcon(CL.getResource("imagenes/2.jpg"));
     ImageIcon pp12 = new ImageIcon(CL.getResource("imagenes/1.jpg"));
-   
+
     private String user;
+
     public rompecabezas02(String name) {
-         this.user=name;
+        this.user = name;
         initComponents();
         this.setVisible(true);
         this.setResizable(false);
 
         this.setSize(800, 490);
         //cursor
-        Cursor cursor = Toolkit.getDefaultToolkit().createCustomCursor(new ImageIcon(getClass().getResource("cursor/cursorimg.png")).getImage(),new Point(0,0),"Custom Cursor");
+        Cursor cursor = Toolkit.getDefaultToolkit().createCustomCursor(new ImageIcon(getClass().getResource("cursor/cursorimg.png")).getImage(), new Point(0, 0), "Custom Cursor");
         this.setCursor(cursor);
         imagenes = new ImageIcon[][]{{pp1, pp2, pp3}, {pp4, pp5, pp6}, {pp7, pp8, pp9}, {pp10, pp11, pp12}};
         status = new JLabel[][]{{pieza1, pieza2, pieza3}, {pieza4, pieza5, pieza6}, {pieza7, pieza8, pieza9}, {pieza10, pieza11, pieza12}};
@@ -74,11 +72,10 @@ public class rompecabezas02 extends javax.swing.JFrame implements ActionListener
         this.setResizable(false);
         this.setLocationRelativeTo(null);
     }
-    int contador = 0, f, c;
+    int contador, f, c;
     JButton btn;
 
     public void actionPerformed(ActionEvent e) {
-
         btn = (JButton) e.getSource();
         int[] filas = {0, 0, 0, 1, 1, 1, 2, 2, 2, 3, 3, 3};
         int[] columnas = {0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2};
@@ -97,15 +94,20 @@ public class rompecabezas02 extends javax.swing.JFrame implements ActionListener
 
             }
         }
-        rompecabezas();
+        rompecabezas(contador, status, imagenes, piezas);
+        if (contador == 12) {
+            contador = 0;
+        }
     }
 
-    public void rompecabezas() {
+    void rompecabezas(int c, JLabel[][] labels, ImageIcon[][] images, JButton[][] buttons) {
         boolean k = true;
-        if (contador == 12) {
-            for (int i = 0; i < 4; i++) {
-                for (int j = 0; j < 3; j++) {
-                    if (status[i][j].getIcon() != imagenes[i][j]) {
+        int i, j;
+        System.out.println("c" + c);
+        if (c == 12) {
+            for (i = 0; i < 4; i++) {
+                for (j = 0; j < 3; j++) {
+                    if (labels[i][j].getIcon() != images[i][j]) {
                         k = false;
                     }
                 }
@@ -115,24 +117,23 @@ public class rompecabezas02 extends javax.swing.JFrame implements ActionListener
             if (k) {
                 ImageIcon ganaste = new ImageIcon(CL.getResource("imagenes/happy.gif"));
                 JOptionPane.showMessageDialog(null, "¡FELICIDADES!\nEres todo un ganador.", "ROMPECABEZAS", JOptionPane.PLAIN_MESSAGE, ganaste);
-                for (int i = 0; i < 4; i++) {
-                    for (int j = 0; j < 3; j++) {
-                        piezas[i][j].setEnabled(true);
-                        status[i][j].setIcon(null);
-                        contador = 0;
+                for (i = 0; i < 4; i++) {
+                    for (j = 0; j < 3; j++) {
+                        buttons[i][j].setEnabled(true);
+                        labels[i][j].setIcon(null);
                     }
                 }
+                c = 0;
             } else {
                 ImageIcon perdiste = new ImageIcon(CL.getResource("imagenes/sad.gif"));
                 JOptionPane.showMessageDialog(null, "GAME OVER\nPerdiste esta vez,\nsuerte para la próxima.", "ROMPECABEZAS", JOptionPane.PLAIN_MESSAGE, perdiste);
-                for (int i = 0; i < 4; i++) {
-                    for (int j = 0; j < 3; j++) {
-                        piezas[i][j].setEnabled(true);
-                        status[i][j].setIcon(null);
-                        contador = 0;
-
+                for (i = 0; i < 4; i++) {
+                    for (j = 0; j < 3; j++) {
+                        buttons[i][j].setEnabled(true);
+                        labels[i][j].setIcon(null);
                     }
                 }
+                c = 0;
             }
         }
     }
@@ -348,9 +349,11 @@ public class rompecabezas02 extends javax.swing.JFrame implements ActionListener
         });
         PIEZAS.add(p9);
 
+        p10.setBackground(new java.awt.Color(204, 204, 255));
         p10.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
         PIEZAS.add(p10);
 
+        p11.setBackground(new java.awt.Color(204, 204, 255));
         p11.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
         p11.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -359,6 +362,7 @@ public class rompecabezas02 extends javax.swing.JFrame implements ActionListener
         });
         PIEZAS.add(p11);
 
+        p12.setBackground(new java.awt.Color(204, 204, 255));
         p12.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
         p12.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -391,10 +395,7 @@ public class rompecabezas02 extends javax.swing.JFrame implements ActionListener
         jPanel1.add(ROMPECABEZAS, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 130, -1, -1));
 
         fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGcars/fondoespacio(3) (1).png"))); // NOI18N
-        fondo.setMaximumSize(new java.awt.Dimension(800, 500));
-        fondo.setMinimumSize(new java.awt.Dimension(800, 500));
         fondo.setOpaque(true);
-        fondo.setPreferredSize(new java.awt.Dimension(800, 500));
         jPanel1.add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 490));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -476,20 +477,19 @@ public class rompecabezas02 extends javax.swing.JFrame implements ActionListener
     }//GEN-LAST:event_volver1ActionPerformed
 
     private void btnVolver1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolver1ActionPerformed
-         Principal3 p = new Principal3(user);
+        Principal3 p = new Principal3(user);
         p.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnVolver1ActionPerformed
 
     private void btnVolver1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVolver1MouseEntered
-          labelvolver.setText(" Inicio");  
+        labelvolver.setText(" Inicio");
     }//GEN-LAST:event_btnVolver1MouseEntered
 
     private void btnVolver1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVolver1MouseExited
-          labelvolver.setText("");  
+        labelvolver.setText("");
     }//GEN-LAST:event_btnVolver1MouseExited
 
-    
     /**
      * @param args the command line arguments
      */
