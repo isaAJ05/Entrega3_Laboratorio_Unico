@@ -28,8 +28,8 @@ public class Pista extends javax.swing.JFrame {
         SeleccionNavePanel NavePanel=new SeleccionNavePanel(user);
         ShowPanel(NavePanel);   
         
-        CarreraPANELcarros Cpanel=new CarreraPANELcarros();
-        add(Cpanel);
+//        CarreraPANELcarros Cpanel=new CarreraPANELcarros();
+//        add(Cpanel);
         
         //cursor
         Cursor cursor = Toolkit.getDefaultToolkit().createCustomCursor(new ImageIcon(getClass().getResource("cursor/cursorimg.png")).getImage(),new Point(0,0),"Custom Cursor");
@@ -186,8 +186,8 @@ public class Pista extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartActionPerformed
-       CarreraPANELcarros Cpanel=new CarreraPANELcarros();
-       ShowPanel(Cpanel); //Llamar el metodo para mostrar el panel 
+//       CarreraPANELcarros Cpanel=new CarreraPANELcarros();
+      // ShowPanel(Cpanel); //Llamar el metodo para mostrar el panel 
     }//GEN-LAST:event_btnStartActionPerformed
 
     private void InfoBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InfoBTNActionPerformed
