@@ -143,17 +143,17 @@ public class CarreraPANELcarros extends javax.swing.JPanel {
 
         BonoAzul1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         BonoAzul1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGcars/BolaAzu60l.png"))); // NOI18N
-        add(BonoAzul1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 70, 60, 50));
+        add(BonoAzul1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 250, 60, 60));
 
         BonoAzul2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         BonoAzul2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGcars/BolaAzul40.png"))); // NOI18N
-        add(BonoAzul2, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 270, 50, 50));
+        add(BonoAzul2, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 70, 50, 50));
 
         ObsRojo2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGcars/BolaRoja40.png"))); // NOI18N
-        add(ObsRojo2, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 200, 50, 50));
+        add(ObsRojo2, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 130, 40, 50));
 
         ObsRojo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGcars/BolaRoja60.png"))); // NOI18N
-        add(ObsRojo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 150, 60, 50));
+        add(ObsRojo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 210, 60, 60));
 
         Mensajito.setFont(new java.awt.Font("Swis721 Blk BT", 0, 14)); // NOI18N
         Mensajito.setForeground(new java.awt.Color(204, 204, 255));
@@ -192,16 +192,6 @@ public class CarreraPANELcarros extends javax.swing.JPanel {
         NARANJAc.setLocation(0, NARANJAc.getLocation().y);
         VERDEc.setLocation(0, VERDEc.getLocation().y);
 
-//        rx1 = ObsRojo1.getX();
-//        rx2 = ObsRojo2.getX();
-//        ry1 = ObsRojo1.getY();
-//        ry2 = ObsRojo2.getY();
-//
-//        ax1 = BonoAzul1.getX();
-//        ax2 = BonoAzul2.getX();
-//        ay1 = BonoAzul1.getY();
-//        ay2 = BonoAzul2.getY();
-        //  reubicarBolitas(BonoAzul1);
         espaciopista = Hacerespaciopista(); //llamar al que crea la matriz
 
         AZULc.requestFocus(); //CENTRAR EL MOVIMIENTO CON TECLAS A LA NAVE DEL USUARIO
