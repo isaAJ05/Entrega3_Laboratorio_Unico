@@ -5,12 +5,11 @@
 package PanelesSP;
 
 import java.awt.Color;
-import java.awt.Cursor;
-import java.awt.Point;
-import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Random;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 /**
@@ -22,11 +21,161 @@ public class medium extends javax.swing.JPanel {
     /**
      * Creates new form medium
      */
+    //Variables globales
+    // - Contadores
+    int entre = 0;//para contabilizar las veces que el usuario presione los botones
+    int cont = 0;//para contabilizar palabras halladas y mostrarlas al usuario
+
+    // - Matrices
+    int movimientos[][] = new int[100][100];
+    int correctos[][] = {{2, 2}, {3, 3}, {4, 4},{5, 5},};
+
+    // -Verifican si la palabra ya la encontró
+    boolean yaloencontre1 = false;
+    boolean yaloencontre2 = false;
+    boolean yaloencontre3 = false;
+    boolean yaloencontre4 = false;
+
+    //SUBRUTINAS
+    // - Subrutina para que cada vez que el usuario presione un boton guarde su movimiento y posteriormente lo verifique 
+    private void botonpresionado(JButton boton, JButton botones[][], JButton vector1[], JButton vector2[], JButton vector3[], JButton vector4[], JLabel chulito1, JLabel chulito2, JLabel chulito3,JLabel chulito4) {
+        boton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                int f;
+                entre++;
+
+                f = comprobacion(entre);//Funcion para saber si he presionado botones dos veces o multiplos de 2
+                //La idea es que cada vez que presione dos botones guarde ese movimiento (con contadores) y verifique si esos dos son una seleccion correcta
+
+                movimientos(boton, f, vector1, vector2, vector3, vector4);//Subrutina que asigna dos numeros en una fila y dos columnas de una matriz si el boton seleccionado hace parte de un boton inicial o final de una palabra
+                verifiquemos(movimientos, f, botones, vector1, vector2, vector3, vector4, chulito1, chulito2, chulito3,chulito4);//Subrutina que verifica si la matriz movimientos hace parte de una seleccion correcta
+
+            }
+        }
+        );
+    }
+
+    //  -Subrutina que asigna dos numeros en una fila y dos columnas de una matriz si el boton seleccionado hace parte de un boton inicial o final de una palabra
+    private void movimientos(JButton boton, int f, JButton vector1[], JButton vector2[], JButton vector3[], JButton vector4[]) {
+        if (boton == vector1[0]) {
+            movimientos[f][0] = 2;
+        } else if (boton == vector1[vector1.length - 1]) {
+            movimientos[f][1] = 2;
+        }
+        if (boton == vector2[0]) {
+            movimientos[f][0] = 3;
+        } else if (boton == vector2[vector2.length - 1]) {
+            movimientos[f][1] = 3;
+        }
+        if (boton == vector3[0]) {
+            movimientos[f][0] = 4;
+        } else if (boton == vector3[vector3.length - 1]) {
+            movimientos[f][1] = 4;
+        }
+        if (boton == vector4[0]) {
+            movimientos[f][0] = 5;
+        } else if (boton == vector4[vector4.length - 1]) {
+            movimientos[f][1] = 5;
+        }
+    }
+
+    //  -Subrutina que verifica si la matriz movimientos hace parte de una seleccion correcta
+    private void verifiquemos(int movimientos[][], int f, JButton botones[][], JButton vector1[], JButton vector2[], JButton vector3[], JButton vector4[], JLabel chulito1, JLabel chulito2, JLabel chulito3,JLabel chulito4) {
+        int i;
+        if (movimientos[f][0] == correctos[0][0] && movimientos[f][1] == correctos[0][1]) {
+            for (i = 0; i < vector1.length; i++) {
+                vector1[i].setBackground(Color.green);
+
+            }
+
+            if (yaloencontre1 == false) {
+                comprobacion2(chulito1);
+            }
+            yaloencontre1 = true;
+        }
+        if (movimientos[f][0] == correctos[1][0] && movimientos[f][1] == correctos[1][1]) {
+            for (i = 0; i < vector2.length; i++) {
+                vector2[i].setBackground(Color.green);
+
+            }
+
+            if (yaloencontre2 == false) {
+                comprobacion2(chulito2);
+            }
+            yaloencontre2 = true;
+        }
+        if (movimientos[f][0] == correctos[2][0] && movimientos[f][1] == correctos[2][1]) {
+            for (i = 0; i < vector3.length; i++) {
+                vector3[i].setBackground(Color.green);
+
+            }
+
+            if (yaloencontre3 == false) {
+                comprobacion2(chulito3);
+            }
+            yaloencontre3 = true;
+        }
+        if (movimientos[f][0] == correctos[3][0] && movimientos[f][1] == correctos[3][1]) {
+            for (i = 0; i < vector4.length; i++) {
+                vector4[i].setBackground(Color.green);
+
+            }
+
+            if (yaloencontre4 == false) {
+                comprobacion2(chulito4);
+            }
+            yaloencontre4 = true;
+        }
+
+    }
+
+    //Subrutina que produce diversas verificaciones y contabilizaciones cada vez que un usuario encuentra una palabra
+    private void comprobacion2(JLabel chulito) {
+        //Se volverá visible una estrella al lado de la palabra Correspondiente en la lista
+        chulito.setVisible(true);
+        //Para contabilizar palabras halladas y mostrarlas al usuario
+        cont += 1;// cada palabra hallada se le suma 1 al contador
+
+        if (cont == 1) {
+            palabrasencontradas.setText("1/4");
+        } else if (cont == 2) {
+            palabrasencontradas.setText("2/4");
+        } else if (cont == 3) {
+            palabrasencontradas.setText("3/4");
+
+        } else if (cont == 4) {
+            palabrasencontradas.setText("4/4");
+            cont += 1;
+        }
+        //JOPTION PANE para mostrar aviso de que ha ganado al usuario
+        if (cont == 5) {
+            JOptionPane.showMessageDialog(null, "¡Felicidades " + name + "! \nHas resuelto el primer nivel\nPresiona NEXT LEVEL para seguir con el siguiente");
+            //Para que no se realicen mas cambios en la sopa
+
+            //para que no pueda pedir mas pistas ver la solucion o instrucciones
+            pista.setEnabled(false);
+            solucion.setEnabled(false);
+            instrucciones.setEnabled(false);
+
+        }
+
+    }
+    //FUNCIONES
+
+    // - Funcion para saber si he presionado botones dos veces o multiplos de 2
+    private int comprobacion(int entre) {
+        int res = entre;
+        if (entre % 2 == 0) {
+            res = entre - 1;
+        }
+        return res;
+
+    }
     private String name = null;
 
     public medium(String user) {
         initComponents();
-        
+
         this.name = user;
         int i, j, auxt = 5, auxt2 = 6, auxp = 0, auxp2 = 1, auxv = 4, auxv2 = 5;
         //Matriz de botones [6][6]
@@ -42,10 +191,22 @@ public class medium extends javax.swing.JPanel {
         //Vector de planetas [5] pero solo se usan 4 espacios
         String[] planetas = {"TIERRA", "MARTE", "VENUS", "PLUTON", ""};
 
+        // Palabra TIERRA
+        JButton[] tierra = {boton36, boton35, boton34, boton33, boton32, boton31,};
+
+        // Palabra MARTE
+        JButton[] marte = {boton11, boton22, boton33, boton44, boton55,};
+
+        // Palabra VENUS
+        JButton[] venus = {boton86, boton76, boton66, boton56, boton46,};
+
+        // Palabra PLUTON
+        JButton[] pluton = {boton61, boton62, boton63, boton64, boton65, boton66,};
+
         //Asignacion de letras a texto de la matriz de botones
         for (i = 0; i < 8; i++) {
             for (j = 0; j < 6; j++) {
-
+botonpresionado(botones[i][j], botones, tierra, marte, venus,pluton, chulito1, chulito2, chulito3,chulito4);
                 //Letras aleatorias mayusculas usando Random
                 Random random = new Random();
                 char letra = (char) (random.nextInt(26) + 'A');
@@ -94,8 +255,7 @@ public class medium extends javax.swing.JPanel {
                 }
             }
         }
-        //Contador para contabilizar palabras halladas y mostrarlas al usuario
-        cont = 0;
+
         //Hacer invisible estrellas al inicio de apertura de la ventana
         chulito1.setVisible(false);
         chulito2.setVisible(false);
@@ -834,95 +994,17 @@ public class medium extends javax.swing.JPanel {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-    int MARTE = 0;
-    int cont;
+
     private void boton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton11ActionPerformed
-        MARTE += 1;//Si se presiona este boton que representa la letra inicial de MARTE el contador sumara 1
-        if (MARTE == 2) {// si vale 2:
-            //se obtendra un color verde en el fondo de los botones que contienen las letras de la palara MARTE
-            boton11.setBackground(Color.green);//Letra M
-            boton22.setBackground(Color.green);//Letra A
-            boton33.setBackground(Color.green);//Letra R
-            boton44.setBackground(Color.green);//Letra T
-            boton55.setBackground(Color.green);//Letra E
-            //Se volverá visible una estrella al lado de la palabra MARTE en la lista
-            chulito2.setVisible(true);
-            //Para contabilizar palabras halladas y mostrarlas al usuario
-            cont += 1;// cada palabra hallada se le suma 1 al contador
-            if (cont == 1) {
-                palabrasencontradas.setText("1/4");
-            } else if (cont == 2) {
-                palabrasencontradas.setText("2/4");
-            } else if (cont == 3) {
-                palabrasencontradas.setText("3/4");
-            } else if (cont == 4) {
-                palabrasencontradas.setText("4/4");
-            }
-        }
-        //JOPTION PANE para mostrar aviso de que ha ganado al usuario
-        if (MARTE == 2 && TIERRA == 2 && VENUS == 2 && PLUTON == 2) {
-            JOptionPane.showMessageDialog(null, "!Qué genio eres " + name + "! \nHas resuelto el segundo nivel\nPero.. ¿estarás listo para el siguiente?\nPresiona NEXT LEVEL para continuar");
-        }
+
     }//GEN-LAST:event_boton11ActionPerformed
-    int PLUTON = 0;
+
     private void boton61ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton61ActionPerformed
-        PLUTON += 1;//Si se presiona este boton que representa la letra inicial de PLUTON el contador sumara 1
-        if (PLUTON == 2) {// si vale 2:
-            //se obtendra un color verde en el fondo de los botones que contienen las letras de la palara PLUTON
-            boton61.setBackground(Color.green);//Letra P
-            boton62.setBackground(Color.green);//Letra L
-            boton63.setBackground(Color.green);//Letra U
-            boton64.setBackground(Color.green);//Letra T
-            boton65.setBackground(Color.green);//Letra O
-            boton66.setBackground(Color.green);//Letra N
-            //Se volverá visible una estrella al lado de la palabra PLUTON en la lista
-            chulito4.setVisible(true);
-            //Para contabilizar palabras halladas y mostrarlas al usuario
-            cont += 1;// cada palabra hallada se le suma 1 al contador
-            if (cont == 1) {
-                palabrasencontradas.setText("1/4");
-            } else if (cont == 2) {
-                palabrasencontradas.setText("2/4");
-            } else if (cont == 3) {
-                palabrasencontradas.setText("3/4");
-            } else if (cont == 4) {
-                palabrasencontradas.setText("4/4");
-            }
-        }
-        //JOPTION PANE para mostrar aviso de que ha ganado al usuario
-        if (MARTE == 2 && TIERRA == 2 && VENUS == 2 && PLUTON == 2) {
-            JOptionPane.showMessageDialog(null, "!Qué genio eres " + name + "! \nHas resuelto el segundo nivel\nPero.. ¿estarás listo para el siguiente?\nPresiona NEXT LEVEL para continuar");
-        }
+
     }//GEN-LAST:event_boton61ActionPerformed
-    int TIERRA;
+
     private void boton31ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton31ActionPerformed
-        TIERRA += 1;//Si se presiona este boton que representa la letra final de TIERRA el contador sumara 1
-        if (TIERRA == 2) {// si vale 2:
-            //se obtendra un color verde en el fondo de los botones que contienen las letras de la palara TIERRA
-            boton36.setBackground(Color.green);//Letra T
-            boton35.setBackground(Color.green);//Letra I
-            boton34.setBackground(Color.green);//Letra E
-            boton33.setBackground(Color.green);//Letra R
-            boton32.setBackground(Color.green);//Letra R
-            boton31.setBackground(Color.green);//Letra A
-            //Se volverá visible una estrella al lado de la palabra TIERRA en la lista
-            chulito1.setVisible(true);
-            //Para contabilizar palabras halladas y mostrarlas al usuario
-            cont += 1;// cada palabra hallada se le suma 1 al contador
-            if (cont == 1) {
-                palabrasencontradas.setText("1/4");
-            } else if (cont == 2) {
-                palabrasencontradas.setText("2/4");
-            } else if (cont == 3) {
-                palabrasencontradas.setText("3/4");
-            } else if (cont == 4) {
-                palabrasencontradas.setText("4/4");
-            }
-        }
-        //JOPTION PANE para mostrar aviso de que ha ganado al usuario
-        if (MARTE == 2 && TIERRA == 2 && VENUS == 2 && PLUTON == 2) {
-            JOptionPane.showMessageDialog(null, "!Qué genio eres " + name + "! \nHas resuelto el segundo nivel\nPero.. ¿estarás listo para el siguiente?\nPresiona NEXT LEVEL para continuar");
-        }
+
     }//GEN-LAST:event_boton31ActionPerformed
 
     private void boton81ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton81ActionPerformed
@@ -1002,32 +1084,7 @@ public class medium extends javax.swing.JPanel {
     }//GEN-LAST:event_boton45ActionPerformed
 
     private void boton55ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton55ActionPerformed
-        MARTE += 1;//Si se presiona este boton que representa la letra inicial de MARTE el contador sumara 1
-        if (MARTE == 2) {// si vale 2:
-            //se obtendra un color verde en el fondo de los botones que contienen las letras de la palara MARTE
-            boton11.setBackground(Color.green);//Letra M
-            boton22.setBackground(Color.green);//Letra A
-            boton33.setBackground(Color.green);//Letra R
-            boton44.setBackground(Color.green);//Letra T
-            boton55.setBackground(Color.green);//Letra E
-            //Se volverá visible una estrella al lado de la palabra MARTE en la lista
-            chulito2.setVisible(true);
-            //Para contabilizar palabras halladas y mostrarlas al usuario
-            cont += 1;// cada palabra hallada se le suma 1 al contador
-            if (cont == 1) {
-                palabrasencontradas.setText("1/4");
-            } else if (cont == 2) {
-                palabrasencontradas.setText("2/4");
-            } else if (cont == 3) {
-                palabrasencontradas.setText("3/4");
-            } else if (cont == 4) {
-                palabrasencontradas.setText("4/4");
-            }
-        }
-        //JOPTION PANE para mostrar aviso de que ha ganado al usuario
-        if (MARTE == 2 && TIERRA == 2 && VENUS == 2 && PLUTON == 2) {
-            JOptionPane.showMessageDialog(null, "!Qué genio eres " + name + "! \nHas resuelto el segundo nivel\nPero.. ¿estarás listo para el siguiente?\nPresiona NEXT LEVEL para continuar");
-        }
+
     }//GEN-LAST:event_boton55ActionPerformed
 
     private void boton65ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton65ActionPerformed
@@ -1047,62 +1104,11 @@ public class medium extends javax.swing.JPanel {
     }//GEN-LAST:event_boton26ActionPerformed
 
     private void boton36ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton36ActionPerformed
-        TIERRA += 1;//Si se presiona este boton que representa la letra inicial de TIERRA el contador sumara 1
-        if (TIERRA == 2) {// si vale 2:
-            //se obtendra un color verde en el fondo de los botones que contienen las letras de la palara TIERRA
-            boton36.setBackground(Color.green);//Letra T
-            boton35.setBackground(Color.green);//Letra I
-            boton34.setBackground(Color.green);//Letra E
-            boton33.setBackground(Color.green);//Letra R
-            boton32.setBackground(Color.green);//Letra R
-            boton31.setBackground(Color.green);//Letra A
-            //Se volverá visible una estrella al lado de la palabra TIERRA en la lista
-            chulito1.setVisible(true);
-            //Para contabilizar palabras halladas y mostrarlas al usuario
-            cont += 1;// cada palabra hallada se le suma 1 al contador
-            if (cont == 1) {
-                palabrasencontradas.setText("1/4");
-            } else if (cont == 2) {
-                palabrasencontradas.setText("2/4");
-            } else if (cont == 3) {
-                palabrasencontradas.setText("3/4");
-            } else if (cont == 4) {
-                palabrasencontradas.setText("4/4");
-            }
-        }
-        //JOPTION PANE para mostrar aviso de que ha ganado al usuario
-        if (MARTE == 2 && TIERRA == 2 && VENUS == 2 && PLUTON == 2) {
-            JOptionPane.showMessageDialog(null, "!Qué genio eres " + name + "! \nHas resuelto el segundo nivel\nPero.. ¿estarás listo para el siguiente?\nPresiona NEXT LEVEL para continuar");
-        }
+
     }//GEN-LAST:event_boton36ActionPerformed
-    int VENUS = 0;
+
     private void boton46ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton46ActionPerformed
-        VENUS += 1;//Si se presiona este boton que representa la letra final de VENUS el contador sumara 1
-        if (VENUS == 2) {// si vale 2:
-            //se obtendra un color verde en el fondo de los botones que contienen las letras de la palara VENUS
-            boton86.setBackground(Color.green);//Letra V
-            boton76.setBackground(Color.green);//Letra E
-            boton66.setBackground(Color.green);//Letra N
-            boton56.setBackground(Color.green);//Letra U
-            boton46.setBackground(Color.green);//Letra S
-            //Se volverá visible una estrella al lado de la palabra VENUS en la lista
-            chulito3.setVisible(true);
-            //Para contabilizar palabras halladas y mostrarlas al usuario
-            cont += 1;// cada palabra hallada se le suma 1 al contador
-            if (cont == 1) {
-                palabrasencontradas.setText("1/4");
-            } else if (cont == 2) {
-                palabrasencontradas.setText("2/4");
-            } else if (cont == 3) {
-                palabrasencontradas.setText("3/4");
-            } else if (cont == 4) {
-                palabrasencontradas.setText("4/4");
-            }
-        }
-        //JOPTION PANE para mostrar aviso de que ha ganado al usuario
-        if (MARTE == 2 && TIERRA == 2 && VENUS == 2 && PLUTON == 2) {
-            JOptionPane.showMessageDialog(null, "!Qué genio eres " + name + "! \nHas resuelto el segundo nivel\nPero.. ¿estarás listo para el siguiente?\nPresiona NEXT LEVEL para continuar");
-        }
+
     }//GEN-LAST:event_boton46ActionPerformed
 
     private void boton56ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton56ActionPerformed
@@ -1110,33 +1116,8 @@ public class medium extends javax.swing.JPanel {
     }//GEN-LAST:event_boton56ActionPerformed
 
     private void boton66ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton66ActionPerformed
-        PLUTON += 1;//Si se presiona este boton que representa la letra final de PLUTON el contador sumara 1
-        if (PLUTON == 2) {// si vale 2:
-            //se obtendra un color verde en el fondo de los botones que contienen las letras de la palara PLUTON
-            boton61.setBackground(Color.green);//Letra P
-            boton62.setBackground(Color.green);//Letra L
-            boton63.setBackground(Color.green);//Letra U
-            boton64.setBackground(Color.green);//Letra T
-            boton65.setBackground(Color.green);//Letra O
-            boton66.setBackground(Color.green);//Letra N
-            //Se volverá visible una estrella al lado de la palabra PLUTON en la lista
-            chulito4.setVisible(true);
-            //Para contabilizar palabras halladas y mostrarlas al usuario
-            cont += 1;// cada palabra hallada se le suma 1 al contador
-            if (cont == 1) {
-                palabrasencontradas.setText("1/4");
-            } else if (cont == 2) {
-                palabrasencontradas.setText("2/4");
-            } else if (cont == 3) {
-                palabrasencontradas.setText("3/4");
-            } else if (cont == 4) {
-                palabrasencontradas.setText("4/4");
-            }
-        }
-        //JOPTION PANE para mostrar aviso de que ha ganado al usuario
-        if (MARTE == 2 && TIERRA == 2 && VENUS == 2 && PLUTON == 2) {
-            JOptionPane.showMessageDialog(null, "!Qué genio eres " + name + "! \nHas resuelto el segundo nivel\nPero.. ¿estarás listo para el siguiente?\nPresiona NEXT LEVEL para continuar");
-        }
+
+
     }//GEN-LAST:event_boton66ActionPerformed
 
     private void boton76ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton76ActionPerformed
@@ -1144,32 +1125,7 @@ public class medium extends javax.swing.JPanel {
     }//GEN-LAST:event_boton76ActionPerformed
 
     private void boton86ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton86ActionPerformed
-        VENUS += 1;//Si se presiona este boton que representa la letra inicial de VENUS el contador sumara 1
-        if (VENUS == 2) {// si vale 2:
-            //se obtendra un color verde en el fondo de los botones que contienen las letras de la palara VENUS
-            boton86.setBackground(Color.green);//Letra V
-            boton76.setBackground(Color.green);//Letra E
-            boton66.setBackground(Color.green);//Letra N
-            boton56.setBackground(Color.green);//Letra U
-            boton46.setBackground(Color.green);//Letra S
-            //Se volverá visible una estrella al lado de la palabra VENUS en la lista
-            chulito3.setVisible(true);
-            //Para contabilizar palabras halladas y mostrarlas al usuario
-            cont += 1;// cada palabra hallada se le suma 1 al contador
-            if (cont == 1) {
-                palabrasencontradas.setText("1/4");
-            } else if (cont == 2) {
-                palabrasencontradas.setText("2/4");
-            } else if (cont == 3) {
-                palabrasencontradas.setText("3/4");
-            } else if (cont == 4) {
-                palabrasencontradas.setText("4/4");
-            }
-        }
-        //JOPTION PANE para mostrar aviso de que ha ganado al usuario
-        if (MARTE == 2 && TIERRA == 2 && VENUS == 2 && PLUTON == 2) {
-            JOptionPane.showMessageDialog(null, "!Qué genio eres " + name + "! \nHas resuelto el segundo nivel\nPero.. ¿estarás listo para el siguiente?\nPresiona NEXT LEVEL para continuar");
-        }
+
     }//GEN-LAST:event_boton86ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -1182,24 +1138,24 @@ public class medium extends javax.swing.JPanel {
         contenido5.revalidate();
         contenido5.repaint();
     }//GEN-LAST:event_jButton2ActionPerformed
-    int taux = 1, maux = 1, vaux = 1, paux = 1;
+
     private void pistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pistaActionPerformed
         //Para mostrar pistas:
         //tengo en cuenta si ya el contador de la palabra está lleno ademas creo un auxiliar para cerciorarme de no repetir la palabra si ya la encontraron
         //la pista consiste en crear un fondo verde en la inicial de la letra de un planeta que no haya encontrado el usuario
         //psra la palabra urano la pista esta en las dos 2 ultimas letras
-        if (TIERRA != 2 & taux == 1) { //pista letra inicial TIERRA
+        if (yaloencontre1 == false) { //pista letra inicial TIERRA
             boton36.setBackground(new Color(153, 255, 153));
-            taux = 0;
-        } else if (MARTE != 2 & maux == 1) {//pista letra inicial MARTE
+            ;
+        } else if (yaloencontre2 == false) {//pista letra inicial MARTE
             boton11.setBackground(new Color(153, 255, 153));
-            maux = 0;
-        } else if (VENUS != 2 & vaux == 1) {//pista letra inicial VENUS
+
+        } else if (yaloencontre3 == false) {//pista letra inicial VENUS
             boton86.setBackground(new Color(153, 255, 153));
-            vaux = 0;
-        } else if (PLUTON != 2 & paux == 1) {//pista letra inicial PLUTON
+
+        } else if (yaloencontre4 == false) {//pista letra inicial PLUTON
             boton61.setBackground(new Color(153, 255, 153));
-            paux = 0;
+
         }
     }//GEN-LAST:event_pistaActionPerformed
 

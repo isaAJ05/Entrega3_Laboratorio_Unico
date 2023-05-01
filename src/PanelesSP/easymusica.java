@@ -4,16 +4,12 @@ package PanelesSP;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-
-
-
 import java.awt.Color;
-import java.awt.Cursor;
-import java.awt.Point;
-import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Random;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 /**
@@ -25,12 +21,142 @@ public class easymusica extends javax.swing.JPanel {
     /**
      * Creates new form easyanime
      */
+    //Variables globales
+    // - Contadores
+    int entre = 0;//para contabilizar las veces que el usuario presione los botones
+    int cont = 0;//para contabilizar palabras halladas y mostrarlas al usuario
+
+    // - Matrices
+    int movimientos[][] = new int[100][100];
+    int correctos[][] = {{2, 2}, {3, 3}, {4, 4}};
+
+    // -Verifican si la palabra ya la encontró
+    boolean yaloencontre1 = false;
+    boolean yaloencontre2 = false;
+    boolean yaloencontre3 = false;
+
+    //SUBRUTINAS
+    // - Subrutina para que cada vez que el usuario presione un boton guarde su movimiento y posteriormente lo verifique 
+    private void botonpresionado(JButton boton, JButton botones[][], JButton vector1[], JButton vector2[], JButton vector3[], JLabel chulito1, JLabel chulito2, JLabel chulito3) {
+        boton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                int f;
+                entre++;
+
+                f = comprobacion(entre);//Funcion para saber si he presionado botones dos veces o multiplos de 2
+                //La idea es que cada vez que presione dos botones guarde ese movimiento (con contadores) y verifique si esos dos son una seleccion correcta
+
+                movimientos(boton, f, vector1, vector2, vector3);//Subrutina que asigna dos numeros en una fila y dos columnas de una matriz si el boton seleccionado hace parte de un boton inicial o final de una palabra
+                verifiquemos(movimientos, f, botones, vector1, vector2, vector3, chulito1, chulito2, chulito3);//Subrutina que verifica si la matriz movimientos hace parte de una seleccion correcta
+
+            }
+        }
+        );
+    }
+
+    //  -Subrutina que asigna dos numeros en una fila y dos columnas de una matriz si el boton seleccionado hace parte de un boton inicial o final de una palabra
+    private void movimientos(JButton boton, int f, JButton vector1[], JButton vector2[], JButton vector3[]) {
+        if (boton == vector1[0]) {
+            movimientos[f][0] = 2;
+        } else if (boton == vector1[vector1.length - 1]) {
+            movimientos[f][1] = 2;
+        }
+        if (boton == vector2[0]) {
+            movimientos[f][0] = 3;
+        } else if (boton == vector2[vector2.length - 1]) {
+            movimientos[f][1] = 3;
+        }
+        if (boton == vector3[0]) {
+            movimientos[f][0] = 4;
+        } else if (boton == vector3[vector3.length - 1]) {
+            movimientos[f][1] = 4;
+        }
+    }
+
+    //  -Subrutina que verifica si la matriz movimientos hace parte de una seleccion correcta
+    private void verifiquemos(int movimientos[][], int f, JButton botones[][], JButton vector1[], JButton vector2[], JButton vector3[], JLabel chulito1, JLabel chulito2, JLabel chulito3) {
+        int i;
+        if (movimientos[f][0] == correctos[0][0] && movimientos[f][1] == correctos[0][1]) {
+            for (i = 0; i < vector1.length; i++) {
+                vector1[i].setBackground(Color.green);
+
+            }
+
+            if (yaloencontre1 == false) {
+                comprobacion2(chulito1);
+            }
+            yaloencontre1 = true;
+        }
+        if (movimientos[f][0] == correctos[1][0] && movimientos[f][1] == correctos[1][1]) {
+            for (i = 0; i < vector2.length; i++) {
+                vector2[i].setBackground(Color.green);
+
+            }
+
+            if (yaloencontre2 == false) {
+                comprobacion2(chulito2);
+            }
+            yaloencontre2 = true;
+        }
+        if (movimientos[f][0] == correctos[2][0] && movimientos[f][1] == correctos[2][1]) {
+            for (i = 0; i < vector3.length; i++) {
+                vector3[i].setBackground(Color.green);
+
+            }
+
+            if (yaloencontre3 == false) {
+                comprobacion2(chulito3);
+            }
+            yaloencontre3 = true;
+        }
+
+    }
+
+    //Subrutina que produce diversas verificaciones y contabilizaciones cada vez que un usuario encuentra una palabra
+    private void comprobacion2(JLabel chulito) {
+        //Se volverá visible una estrella al lado de la palabra Correspondiente en la lista
+        chulito.setVisible(true);
+        //Para contabilizar palabras halladas y mostrarlas al usuario
+        cont += 1;// cada palabra hallada se le suma 1 al contador
+
+        if (cont == 1) {
+            palabrasencontradas.setText("1/3");
+        } else if (cont == 2) {
+            palabrasencontradas.setText("2/3");
+        } else if (cont == 3) {
+            palabrasencontradas.setText("3/3");
+            cont += 1;
+        }
+        //JOPTION PANE para mostrar aviso de que ha ganado al usuario
+        if (cont == 4) {
+            JOptionPane.showMessageDialog(null, "¡Felicidades " + name + "! \nHas resuelto el primer nivel\nPresiona NEXT LEVEL para seguir con el siguiente");
+            //Para que no se realicen mas cambios en la sopa
+
+            //para que no pueda pedir mas pistas ver la solucion o instrucciones
+            pista.setEnabled(false);
+            solucion.setEnabled(false);
+            instrucciones.setEnabled(false);
+
+        }
+
+    }
+    //FUNCIONES
+
+    // - Funcion para saber si he presionado botones dos veces o multiplos de 2
+    private int comprobacion(int entre) {
+        int res = entre;
+        if (entre % 2 == 0) {
+            res = entre - 1;
+        }
+        return res;
+
+    }
     private String name = null;
 
     public easymusica(String user) {
         this.name = user;
         initComponents();
-        
+
         int i, j, auxt = 5, auxt2 = 6;
         //Matriz de botones [7][5]
         JButton botones[][] = {{boton11, boton12, boton13, boton14, boton15},
@@ -43,11 +169,20 @@ public class easymusica extends javax.swing.JPanel {
 
         //Vector de personajes de anime [4] pero solo se usan 3 espacios
         String[] cantantes = {"TAYLOR", "ELVIS", "JOE", ""};
+        
+        // Vector de botones de TAYLOR
+        JButton[] taylor = {boton72, boton62, boton52, boton42, boton32, boton22,};
+
+        // Vector de botones de ELVIS
+        JButton[] elvis = {boton31, boton42, boton53, boton64, boton75,};
+
+        // Vector de botones de JOE
+        JButton[] joe = {boton15, boton25, boton35,};
 
         //Asignacion de letras a texto de la matriz de botones
         for (i = 0; i < 7; i++) {
             for (j = 0; j < 5; j++) {
-
+                botonpresionado(botones[i][j], botones, taylor, elvis, joe, chulito1, chulito2, chulito3);
                 //Letras aleatorias mayusculas usando Random
                 Random random = new Random();
                 char letra = (char) (random.nextInt(26) + 'A');
@@ -59,17 +194,17 @@ public class easymusica extends javax.swing.JPanel {
                 //i representará mis filas
                 //j representará mis columnas
                 // TAYLOR
-                if (i >=1 && i<=6 && j == 1) { // Posición vertical inversa: Fila 1-6, columna 2
+                if (i >= 1 && i <= 6 && j == 1) { // Posición vertical inversa: Fila 1-6, columna 2
                     String caracter = cantantes[0].substring(auxt, auxt2);//extraer caracteres de la palabra taylor
-                    auxt2= auxt;
-                    auxt-=1;
+                    auxt2 = auxt;
+                    auxt -= 1;
                     botones[i][j].setText(caracter);//se le asignan las letras correspondientes
                     //JOE
-                } else if (i <=2 && j ==4) { //Posición vertical : fila 0-2, columna 4
-                    String caracter3 =cantantes[2].substring(i, i+1);       
+                } else if (i <= 2 && j == 4) { //Posición vertical : fila 0-2, columna 4
+                    String caracter3 = cantantes[2].substring(i, i + 1);
                     botones[i][j].setText(caracter3);
                     // ELVIS
-                }else if (i >= 2 && i <= 6 && j <=5 ) { //Posición Diagonal: fila de 2-6, columnas 0-5
+                } else if (i >= 2 && i <= 6 && j <= 5) { //Posición Diagonal: fila de 2-6, columnas 0-5
                     if (i == 2 && j == 0) {
                         String caracter2 = cantantes[1].substring(0, 1);//extracción de caracter personalizado 
                         botones[i][j].setText(caracter2);//LETRA E
@@ -86,12 +221,10 @@ public class easymusica extends javax.swing.JPanel {
                         String caracter24 = cantantes[1].substring(4, 5);
                         botones[i][j].setText(caracter24);//LETRA S
                     }
-                    
+
                 }
             }
         }
-        //Contador para contabilizar palabras halladas y mostrarlas al usuario
-        cont = 0;
         //Hacer invisible estrellas al inicio de apertura de la ventana
         chulito1.setVisible(false);
         chulito2.setVisible(false);
@@ -715,76 +848,29 @@ public class easymusica extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    int cont;
+
     private void boton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton11ActionPerformed
-      
+
     }//GEN-LAST:event_boton11ActionPerformed
 
     private void boton61ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton61ActionPerformed
-        
+
     }//GEN-LAST:event_boton61ActionPerformed
 
     private void boton21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton21ActionPerformed
 
     }//GEN-LAST:event_boton21ActionPerformed
-    int ELVIS=0;
+
     private void boton31ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton31ActionPerformed
-        ELVIS += 1;//Si se presiona este boton que representa la letra inicial de ELVIS el contador sumara 1
-        if (ELVIS == 2) {// si vale 2:
-            //se obtendra un color verde en el fondo de los botones que contienen las letras de la palara ELVIS
-            boton31.setBackground(Color.green);//Letra E
-            boton42.setBackground(Color.green);//Letra L
-            boton53.setBackground(Color.green);//Letra V
-            boton64.setBackground(Color.green);//Letra I
-            boton75.setBackground(Color.green);//Letra S
-            //Se volverá visible una estrella al lado de la palabra JOE en la lista
-            chulito2.setVisible(true);
-            //Para contabilizar palabras halladas y mostrarlas al usuario
-            cont += 1;// cada palabra hallada se le suma 1 al contador
-            if (cont == 1) {
-                palabrasencontradas.setText("1/3");
-            } else if (cont == 2) {
-                palabrasencontradas.setText("2/3");
-            } else if (cont == 3) {
-                palabrasencontradas.setText("3/3");
-            }
-        }
-        //JOPTION PANE para mostrar aviso de que ha ganado al usuario
-        if (JOE >= 2 && TAYLOR >= 2 && ELVIS >= 2) {
-            JOptionPane.showMessageDialog(null, "¡Felicidades " + name + "! \nHas resuelto el primer nivel\nPresiona NEXT LEVEL para seguir con el siguiente");
-        }
+
     }//GEN-LAST:event_boton31ActionPerformed
 
     private void boton32ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton32ActionPerformed
 
     }//GEN-LAST:event_boton32ActionPerformed
-    int TAYLOR=0;
+
     private void boton72ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton72ActionPerformed
-         TAYLOR += 1;//Si se presiona este boton que representa la letra inicial de TAYLOR el contador sumara 1
-        if (TAYLOR == 2) {// si vale 2:
-            //se obtendra un color verde en el fondo de los botones que contienen las letras de la palara TAYLOT
-            boton72.setBackground(Color.green);//Letra T
-            boton62.setBackground(Color.green);//Letra A
-            boton52.setBackground(Color.green);//Letra Y
-            boton42.setBackground(Color.green);//Letra L
-            boton32.setBackground(Color.green);//Letra O
-            boton22.setBackground(Color.green);//Letra R
-            //Se volverá visible una estrella al lado de la palabra TAYLOR en la lista
-            chulito1.setVisible(true);
-            //Para contabilizar palabras halladas y mostrarlas al usuario
-            cont += 1;// cada palabra hallada se le suma 1 al contador
-            if (cont == 1) {
-                palabrasencontradas.setText("1/3");
-            } else if (cont == 2) {
-                palabrasencontradas.setText("2/3");
-            } else if (cont == 3) {
-                palabrasencontradas.setText("3/3");
-            }
-        }
-        //JOPTION PANE para mostrar aviso de que ha ganado al usuario
-        if (JOE >= 2 && TAYLOR >= 2 && ELVIS >= 2) {
-            JOptionPane.showMessageDialog(null, "¡Felicidades " + name + "! \nHas resuelto el primer nivel\nPresiona NEXT LEVEL para seguir con el siguiente");
-        }
+
     }//GEN-LAST:event_boton72ActionPerformed
 
     private void boton23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton23ActionPerformed
@@ -802,30 +888,8 @@ public class easymusica extends javax.swing.JPanel {
     private void boton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton14ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_boton14ActionPerformed
-int JOE=0;
+
     private void boton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton15ActionPerformed
-JOE += 1;//Si se presiona este boton que representa la letra inicial de JOEel contador sumara 1
-        if (JOE == 2) {// si vale 2:
-            //se obtendra un color verde en el fondo de los botones que contienen las letras de la palara JOE
-            boton15.setBackground(Color.green);//Letra J
-            boton25.setBackground(Color.green);//Letra O
-            boton35.setBackground(Color.green);//Letra E
-            //Se volverá visible una estrella al lado de la palabra JOE en la lista
-            chulito3.setVisible(true);
-            //Para contabilizar palabras halladas y mostrarlas al usuario
-            cont += 1;// cada palabra hallada se le suma 1 al contador
-            if (cont == 1) {
-                palabrasencontradas.setText("1/3");
-            } else if (cont == 2) {
-                palabrasencontradas.setText("2/3");
-            } else if (cont == 3) {
-                palabrasencontradas.setText("3/3");
-            }
-        }
-        //JOPTION PANE para mostrar aviso de que ha ganado al usuario
-        if (JOE >= 2 && TAYLOR >= 2 && ELVIS >= 2) {
-            JOptionPane.showMessageDialog(null, "¡Felicidades " + name + "! \nHas resuelto el primer nivel\nPresiona NEXT LEVEL para seguir con el siguiente");
-        }
     }//GEN-LAST:event_boton15ActionPerformed
 
     private void boton24ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton24ActionPerformed
@@ -853,32 +917,11 @@ JOE += 1;//Si se presiona este boton que representa la letra inicial de JOEel co
     }//GEN-LAST:event_boton74ActionPerformed
 
     private void boton25ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton25ActionPerformed
-        
+
     }//GEN-LAST:event_boton25ActionPerformed
-    
+
     private void boton35ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton35ActionPerformed
-       JOE += 1;//Si se presiona este boton que representa la letra inicial de JOEel contador sumara 1
-        if (JOE == 2) {// si vale 2:
-            //se obtendra un color verde en el fondo de los botones que contienen las letras de la palara JOE
-            boton15.setBackground(Color.green);//Letra J
-            boton25.setBackground(Color.green);//Letra O
-            boton35.setBackground(Color.green);//Letra E
-            //Se volverá visible una estrella al lado de la palabra JOE en la lista
-            chulito3.setVisible(true);
-            //Para contabilizar palabras halladas y mostrarlas al usuario
-            cont += 1;// cada palabra hallada se le suma 1 al contador
-            if (cont == 1) {
-                palabrasencontradas.setText("1/3");
-            } else if (cont == 2) {
-                palabrasencontradas.setText("2/3");
-            } else if (cont == 3) {
-                palabrasencontradas.setText("3/3");
-            }
-        }
-        //JOPTION PANE para mostrar aviso de que ha ganado al usuario
-        if (JOE >= 2 && TAYLOR >= 2 && ELVIS >= 2) {
-            JOptionPane.showMessageDialog(null, "¡Felicidades " + name + "! \nHas resuelto el primer nivel\nPresiona NEXT LEVEL para seguir con el siguiente");
-        }
+
     }//GEN-LAST:event_boton35ActionPerformed
 
     private void boton45ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton45ActionPerformed
@@ -894,30 +937,7 @@ JOE += 1;//Si se presiona este boton que representa la letra inicial de JOEel co
     }//GEN-LAST:event_boton65ActionPerformed
 
     private void boton75ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton75ActionPerformed
-         ELVIS += 1;//Si se presiona este boton que representa la letra inicial de ELVIS el contador sumara 1
-        if (ELVIS == 2) {// si vale 2:
-            //se obtendra un color verde en el fondo de los botones que contienen las letras de la palara ELVIS
-            boton31.setBackground(Color.green);//Letra E
-            boton42.setBackground(Color.green);//Letra L
-            boton53.setBackground(Color.green);//Letra V
-            boton64.setBackground(Color.green);//Letra I
-            boton75.setBackground(Color.green);//Letra S
-            //Se volverá visible una estrella al lado de la palabra JOE en la lista
-            chulito2.setVisible(true);
-            //Para contabilizar palabras halladas y mostrarlas al usuario
-            cont += 1;// cada palabra hallada se le suma 1 al contador
-            if (cont == 1) {
-                palabrasencontradas.setText("1/3");
-            } else if (cont == 2) {
-                palabrasencontradas.setText("2/3");
-            } else if (cont == 3) {
-                palabrasencontradas.setText("3/3");
-            }
-        }
-        //JOPTION PANE para mostrar aviso de que ha ganado al usuario
-        if (JOE >= 2 && TAYLOR >= 2 && ELVIS >= 2) {
-            JOptionPane.showMessageDialog(null, "¡Felicidades " + name + "! \nHas resuelto el primer nivel\nPresiona NEXT LEVEL para seguir con el siguiente");
-        }
+
     }//GEN-LAST:event_boton75ActionPerformed
 
     private void siguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_siguienteActionPerformed
@@ -936,22 +956,22 @@ JOE += 1;//Si se presiona este boton que representa la letra inicial de JOEel co
         //Al presionar este boton se podra visualizar la solución de la sopa de letras al ver con un fondo verde las letras de las palabras propuestas al usuario
         //TAYLOR
         boton72.setBackground(Color.green);//Letra T
-            boton62.setBackground(Color.green);//Letra A
-            boton52.setBackground(Color.green);//Letra Y
-            boton42.setBackground(Color.green);//Letra L
-            boton32.setBackground(Color.green);//Letra O
-            boton22.setBackground(Color.green);//Letra R
+        boton62.setBackground(Color.green);//Letra A
+        boton52.setBackground(Color.green);//Letra Y
+        boton42.setBackground(Color.green);//Letra L
+        boton32.setBackground(Color.green);//Letra O
+        boton22.setBackground(Color.green);//Letra R
         //JOE
-       boton15.setBackground(Color.green);//Letra J
-            boton25.setBackground(Color.green);//Letra O
-            boton35.setBackground(Color.green);//Letra E
+        boton15.setBackground(Color.green);//Letra J
+        boton25.setBackground(Color.green);//Letra O
+        boton35.setBackground(Color.green);//Letra E
 
         //ELVIS
-         boton31.setBackground(Color.green);//Letra E
-            boton42.setBackground(Color.green);//Letra L
-            boton53.setBackground(Color.green);//Letra V
-            boton64.setBackground(Color.green);//Letra I
-            boton75.setBackground(Color.green);//Letra S
+        boton31.setBackground(Color.green);//Letra E
+        boton42.setBackground(Color.green);//Letra L
+        boton53.setBackground(Color.green);//Letra V
+        boton64.setBackground(Color.green);//Letra I
+        boton75.setBackground(Color.green);//Letra S
 
         //MOSTRAR PALABRAS ENCONTRADAS
         palabrasencontradas.setText("3/3");
@@ -977,21 +997,21 @@ JOE += 1;//Si se presiona este boton que representa la letra inicial de JOEel co
                 + "\n\n𝐏𝐋𝐔𝐒: Si lo deseas puedes pedir pistas o revelar la solución de la sopa de letras al seleccionar dichas opciones."
                 + "\n\n                             ¡𝗗𝗜𝗩𝗜𝗘𝗥𝗧𝗘𝗧𝗘 𝗝𝗨𝗚𝗔𝗡𝗗𝗢 𝗟𝗔 𝗦𝗢𝗣𝗔 𝗗𝗘 𝗟𝗘𝗧𝗥𝗔𝗦 𝗦𝗧𝗔𝗥: 𝗩𝗘𝗥𝗦𝗜𝗢𝗡 𝐌𝗨𝗦𝗜𝐂𝗔!", "STAR GAMES: Sopa de letras STAR", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_instruccionesActionPerformed
-    int jaux=1 , eaux=1 , taux=1 ;
+
     private void pistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pistaActionPerformed
         //Para mostrar pistas:
         //tengo en cuenta si ya el contador de la palabra está lleno ademas creo un auxiliar para cerciorarme de no repetir la palabra si ya la encontraron
         //la pista consiste en crear un fondo verde en la inicial de la letra de un planeta que no haya encontrado el usuario
 
-        if (JOE < 2 & jaux == 1) { //pista letra inicial JOE
+        if (yaloencontre3 == false) { //pista letra inicial JOE
             boton15.setBackground(new Color(153, 255, 153));
-            jaux = 0;
-        } else if (ELVIS < 2 & eaux == 1) {//pista letra inicial ELVIS
+
+        } else if (yaloencontre2 == false) {//pista letra inicial ELVIS
             boton31.setBackground(new Color(153, 255, 153));
-            eaux = 0;
-        } else if (TAYLOR < 2 & taux == 1) {//pista letra inicial TAYLOR
+
+        } else if (yaloencontre1 == false) {//pista letra inicial TAYLOR
             boton72.setBackground(new Color(153, 255, 153));
-            taux = 0;
+
         }
     }//GEN-LAST:event_pistaActionPerformed
 
@@ -1006,37 +1026,13 @@ JOE += 1;//Si se presiona este boton que representa la letra inicial de JOEel co
     private void boton51ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton51ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_boton51ActionPerformed
-    
+
     private void boton22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton22ActionPerformed
-         TAYLOR += 1;//Si se presiona este boton que representa la letra inicial de TAYLOR el contador sumara 1
-        if (TAYLOR == 2) {// si vale 2:
-            //se obtendra un color verde en el fondo de los botones que contienen las letras de la palara TAYLOT
-            boton72.setBackground(Color.green);//Letra T
-            boton62.setBackground(Color.green);//Letra A
-            boton52.setBackground(Color.green);//Letra Y
-            boton42.setBackground(Color.green);//Letra L
-            boton32.setBackground(Color.green);//Letra O
-            boton22.setBackground(Color.green);//Letra R
-            //Se volverá visible una estrella al lado de la palabra TAYLOR en la lista
-            chulito1.setVisible(true);
-            //Para contabilizar palabras halladas y mostrarlas al usuario
-            cont += 1;// cada palabra hallada se le suma 1 al contador
-            if (cont == 1) {
-                palabrasencontradas.setText("1/3");
-            } else if (cont == 2) {
-                palabrasencontradas.setText("2/3");
-            } else if (cont == 3) {
-                palabrasencontradas.setText("3/3");
-            }
-        }
-        //JOPTION PANE para mostrar aviso de que ha ganado al usuario
-        if (JOE >= 2 && TAYLOR >= 2 && ELVIS >= 2) {
-            JOptionPane.showMessageDialog(null, "¡Felicidades " + name + "! \nHas resuelto el primer nivel\nPresiona NEXT LEVEL para seguir con el siguiente");
-        }
+
     }//GEN-LAST:event_boton22ActionPerformed
 
     private void boton71ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton71ActionPerformed
-        
+
     }//GEN-LAST:event_boton71ActionPerformed
 
     private void btnVolver3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVolver3MouseEntered
