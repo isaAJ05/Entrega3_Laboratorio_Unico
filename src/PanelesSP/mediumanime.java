@@ -137,14 +137,14 @@ public class mediumanime extends javax.swing.JPanel {
         cont += 1;// cada palabra hallada se le suma 1 al contador
 
         if (cont == 1) {
-            palabrasencontradas.setText("1/3");
+            palabrasencontradas.setText("1/4");
         } else if (cont == 2) {
-            palabrasencontradas.setText("2/3");
+            palabrasencontradas.setText("2/4");
         } else if (cont == 3) {
-            palabrasencontradas.setText("3/3");
+            palabrasencontradas.setText("3/4");
 
         } else if (cont == 4) {
-            palabrasencontradas.setText("3/3");
+            palabrasencontradas.setText("4/4");
             cont += 1;
         }
         //JOPTION PANE para mostrar aviso de que ha ganado al usuario
