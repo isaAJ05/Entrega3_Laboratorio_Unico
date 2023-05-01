@@ -5,10 +5,10 @@ import javax.swing.ImageIcon;
 
 
 public class SeleccionNavePanel extends javax.swing.JPanel {
-private String user;
-    public SeleccionNavePanel(String name) {
+private String name = null;
+public SeleccionNavePanel(String user) {
         initComponents();
-        this.user= name;
+        this.name = user;
     }
 
    boolean OP,OPA=false,OPV=false,OPN=false;
