@@ -5,18 +5,19 @@
 package PanelesSP;
 
 import java.awt.Color;
-import java.awt.Cursor;
-import java.awt.Point;
-import java.awt.Toolkit;
+
+import java.awt.Font;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.util.HashSet;
 import java.util.Random;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 
 /**
@@ -25,29 +26,144 @@ import javax.swing.Timer;
  */
 public class easy extends javax.swing.JPanel {
 
-    //SUBRUTINA PARA HACER QUE EL BOTON TENGA UN SOMBREADO
-    private void cambiarcolor(JButton boton) {
-    boton.addMouseListener(new MouseAdapter() {
-        @Override
-        public void mouseEntered(MouseEvent evt) {
-            boton.setBackground(new Color(255, 153, 255));
-             Timer timer = new Timer(2000, new ActionListener() {
-                    public void actionPerformed(ActionEvent e) {
-                        boton.setBackground(new Color(255,255,255));
-                    }
-                });
-                timer.setRepeats(false); // hacemos que el temporizador se ejecute solo una vez
-                timer.start(); // iniciamos el temporizador
+    
+    //Variables globales
+    // - Contadores
+    int entre = 0;//para contabilizar las veces que el usuario presione los botones
+    int cont = 0;//para contabilizar palabras halladas y mostrarlas al usuario
+
+    // - Matrices
+    int movimientos[][] = new int[100][100];
+    int correctos[][] = {{2, 2}, {3, 3}, {4, 4}};
+
+    // -Verifican si la palabra ya la encontró
+    boolean yaloencontre1 = false;
+    boolean yaloencontre2 = false;
+    boolean yaloencontre3 = false;
+
+    //SUBRUTINAS
+    // - Subrutina para que cada vez que el usuario presione un boton guarde su movimiento y posteriormente lo verifique 
+    private void botonpresionado(JButton boton, JButton botones[][], JButton vector1[], JButton vector2[], JButton vector3[], JLabel chulito1, JLabel chulito2, JLabel chulito3) {
+        boton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                int f;
+                entre++;
+
+                f = comprobacion(entre);//Funcion para saber si he presionado botones dos veces o multiplos de 2
+                //La idea es que cada vez que presione dos botones guarde ese movimiento (con contadores) y verifique si esos dos son una seleccion correcta
+
+                movimientos(boton, f, vector1, vector2, vector3);//Subrutina que asigna dos numeros en una fila y dos columnas de una matriz si el boton seleccionado hace parte de un boton inicial o final de una palabra
+                verifiquemos(movimientos, f, botones, vector1, vector2, vector3, chulito1, chulito2, chulito3);//Subrutina que verifica si la matriz movimientos hace parte de una seleccion correcta
+
+            }
+        }
+        );
+    }
+
+    //  -Subrutina que asigna dos numeros en una fila y dos columnas de una matriz si el boton seleccionado hace parte de un boton inicial o final de una palabra
+    private void movimientos(JButton boton, int f, JButton vector1[], JButton vector2[], JButton vector3[]) {
+        if (boton == vector1[0]) {
+            movimientos[f][0] = 2;
+        } else if (boton == vector1[vector1.length - 1]) {
+            movimientos[f][1] = 2;
+        }
+        if (boton == vector2[0]) {
+            movimientos[f][0] = 3;
+        } else if (boton == vector2[vector2.length - 1]) {
+            movimientos[f][1] = 3;
+        }
+        if (boton == vector3[0]) {
+            movimientos[f][0] = 4;
+        } else if (boton == vector3[vector3.length - 1]) {
+            movimientos[f][1] = 4;
+        }
+    }
+
+    //  -Subrutina que verifica si la matriz movimientos hace parte de una seleccion correcta
+    private void verifiquemos(int movimientos[][], int f, JButton botones[][], JButton vector1[], JButton vector2[], JButton vector3[], JLabel chulito1, JLabel chulito2, JLabel chulito3) {
+        int i;
+        if (movimientos[f][0] == correctos[0][0] && movimientos[f][1] == correctos[0][1]) {
+            for (i = 0; i < vector1.length; i++) {
+                vector1[i].setBackground(Color.green);
+
+            }
+
+            if (yaloencontre1 == false) {
+                comprobacion2(chulito1);
+            }
+            yaloencontre1 = true;
+        }
+        if (movimientos[f][0] == correctos[1][0] && movimientos[f][1] == correctos[1][1]) {
+            for (i = 0; i < vector2.length; i++) {
+                vector2[i].setBackground(Color.green);
+
+            }
+
+            if (yaloencontre2 == false) {
+                comprobacion2(chulito2);
+            }
+            yaloencontre2 = true;
+        }
+        if (movimientos[f][0] == correctos[2][0] && movimientos[f][1] == correctos[2][1]) {
+            for (i = 0; i < vector3.length; i++) {
+                vector3[i].setBackground(Color.green);
+
+            }
+
+            if (yaloencontre3 == false) {
+                comprobacion2(chulito3);
+            }
+            yaloencontre3 = true;
         }
 
-        
-    });
-}
+    }
+
+    //Subrutina que produce diversas verificaciones y contabilizaciones cada vez que un usuario encuentra una palabra
+    private void comprobacion2(JLabel chulito) {
+        //Se volverá visible una estrella al lado de la palabra Correspondiente en la lista
+        chulito.setVisible(true);
+        //Para contabilizar palabras halladas y mostrarlas al usuario
+        cont += 1;// cada palabra hallada se le suma 1 al contador
+
+        if (cont == 1) {
+            palabrasencontradas.setText("1/3");
+        } else if (cont == 2) {
+            palabrasencontradas.setText("2/3");
+        } else if (cont == 3) {
+            palabrasencontradas.setText("3/3");
+            cont += 1;
+        }
+        //JOPTION PANE para mostrar aviso de que ha ganado al usuario
+        if (cont == 4) {
+            JOptionPane.showMessageDialog(null, "¡Felicidades " + name + "! \nHas resuelto el primer nivel\nPresiona NEXT LEVEL para seguir con el siguiente");
+            //Para que no se realicen mas cambios en la sopa
+
+            //para que no pueda pedir mas pistas ver la solucion o instrucciones
+            pista.setEnabled(false);
+            solucion.setEnabled(false);
+            instrucciones.setEnabled(false);
+
+        }
+
+    }
+    //FUNCIONES
+
+    // - Funcion para saber si he presionado botones dos veces o multiplos de 2
+    private int comprobacion(int entre) {
+        int res = entre;
+        if (entre % 2 == 0) {
+            res = entre - 1;
+        }
+        return res;
+
+    }
+
     private String name = null;
+
     public easy(String user) {
         initComponents();
         this.name = user;
-       
+
         int i, j, auxt = 5, auxt2 = 6;
         //Matriz de botones [7][5]
         JButton botones[][] = {{boton11, boton12, boton13, boton14, boton15},
@@ -58,14 +174,21 @@ public class easy extends javax.swing.JPanel {
         {boton61, boton62, boton63, boton64, boton65},
         {boton71, boton72, boton73, boton74, boton75},};//matriz de botones
 
-        
         //Vector de planetas [4] pero solo se usan 3 espacios
         String[] planetas = {"TIERRA", "CERES", "VENUS", ""};
+        //Vector botones tierra
+        JButton tierra[] = {boton73, boton63, boton53, boton43, boton33, boton23,};
+        //Vector botones Ceres
+        JButton ceres[] = {boton21, boton32, boton43, boton54, boton65,};
+        //Vector botones Venus
+        JButton venus[] = {boton11, boton12, boton13, boton14, boton15,};
 
         //Asignacion de letras a texto de la matriz de botones
         for (i = 0; i < 7; i++) {
             for (j = 0; j < 5; j++) {
-                cambiarcolor(botones[i][j]);//EJECUTAR LA SUBRUTINA
+
+                botonpresionado(botones[i][j], botones, tierra, ceres, venus, chulito1, chulito2, chulito3);
+//cambiarcolor(botones[i][j]);//EJECUTAR LA SUBRUTINA
                 //Letras aleatorias mayusculas usando Random
                 Random random = new Random();
                 char letra = (char) (random.nextInt(26) + 'A');
@@ -82,34 +205,39 @@ public class easy extends javax.swing.JPanel {
                     auxt2 = auxt;// uso de auxiliares para obtener valores deseados para una correcta extracción de caracteres
                     auxt = auxt - 1;
                     botones[i][j].setText(caracter);//se le asignan las letras correspondientes
+                    //comprobarBoton(botones[i][j], tierra);
+
                     // CERES
                 } else if (i >= 1 && i < 6 && j < 5) { //Posición Diagonal: fila de 1-5, columnas 0-4
                     if (i == 1 && j == 0) {
                         String caracter2 = planetas[1].substring(j, i);//extracción de caracter personalizado 
                         botones[i][j].setText(caracter2);//LETRA C
+                        //comprobarBoton(botones[i][j], ceres);
                     } else if (i == 2 && j == 1) {
                         String caracter21 = planetas[1].substring(j, i);
                         botones[i][j].setText(caracter21);//LETRA E
+                        // comprobarBoton(botones[i][j], ceres);
                     } else if (i == 3 && j == 2) {
                         String caracter22 = planetas[1].substring(j, i);
                         botones[i][j].setText(caracter22);//LETRA R
+                        // comprobarBoton(botones[i][j], ceres);
                     } else if (i == 4 && j == 3) {
                         String caracter23 = planetas[1].substring(j, i);
                         botones[i][j].setText(caracter23);//LETRA E
+                        // comprobarBoton(botones[i][j], ceres);
                     } else if (i == 5 && j == 4) {
                         String caracter24 = planetas[1].substring(j, i);
                         botones[i][j].setText(caracter24);//LETRA S 
+                        // comprobarBoton(botones[i][j], ceres);
                     }
                     //VENUS
                 } else if (i == 0 && j < 5) { //Posición Horizontal : fila 0, columna 0-4
                     String caracter3 = planetas[2].substring(j, j + 1);
                     botones[i][j].setText(caracter3);
-
+                    //comprobarBoton(botones[i][j], venus);
                 }
             }
         }
-        //Contador para contabilizar palabras halladas y mostrarlas al usuario
-        cont = 0;
         //Hacer invisible estrellas al inicio de apertura de la ventana
         chulito1.setVisible(false);
         chulito2.setVisible(false);
@@ -487,20 +615,6 @@ public class easy extends javax.swing.JPanel {
         contenido4Layout.setHorizontalGroup(
             contenido4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(contenido4Layout.createSequentialGroup()
-                .addGap(47, 47, 47)
-                .addGroup(contenido4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(labelvolver, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnVolver3, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(instrucciones)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(pista, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(solucion)
-                .addGap(78, 78, 78)
-                .addComponent(palabrasencontradas, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(83, 83, 83))
-            .addGroup(contenido4Layout.createSequentialGroup()
                 .addGap(514, 514, 514)
                 .addGroup(contenido4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(contenido4Layout.createSequentialGroup()
@@ -603,7 +717,21 @@ public class easy extends javax.swing.JPanel {
                     .addGroup(contenido4Layout.createSequentialGroup()
                         .addGap(478, 478, 478)
                         .addComponent(siguiente, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(181, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contenido4Layout.createSequentialGroup()
+                .addGap(47, 47, 47)
+                .addGroup(contenido4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(labelvolver, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnVolver3, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(instrucciones)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(pista, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(solucion)
+                .addGap(78, 78, 78)
+                .addComponent(palabrasencontradas, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(83, 83, 83))
         );
         contenido4Layout.setVerticalGroup(
             contenido4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -718,36 +846,36 @@ public class easy extends javax.swing.JPanel {
 
     private void pistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pistaActionPerformed
         //Para mostrar pistas:
-        //tengo en cuenta si ya el contador de la palabra está lleno ademas creo un auxiliar para cerciorarme de no repetir la palabra si ya la encontraron
-        //la pista consiste en crear un fondo verde en la inicial de la letra de un planeta que no haya encontrado el usuario
-        //psra la palabra urano la pista esta en las dos 2 ultimas letras
-        if (tierra != 2 & taux == 1) { //pista letra inicial TIERRA
+
+        //la pista consiste en crear un fondo verde en la inicial de la letra de una palabra que no haya encontrado el usuario
+
+        if (yaloencontre1 == false) { //pista letra inicial TIERRA
             boton73.setBackground(new Color(153, 255, 153));
-            taux = 0;
-        } else if (ceres != 2 & caux == 1) {//pista letra inicial CERES
+
+        } else if (yaloencontre2 == false) {//pista letra inicial CERES
             boton21.setBackground(new Color(153, 255, 153));
-            caux = 0;
-        } else if (venus != 2 & vaux == 1) {//pista letra inicial VENUS
+
+        } else if (yaloencontre3 == false) {//pista letra inicial VENUS
             boton11.setBackground(new Color(153, 255, 153));
-            vaux = 0;
+
         }
     }//GEN-LAST:event_pistaActionPerformed
 
     private void instruccionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_instruccionesActionPerformed
         //Mostrar Joption pane de instrucciones
         JOptionPane.showMessageDialog(null, "𝐅𝐔𝐍𝐂𝐈𝐎𝐍𝐀𝐌𝐈𝐄𝐍𝐓𝐎 𝐃𝐄𝐋 𝐉𝐔𝐄𝐆𝐎:\nEste nivel está compuesto por una sopa de letras de dimensiones 7x5 donde encontrarás 3 palabras ocultas"
-            + "\nrelacionadas a nombres de planetas del sistema solar."
-            + "\nAl lado derecho de la pantalla visualizarás la lista de palabras que debes buscar."
-            + "\n𝐏𝐚𝐫𝐚 𝐣𝐮𝐠𝐚𝐫: "
-            + "\n  ⭐Busca las letras de las palabras en cualquier dirección: horizontal, vertical o diagonal, en sentido normal"
-            + "\n     o inverso."
-            + "\n  ⭐Una vez que encuentres una letra de una palabra, selecciona la letra inicial y ultima"
-            + "\n      para que el sistema verifique tu elección.\n"
-            + "  ⭐Si tu selección es correcta se cambiará el fondo de la palabra en la sopa de letras y aparecerá "
-            + "\n      una estrella al lado de la palabra de la lista.\n"
-            + "  ⭐Continúa buscando hasta que hayas encontrado todas las palabras de la lista."
-            + "\n\n𝐏𝐋𝐔𝐒: Si lo deseas puedes pedir pistas o revelar la solución de la sopa de letras al seleccionar dichas opciones."
-            + "\n\n                             ¡𝗗𝗜𝗩𝗜𝗘𝗥𝗧𝗘𝗧𝗘 𝗝𝗨𝗚𝗔𝗡𝗗𝗢 𝗟𝗔 𝗦𝗢𝗣𝗔 𝗗𝗘 𝗟𝗘𝗧𝗥𝗔𝗦 𝗦𝗧𝗔𝗥: 𝗩𝗘𝗥𝗦𝗜𝗢𝗡 𝗣𝗟𝗔𝗡𝗘𝗧𝗔𝗦!", "STAR GAMES: Sopa de letras STAR", JOptionPane.INFORMATION_MESSAGE);
+                + "\nrelacionadas a nombres de planetas del sistema solar."
+                + "\nAl lado derecho de la pantalla visualizarás la lista de palabras que debes buscar."
+                + "\n𝐏𝐚𝐫𝐚 𝐣𝐮𝐠𝐚𝐫: "
+                + "\n  ⭐Busca las letras de las palabras en cualquier dirección: horizontal, vertical o diagonal, en sentido normal"
+                + "\n     o inverso."
+                + "\n  ⭐Una vez que encuentres una letra de una palabra, selecciona la letra inicial y ultima"
+                + "\n      para que el sistema verifique tu elección.\n"
+                + "  ⭐Si tu selección es correcta se cambiará el fondo de la palabra en la sopa de letras y aparecerá "
+                + "\n      una estrella al lado de la palabra de la lista.\n"
+                + "  ⭐Continúa buscando hasta que hayas encontrado todas las palabras de la lista."
+                + "\n\n𝐏𝐋𝐔𝐒: Si lo deseas puedes pedir pistas o revelar la solución de la sopa de letras al seleccionar dichas opciones."
+                + "\n\n                             ¡𝗗𝗜𝗩𝗜𝗘𝗥𝗧𝗘𝗧𝗘 𝗝𝗨𝗚𝗔𝗡𝗗𝗢 𝗟𝗔 𝗦𝗢𝗣𝗔 𝗗𝗘 𝗟𝗘𝗧𝗥𝗔𝗦 𝗦𝗧𝗔𝗥: 𝗩𝗘𝗥𝗦𝗜𝗢𝗡 𝗣𝗟𝗔𝗡𝗘𝗧𝗔𝗦!", "STAR GAMES: Sopa de letras STAR", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_instruccionesActionPerformed
 
     private void solucionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_solucionActionPerformed
@@ -778,11 +906,16 @@ public class easy extends javax.swing.JPanel {
         chulito1.setVisible(true);
         chulito2.setVisible(true);
         chulito3.setVisible(true);
+        //DESHABILITAR BOTONES
+        pista.setEnabled(false);
+        solucion.setEnabled(false);
+        instrucciones.setEnabled(false);
+        
     }//GEN-LAST:event_solucionActionPerformed
 
     private void siguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_siguienteActionPerformed
         contenido4.removeAll();
-        
+
         medium m = new medium(name);
         m.setSize(800, 496);
         m.setLocation(0, 0);
@@ -797,30 +930,7 @@ public class easy extends javax.swing.JPanel {
     }//GEN-LAST:event_boton75ActionPerformed
 
     private void boton65ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton65ActionPerformed
-        ceres += 1;//Si se presiona este boton que representa la letra final de CERES el contador sumara 1
-        if (ceres == 2) {// si vale 2:
-            //se obtendra un color verde en el fondo de los botones que contienen las letras de la palabra CERES
-            boton21.setBackground(Color.green);//Letra C
-            boton32.setBackground(Color.green);//Letra E
-            boton43.setBackground(Color.green);//Letra R
-            boton54.setBackground(Color.green);//Letra E
-            boton65.setBackground(Color.green);//Letra S
-            //Se volverá visible una estrella al lado de la palabra CERES en la lista
-            chulito2.setVisible(true);
-            //Para contabilizar palabras halladas y mostrarlas al usuario
-            cont += 1;// cada palabra hallada se le suma 1 al contador
-            if (cont == 1) {
-                palabrasencontradas.setText("1/3");
-            } else if (cont == 2) {
-                palabrasencontradas.setText("2/3");
-            } else if (cont == 3) {
-                palabrasencontradas.setText("3/3");
-            }
-        }
-        //JOPTION PANE para mostrar aviso de que ha ganado al usuario
-        if (venus == 2 && tierra == 2 && ceres == 2) {
-            JOptionPane.showMessageDialog(null, "¡Felicidades " + name + "! \nHas resuelto el primer nivel\nPresiona NEXT LEVEL para seguir con el siguiente");
-        }
+
     }//GEN-LAST:event_boton65ActionPerformed
 
     private void boton55ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton55ActionPerformed
@@ -864,30 +974,7 @@ public class easy extends javax.swing.JPanel {
     }//GEN-LAST:event_boton24ActionPerformed
 
     private void boton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton15ActionPerformed
-        venus += 1;//Si se presiona este boton que representa la letra final de VENUS el contador sumara 1
-        if (venus == 2) {// si vale 2:
-            //se obtendra un color verde en el fondo de los botones que contienen las letras de la palara VENUS
-            boton11.setBackground(Color.green);//Letra V
-            boton12.setBackground(Color.green);//Letra E
-            boton13.setBackground(Color.green);//Letra N
-            boton14.setBackground(Color.green);//Letra U
-            boton15.setBackground(Color.green);//Letra S
-            //Se volverá visible una estrella al lado de la palabra VENUS en la lista
-            chulito3.setVisible(true);
-            //Para contabilizar palabras halladas y mostrarlas al usuario
-            cont += 1;// cada palabra hallada se le suma 1 al contador
-            if (cont == 1) {
-                palabrasencontradas.setText("1/3");
-            } else if (cont == 2) {
-                palabrasencontradas.setText("2/3");
-            } else if (cont == 3) {
-                palabrasencontradas.setText("3/3");
-            }
-        }
-        //JOPTION PANE para mostrar aviso de que ha ganado al usuario
-        if (venus == 2 && tierra == 2 && ceres == 2) {
-            JOptionPane.showMessageDialog(null, "!Felicidades " + name + "! \nHas resuelto el primer nivel\nPresiona NEXT LEVEL para seguir con el siguiente");
-        }
+
     }//GEN-LAST:event_boton15ActionPerformed
 
     private void boton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton14ActionPerformed
@@ -895,31 +982,7 @@ public class easy extends javax.swing.JPanel {
     }//GEN-LAST:event_boton14ActionPerformed
 
     private void boton73ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton73ActionPerformed
-        tierra += 1;//Si se presiona este boton que representa la letra inicial de TIERRA el contador sumara 1
-        if (tierra == 2) {// si vale 2:
-            //se obtendra un color verde en el fondo de los botones que contienen las letras de la palabra TIERRA
-            boton73.setBackground(Color.green);//Letra T
-            boton63.setBackground(Color.green);//Letra I
-            boton53.setBackground(Color.green);//Letra E
-            boton43.setBackground(Color.green);//Letra R
-            boton33.setBackground(Color.green);//Letra R
-            boton23.setBackground(Color.green);//Letra A
-            //Se volverá visible una estrella al lado de la palabra TIERRA en la lista
-            chulito1.setVisible(true);
-            //Para contabilizar palabras halladas y mostrarlas al usuario
-            cont += 1;// cada palabra hallada se le suma 1 al contador
-            if (cont == 1) {
-                palabrasencontradas.setText("1/3");
-            } else if (cont == 2) {
-                palabrasencontradas.setText("2/3");
-            } else if (cont == 3) {
-                palabrasencontradas.setText("3/3");
-            }
-        }
-        //JOPTION PANE para mostrar aviso de que ha ganado al usuario
-        if (venus == 2 && tierra == 2 && ceres == 2) {
-            JOptionPane.showMessageDialog(null, "!Felicidades " + name + "! \nHas resuelto el primer nivel\nPresiona NEXT LEVEL para seguir con el siguiente");
-        }
+
     }//GEN-LAST:event_boton73ActionPerformed
 
     private void boton53ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton53ActionPerformed
@@ -927,31 +990,7 @@ public class easy extends javax.swing.JPanel {
     }//GEN-LAST:event_boton53ActionPerformed
 
     private void boton23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton23ActionPerformed
-        tierra += 1;//Si se presiona este boton que representa la letra final de TIERRA el contador sumara 1
-        if (tierra == 2) {// si vale 2:
-            //se obtendra un color verde en el fondo de los botones que contienen las letras de la palabra TIERRA
-            boton73.setBackground(Color.green);//Letra T
-            boton63.setBackground(Color.green);//Letra I
-            boton53.setBackground(Color.green);//Letra E
-            boton43.setBackground(Color.green);//Letra R
-            boton33.setBackground(Color.green);//Letra R
-            boton23.setBackground(Color.green);//Letra A
-            //Se volverá visible una estrella al lado de la palabra TIERRA en la lista
-            chulito1.setVisible(true);
-            //Para contabilizar palabras halladas y mostrarlas al usuario
-            cont += 1;// cada palabra hallada se le suma 1 al contador
-            if (cont == 1) {
-                palabrasencontradas.setText("1/3");
-            } else if (cont == 2) {
-                palabrasencontradas.setText("2/3");
-            } else if (cont == 3) {
-                palabrasencontradas.setText("3/3");
-            }
-        }
-        //JOPTION PANE para mostrar aviso de que ha ganado al usuario
-        if (venus == 2 && tierra == 2 && ceres == 2) {
-            JOptionPane.showMessageDialog(null, "¡Felicidades " + name + "! \nHas resuelto el primer nivel\nPresiona NEXT LEVEL para seguir con el siguiente");
-        }
+
     }//GEN-LAST:event_boton23ActionPerformed
 
     private void boton72ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton72ActionPerformed
@@ -967,30 +1006,7 @@ public class easy extends javax.swing.JPanel {
     }//GEN-LAST:event_boton31ActionPerformed
 
     private void boton21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton21ActionPerformed
-        ceres += 1;//Si se presiona este boton que representa la letra inicial de CERES el contador sumara 1
-        if (ceres == 2) {// si vale 2:
-            //se obtendra un color verde en el fondo de los botones que contienen las letras de la palabra CERES
-            boton21.setBackground(Color.green);//Letra C
-            boton32.setBackground(Color.green);//Letra E
-            boton43.setBackground(Color.green);//Letra R
-            boton54.setBackground(Color.green);//Letra E
-            boton65.setBackground(Color.green);//Letra S
-            //Se volverá visible una estrella al lado de la palabra CERES en la lista
-            chulito2.setVisible(true);
-            //Para contabilizar palabras halladas y mostrarlas al usuario
-            cont += 1;// cada palabra hallada se le suma 1 al contador
-            if (cont == 1) {
-                palabrasencontradas.setText("1/3");
-            } else if (cont == 2) {
-                palabrasencontradas.setText("2/3");
-            } else if (cont == 3) {
-                palabrasencontradas.setText("3/3");
-            }
-        }
-        //JOPTION PANE para mostrar aviso de que ha ganado al usuario
-        if (venus == 2 && tierra == 2 && ceres == 2) {
-            JOptionPane.showMessageDialog(null, "¡Felicidades " + name + "! \nHas resuelto el primer nivel\nPresiona NEXT LEVEL para seguir con el siguiente");
-        }
+
     }//GEN-LAST:event_boton21ActionPerformed
 
     private void boton61ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton61ActionPerformed
@@ -998,30 +1014,7 @@ public class easy extends javax.swing.JPanel {
     }//GEN-LAST:event_boton61ActionPerformed
 
     private void boton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton11ActionPerformed
-        venus += 1;//Si se presiona este boton que representa la letra inicial de VENUS el contador sumara 1
-        if (venus == 2) {// si vale 2:
-            //se obtendra un color verde en el fondo de los botones que contienen las letras de la palara VENUS
-            boton11.setBackground(Color.green);//Letra V
-            boton12.setBackground(Color.green);//Letra E
-            boton13.setBackground(Color.green);//Letra N
-            boton14.setBackground(Color.green);//Letra U
-            boton15.setBackground(Color.green);//Letra S
-            //Se volverá visible una estrella al lado de la palabra VENUS en la lista
-            chulito3.setVisible(true);
-            //Para contabilizar palabras halladas y mostrarlas al usuario
-            cont += 1;// cada palabra hallada se le suma 1 al contador
-            if (cont == 1) {
-                palabrasencontradas.setText("1/3");
-            } else if (cont == 2) {
-                palabrasencontradas.setText("2/3");
-            } else if (cont == 3) {
-                palabrasencontradas.setText("3/3");
-            }
-        }
-        //JOPTION PANE para mostrar aviso de que ha ganado al usuario
-        if (venus == 2 && tierra == 2 && ceres == 2) {
-            JOptionPane.showMessageDialog(null, "¡Felicidades " + name + "! \nHas resuelto el primer nivel\nPresiona NEXT LEVEL para seguir con el siguiente");
-        }
+
     }//GEN-LAST:event_boton11ActionPerformed
 
     private void btnVolver3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVolver3MouseEntered
@@ -1043,8 +1036,7 @@ public class easy extends javax.swing.JPanel {
         contenido4.revalidate();
         contenido4.repaint();
     }//GEN-LAST:event_btnVolver3ActionPerformed
-    int cont;
-    int venus = 0;    int ceres = 0;    int tierra = 0;    int taux = 1, caux = 1, vaux = 1;
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton boton11;

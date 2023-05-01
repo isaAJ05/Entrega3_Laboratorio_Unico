@@ -5,12 +5,11 @@
 package PanelesSP;
 
 import java.awt.Color;
-import java.awt.Cursor;
-import java.awt.Point;
-import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Random;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 /**
@@ -22,12 +21,149 @@ public class easyanime extends javax.swing.JPanel {
     /**
      * Creates new form easyanime
      */
+    
+    
+    //Variables globales
+    // - Contadores
+    int entre = 0;//para contabilizar las veces que el usuario presione los botones
+    int cont=0;//para contabilizar palabras halladas y mostrarlas al usuario
+    
+    // - Matrices
+    int movimientos[][] = new int[100][100];
+    int correctos[][] = {{2, 2}, {3, 3}, {4, 4}};
+    
+    // -Verifican si la palabra ya la encontró
+    boolean yaloencontre1 = false;
+    boolean yaloencontre2 = false;
+    boolean yaloencontre3 = false;
+    
+    //SUBRUTINAS
+
+    // - Subrutina para que cada vez que el usuario presione un boton guarde su movimiento y posteriormente lo verifique 
+    private void botonpresionado(JButton boton, JButton botones[][], JButton vector1[], JButton vector2[], JButton vector3[], JLabel chulito1, JLabel chulito2, JLabel chulito3) {
+        boton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                int f;
+                entre++;
+
+                f = comprobacion(entre);//Funcion para saber si he presionado botones dos veces o multiplos de 2
+                //La idea es que cada vez que presione dos botones guarde ese movimiento (con contadores) y verifique si esos dos son una seleccion correcta
+
+                movimientos(boton, f, vector1, vector2, vector3);//Subrutina que asigna dos numeros en una fila y dos columnas de una matriz si el boton seleccionado hace parte de un boton inicial o final de una palabra
+                verifiquemos(movimientos, f, botones, vector1, vector2, vector3, chulito1, chulito2, chulito3);//Subrutina que verifica si la matriz movimientos hace parte de una seleccion correcta
+
+            }
+        }
+        );
+    }
+
+    
+
+    //  -Subrutina que asigna dos numeros en una fila y dos columnas de una matriz si el boton seleccionado hace parte de un boton inicial o final de una palabra
+    private void movimientos(JButton boton, int f, JButton vector1[], JButton vector2[], JButton vector3[]) {
+        if (boton == vector1[0]) {
+            movimientos[f][0] = 2;
+        } else if (boton == vector1[vector1.length - 1]) {
+            movimientos[f][1] = 2;
+        }
+        if (boton == vector2[0]) {
+            movimientos[f][0] = 3;
+        } else if (boton == vector2[vector2.length - 1]) {
+            movimientos[f][1] = 3;
+        }
+        if (boton == vector3[0]) {
+            movimientos[f][0] = 4;
+        } else if (boton == vector3[vector3.length - 1]) {
+            movimientos[f][1] = 4;
+        }
+    }
+
+    
+    //  -Subrutina que verifica si la matriz movimientos hace parte de una seleccion correcta
+    private void verifiquemos(int movimientos[][], int f, JButton botones[][], JButton vector1[], JButton vector2[], JButton vector3[], JLabel chulito1, JLabel chulito2, JLabel chulito3) {
+        int i;
+        if (movimientos[f][0] == correctos[0][0] && movimientos[f][1] == correctos[0][1]) {
+            for (i = 0; i < vector1.length; i++) {
+                vector1[i].setBackground(Color.green);
+
+            }
+
+            if (yaloencontre1 == false) {
+                comprobacion2(chulito1);
+            }
+            yaloencontre1 = true;
+        }
+        if (movimientos[f][0] == correctos[1][0] && movimientos[f][1] == correctos[1][1]) {
+            for (i = 0; i < vector2.length; i++) {
+                vector2[i].setBackground(Color.green);
+
+            }
+
+            if (yaloencontre2 == false) {
+                comprobacion2(chulito2);
+            }
+            yaloencontre2 = true;
+        }
+        if (movimientos[f][0] == correctos[2][0] && movimientos[f][1] == correctos[2][1]) {
+            for (i = 0; i < vector3.length; i++) {
+                vector3[i].setBackground(Color.green);
+
+            }
+
+            if (yaloencontre3 == false) {
+                comprobacion2(chulito3);
+            }
+            yaloencontre3 = true;
+        }
+
+    }
+
+    //Subrutina que produce diversas verificaciones y contabilizaciones cada vez que un usuario encuentra una palabra
+    private void comprobacion2(JLabel chulito) {
+        //Se volverá visible una estrella al lado de la palabra Correspondiente en la lista
+        chulito.setVisible(true);
+        //Para contabilizar palabras halladas y mostrarlas al usuario
+        cont += 1;// cada palabra hallada se le suma 1 al contador
+
+        if (cont == 1) {
+            palabrasencontradas.setText("1/3");
+        } else if (cont == 2) {
+            palabrasencontradas.setText("2/3");
+        } else if (cont == 3) {
+            palabrasencontradas.setText("3/3");
+            cont += 1;
+        }
+        //JOPTION PANE para mostrar aviso de que ha ganado al usuario
+        if (cont == 4) {
+            JOptionPane.showMessageDialog(null, "¡Felicidades " + name + "! \nHas resuelto el primer nivel\nPresiona NEXT LEVEL para seguir con el siguiente");
+            //Para que no se realicen mas cambios en la sopa
+
+            //para que no pueda pedir mas pistas ver la solucion o instrucciones
+            pista.setEnabled(false);
+            solucion.setEnabled(false);
+            instrucciones.setEnabled(false);
+
+        }
+
+    }
+    //FUNCIONES
+    
+    // - Funcion para saber si he presionado botones dos veces o multiplos de 2
+    private int comprobacion(int entre) {
+        int res = entre;
+        if (entre % 2 == 0) {
+            res = entre - 1;
+        }
+        return res;
+
+    }
+
     private String name = null;
 
     public easyanime(String user) {
         this.name = user;
         initComponents();
-        
+
         int i, j, auxt = 5, auxt2 = 6;
         //Matriz de botones [7][5]
         JButton botones[][] = {{boton11, boton12, boton13, boton14, boton15},
@@ -40,11 +176,19 @@ public class easyanime extends javax.swing.JPanel {
 
         //Vector de personajes de anime [4] pero solo se usan 3 espacios
         String[] animes = {"NARUTO", "SHOTO", "GOKU", ""};
+        // Vector de botones para la palabra "Naruto"
+        JButton[] naruto = {boton11, boton21, boton31, boton41, boton51, boton61,};
 
+        // Vector de botones para la palabra "Goku"
+        JButton[] goku = {boton22, boton23, boton24, boton25,};
+
+        // Vector de botones para la palabra "Shoto"
+        JButton[] shoto = {boton35, boton44, boton53, boton62, boton71,};
+        
         //Asignacion de letras a texto de la matriz de botones
         for (i = 0; i < 7; i++) {
             for (j = 0; j < 5; j++) {
-
+                botonpresionado(botones[i][j], botones, shoto, goku, naruto, chulito1, chulito2, chulito3);
                 //Letras aleatorias mayusculas usando Random
                 Random random = new Random();
                 char letra = (char) (random.nextInt(26) + 'A');
@@ -55,11 +199,11 @@ public class easyanime extends javax.swing.JPanel {
                 //De acuerdo a mi matriz planteada:
                 //i representará mis filas
                 //j representará mis columnas
-                // TIERRA 
+                // NARUTO 
                 if (i < 6 && j == 0) { // Posición vertica: Fila 1-6, columna 1
                     String caracter = animes[0].substring(i, i + 1);//extraer caracteres de la palabra NARUTO
                     botones[i][j].setText(caracter);//se le asignan las letras correspondientes
-                    // LUFFY
+                    // SHOTO
                 } else if (i > 1 && i < 7 && j < 6) { //Posición Diagonal: fila de 1-5, columnas 0-5
                     if (i == 2 && j == 4) {
                         String caracter2 = animes[1].substring(0, 1);//extracción de caracter personalizado 
@@ -85,8 +229,7 @@ public class easyanime extends javax.swing.JPanel {
                 }
             }
         }
-        //Contador para contabilizar palabras halladas y mostrarlas al usuario
-        cont = 0;
+        
         //Hacer invisible estrellas al inicio de apertura de la ventana
         chulito1.setVisible(false);
         chulito2.setVisible(false);
@@ -625,11 +768,14 @@ public class easyanime extends javax.swing.JPanel {
                         .addGroup(contenido4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(chulito1)
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(contenido4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(chulito2))
-                        .addGap(97, 97, 97))
+                        .addGroup(contenido4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(contenido4Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(chulito2))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contenido4Layout.createSequentialGroup()
+                                .addGap(12, 12, 12)
+                                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(109, 109, 109))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contenido4Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(btnVolver3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -707,62 +853,14 @@ public class easyanime extends javax.swing.JPanel {
             .addComponent(contenido4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
     }// </editor-fold>//GEN-END:initComponents
-int naruto = 0;
-    int cont;
+
+    
     private void boton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton11ActionPerformed
-        naruto += 1;//Si se presiona este boton que representa la letra inicial de NARUTO el contador sumara 1
-        if (naruto == 2) {// si vale 2:
-            //se obtendra un color verde en el fondo de los botones que contienen las letras de la palara NARUTO
-            boton11.setBackground(Color.green);//Letra N
-            boton21.setBackground(Color.green);//Letra A
-            boton31.setBackground(Color.green);//Letra R
-            boton41.setBackground(Color.green);//Letra U
-            boton51.setBackground(Color.green);//Letra T
-            boton61.setBackground(Color.green);//Letra O
-            //Se volverá visible una estrella al lado de la palabra VENUS en la lista
-            chulito3.setVisible(true);
-            //Para contabilizar palabras halladas y mostrarlas al usuario
-            cont += 1;// cada palabra hallada se le suma 1 al contador
-            if (cont == 1) {
-                palabrasencontradas.setText("1/3");
-            } else if (cont == 2) {
-                palabrasencontradas.setText("2/3");
-            } else if (cont == 3) {
-                palabrasencontradas.setText("3/3");
-            }
-        }
-        //JOPTION PANE para mostrar aviso de que ha ganado al usuario
-        if (naruto >= 2 && goku >= 2 && shoto >= 2) {
-            JOptionPane.showMessageDialog(null, "¡Felicidades " + name + "! \nHas resuelto el primer nivel\nPresiona NEXT LEVEL para seguir con el siguiente");
-        }
+       
     }//GEN-LAST:event_boton11ActionPerformed
 
     private void boton61ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton61ActionPerformed
-        naruto += 1;//Si se presiona este boton que representa la letra inicial de NARUTO el contador sumara 1
-        if (naruto == 2) {// si vale 2:
-            //se obtendra un color verde en el fondo de los botones que contienen las letras de la palara NARUTO
-            boton11.setBackground(Color.green);//Letra N
-            boton21.setBackground(Color.green);//Letra A
-            boton31.setBackground(Color.green);//Letra R
-            boton41.setBackground(Color.green);//Letra U
-            boton51.setBackground(Color.green);//Letra T
-            boton61.setBackground(Color.green);//Letra O
-            //Se volverá visible una estrella al lado de la palabra NARUTO en la lista
-            chulito3.setVisible(true);
-            //Para contabilizar palabras halladas y mostrarlas al usuario
-            cont += 1;// cada palabra hallada se le suma 1 al contador
-            if (cont == 1) {
-                palabrasencontradas.setText("1/3");
-            } else if (cont == 2) {
-                palabrasencontradas.setText("2/3");
-            } else if (cont == 3) {
-                palabrasencontradas.setText("3/3");
-            }
-        }
-        //JOPTION PANE para mostrar aviso de que ha ganado al usuario
-        if (naruto >= 2 && goku >= 2 && shoto >= 2) {
-            JOptionPane.showMessageDialog(null, "¡Felicidades " + name + "! \nHas resuelto el primer nivel\nPresiona NEXT LEVEL para seguir con el siguiente");
-        }
+        
     }//GEN-LAST:event_boton61ActionPerformed
 
     private void boton21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton21ActionPerformed
@@ -826,58 +924,11 @@ int naruto = 0;
     }//GEN-LAST:event_boton74ActionPerformed
 
     private void boton25ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton25ActionPerformed
-        goku += 1;//Si se presiona este boton que representa la letra inicial de GOKU el contador sumara 1
-        if (goku == 2) {// si vale 2:
-            //se obtendra un color verde en el fondo de los botones que contienen las letras de la palabra GOKU
-            boton22.setBackground(Color.green);//Letra G
-            boton23.setBackground(Color.green);//Letra O
-            boton24.setBackground(Color.green);//Letra K
-            boton25.setBackground(Color.green);//Letra U
-
-            //Se volverá visible una estrella al lado de la palabra GOKU en la lista
-            chulito2.setVisible(true);
-            //Para contabilizar palabras halladas y mostrarlas al usuario
-            cont += 1;// cada palabra hallada se le suma 1 al contador
-            if (cont == 1) {
-                palabrasencontradas.setText("1/3");
-            } else if (cont == 2) {
-                palabrasencontradas.setText("2/3");
-            } else if (cont == 3) {
-                palabrasencontradas.setText("3/3");
-            }
-        }
-        //JOPTION PANE para mostrar aviso de que ha ganado al usuario
-        if (naruto >= 2 && goku >= 2 && shoto >= 2) {
-            JOptionPane.showMessageDialog(null, "¡Felicidades " + name + "! \nHas resuelto el primer nivel\nPresiona NEXT LEVEL para seguir con el siguiente");
-        }
+        
     }//GEN-LAST:event_boton25ActionPerformed
-    int shoto = 0;
+    
     private void boton35ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton35ActionPerformed
-        shoto += 1;//Si se presiona este boton que representa la letra inicial de SHOTO el contador sumara 1
-        if (shoto == 2) {// si vale 2:
-            //se obtendra un color verde en el fondo de los botones que contienen las letras de la palabra SHOTO
-            boton35.setBackground(Color.green);//Letra L
-            boton44.setBackground(Color.green);//Letra U
-            boton53.setBackground(Color.green);//Letra F
-            boton62.setBackground(Color.green);//Letra F
-            boton71.setBackground(Color.green);//Letra Y
-
-            //Se volverá visible una estrella al lado de la palabra SHOTO en la lista
-            chulito1.setVisible(true);
-            //Para contabilizar palabras halladas y mostrarlas al usuario
-            cont += 1;// cada palabra hallada se le suma 1 al contador
-            if (cont == 1) {
-                palabrasencontradas.setText("1/3");
-            } else if (cont == 2) {
-                palabrasencontradas.setText("2/3");
-            } else if (cont == 3) {
-                palabrasencontradas.setText("3/3");
-            }
-        }
-        //JOPTION PANE para mostrar aviso de que ha ganado al usuario
-        if (naruto >= 2 && goku >= 2 && shoto >= 2) {
-            JOptionPane.showMessageDialog(null, "¡Felicidades " + name + "! \nHas resuelto el primer nivel\nPresiona NEXT LEVEL para seguir con el siguiente");
-        }
+        
     }//GEN-LAST:event_boton35ActionPerformed
 
     private void boton45ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton45ActionPerformed
@@ -923,12 +974,12 @@ int naruto = 0;
         boton24.setBackground(Color.green);//Letra K
         boton25.setBackground(Color.green);//Letra U
 
-        //LUFFY
-        boton35.setBackground(Color.green);//Letra L
-        boton44.setBackground(Color.green);//Letra U
-        boton53.setBackground(Color.green);//Letra F
-        boton62.setBackground(Color.green);//Letra F
-        boton71.setBackground(Color.green);//Letra Y
+        //SHOTO
+        boton35.setBackground(Color.green);//Letra S
+        boton44.setBackground(Color.green);//Letra H
+        boton53.setBackground(Color.green);//Letra O
+        boton62.setBackground(Color.green);//Letra T
+        boton71.setBackground(Color.green);//Letra O
 
         //MOSTRAR PALABRAS ENCONTRADAS
         palabrasencontradas.setText("3/3");
@@ -954,21 +1005,21 @@ int naruto = 0;
                 + "\n\n𝐏𝐋𝐔𝐒: Si lo deseas puedes pedir pistas o revelar la solución de la sopa de letras al seleccionar dichas opciones."
                 + "\n\n                             ¡𝗗𝗜𝗩𝗜𝗘𝗥𝗧𝗘𝗧𝗘 𝗝𝗨𝗚𝗔𝗡𝗗𝗢 𝗟𝗔 𝗦𝗢𝗣𝗔 𝗗𝗘 𝗟𝗘𝗧𝗥𝗔𝗦 𝗦𝗧𝗔𝗥: 𝗩𝗘𝗥𝗦𝗜𝗢𝗡 𝗔𝗡𝗜𝐌𝗘!", "STAR GAMES: Sopa de letras STAR", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_instruccionesActionPerformed
-    int naux=1 , gaux=1 , laux=1 ;
+    
     private void pistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pistaActionPerformed
         //Para mostrar pistas:
-        //tengo en cuenta si ya el contador de la palabra está lleno ademas creo un auxiliar para cerciorarme de no repetir la palabra si ya la encontraron
-        //la pista consiste en crear un fondo verde en la inicial de la letra de un planeta que no haya encontrado el usuario
+      
+        //la pista consiste en crear un fondo verde en la inicial de la letra de una palabra que no haya encontrado el usuario
 
-        if (naruto < 2 & naux == 1) { //pista letra inicial NARUTO
+        if (yaloencontre3==false) { //pista letra inicial NARUTO
             boton11.setBackground(new Color(153, 255, 153));
-            naux = 0;
-        } else if (goku < 2 & gaux == 1) {//pista letra inicial GOKU
+            
+        } else if (yaloencontre2==false) {//pista letra inicial GOKU
             boton22.setBackground(new Color(153, 255, 153));
-            gaux = 0;
-        } else if (shoto < 2 & laux == 1) {//pista letra inicial LUFFY
+            
+        } else if (yaloencontre1==false) {//pista letra inicial SHOTO
             boton35.setBackground(new Color(153, 255, 153));
-            laux = 0;
+            
         }
     }//GEN-LAST:event_pistaActionPerformed
 
@@ -983,60 +1034,13 @@ int naruto = 0;
     private void boton51ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton51ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_boton51ActionPerformed
-    int goku = 0;
+    
     private void boton22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton22ActionPerformed
-        goku += 1;//Si se presiona este boton que representa la letra inicial de GOKU el contador sumara 1
-        if (goku == 2) {// si vale 2:
-            //se obtendra un color verde en el fondo de los botones que contienen las letras de la palabra GOKU
-            boton22.setBackground(Color.green);//Letra G
-            boton23.setBackground(Color.green);//Letra O
-            boton24.setBackground(Color.green);//Letra K
-            boton25.setBackground(Color.green);//Letra U
-
-            //Se volverá visible una estrella al lado de la palabra GOKU en la lista
-            chulito2.setVisible(true);
-            //Para contabilizar palabras halladas y mostrarlas al usuario
-            cont += 1;// cada palabra hallada se le suma 1 al contador
-            if (cont == 1) {
-                palabrasencontradas.setText("1/3");
-            } else if (cont == 2) {
-                palabrasencontradas.setText("2/3");
-            } else if (cont == 3) {
-                palabrasencontradas.setText("3/3");
-            }
-        }
-        //JOPTION PANE para mostrar aviso de que ha ganado al usuario
-        if (naruto >= 2 && goku >= 2 && shoto >= 2) {
-            JOptionPane.showMessageDialog(null, "¡Felicidades " + name + "! \nHas resuelto el primer nivel\nPresiona NEXT LEVEL para seguir con el siguiente");
-        }
+        
     }//GEN-LAST:event_boton22ActionPerformed
 
     private void boton71ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton71ActionPerformed
-        shoto += 1;//Si se presiona este boton que representa la letra inicial de LUFFY el contador sumara 1
-        if (shoto == 2) {// si vale 2:
-            //se obtendra un color verde en el fondo de los botones que contienen las letras de la palabra LUFFY
-            boton35.setBackground(Color.green);//Letra L
-            boton44.setBackground(Color.green);//Letra U
-            boton53.setBackground(Color.green);//Letra F
-            boton62.setBackground(Color.green);//Letra F
-            boton71.setBackground(Color.green);//Letra Y
-
-            //Se volverá visible una estrella al lado de la palabra LUFFY en la lista
-            chulito1.setVisible(true);
-            //Para contabilizar palabras halladas y mostrarlas al usuario
-            cont += 1;// cada palabra hallada se le suma 1 al contador
-            if (cont == 1) {
-                palabrasencontradas.setText("1/3");
-            } else if (cont == 2) {
-                palabrasencontradas.setText("2/3");
-            } else if (cont == 3) {
-                palabrasencontradas.setText("3/3");
-            }
-        }
-        //JOPTION PANE para mostrar aviso de que ha ganado al usuario
-        if (naruto >= 2 && goku >= 2 && shoto >= 2) {
-            JOptionPane.showMessageDialog(null, "¡Felicidades " + name + "! \nHas resuelto el primer nivel\nPresiona NEXT LEVEL para seguir con el siguiente");
-        }
+       
     }//GEN-LAST:event_boton71ActionPerformed
 
     private void btnVolver3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVolver3MouseEntered
