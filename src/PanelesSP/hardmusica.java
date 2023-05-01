@@ -8,9 +8,12 @@ import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Point;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Random;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 /**
@@ -22,12 +25,202 @@ public class hardmusica extends javax.swing.JPanel {
     /**
      * Creates new form hard
      */
+    //Variables globales
+    // - Contadores
+    int entre = 0;//para contabilizar las veces que el usuario presione los botones
+    int cont = 0;//para contabilizar palabras halladas y mostrarlas al usuario
+
+    // - Matrices
+    int movimientos[][] = new int[100][100];
+    int correctos[][] = {{2, 2}, {3, 3}, {4, 4}, {5, 5}, {6, 6}, {7, 7},};
+
+    // -Verifican si la palabra ya la encontró
+    boolean yaloencontre1 = false;
+    boolean yaloencontre2 = false;
+    boolean yaloencontre3 = false;
+    boolean yaloencontre4 = false;
+    boolean yaloencontre5 = false;
+    boolean yaloencontre6 = false;
+
+    //SUBRUTINAS
+    // - Subrutina para que cada vez que el usuario presione un boton guarde su movimiento y posteriormente lo verifique 
+    private void botonpresionado(JButton boton, JButton botones[][], JButton vector1[], JButton vector2[], JButton vector3[], JButton vector4[], JButton vector5[], JButton vector6[], JLabel chulito1, JLabel chulito2, JLabel chulito3, JLabel chulito4, JLabel chulito5, JLabel chulito6) {
+        boton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                int f;
+                entre++;
+
+                f = comprobacion(entre);//Funcion para saber si he presionado botones dos veces o multiplos de 2
+                //La idea es que cada vez que presione dos botones guarde ese movimiento (con contadores) y verifique si esos dos son una seleccion correcta
+
+                movimientos(boton, f, vector1, vector2, vector3, vector4, vector5, vector6);//Subrutina que asigna dos numeros en una fila y dos columnas de una matriz si el boton seleccionado hace parte de un boton inicial o final de una palabra
+                verifiquemos(movimientos, f, botones, vector1, vector2, vector3, vector4, vector5, vector6, chulito1, chulito2, chulito3, chulito4, chulito5, chulito6);//Subrutina que verifica si la matriz movimientos hace parte de una seleccion correcta
+
+            }
+        }
+        );
+    }
+
+    //  -Subrutina que asigna dos numeros en una fila y dos columnas de una matriz si el boton seleccionado hace parte de un boton inicial o final de una palabra
+    private void movimientos(JButton boton, int f, JButton vector1[], JButton vector2[], JButton vector3[], JButton vector4[], JButton vector5[], JButton vector6[]) {
+        if (boton == vector1[0]) {
+            movimientos[f][0] = 2;
+        } else if (boton == vector1[vector1.length - 1]) {
+            movimientos[f][1] = 2;
+        }
+        if (boton == vector2[0]) {
+            movimientos[f][0] = 3;
+        } else if (boton == vector2[vector2.length - 1]) {
+            movimientos[f][1] = 3;
+        }
+        if (boton == vector3[0]) {
+            movimientos[f][0] = 4;
+        } else if (boton == vector3[vector3.length - 1]) {
+            movimientos[f][1] = 4;
+        }
+        if (boton == vector4[0]) {
+            movimientos[f][0] = 5;
+        } else if (boton == vector4[vector4.length - 1]) {
+            movimientos[f][1] = 5;
+        }
+        if (boton == vector5[0]) {
+            movimientos[f][0] = 6;
+        } else if (boton == vector5[vector5.length - 1]) {
+            movimientos[f][1] = 6;
+        }
+        if (boton == vector6[0]) {
+            movimientos[f][0] = 7;
+        } else if (boton == vector6[vector6.length - 1]) {
+            movimientos[f][1] = 7;
+        }
+    }
+
+    //  -Subrutina que verifica si la matriz movimientos hace parte de una seleccion correcta
+    private void verifiquemos(int movimientos[][], int f, JButton botones[][], JButton vector1[], JButton vector2[], JButton vector3[], JButton vector4[], JButton vector5[], JButton vector6[], JLabel chulito1, JLabel chulito2, JLabel chulito3, JLabel chulito4, JLabel chulito5, JLabel chulito6) {
+        int i;
+        if (movimientos[f][0] == correctos[0][0] && movimientos[f][1] == correctos[0][1]) {
+            for (i = 0; i < vector1.length; i++) {
+                vector1[i].setBackground(Color.green);
+
+            }
+
+            if (yaloencontre1 == false) {
+                comprobacion2(chulito1);
+            }
+            yaloencontre1 = true;
+        }
+        if (movimientos[f][0] == correctos[1][0] && movimientos[f][1] == correctos[1][1]) {
+            for (i = 0; i < vector2.length; i++) {
+                vector2[i].setBackground(Color.green);
+
+            }
+
+            if (yaloencontre2 == false) {
+                comprobacion2(chulito2);
+            }
+            yaloencontre2 = true;
+        }
+        if (movimientos[f][0] == correctos[2][0] && movimientos[f][1] == correctos[2][1]) {
+            for (i = 0; i < vector3.length; i++) {
+                vector3[i].setBackground(Color.green);
+
+            }
+
+            if (yaloencontre3 == false) {
+                comprobacion2(chulito3);
+            }
+            yaloencontre3 = true;
+        }
+        if (movimientos[f][0] == correctos[3][0] && movimientos[f][1] == correctos[3][1]) {
+            for (i = 0; i < vector4.length; i++) {
+                vector4[i].setBackground(Color.green);
+
+            }
+
+            if (yaloencontre4 == false) {
+                comprobacion2(chulito4);
+            }
+            yaloencontre4 = true;
+        }
+        if (movimientos[f][0] == correctos[4][0] && movimientos[f][1] == correctos[4][1]) {
+            for (i = 0; i < vector5.length; i++) {
+                vector5[i].setBackground(Color.green);
+
+            }
+
+            if (yaloencontre5 == false) {
+                comprobacion2(chulito5);
+            }
+            yaloencontre5 = true;
+        }
+        if (movimientos[f][0] == correctos[5][0] && movimientos[f][1] == correctos[5][1]) {
+            for (i = 0; i < vector6.length; i++) {
+                vector6[i].setBackground(Color.green);
+
+            }
+
+            if (yaloencontre6 == false) {
+                comprobacion2(chulito6);
+            }
+            yaloencontre6 = true;
+        }
+
+    }
+
+    //Subrutina que produce diversas verificaciones y contabilizaciones cada vez que un usuario encuentra una palabra
+    private void comprobacion2(JLabel chulito) {
+        //Se volverá visible una estrella al lado de la palabra Correspondiente en la lista
+        chulito.setVisible(true);
+        //Para contabilizar palabras halladas y mostrarlas al usuario
+        cont += 1;// cada palabra hallada se le suma 1 al contador
+
+        if (cont == 1) {
+            palabrasencontradas.setText("1/6");
+        } else if (cont == 2) {
+            palabrasencontradas.setText("2/6");
+        } else if (cont == 3) {
+            palabrasencontradas.setText("3/6");
+
+        } else if (cont == 4) {
+            palabrasencontradas.setText("4/6");
+
+        } else if (cont == 5) {
+            palabrasencontradas.setText("5/6");
+
+        } else if (cont == 6) {
+            palabrasencontradas.setText("6/6");
+            cont += 1;
+        }
+        //JOPTION PANE para mostrar aviso de que ha ganado al usuario
+        if (cont == 7) {
+            JOptionPane.showMessageDialog(null, "¡Felicidades " + name + "! \nHas resuelto el primer nivel\nPresiona NEXT LEVEL para seguir con el siguiente");
+            //Para que no se realicen mas cambios en la sopa
+
+            //para que no pueda pedir mas pistas ver la solucion o instrucciones
+            pista.setEnabled(false);
+            solucion.setEnabled(false);
+            instrucciones.setEnabled(false);
+
+        }
+
+    }
+    //FUNCIONES
+
+    // - Funcion para saber si he presionado botones dos veces o multiplos de 2
+    private int comprobacion(int entre) {
+        int res = entre;
+        if (entre % 2 == 0) {
+            res = entre - 1;
+        }
+        return res;
+
+    }
     private String name = null;
 
     public hardmusica(String user) {
         initComponents();
         this.name = user;
-        
+
         int i, j, auxs = 1, auxs2 = 0, auxm2 = 7, auxm = 8, auxn = 7, auxn2 = 6, aux5 = 3, aux52 = 4;
         //Matriz de botones [8][8]
         JButton botones[][] = {{boton11, boton12, boton13, boton14, boton15, boton16, boton17, boton18},
@@ -41,6 +234,23 @@ public class hardmusica extends javax.swing.JPanel {
 
         //Vector de cantantes [8] pero solo se usan 6 espacios
         String[] cantantes = {"STRAYK", "MANESKIN", "BIGTR", "5SOS", "QUEEN", "NIRVANA", "", ""};
+        //NIRVANA
+        JButton[] nirvana = {boton28, boton27, boton26, boton25, boton24, boton23, boton22, };
+
+        //MANESKIN
+        JButton[] maneskin = {boton87, boton77, boton67, boton57, boton47, boton37, boton27, boton17, };
+
+        //5SOS
+        JButton[] fiveSOS = {boton85, boton84, boton83, boton82, };
+
+        //STRAYK
+        JButton[] strayK = {boton32, boton33, boton34, boton35, boton36, boton37, };
+
+        //BIGTR
+        JButton[] bigTR = {boton81, boton72, boton63, boton54, boton45, };
+
+        //QUEEN
+        JButton[] queen = {boton11, boton21, boton31, boton41, boton51, };
 
         //Asignacion de letras a texto de la matriz de botones
         for (i = 0; i < 8; i++) {
@@ -51,7 +261,7 @@ public class hardmusica extends javax.swing.JPanel {
                 char letra = (char) (random.nextInt(26) + 'A');
                 String letraStr = String.valueOf(letra);
                 botones[i][j].setText(letraStr);// se le asigna una letra aleatoria al texto de los botones
-
+                 botonpresionado(botones[i][j], botones, strayK, maneskin, bigTR, fiveSOS, queen, nirvana, chulito1, chulito2, chulito3, chulito4, chulito5, chulito6);
                 //ORGANIZAR LETRAS DE PALABRAS SEGUN LA POSICIÓN DESEADA
                 //De acuerdo a mi matriz planteada:
                 //i representará mis filas
@@ -107,8 +317,7 @@ public class hardmusica extends javax.swing.JPanel {
                 }
             }
         }
-        //Contador para contabilizar palabras halladas y mostrarlas al usuario
-        cont = 0;
+ 
         //Hacer invisible estrellas al inicio de apertura de la ventana
         chulito1.setVisible(false);
         chulito2.setVisible(false);
@@ -1086,109 +1295,16 @@ public class hardmusica extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    int cont;
-    int QUEEN = 0;
     private void boton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton11ActionPerformed
-        QUEEN += 1;//Si se presiona este boton que representa la letra inicial de QUEEN el contador sumara 1
-        if (QUEEN == 2) {// si vale 2:
-            //se obtendra un color verde en el fondo de los botones que contienen las letras de la palara QUEEN
-            boton11.setBackground(Color.green);//Letra Q
-            boton21.setBackground(Color.green);//Letra U
-            boton31.setBackground(Color.green);//Letra E
-            boton41.setBackground(Color.green);//Letra E
-            boton51.setBackground(Color.green);//Letra N
-            //Se volverá visible una estrella al lado de la palabra QUEEN en la lista
-            chulito5.setVisible(true);
-            //Para contabilizar palabras halladas y mostrarlas al usuario
-            cont += 1;// cada palabra hallada se le suma 1 al contador
-            if (cont == 1) {
-                palabrasencontradas.setText("1/6");
-            } else if (cont == 2) {
-                palabrasencontradas.setText("2/6");
-            } else if (cont == 3) {
-                palabrasencontradas.setText("3/6");
-            } else if (cont == 4) {
-                palabrasencontradas.setText("4/6");
-            } else if (cont == 5) {
-                palabrasencontradas.setText("5/6");
-            } else if (cont == 6) {
-                palabrasencontradas.setText("6/6");
-            }
-        }
-        //JOPTION PANE para mostrar aviso de que ha ganado al usuario
-        if (NIRVANA >= 2 && BIGTR >= 2 && SSOS >= 2 && QUEEN >= 2 && STRAYK >= 2 && MANESKIN >= 2) {
-            JOptionPane.showMessageDialog(null, "!FELICIDADES " + name + "! \nHas resuelto el nivel hard\nSin duda eres un maestro de la Sopa de letras STAR :D");
-            JOptionPane.showMessageDialog(null, "Presiona REGRESAR AL MENU para ir al principio del juego \n o SALIR para ir al Menu principal de STAR GAMES");
-        }
+        
     }//GEN-LAST:event_boton11ActionPerformed
-    int BIGTR = 0;
+  
     private void boton81ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton81ActionPerformed
-        BIGTR += 1;//Si se presiona este boton que representa la letra inicial de BIGTR el contador sumara 1
-        if (BIGTR == 2) {// si vale 2:
-            //se obtendra un color verde en el fondo de los botones que contienen las letras de la palara BIGTR
-            boton81.setBackground(Color.green);//Letra B
-            boton72.setBackground(Color.green);//Letra I
-            boton63.setBackground(Color.green);//Letra G
-            boton54.setBackground(Color.green);//Letra T
-            boton45.setBackground(Color.green);//Letra R
-            //Se volverá visible una estrella al lado de la palabra BIGTR en la lista
-            chulito3.setVisible(true);
-            //Para contabilizar palabras halladas y mostrarlas al usuario
-            cont += 1;// cada palabra hallada se le suma 1 al contador
-            if (cont == 1) {
-                palabrasencontradas.setText("1/6");
-            } else if (cont == 2) {
-                palabrasencontradas.setText("2/6");
-            } else if (cont == 3) {
-                palabrasencontradas.setText("3/6");
-            } else if (cont == 4) {
-                palabrasencontradas.setText("4/6");
-            } else if (cont == 5) {
-                palabrasencontradas.setText("5/6");
-            } else if (cont == 6) {
-                palabrasencontradas.setText("6/6");
-            }
-        }
-        //JOPTION PANE para mostrar aviso de que ha ganado al usuario
-        if (NIRVANA >= 2 && BIGTR >= 2 && SSOS >= 2 && QUEEN >= 2 && STRAYK >= 2 && MANESKIN >= 2) {
-            JOptionPane.showMessageDialog(null, "!FELICIDADES " + name + "! \nHas resuelto el nivel hard\nSin duda eres un maestro de la Sopa de letras STAR :D");
-            JOptionPane.showMessageDialog(null, "Presiona REGRESAR AL MENU para ir al principio del juego \n o SALIR para ir al Menu principal de STAR GAMES");
-        }
+        
     }//GEN-LAST:event_boton81ActionPerformed
-    int STRAYK = 0;
+  
     private void boton32ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton32ActionPerformed
-        STRAYK += 1;//Si se presiona este boton que representa la letra inicial de STRAYK el contador sumara 1
-        if (STRAYK == 2) {// si vale 2:
-            //se obtendra un color verde en el fondo de los botones que contienen las letras de la palara STRAYK
-            boton32.setBackground(Color.green);//Letra S
-            boton33.setBackground(Color.green);//Letra T
-            boton34.setBackground(Color.green);//Letra R
-            boton35.setBackground(Color.green);//Letra A
-            boton36.setBackground(Color.green);//Letra Y
-            boton37.setBackground(Color.green);//Letra K
-            //Se volverá visible una estrella al lado de la palabra STRAYK en la lista
-            chulito1.setVisible(true);
-            //Para contabilizar palabras halladas y mostrarlas al usuario
-            cont += 1;// cada palabra hallada se le suma 1 al contador
-            if (cont == 1) {
-                palabrasencontradas.setText("1/6");
-            } else if (cont == 2) {
-                palabrasencontradas.setText("2/6");
-            } else if (cont == 3) {
-                palabrasencontradas.setText("3/6");
-            } else if (cont == 4) {
-                palabrasencontradas.setText("4/6");
-            } else if (cont == 5) {
-                palabrasencontradas.setText("5/6");
-            } else if (cont == 6) {
-                palabrasencontradas.setText("6/6");
-            }
-        }
-        //JOPTION PANE para mostrar aviso de que ha ganado al usuario
-        if (NIRVANA >= 2 && BIGTR >= 2 && SSOS >= 2 && QUEEN >= 2 && STRAYK >= 2 && MANESKIN >= 2) {
-            JOptionPane.showMessageDialog(null, "!FELICIDADES " + name + "! \nHas resuelto el nivel hard\nSin duda eres un maestro de la Sopa de letras STAR :D");
-            JOptionPane.showMessageDialog(null, "Presiona REGRESAR AL MENU para ir al principio del juego \n o SALIR para ir al Menu principal de STAR GAMES");
-        }
+        
     }//GEN-LAST:event_boton32ActionPerformed
 
     private void boton72ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton72ActionPerformed
@@ -1220,40 +1336,7 @@ public class hardmusica extends javax.swing.JPanel {
     }//GEN-LAST:event_boton16ActionPerformed
 
     private void boton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton17ActionPerformed
-        MANESKIN += 1;//Si se presiona este boton que representa la letra inicial de MANESKIN el contador sumara 1
-        if (MANESKIN == 2) {// si vale 2:
-            //se obtendra un color verde en el fondo de los botones que contienen las letras de la palara MANESKIN
-            boton87.setBackground(Color.green);//Letra M
-            boton77.setBackground(Color.green);//Letra A
-            boton67.setBackground(Color.green);//Letra N
-            boton57.setBackground(Color.green);//Letra E
-            boton47.setBackground(Color.green);//Letra S
-            boton37.setBackground(Color.green);//Letra K
-            boton27.setBackground(Color.green);//Letra I
-            boton17.setBackground(Color.green);//Letra N
-            //Se volverá visible una estrella al lado de la palabra MANESKIN en la lista
-            chulito2.setVisible(true);
-            //Para contabilizar palabras halladas y mostrarlas al usuario
-            cont += 1;// cada palabra hallada se le suma 1 al contador
-            if (cont == 1) {
-                palabrasencontradas.setText("1/6");
-            } else if (cont == 2) {
-                palabrasencontradas.setText("2/6");
-            } else if (cont == 3) {
-                palabrasencontradas.setText("3/6");
-            } else if (cont == 4) {
-                palabrasencontradas.setText("4/6");
-            } else if (cont == 5) {
-                palabrasencontradas.setText("5/6");
-            } else if (cont == 6) {
-                palabrasencontradas.setText("6/6");
-            }
-        }
-        //JOPTION PANE para mostrar aviso de que ha ganado al usuario
-        if (NIRVANA >= 2 && BIGTR >= 2 && SSOS >= 2 && QUEEN >= 2 && STRAYK >= 2 && MANESKIN >= 2) {
-            JOptionPane.showMessageDialog(null, "!FELICIDADES " + name + "! \nHas resuelto el nivel hard\nSin duda eres un maestro de la Sopa de letras STAR :D");
-            JOptionPane.showMessageDialog(null, "Presiona REGRESAR AL MENU para ir al principio del juego \n o SALIR para ir al Menu principal de STAR GAMES");
-        }
+        
     }//GEN-LAST:event_boton17ActionPerformed
 
     private void boton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton18ActionPerformed
@@ -1297,37 +1380,7 @@ public class hardmusica extends javax.swing.JPanel {
     }//GEN-LAST:event_boton35ActionPerformed
 
     private void boton45ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton45ActionPerformed
-        BIGTR += 1;//Si se presiona este boton que representa la letra inicial de BIGTR el contador sumara 1
-        if (BIGTR == 2) {// si vale 2:
-            //se obtendra un color verde en el fondo de los botones que contienen las letras de la palara BIGTR
-            boton81.setBackground(Color.green);//Letra B
-            boton72.setBackground(Color.green);//Letra I
-            boton63.setBackground(Color.green);//Letra G
-            boton54.setBackground(Color.green);//Letra T
-            boton45.setBackground(Color.green);//Letra R
-            //Se volverá visible una estrella al lado de la palabra BIGTR en la lista
-            chulito3.setVisible(true);
-            //Para contabilizar palabras halladas y mostrarlas al usuario
-            cont += 1;// cada palabra hallada se le suma 1 al contador
-            if (cont == 1) {
-                palabrasencontradas.setText("1/6");
-            } else if (cont == 2) {
-                palabrasencontradas.setText("2/6");
-            } else if (cont == 3) {
-                palabrasencontradas.setText("3/6");
-            } else if (cont == 4) {
-                palabrasencontradas.setText("4/6");
-            } else if (cont == 5) {
-                palabrasencontradas.setText("5/6");
-            } else if (cont == 6) {
-                palabrasencontradas.setText("6/6");
-            }
-        }
-        //JOPTION PANE para mostrar aviso de que ha ganado al usuario
-        if (NIRVANA >= 2 && BIGTR >= 2 && SSOS >= 2 && QUEEN >= 2 && STRAYK >= 2 && MANESKIN >= 2) {
-            JOptionPane.showMessageDialog(null, "!FELICIDADES " + name + "! \nHas resuelto el nivel hard\nSin duda eres un maestro de la Sopa de letras STAR :D");
-            JOptionPane.showMessageDialog(null, "Presiona REGRESAR AL MENU para ir al principio del juego \n o SALIR para ir al Menu principal de STAR GAMES");
-        }
+        
     }//GEN-LAST:event_boton45ActionPerformed
 
     private void boton55ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton55ActionPerformed
@@ -1341,38 +1394,9 @@ public class hardmusica extends javax.swing.JPanel {
     private void boton75ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton75ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_boton75ActionPerformed
-    int SSOS = 0;
+   
     private void boton85ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton85ActionPerformed
-        SSOS += 1;//Si se presiona este boton que representa la letra inicial de SSOS el contador sumara 1
-        if (SSOS == 2) {// si vale 2:
-            //se obtendra un color verde en el fondo de los botones que contienen las letras de la palara SSOS
-            boton85.setBackground(Color.green);//Letra 5
-            boton84.setBackground(Color.green);//Letra S
-            boton83.setBackground(Color.green);//Letra O
-            boton82.setBackground(Color.green);//Letra S
-            //Se volverá visible una estrella al lado de la palabra SOS en la lista
-            chulito4.setVisible(true);
-            //Para contabilizar palabras halladas y mostrarlas al usuario
-            cont += 1;// cada palabra hallada se le suma 1 al contador
-            if (cont == 1) {
-                palabrasencontradas.setText("1/6");
-            } else if (cont == 2) {
-                palabrasencontradas.setText("2/6");
-            } else if (cont == 3) {
-                palabrasencontradas.setText("3/6");
-            } else if (cont == 4) {
-                palabrasencontradas.setText("4/6");
-            } else if (cont == 5) {
-                palabrasencontradas.setText("5/6");
-            } else if (cont == 6) {
-                palabrasencontradas.setText("6/6");
-            }
-        }
-        //JOPTION PANE para mostrar aviso de que ha ganado al usuario
-        if (NIRVANA >= 2 && BIGTR >= 2 && SSOS >= 2 && QUEEN >= 2 && STRAYK >= 2 && MANESKIN >= 2) {
-            JOptionPane.showMessageDialog(null, "!FELICIDADES " + name + "! \nHas resuelto el nivel hard\nSin duda eres un maestro de la Sopa de letras STAR :D");
-            JOptionPane.showMessageDialog(null, "Presiona REGRESAR AL MENU para ir al principio del juego \n o SALIR para ir al Menu principal de STAR GAMES");
-        }
+       
     }//GEN-LAST:event_boton85ActionPerformed
 
     private void boton26ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton26ActionPerformed
@@ -1408,38 +1432,7 @@ public class hardmusica extends javax.swing.JPanel {
     }//GEN-LAST:event_boton27ActionPerformed
 
     private void boton37ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton37ActionPerformed
-        STRAYK += 1;//Si se presiona este boton que representa la letra inicial de STRAYK el contador sumara 1
-        if (STRAYK == 2) {// si vale 2:
-            //se obtendra un color verde en el fondo de los botones que contienen las letras de la palara STRAYK
-            boton32.setBackground(Color.green);//Letra S
-            boton33.setBackground(Color.green);//Letra T
-            boton34.setBackground(Color.green);//Letra R
-            boton35.setBackground(Color.green);//Letra A
-            boton36.setBackground(Color.green);//Letra Y
-            boton37.setBackground(Color.green);//Letra K
-            //Se volverá visible una estrella al lado de la palabra STRAYK en la lista
-            chulito1.setVisible(true);
-            //Para contabilizar palabras halladas y mostrarlas al usuario
-            cont += 1;// cada palabra hallada se le suma 1 al contador
-            if (cont == 1) {
-                palabrasencontradas.setText("1/6");
-            } else if (cont == 2) {
-                palabrasencontradas.setText("2/6");
-            } else if (cont == 3) {
-                palabrasencontradas.setText("3/6");
-            } else if (cont == 4) {
-                palabrasencontradas.setText("4/6");
-            } else if (cont == 5) {
-                palabrasencontradas.setText("5/6");
-            } else if (cont == 6) {
-                palabrasencontradas.setText("6/6");
-            }
-        }
-        //JOPTION PANE para mostrar aviso de que ha ganado al usuario
-        if (NIRVANA >= 2 && BIGTR >= 2 && SSOS >= 2 && QUEEN >= 2 && STRAYK >= 2 && MANESKIN >= 2) {
-            JOptionPane.showMessageDialog(null, "!FELICIDADES " + name + "! \nHas resuelto el nivel hard\nSin duda eres un maestro de la Sopa de letras STAR :D");
-            JOptionPane.showMessageDialog(null, "Presiona REGRESAR AL MENU para ir al principio del juego \n o SALIR para ir al Menu principal de STAR GAMES");
-        }
+        
     }//GEN-LAST:event_boton37ActionPerformed
 
     private void boton47ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton47ActionPerformed
@@ -1457,78 +1450,13 @@ public class hardmusica extends javax.swing.JPanel {
     private void boton77ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton77ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_boton77ActionPerformed
-    int MANESKIN = 0;
+   
     private void boton87ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton87ActionPerformed
-        MANESKIN += 1;//Si se presiona este boton que representa la letra inicial de MANESKIN el contador sumara 1
-        if (MANESKIN == 2) {// si vale 2:
-            //se obtendra un color verde en el fondo de los botones que contienen las letras de la palara MANESKIN
-            boton87.setBackground(Color.green);//Letra M
-            boton77.setBackground(Color.green);//Letra A
-            boton67.setBackground(Color.green);//Letra N
-            boton57.setBackground(Color.green);//Letra E
-            boton47.setBackground(Color.green);//Letra S
-            boton37.setBackground(Color.green);//Letra K
-            boton27.setBackground(Color.green);//Letra I
-            boton17.setBackground(Color.green);//Letra N
-            //Se volverá visible una estrella al lado de la palabra MANESKIN en la lista
-            chulito2.setVisible(true);
-            //Para contabilizar palabras halladas y mostrarlas al usuario
-            cont += 1;// cada palabra hallada se le suma 1 al contador
-            if (cont == 1) {
-                palabrasencontradas.setText("1/6");
-            } else if (cont == 2) {
-                palabrasencontradas.setText("2/6");
-            } else if (cont == 3) {
-                palabrasencontradas.setText("3/6");
-            } else if (cont == 4) {
-                palabrasencontradas.setText("4/6");
-            } else if (cont == 5) {
-                palabrasencontradas.setText("5/6");
-            } else if (cont == 6) {
-                palabrasencontradas.setText("6/6");
-            }
-        }
-        //JOPTION PANE para mostrar aviso de que ha ganado al usuario
-        if (NIRVANA >= 2 && BIGTR >= 2 && SSOS >= 2 && QUEEN >= 2 && STRAYK >= 2 && MANESKIN >= 2) {
-            JOptionPane.showMessageDialog(null, "!FELICIDADES " + name + "! \nHas resuelto el nivel hard\nSin duda eres un maestro de la Sopa de letras STAR :D");
-            JOptionPane.showMessageDialog(null, "Presiona REGRESAR AL MENU para ir al principio del juego \n o SALIR para ir al Menu principal de STAR GAMES");
-        }
+       
     }//GEN-LAST:event_boton87ActionPerformed
-    int NIRVANA = 0;
+ 
     private void boton28ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton28ActionPerformed
-        NIRVANA += 1;//Si se presiona este boton que representa la letra inicial de NIRVANA el contador sumara 1
-        if (NIRVANA == 2) {// si vale 2:
-            //se obtendra un color verde en el fondo de los botones que contienen las letras de la palara NIRVANA
-            boton28.setBackground(Color.green);//Letra N
-            boton27.setBackground(Color.green);//Letra I
-            boton26.setBackground(Color.green);//Letra R
-            boton25.setBackground(Color.green);//Letra V
-            boton24.setBackground(Color.green);//Letra A
-            boton23.setBackground(Color.green);//Letra N
-            boton22.setBackground(Color.green);//Letra A
-            //Se volverá visible una estrella al lado de la palabra NIRVANA en la lista
-            chulito6.setVisible(true);
-            //Para contabilizar palabras halladas y mostrarlas al usuario
-            cont += 1;// cada palabra hallada se le suma 1 al contador
-            if (cont == 1) {
-                palabrasencontradas.setText("1/6");
-            } else if (cont == 2) {
-                palabrasencontradas.setText("2/6");
-            } else if (cont == 3) {
-                palabrasencontradas.setText("3/6");
-            } else if (cont == 4) {
-                palabrasencontradas.setText("4/6");
-            } else if (cont == 5) {
-                palabrasencontradas.setText("5/6");
-            } else if (cont == 6) {
-                palabrasencontradas.setText("6/6");
-            }
-        }
-        //JOPTION PANE para mostrar aviso de que ha ganado al usuario
-        if (NIRVANA >= 2 && BIGTR >= 2 && SSOS >= 2 && QUEEN >= 2 && STRAYK >= 2 && MANESKIN >= 2) {
-            JOptionPane.showMessageDialog(null, "!FELICIDADES " + name + "! \nHas resuelto el nivel hard\nSin duda eres un maestro de la Sopa de letras STAR :D");
-            JOptionPane.showMessageDialog(null, "Presiona REGRESAR AL MENU para ir al principio del juego \n o SALIR para ir al Menu principal de STAR GAMES");
-        }
+       
     }//GEN-LAST:event_boton28ActionPerformed
 
     private void boton38ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton38ActionPerformed
@@ -1554,29 +1482,30 @@ public class hardmusica extends javax.swing.JPanel {
     private void boton88ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton88ActionPerformed
 
     }//GEN-LAST:event_boton88ActionPerformed
-    int contp = 0, maux = 1, qaux = 1, baux = 1, saux = 1, staux = 1, naux = 1;
+    int contp=0;
     private void pistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pistaActionPerformed
         //Para mostrar pistas:
-        //tengo en cuenta si ya el contador de la palabra está lleno ademas creo un auxiliar para cerciorarme de no repetir la palabra si ya la encontraron
+        
         //la pista consiste en crear un fondo verde en la inicial o final de la letra de un planeta que no haya encontrado el usuario
-        if (QUEEN < 2 & qaux == 1) {//pista letra inicial QUEEN
+        if (yaloencontre5 == false&&contp<4) {//pista letra inicial QUEEN
             boton11.setBackground(new Color(153, 255, 153));
-            qaux = 0;
-        } else if (BIGTR < 2 & baux == 1) {//pista letra inicial BIGTR
-            boton14.setBackground(new Color(153, 255, 153));
-            baux = 0;
-        } else if (SSOS < 2 & saux == 1) {//pista letra inicisl 5SOS
-            boton82.setBackground(new Color(153, 255, 153));
-            saux = 0;
-        } else if (STRAYK < 2 & staux == 1) {//pista letra final STRAYK
+
+        } else if (yaloencontre3 == false&&contp<4) {//pista letra inicial BIGTR
+             boton81.setBackground(new Color(153, 255, 153));//Letra B
+    
+        } else if (yaloencontre4 == false&&contp<4) {//pista letra inicisl 5SOS
+           
+            boton85.setBackground(new Color(153, 255, 153));
+  
+        } else if (yaloencontre1 == false&&contp<4) {//pista letra final STRAYK
             boton37.setBackground(new Color(153, 255, 153));
-            staux = 0;
-        } else if (MANESKIN < 2 & maux == 1) {//pista letra final MANESKIN
-            boton87.setBackground(new Color(153, 255, 153));
-            maux = 0;
-        } else if (NIRVANA < 2 & naux == 1) {//pista letra final NIRVANA
+        ;
+        } else if (yaloencontre2 == false&&contp<4) {//pista letra final MANESKIN
+            boton17.setBackground(new Color(153, 255, 153));
+   
+        } else if (yaloencontre6 == false&&contp<4) {//pista letra final NIRVANA
             boton22.setBackground(new Color(153, 255, 153));
-            naux = 0;
+        
         }
         contp += 1;
         if (contp > 4) {
@@ -1672,106 +1601,15 @@ public class hardmusica extends javax.swing.JPanel {
     }//GEN-LAST:event_siguiente1ActionPerformed
 
     private void boton22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton22ActionPerformed
-        NIRVANA += 1;//Si se presiona este boton que representa la letra inicial de NIRVANA el contador sumara 1
-        if (NIRVANA == 2) {// si vale 2:
-            //se obtendra un color verde en el fondo de los botones que contienen las letras de la palara NIRVANA
-            boton28.setBackground(Color.green);//Letra N
-            boton27.setBackground(Color.green);//Letra I
-            boton26.setBackground(Color.green);//Letra R
-            boton25.setBackground(Color.green);//Letra V
-            boton24.setBackground(Color.green);//Letra A
-            boton23.setBackground(Color.green);//Letra N
-            boton22.setBackground(Color.green);//Letra A
-            //Se volverá visible una estrella al lado de la palabra NIRVANA en la lista
-            chulito6.setVisible(true);
-            //Para contabilizar palabras halladas y mostrarlas al usuario
-            cont += 1;// cada palabra hallada se le suma 1 al contador
-            if (cont == 1) {
-                palabrasencontradas.setText("1/6");
-            } else if (cont == 2) {
-                palabrasencontradas.setText("2/6");
-            } else if (cont == 3) {
-                palabrasencontradas.setText("3/6");
-            } else if (cont == 4) {
-                palabrasencontradas.setText("4/6");
-            } else if (cont == 5) {
-                palabrasencontradas.setText("5/6");
-            } else if (cont == 6) {
-                palabrasencontradas.setText("6/6");
-            }
-        }
-        //JOPTION PANE para mostrar aviso de que ha ganado al usuario
-        if (NIRVANA >= 2 && BIGTR >= 2 && SSOS >= 2 && QUEEN >= 2 && STRAYK >= 2 && MANESKIN >= 2) {
-            JOptionPane.showMessageDialog(null, "!FELICIDADES " + name + "! \nHas resuelto el nivel hard\nSin duda eres un maestro de la Sopa de letras STAR :D");
-            JOptionPane.showMessageDialog(null, "Presiona REGRESAR AL INICIO para ir al principio del juego \n o SALIR para ir al Menu principal de STAR GAMES");
-        }
+       
     }//GEN-LAST:event_boton22ActionPerformed
 
     private void boton82ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton82ActionPerformed
-        SSOS += 1;//Si se presiona este boton que representa la letra inicial de SSOS el contador sumara 1
-        if (SSOS == 2) {// si vale 2:
-            //se obtendra un color verde en el fondo de los botones que contienen las letras de la palara SSOS
-            boton85.setBackground(Color.green);//Letra 5
-            boton84.setBackground(Color.green);//Letra S
-            boton83.setBackground(Color.green);//Letra O
-            boton82.setBackground(Color.green);//Letra S
-            //Se volverá visible una estrella al lado de la palabra SOS en la lista
-            chulito4.setVisible(true);
-            //Para contabilizar palabras halladas y mostrarlas al usuario
-            cont += 1;// cada palabra hallada se le suma 1 al contador
-            if (cont == 1) {
-                palabrasencontradas.setText("1/6");
-            } else if (cont == 2) {
-                palabrasencontradas.setText("2/6");
-            } else if (cont == 3) {
-                palabrasencontradas.setText("3/6");
-            } else if (cont == 4) {
-                palabrasencontradas.setText("4/6");
-            } else if (cont == 5) {
-                palabrasencontradas.setText("5/6");
-            } else if (cont == 6) {
-                palabrasencontradas.setText("6/6");
-            }
-        }
-        //JOPTION PANE para mostrar aviso de que ha ganado al usuario
-        if (NIRVANA >= 2 && BIGTR >= 2 && SSOS >= 2 && QUEEN >= 2 && STRAYK >= 2 && MANESKIN >= 2) {
-            JOptionPane.showMessageDialog(null, "!FELICIDADES " + name + "! \nHas resuelto el nivel hard\nSin duda eres un maestro de la Sopa de letras STAR :D");
-            JOptionPane.showMessageDialog(null, "Presiona REGRESAR AL INICIO para ir al principio del juego \n o SALIR para ir al Menu principal de STAR GAMES");
-        }
+        
     }//GEN-LAST:event_boton82ActionPerformed
 
     private void boton51ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton51ActionPerformed
-        QUEEN += 1;//Si se presiona este boton que representa la letra inicial de QUEEN el contador sumara 1
-        if (QUEEN == 2) {// si vale 2:
-            //se obtendra un color verde en el fondo de los botones que contienen las letras de la palara QUEEN
-            boton11.setBackground(Color.green);//Letra Q
-            boton21.setBackground(Color.green);//Letra U
-            boton31.setBackground(Color.green);//Letra E
-            boton41.setBackground(Color.green);//Letra E
-            boton51.setBackground(Color.green);//Letra N
-            //Se volverá visible una estrella al lado de la palabra QUEEN en la lista
-            chulito5.setVisible(true);
-            //Para contabilizar palabras halladas y mostrarlas al usuario
-            cont += 1;// cada palabra hallada se le suma 1 al contador
-            if (cont == 1) {
-                palabrasencontradas.setText("1/6");
-            } else if (cont == 2) {
-                palabrasencontradas.setText("2/6");
-            } else if (cont == 3) {
-                palabrasencontradas.setText("3/6");
-            } else if (cont == 4) {
-                palabrasencontradas.setText("4/6");
-            } else if (cont == 5) {
-                palabrasencontradas.setText("5/6");
-            } else if (cont == 6) {
-                palabrasencontradas.setText("6/6");
-            }
-        }
-        //JOPTION PANE para mostrar aviso de que ha ganado al usuario
-        if (NIRVANA >= 2 && BIGTR >= 2 && SSOS >= 2 && QUEEN >= 2 && STRAYK >= 2 && MANESKIN >= 2) {
-            JOptionPane.showMessageDialog(null, "!FELICIDADES " + name + "! \nHas resuelto el nivel hard\nSin duda eres un maestro de la Sopa de letras STAR :D");
-            JOptionPane.showMessageDialog(null, "Presiona REGRESAR AL INICIO para ir al principio del juego \n o SALIR para ir al Menu principal de STAR GAMES");
-        }
+
     }//GEN-LAST:event_boton51ActionPerformed
 
     private void boton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton12ActionPerformed

@@ -1,27 +1,218 @@
-
 package PanelesSP;
 
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Point;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Random;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-
 
 public class hardanime extends javax.swing.JPanel {
 
     /**
      * Creates new form hard
      */
+    //Variables globales
+    // - Contadores
+    int entre = 0;//para contabilizar las veces que el usuario presione los botones
+    int cont = 0;//para contabilizar palabras halladas y mostrarlas al usuario
+
+    // - Matrices
+    int movimientos[][] = new int[100][100];
+    int correctos[][] = {{2, 2}, {3, 3}, {4, 4}, {5, 5}, {6, 6}, {7, 7},};
+
+    // -Verifican si la palabra ya la encontró
+    boolean yaloencontre1 = false;
+    boolean yaloencontre2 = false;
+    boolean yaloencontre3 = false;
+    boolean yaloencontre4 = false;
+    boolean yaloencontre5 = false;
+    boolean yaloencontre6 = false;
+
+    //SUBRUTINAS
+    // - Subrutina para que cada vez que el usuario presione un boton guarde su movimiento y posteriormente lo verifique 
+    private void botonpresionado(JButton boton, JButton botones[][], JButton vector1[], JButton vector2[], JButton vector3[], JButton vector4[], JButton vector5[], JButton vector6[], JLabel chulito1, JLabel chulito2, JLabel chulito3, JLabel chulito4, JLabel chulito5, JLabel chulito6) {
+        boton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                int f;
+                entre++;
+
+                f = comprobacion(entre);//Funcion para saber si he presionado botones dos veces o multiplos de 2
+                //La idea es que cada vez que presione dos botones guarde ese movimiento (con contadores) y verifique si esos dos son una seleccion correcta
+
+                movimientos(boton, f, vector1, vector2, vector3, vector4, vector5, vector6);//Subrutina que asigna dos numeros en una fila y dos columnas de una matriz si el boton seleccionado hace parte de un boton inicial o final de una palabra
+                verifiquemos(movimientos, f, botones, vector1, vector2, vector3, vector4, vector5, vector6, chulito1, chulito2, chulito3, chulito4, chulito5, chulito6);//Subrutina que verifica si la matriz movimientos hace parte de una seleccion correcta
+
+            }
+        }
+        );
+    }
+
+    //  -Subrutina que asigna dos numeros en una fila y dos columnas de una matriz si el boton seleccionado hace parte de un boton inicial o final de una palabra
+    private void movimientos(JButton boton, int f, JButton vector1[], JButton vector2[], JButton vector3[], JButton vector4[], JButton vector5[], JButton vector6[]) {
+        if (boton == vector1[0]) {
+            movimientos[f][0] = 2;
+        } else if (boton == vector1[vector1.length - 1]) {
+            movimientos[f][1] = 2;
+        }
+        if (boton == vector2[0]) {
+            movimientos[f][0] = 3;
+        } else if (boton == vector2[vector2.length - 1]) {
+            movimientos[f][1] = 3;
+        }
+        if (boton == vector3[0]) {
+            movimientos[f][0] = 4;
+        } else if (boton == vector3[vector3.length - 1]) {
+            movimientos[f][1] = 4;
+        }
+        if (boton == vector4[0]) {
+            movimientos[f][0] = 5;
+        } else if (boton == vector4[vector4.length - 1]) {
+            movimientos[f][1] = 5;
+        }
+        if (boton == vector5[0]) {
+            movimientos[f][0] = 6;
+        } else if (boton == vector5[vector5.length - 1]) {
+            movimientos[f][1] = 6;
+        }
+        if (boton == vector6[0]) {
+            movimientos[f][0] = 7;
+        } else if (boton == vector6[vector6.length - 1]) {
+            movimientos[f][1] = 7;
+        }
+    }
+
+    //  -Subrutina que verifica si la matriz movimientos hace parte de una seleccion correcta
+    private void verifiquemos(int movimientos[][], int f, JButton botones[][], JButton vector1[], JButton vector2[], JButton vector3[], JButton vector4[], JButton vector5[], JButton vector6[], JLabel chulito1, JLabel chulito2, JLabel chulito3, JLabel chulito4, JLabel chulito5, JLabel chulito6) {
+        int i;
+        if (movimientos[f][0] == correctos[0][0] && movimientos[f][1] == correctos[0][1]) {
+            for (i = 0; i < vector1.length; i++) {
+                vector1[i].setBackground(Color.green);
+
+            }
+
+            if (yaloencontre1 == false) {
+                comprobacion2(chulito1);
+            }
+            yaloencontre1 = true;
+        }
+        if (movimientos[f][0] == correctos[1][0] && movimientos[f][1] == correctos[1][1]) {
+            for (i = 0; i < vector2.length; i++) {
+                vector2[i].setBackground(Color.green);
+
+            }
+
+            if (yaloencontre2 == false) {
+                comprobacion2(chulito2);
+            }
+            yaloencontre2 = true;
+        }
+        if (movimientos[f][0] == correctos[2][0] && movimientos[f][1] == correctos[2][1]) {
+            for (i = 0; i < vector3.length; i++) {
+                vector3[i].setBackground(Color.green);
+
+            }
+
+            if (yaloencontre3 == false) {
+                comprobacion2(chulito3);
+            }
+            yaloencontre3 = true;
+        }
+        if (movimientos[f][0] == correctos[3][0] && movimientos[f][1] == correctos[3][1]) {
+            for (i = 0; i < vector4.length; i++) {
+                vector4[i].setBackground(Color.green);
+
+            }
+
+            if (yaloencontre4 == false) {
+                comprobacion2(chulito4);
+            }
+            yaloencontre4 = true;
+        }
+        if (movimientos[f][0] == correctos[4][0] && movimientos[f][1] == correctos[4][1]) {
+            for (i = 0; i < vector5.length; i++) {
+                vector5[i].setBackground(Color.green);
+
+            }
+
+            if (yaloencontre5 == false) {
+                comprobacion2(chulito5);
+            }
+            yaloencontre5 = true;
+        }
+        if (movimientos[f][0] == correctos[5][0] && movimientos[f][1] == correctos[5][1]) {
+            for (i = 0; i < vector6.length; i++) {
+                vector6[i].setBackground(Color.green);
+
+            }
+
+            if (yaloencontre6 == false) {
+                comprobacion2(chulito6);
+            }
+            yaloencontre6 = true;
+        }
+
+    }
+
+    //Subrutina que produce diversas verificaciones y contabilizaciones cada vez que un usuario encuentra una palabra
+    private void comprobacion2(JLabel chulito) {
+        //Se volverá visible una estrella al lado de la palabra Correspondiente en la lista
+        chulito.setVisible(true);
+        //Para contabilizar palabras halladas y mostrarlas al usuario
+        cont += 1;// cada palabra hallada se le suma 1 al contador
+
+        if (cont == 1) {
+            palabrasencontradas.setText("1/6");
+        } else if (cont == 2) {
+            palabrasencontradas.setText("2/6");
+        } else if (cont == 3) {
+            palabrasencontradas.setText("3/6");
+
+        } else if (cont == 4) {
+            palabrasencontradas.setText("4/6");
+
+        } else if (cont == 5) {
+            palabrasencontradas.setText("5/6");
+
+        } else if (cont == 6) {
+            palabrasencontradas.setText("6/6");
+            cont += 1;
+        }
+        //JOPTION PANE para mostrar aviso de que ha ganado al usuario
+        if (cont == 7) {
+            JOptionPane.showMessageDialog(null, "¡Felicidades " + name + "! \nHas resuelto el primer nivel\nPresiona NEXT LEVEL para seguir con el siguiente");
+            //Para que no se realicen mas cambios en la sopa
+
+            //para que no pueda pedir mas pistas ver la solucion o instrucciones
+            pista.setEnabled(false);
+            solucion.setEnabled(false);
+            instrucciones.setEnabled(false);
+
+        }
+
+    }
+    //FUNCIONES
+
+    // - Funcion para saber si he presionado botones dos veces o multiplos de 2
+    private int comprobacion(int entre) {
+        int res = entre;
+        if (entre % 2 == 0) {
+            res = entre - 1;
+        }
+        return res;
+
+    }
     private String name = null;
 
     public hardanime(String user) {
         initComponents();
         this.name = user;
-        
+
         int i, j, auxs = 1, auxs2 = 0, auxa2 = 3, auxa = 4, auxd = 1, auxd2 = 0, auxh = 5, auxh2 = 6;
         //Matriz de botones [8][8]
         JButton botones[][] = {{boton11, boton12, boton13, boton14, boton15, boton16, boton17, boton18},
@@ -36,10 +227,28 @@ public class hardanime extends javax.swing.JPanel {
         //Vector de animes [8] pero solo se usan 6 espacios
         String[] animes = {"SHINZO", "ANYA", "DAZAI", "HANAKO", "MIYAMURA", "MIRKO", "", ""};
 
+        //SHINZO
+        JButton[] shinzo = {boton22, boton23, boton24, boton25, boton26, boton27, };
+
+        //ANYA
+        JButton[] anya = {boton58, boton68, boton78, boton88, };
+
+        //DAZAI
+        JButton[] dazai = {boton46, boton56, boton66, boton76, boton86, };
+
+        //HANAKO
+        JButton[] hanako = {boton82, boton72, boton62, boton52, boton42, boton32, };
+
+        //MIYAMURA
+        JButton[] miyamura = {boton14, boton24, boton34, boton44, boton54, boton64, boton74, boton84, };
+
+        //MIRKO
+        JButton[] mirko = {boton15, boton24, boton33, boton42, boton51, };
+        
         //Asignacion de letras a texto de la matriz de botones
         for (i = 0; i < 8; i++) {
             for (j = 0; j < 8; j++) {
-
+                botonpresionado(botones[i][j], botones, shinzo, anya, dazai, hanako, miyamura, mirko, chulito1, chulito2, chulito3, chulito4, chulito5, chulito6);
                 //Letras aleatorias mayusculas usando Random
                 Random random = new Random();
                 char letra = (char) (random.nextInt(26) + 'A');
@@ -101,8 +310,7 @@ public class hardanime extends javax.swing.JPanel {
 
             }
         }
-        //Contador para contabilizar palabras halladas y mostrarlas al usuario
-        cont = 0;
+       
         //Hacer invisible estrellas al inicio de apertura de la ventana
         chulito1.setVisible(false);
         chulito2.setVisible(false);
@@ -1077,7 +1285,7 @@ public class hardanime extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    int cont;
+
     private void boton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton11ActionPerformed
 
     }//GEN-LAST:event_boton11ActionPerformed
@@ -1085,40 +1293,10 @@ public class hardanime extends javax.swing.JPanel {
     private void boton81ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton81ActionPerformed
 
     }//GEN-LAST:event_boton81ActionPerformed
-    int HANAKO = 0;
+   
     private void boton32ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton32ActionPerformed
-        HANAKO += 1;//Si se presiona este boton que representa la letra inicial de HANAKO el contador sumara 1
-        if (HANAKO == 2) {// si vale 2:
-            //se obtendra un color verde en el fondo de los botones que contienen las letras de la palara HANAKO
-            boton82.setBackground(Color.green);//Letra H
-            boton72.setBackground(Color.green);//Letra A
-            boton62.setBackground(Color.green);//Letra N
-            boton52.setBackground(Color.green);//Letra A
-            boton42.setBackground(Color.green);//Letra K
-            boton32.setBackground(Color.green);//Letra O
-            //Se volverá visible una estrella al lado de la palabra HANAKO en la lista
-            chulito4.setVisible(true);
-            //Para contabilizar palabras halladas y mostrarlas al usuario
-            cont += 1;// cada palabra hallada se le suma 1 al contador
-            if (cont == 1) {
-                palabrasencontradas.setText("1/6");
-            } else if (cont == 2) {
-                palabrasencontradas.setText("2/6");
-            } else if (cont == 3) {
-                palabrasencontradas.setText("3/6");
-            } else if (cont == 4) {
-                palabrasencontradas.setText("4/6");
-            } else if (cont == 5) {
-                palabrasencontradas.setText("5/6");
-            } else if (cont == 6) {
-                palabrasencontradas.setText("6/6");
-            }
-        }
-        //JOPTION PANE para mostrar aviso de que ha ganado al usuario
-        if (SHINZO >= 2 && ANYA >= 2 && DAZAI >= 2 && HANAKO >= 2 && MIYAMURA >= 2 && MIRKO >= 2) {
-            JOptionPane.showMessageDialog(null, "!FELICIDADES " + name + "! \nHas resuelto el nivel hard\nSin duda eres un maestro de la Sopa de letras STAR :D");
-            JOptionPane.showMessageDialog(null, "Presiona REGRESAR AL MENU para ir al principio del juego \n o SALIR para ir al Menu principal de STAR GAMES");
-        }
+       
+          
     }//GEN-LAST:event_boton32ActionPerformed
 
     private void boton72ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton72ActionPerformed
@@ -1136,76 +1314,13 @@ public class hardanime extends javax.swing.JPanel {
     private void boton83ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton83ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_boton83ActionPerformed
-    int MIYAMURA = 0;
+
     private void boton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton14ActionPerformed
-        MIYAMURA += 1;//Si se presiona este boton que representa la letra inicial de MIYAMURA el contador sumara 1
-        if (MIYAMURA == 2) {// si vale 2:
-            //se obtendra un color verde en el fondo de los botones que contienen las letras de la palara MIYAMURA
-            boton14.setBackground(Color.green);//Letra M
-            boton24.setBackground(Color.green);//Letra I
-            boton34.setBackground(Color.green);//Letra Y
-            boton44.setBackground(Color.green);//Letra A
-            boton54.setBackground(Color.green);//Letra M
-            boton64.setBackground(Color.green);//Letra U
-            boton74.setBackground(Color.green);//Letra R
-            boton84.setBackground(Color.green);//Letra A
-            //Se volverá visible una estrella al lado de la palabra MIYAMURA en la lista
-            chulito5.setVisible(true);
-            //Para contabilizar palabras halladas y mostrarlas al usuario
-            cont += 1;// cada palabra hallada se le suma 1 al contador
-            if (cont == 1) {
-                palabrasencontradas.setText("1/6");
-            } else if (cont == 2) {
-                palabrasencontradas.setText("2/6");
-            } else if (cont == 3) {
-                palabrasencontradas.setText("3/6");
-            } else if (cont == 4) {
-                palabrasencontradas.setText("4/6");
-            } else if (cont == 5) {
-                palabrasencontradas.setText("5/6");
-            } else if (cont == 6) {
-                palabrasencontradas.setText("6/6");
-            }
-        }
-        //JOPTION PANE para mostrar aviso de que ha ganado al usuario
-        if (SHINZO >= 2 && ANYA >= 2 && DAZAI >= 2 && HANAKO >= 2 && MIYAMURA >= 2 && MIRKO >= 2) {
-            JOptionPane.showMessageDialog(null, "!FELICIDADES " + name + "! \nHas resuelto el nivel hard\nSin duda eres un maestro de la Sopa de letras STAR :D");
-            JOptionPane.showMessageDialog(null, "Presiona REGRESAR AL MENU para ir al principio del juego \n o SALIR para ir al Menu principal de STAR GAMES");
-        }
+        
     }//GEN-LAST:event_boton14ActionPerformed
-    int MIRKO = 0;
+  
     private void boton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton15ActionPerformed
-        MIRKO += 1;//Si se presiona este boton que representa la letra inicial de MIRKO el contador sumara 1
-        if (MIRKO == 2) {// si vale 2:
-            //se obtendra un color verde en el fondo de los botones que contienen las letras de la palara MIRKO
-            boton15.setBackground(Color.green);//Letra M
-            boton24.setBackground(Color.green);//Letra I
-            boton33.setBackground(Color.green);//Letra R
-            boton42.setBackground(Color.green);//Letra K
-            boton51.setBackground(Color.green);//Letra O
-            //Se volverá visible una estrella al lado de la palabra MIRKO en la lista
-            chulito6.setVisible(true);
-            //Para contabilizar palabras halladas y mostrarlas al usuario
-            cont += 1;// cada palabra hallada se le suma 1 al contador
-            if (cont == 1) {
-                palabrasencontradas.setText("1/6");
-            } else if (cont == 2) {
-                palabrasencontradas.setText("2/6");
-            } else if (cont == 3) {
-                palabrasencontradas.setText("3/6");
-            } else if (cont == 4) {
-                palabrasencontradas.setText("4/6");
-            } else if (cont == 5) {
-                palabrasencontradas.setText("5/6");
-            } else if (cont == 6) {
-                palabrasencontradas.setText("6/6");
-            }
-        }
-        //JOPTION PANE para mostrar aviso de que ha ganado al usuario
-        if (SHINZO >= 2 && ANYA >= 2 && DAZAI >= 2 && HANAKO >= 2 && MIYAMURA >= 2 && MIRKO >= 2) {
-            JOptionPane.showMessageDialog(null, "!FELICIDADES " + name + "! \nHas resuelto el nivel hard\nSin duda eres un maestro de la Sopa de letras STAR :D");
-            JOptionPane.showMessageDialog(null, "Presiona REGRESAR AL MENU para ir al principio del juego \n o SALIR para ir al Menu principal de STAR GAMES");
-        }
+       
     }//GEN-LAST:event_boton15ActionPerformed
 
     private void boton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton16ActionPerformed
@@ -1245,40 +1360,7 @@ public class hardanime extends javax.swing.JPanel {
     }//GEN-LAST:event_boton74ActionPerformed
 
     private void boton84ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton84ActionPerformed
-        MIYAMURA += 1;//Si se presiona este boton que representa la letra inicial de MIYAMURA el contador sumara 1
-        if (MIYAMURA == 2) {// si vale 2:
-            //se obtendra un color verde en el fondo de los botones que contienen las letras de la palara MIYAMURA
-            boton14.setBackground(Color.green);//Letra M
-            boton24.setBackground(Color.green);//Letra I
-            boton34.setBackground(Color.green);//Letra Y
-            boton44.setBackground(Color.green);//Letra A
-            boton54.setBackground(Color.green);//Letra M
-            boton64.setBackground(Color.green);//Letra U
-            boton74.setBackground(Color.green);//Letra R
-            boton84.setBackground(Color.green);//Letra A
-            //Se volverá visible una estrella al lado de la palabra MIYAMURA en la lista
-            chulito5.setVisible(true);
-            //Para contabilizar palabras halladas y mostrarlas al usuario
-            cont += 1;// cada palabra hallada se le suma 1 al contador
-            if (cont == 1) {
-                palabrasencontradas.setText("1/6");
-            } else if (cont == 2) {
-                palabrasencontradas.setText("2/6");
-            } else if (cont == 3) {
-                palabrasencontradas.setText("3/6");
-            } else if (cont == 4) {
-                palabrasencontradas.setText("4/6");
-            } else if (cont == 5) {
-                palabrasencontradas.setText("5/6");
-            } else if (cont == 6) {
-                palabrasencontradas.setText("6/6");
-            }
-        }
-        //JOPTION PANE para mostrar aviso de que ha ganado al usuario
-        if (SHINZO >= 2 && ANYA >= 2 && DAZAI >= 2 && HANAKO >= 2 && MIYAMURA >= 2 && MIRKO >= 2) {
-            JOptionPane.showMessageDialog(null, "!FELICIDADES " + name + "! \nHas resuelto el nivel hard\nSin duda eres un maestro de la Sopa de letras STAR :D");
-            JOptionPane.showMessageDialog(null, "Presiona REGRESAR AL MENU para ir al principio del juego \n o SALIR para ir al Menu principal de STAR GAMES");
-        }
+        
     }//GEN-LAST:event_boton84ActionPerformed
 
     private void boton25ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton25ActionPerformed
@@ -1316,39 +1398,9 @@ public class hardanime extends javax.swing.JPanel {
     private void boton36ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton36ActionPerformed
 
     }//GEN-LAST:event_boton36ActionPerformed
-    int DAZAI = 0;
+    
     private void boton46ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton46ActionPerformed
-        DAZAI += 1;//Si se presiona este boton que representa la letra inicial de DAZAI el contador sumara 1
-        if (DAZAI == 2) {// si vale 2:
-            //se obtendra un color verde en el fondo de los botones que contienen las letras de la palara DAZAI
-            boton46.setBackground(Color.green);//Letra D
-            boton56.setBackground(Color.green);//Letra A
-            boton66.setBackground(Color.green);//Letra Z
-            boton76.setBackground(Color.green);//Letra A
-            boton86.setBackground(Color.green);//Letra A
-            //Se volverá visible una estrella al lado de la palabra DAZAI en la lista
-            chulito3.setVisible(true);
-            //Para contabilizar palabras halladas y mostrarlas al usuario
-            cont += 1;// cada palabra hallada se le suma 1 al contador
-            if (cont == 1) {
-                palabrasencontradas.setText("1/6");
-            } else if (cont == 2) {
-                palabrasencontradas.setText("2/6");
-            } else if (cont == 3) {
-                palabrasencontradas.setText("3/6");
-            } else if (cont == 4) {
-                palabrasencontradas.setText("4/6");
-            } else if (cont == 5) {
-                palabrasencontradas.setText("5/6");
-            } else if (cont == 6) {
-                palabrasencontradas.setText("6/6");
-            }
-        }
-        //JOPTION PANE para mostrar aviso de que ha ganado al usuario
-        if (SHINZO >= 2 && ANYA >= 2 && DAZAI >= 2 && HANAKO >= 2 && MIYAMURA >= 2 && MIRKO >= 2) {
-            JOptionPane.showMessageDialog(null, "!FELICIDADES " + name + "! \nHas resuelto el nivel hard\nSin duda eres un maestro de la Sopa de letras STAR :D");
-            JOptionPane.showMessageDialog(null, "Presiona REGRESAR AL MENU para ir al principio del juego \n o SALIR para ir al Menu principal de STAR GAMES");
-        }
+       
     }//GEN-LAST:event_boton46ActionPerformed
 
     private void boton56ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton56ActionPerformed
@@ -1364,72 +1416,12 @@ public class hardanime extends javax.swing.JPanel {
     }//GEN-LAST:event_boton76ActionPerformed
 
     private void boton86ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton86ActionPerformed
-        DAZAI += 1;//Si se presiona este boton que representa la letra inicial de DAZAI el contador sumara 1
-        if (DAZAI == 2) {// si vale 2:
-            //se obtendra un color verde en el fondo de los botones que contienen las letras de la palara DAZAI
-            boton46.setBackground(Color.green);//Letra D
-            boton56.setBackground(Color.green);//Letra A
-            boton66.setBackground(Color.green);//Letra Z
-            boton76.setBackground(Color.green);//Letra A
-            boton86.setBackground(Color.green);//Letra A
-            //Se volverá visible una estrella al lado de la palabra DAZAI en la lista
-            chulito3.setVisible(true);
-            //Para contabilizar palabras halladas y mostrarlas al usuario
-            cont += 1;// cada palabra hallada se le suma 1 al contador
-            if (cont == 1) {
-                palabrasencontradas.setText("1/6");
-            } else if (cont == 2) {
-                palabrasencontradas.setText("2/6");
-            } else if (cont == 3) {
-                palabrasencontradas.setText("3/6");
-            } else if (cont == 4) {
-                palabrasencontradas.setText("4/6");
-            } else if (cont == 5) {
-                palabrasencontradas.setText("5/6");
-            } else if (cont == 6) {
-                palabrasencontradas.setText("6/6");
-            }
-        }
-        //JOPTION PANE para mostrar aviso de que ha ganado al usuario
-        if (SHINZO >= 2 && ANYA >= 2 && DAZAI >= 2 && HANAKO >= 2 && MIYAMURA >= 2 && MIRKO >= 2) {
-            JOptionPane.showMessageDialog(null, "!FELICIDADES " + name + "! \nHas resuelto el nivel hard\nSin duda eres un maestro de la Sopa de letras STAR :D");
-            JOptionPane.showMessageDialog(null, "Presiona REGRESAR AL MENU para ir al principio del juego \n o SALIR para ir al Menu principal de STAR GAMES");
-        }
+       
     }//GEN-LAST:event_boton86ActionPerformed
 
     private void boton27ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton27ActionPerformed
-        SHINZO += 1;//Si se presiona este boton que representa la letra inicial de SHINZO el contador sumara 1
-        if (SHINZO == 2) {// si vale 2:
-            //se obtendra un color verde en el fondo de los botones que contienen las letras de la palara SHINZO
-            boton22.setBackground(Color.green);//Letra S
-            boton23.setBackground(Color.green);//Letra H
-            boton24.setBackground(Color.green);//Letra I
-            boton25.setBackground(Color.green);//Letra N
-            boton26.setBackground(Color.green);//Letra Z
-            boton27.setBackground(Color.green);//Letra O 
-            //Se volverá visible una estrella al lado de la palabra SHINZO en la lista
-            chulito1.setVisible(true);
-            //Para contabilizar palabras halladas y mostrarlas al usuario
-            cont += 1;// cada palabra hallada se le suma 1 al contador
-            if (cont == 1) {
-                palabrasencontradas.setText("1/6");
-            } else if (cont == 2) {
-                palabrasencontradas.setText("2/6");
-            } else if (cont == 3) {
-                palabrasencontradas.setText("3/6");
-            } else if (cont == 4) {
-                palabrasencontradas.setText("4/6");
-            } else if (cont == 5) {
-                palabrasencontradas.setText("5/6");
-            } else if (cont == 6) {
-                palabrasencontradas.setText("6/6");
-            }
-        }
-        //JOPTION PANE para mostrar aviso de que ha ganado al usuario
-        if (SHINZO >= 2 && ANYA >= 2 && DAZAI >= 2 && HANAKO >= 2 && MIYAMURA >= 2 && MIRKO >= 2) {
-            JOptionPane.showMessageDialog(null, "!FELICIDADES " + name + "! \nHas resuelto el nivel hard\nSin duda eres un maestro de la Sopa de letras STAR :D");
-            JOptionPane.showMessageDialog(null, "Presiona REGRESAR AL MENU para ir al principio del juego \n o SALIR para ir al Menu principal de STAR GAMES");
-        }
+       
+        
     }//GEN-LAST:event_boton27ActionPerformed
 
     private void boton37ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton37ActionPerformed
@@ -1469,36 +1461,8 @@ public class hardanime extends javax.swing.JPanel {
     }//GEN-LAST:event_boton48ActionPerformed
 
     private void boton58ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton58ActionPerformed
-        ANYA += 1;//Si se presiona este boton que representa la letra inicial de ANYA el contador sumara 1
-        if (ANYA == 2) {// si vale 2:
-            //se obtendra un color verde en el fondo de los botones que contienen las letras de la palara ANYA
-            boton58.setBackground(Color.green);//Letra A
-            boton68.setBackground(Color.green);//Letra N
-            boton78.setBackground(Color.green);//Letra Y
-            boton88.setBackground(Color.green);//Letra A
-            //Se volverá visible una estrella al lado de la palabra ANYA en la lista
-            chulito2.setVisible(true);
-            //Para contabilizar palabras halladas y mostrarlas al usuario
-            cont += 1;// cada palabra hallada se le suma 1 al contador
-            if (cont == 1) {
-                palabrasencontradas.setText("1/6");
-            } else if (cont == 2) {
-                palabrasencontradas.setText("2/6");
-            } else if (cont == 3) {
-                palabrasencontradas.setText("3/6");
-            } else if (cont == 4) {
-                palabrasencontradas.setText("4/6");
-            } else if (cont == 5) {
-                palabrasencontradas.setText("5/6");
-            } else if (cont == 6) {
-                palabrasencontradas.setText("6/6");
-            }
-        }
-        //JOPTION PANE para mostrar aviso de que ha ganado al usuario
-        if (SHINZO >= 2 && ANYA >= 2 && DAZAI >= 2 && HANAKO >= 2 && MIYAMURA >= 2 && MIRKO >= 2) {
-            JOptionPane.showMessageDialog(null, "!FELICIDADES " + name + "! \nHas resuelto el nivel hard\nSin duda eres un maestro de la Sopa de letras STAR :D");
-            JOptionPane.showMessageDialog(null, "Presiona REGRESAR AL MENU para ir al principio del juego \n o SALIR para ir al Menu principal de STAR GAMES");
-        }
+       
+         
     }//GEN-LAST:event_boton58ActionPerformed
 
     private void boton68ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton68ActionPerformed
@@ -1508,63 +1472,35 @@ public class hardanime extends javax.swing.JPanel {
     private void boton78ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton78ActionPerformed
 
     }//GEN-LAST:event_boton78ActionPerformed
-    int ANYA = 0;
+
     private void boton88ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton88ActionPerformed
-        ANYA += 1;//Si se presiona este boton que representa la letra inicial de ANYA el contador sumara 1
-        if (ANYA == 2) {// si vale 2:
-            //se obtendra un color verde en el fondo de los botones que contienen las letras de la palara ANYA
-            boton58.setBackground(Color.green);//Letra A
-            boton68.setBackground(Color.green);//Letra N
-            boton78.setBackground(Color.green);//Letra Y
-            boton88.setBackground(Color.green);//Letra A
-            //Se volverá visible una estrella al lado de la palabra ANYA en la lista
-            chulito2.setVisible(true);
-            //Para contabilizar palabras halladas y mostrarlas al usuario
-            cont += 1;// cada palabra hallada se le suma 1 al contador
-            if (cont == 1) {
-                palabrasencontradas.setText("1/6");
-            } else if (cont == 2) {
-                palabrasencontradas.setText("2/6");
-            } else if (cont == 3) {
-                palabrasencontradas.setText("3/6");
-            } else if (cont == 4) {
-                palabrasencontradas.setText("4/6");
-            } else if (cont == 5) {
-                palabrasencontradas.setText("5/6");
-            } else if (cont == 6) {
-                palabrasencontradas.setText("6/6");
-            }
-        }
-        //JOPTION PANE para mostrar aviso de que ha ganado al usuario
-        if (SHINZO >= 2 && ANYA >= 2 && DAZAI >= 2 && HANAKO >= 2 && MIYAMURA >= 2 && MIRKO >= 2) {
-            JOptionPane.showMessageDialog(null, "!FELICIDADES " + name + "! \nHas resuelto el nivel hard\nSin duda eres un maestro de la Sopa de letras STAR :D");
-            JOptionPane.showMessageDialog(null, "Presiona REGRESAR AL MENU para ir al principio del juego \n o SALIR para ir al Menu principal de STAR GAMES");
-        }
+       
     }//GEN-LAST:event_boton88ActionPerformed
-    int contp = 0,maux=1, aaux=1, haux = 1, saux = 1, miaux = 1, daux = 1;
+  int contp=0;
     private void pistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pistaActionPerformed
         //Para mostrar pistas:
         //tengo en cuenta si ya el contador de la palabra está lleno ademas creo un auxiliar para cerciorarme de no repetir la palabra si ya la encontraron
         //la pista consiste en crear un fondo verde en la inicial o final de la letra de un planeta que no haya encontrado el usuario
         //psra la palabra HANAKO la pista esta en las ultima letra
-        if (SHINZO < 2 & saux == 1) {//pista letra inicial SHINZO
+       
+        if (yaloencontre1 == false&&contp<4) {//pista letra inicial SHINZO
             boton22.setBackground(new Color(153, 255, 153));
-            saux = 0;
-        } else if (MIYAMURA < 2 & miaux == 1) {//pista letra inicial MIYAMURA
+         
+        } else if (yaloencontre5 == false&&contp<4) {//pista letra inicial MIYAMURA
             boton14.setBackground(new Color(153, 255, 153));
-            miaux = 0;
-        } else if (DAZAI < 2 & daux == 1) {//pista letra inicisl DAZAI
+           
+        } else if (yaloencontre3 == false&&contp<4) {//pista letra inicisl DAZAI
             boton46.setBackground(new Color(153, 255, 153));
-            daux = 0;
-        } else if (HANAKO < 2 & haux == 1) {//pista letra final HANAKO
+       
+        } else if (yaloencontre4 == false&&contp<4) {//pista letra final HANAKO
             boton82.setBackground(new Color(153, 255, 153));
-            haux = 0;
-        }else if (ANYA < 2 & aaux == 1) {//pista letra final ANYA
+           
+        } else if (yaloencontre2 == false&&contp<4) {//pista letra final ANYA
             boton57.setBackground(new Color(153, 255, 153));
-            aaux = 0;
-        }else if (MIRKO < 2 & maux == 1) {//pista letra final MIRKO
+           
+        } else if (yaloencontre6 == false&&contp<4) {//pista letra final MIRKO
             boton51.setBackground(new Color(153, 255, 153));
-            maux = 0;
+           
         }
         contp += 1;
         if (contp > 4) {
@@ -1657,109 +1593,20 @@ public class hardanime extends javax.swing.JPanel {
         contenido6.revalidate();
         contenido6.repaint();
     }//GEN-LAST:event_siguiente1ActionPerformed
-    int SHINZO = 0;
+    
     private void boton22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton22ActionPerformed
-        SHINZO += 1;//Si se presiona este boton que representa la letra inicial de SHINZO el contador sumara 1
-        if (SHINZO == 2) {// si vale 2:
-            //se obtendra un color verde en el fondo de los botones que contienen las letras de la palara SHINZO
-            boton22.setBackground(Color.green);//Letra S
-            boton23.setBackground(Color.green);//Letra H
-            boton24.setBackground(Color.green);//Letra I
-            boton25.setBackground(Color.green);//Letra N
-            boton26.setBackground(Color.green);//Letra Z
-            boton27.setBackground(Color.green);//Letra O 
-            //Se volverá visible una estrella al lado de la palabra SHINZO en la lista
-            chulito1.setVisible(true);
-            //Para contabilizar palabras halladas y mostrarlas al usuario
-            cont += 1;// cada palabra hallada se le suma 1 al contador
-            if (cont == 1) {
-                palabrasencontradas.setText("1/6");
-            } else if (cont == 2) {
-                palabrasencontradas.setText("2/6");
-            } else if (cont == 3) {
-                palabrasencontradas.setText("3/6");
-            } else if (cont == 4) {
-                palabrasencontradas.setText("4/6");
-            } else if (cont == 5) {
-                palabrasencontradas.setText("5/6");
-            } else if (cont == 6) {
-                palabrasencontradas.setText("6/6");
-            }
-        }
-        //JOPTION PANE para mostrar aviso de que ha ganado al usuario
-        if (SHINZO >= 2 && ANYA >= 2 && DAZAI >= 2 && HANAKO >= 2 && MIYAMURA >= 2 && MIRKO >= 2) {
-            JOptionPane.showMessageDialog(null, "!FELICIDADES " + name + "! \nHas resuelto el nivel hard\nSin duda eres un maestro de la Sopa de letras STAR :D");
-            JOptionPane.showMessageDialog(null, "Presiona REGRESAR AL MENU para ir al principio del juego \n o SALIR para ir al Menu principal de STAR GAMES");
-        }
+        
+        
     }//GEN-LAST:event_boton22ActionPerformed
 
     private void boton82ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton82ActionPerformed
-        HANAKO += 1;//Si se presiona este boton que representa la letra inicial de HANAKO el contador sumara 1
-        if (HANAKO == 2) {// si vale 2:
-            //se obtendra un color verde en el fondo de los botones que contienen las letras de la palara HANAKO
-            boton82.setBackground(Color.green);//Letra H
-            boton72.setBackground(Color.green);//Letra A
-            boton62.setBackground(Color.green);//Letra N
-            boton52.setBackground(Color.green);//Letra A
-            boton42.setBackground(Color.green);//Letra K
-            boton32.setBackground(Color.green);//Letra O
-            //Se volverá visible una estrella al lado de la palabra HANAKO en la lista
-            chulito4.setVisible(true);
-            //Para contabilizar palabras halladas y mostrarlas al usuario
-            cont += 1;// cada palabra hallada se le suma 1 al contador
-            if (cont == 1) {
-                palabrasencontradas.setText("1/6");
-            } else if (cont == 2) {
-                palabrasencontradas.setText("2/6");
-            } else if (cont == 3) {
-                palabrasencontradas.setText("3/6");
-            } else if (cont == 4) {
-                palabrasencontradas.setText("4/6");
-            } else if (cont == 5) {
-                palabrasencontradas.setText("5/6");
-            } else if (cont == 6) {
-                palabrasencontradas.setText("6/6");
-            }
-        }
-        //JOPTION PANE para mostrar aviso de que ha ganado al usuario
-        if (SHINZO >= 2 && ANYA >= 2 && DAZAI >= 2 && HANAKO >= 2 && MIYAMURA >= 2 && MIRKO >= 2) {
-            JOptionPane.showMessageDialog(null, "!FELICIDADES " + name + "! \nHas resuelto el nivel hard\nSin duda eres un maestro de la Sopa de letras STAR :D");
-            JOptionPane.showMessageDialog(null, "Presiona REGRESAR AL MENU para ir al principio del juego \n o SALIR para ir al Menu principal de STAR GAMES");
-        }
+      
+     
     }//GEN-LAST:event_boton82ActionPerformed
 
     private void boton51ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton51ActionPerformed
-        MIRKO += 1;//Si se presiona este boton que representa la letra inicial de MIRKO el contador sumara 1
-        if (MIRKO == 2) {// si vale 2:
-            //se obtendra un color verde en el fondo de los botones que contienen las letras de la palara MIRKO
-            boton15.setBackground(Color.green);//Letra M
-            boton24.setBackground(Color.green);//Letra I
-            boton33.setBackground(Color.green);//Letra R
-            boton42.setBackground(Color.green);//Letra K
-            boton51.setBackground(Color.green);//Letra O
-            //Se volverá visible una estrella al lado de la palabra MIRKO en la lista
-            chulito6.setVisible(true);
-            //Para contabilizar palabras halladas y mostrarlas al usuario
-            cont += 1;// cada palabra hallada se le suma 1 al contador
-            if (cont == 1) {
-                palabrasencontradas.setText("1/6");
-            } else if (cont == 2) {
-                palabrasencontradas.setText("2/6");
-            } else if (cont == 3) {
-                palabrasencontradas.setText("3/6");
-            } else if (cont == 4) {
-                palabrasencontradas.setText("4/6");
-            } else if (cont == 5) {
-                palabrasencontradas.setText("5/6");
-            } else if (cont == 6) {
-                palabrasencontradas.setText("6/6");
-            }
-        }
-        //JOPTION PANE para mostrar aviso de que ha ganado al usuario
-        if (SHINZO >= 2 && ANYA >= 2 && DAZAI >= 2 && HANAKO >= 2 && MIYAMURA >= 2 && MIRKO >= 2) {
-            JOptionPane.showMessageDialog(null, "!FELICIDADES " + name + "! \nHas resuelto el nivel hard\nSin duda eres un maestro de la Sopa de letras STAR :D");
-            JOptionPane.showMessageDialog(null, "Presiona REGRESAR AL MENU para ir al principio del juego \n o SALIR para ir al Menu principal de STAR GAMES");
-        }
+       
+      
     }//GEN-LAST:event_boton51ActionPerformed
 
     private void boton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton12ActionPerformed
@@ -1771,7 +1618,7 @@ public class hardanime extends javax.swing.JPanel {
     }//GEN-LAST:event_boton13ActionPerformed
 
     private void btnVolver2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolver2ActionPerformed
-         contenido6.removeAll();
+        contenido6.removeAll();
         tema m = new tema(name);
         m.setSize(800, 496);
         m.setLocation(0, 0);
