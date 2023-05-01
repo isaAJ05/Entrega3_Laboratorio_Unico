@@ -1,5 +1,4 @@
 
-
 import java.awt.Cursor;
 import rompecabezas.*;
 import java.awt.Font;
@@ -14,10 +13,8 @@ import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 
 // Créditos de la imagen: https://www.nationalgeographic.com.es/ciencia/sistema-solar-que-es-como-se-formo-y-datos-principales_18430
-
 // Créditos gif ganador: https://tenor.com/view/cute-panda-happy-love-yay-gif-16763329
 // Créditos gif perdedor: https://images.app.goo.gl/FLzFLSCFVXRhy6NX8
-
 public class rompecabezas02 extends javax.swing.JFrame implements ActionListener {
 
     JLabel[][] status;
@@ -36,17 +33,18 @@ public class rompecabezas02 extends javax.swing.JFrame implements ActionListener
     ImageIcon pp10 = new ImageIcon(CL.getResource("imagenes/3.jpg"));
     ImageIcon pp11 = new ImageIcon(CL.getResource("imagenes/2.jpg"));
     ImageIcon pp12 = new ImageIcon(CL.getResource("imagenes/1.jpg"));
-   
+
     private String user;
+
     public rompecabezas02(String name) {
-         this.user=name;
+        this.user = name;
         initComponents();
         this.setVisible(true);
         this.setResizable(false);
 
         this.setSize(800, 490);
         //cursor
-        Cursor cursor = Toolkit.getDefaultToolkit().createCustomCursor(new ImageIcon(getClass().getResource("cursor/cursorimg.png")).getImage(),new Point(0,0),"Custom Cursor");
+        Cursor cursor = Toolkit.getDefaultToolkit().createCustomCursor(new ImageIcon(getClass().getResource("cursor/cursorimg.png")).getImage(), new Point(0, 0), "Custom Cursor");
         this.setCursor(cursor);
         imagenes = new ImageIcon[][]{{pp1, pp2, pp3}, {pp4, pp5, pp6}, {pp7, pp8, pp9}, {pp10, pp11, pp12}};
         status = new JLabel[][]{{pieza1, pieza2, pieza3}, {pieza4, pieza5, pieza6}, {pieza7, pieza8, pieza9}, {pieza10, pieza11, pieza12}};
@@ -78,11 +76,9 @@ public class rompecabezas02 extends javax.swing.JFrame implements ActionListener
     JButton btn;
 
     public void actionPerformed(ActionEvent e) {
-
         btn = (JButton) e.getSource();
         int[] filas = {0, 0, 0, 1, 1, 1, 2, 2, 2, 3, 3, 3};
         int[] columnas = {0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2};
-
         for (int i = 0; i < 12; i++) {
             f = filas[i];
             c = columnas[i];
@@ -97,15 +93,21 @@ public class rompecabezas02 extends javax.swing.JFrame implements ActionListener
 
             }
         }
-        rompecabezas();
-    }
-
-    public void rompecabezas() {
-        boolean k = true;
+        rompecabezas(contador, status, imagenes, piezas);
         if (contador == 12) {
-            for (int i = 0; i < 4; i++) {
-                for (int j = 0; j < 3; j++) {
-                    if (status[i][j].getIcon() != imagenes[i][j]) {
+            contador = 0;
+        }
+    }
+    
+
+    public void rompecabezas(int c, JLabel[][] labels, ImageIcon[][] images, JButton[][] buttons) {
+        boolean k = true;
+        int i, j;
+        System.out.println("c" + c);
+        if (c == 12) {
+            for (i = 0; i < 4; i++) {
+                for (j = 0; j < 3; j++) {
+                    if (labels[i][j].getIcon() != images[i][j]) {
                         k = false;
                     }
                 }
@@ -115,33 +117,28 @@ public class rompecabezas02 extends javax.swing.JFrame implements ActionListener
             if (k) {
                 ImageIcon ganaste = new ImageIcon(CL.getResource("imagenes/happy.gif"));
                 JOptionPane.showMessageDialog(null, "¡FELICIDADES!\nEres todo un ganador.", "ROMPECABEZAS", JOptionPane.PLAIN_MESSAGE, ganaste);
-                for (int i = 0; i < 4; i++) {
-                    for (int j = 0; j < 3; j++) {
-                        piezas[i][j].setEnabled(true);
-                        status[i][j].setIcon(null);
-                        contador = 0;
+                for (i = 0; i < 4; i++) {
+                    for (j = 0; j < 3; j++) {
+                        buttons[i][j].setEnabled(true);
+                        labels[i][j].setIcon(null);
                     }
                 }
+                c = 0;
             } else {
                 ImageIcon perdiste = new ImageIcon(CL.getResource("imagenes/sad.gif"));
                 JOptionPane.showMessageDialog(null, "GAME OVER\nPerdiste esta vez,\nsuerte para la próxima.", "ROMPECABEZAS", JOptionPane.PLAIN_MESSAGE, perdiste);
-                for (int i = 0; i < 4; i++) {
-                    for (int j = 0; j < 3; j++) {
-                        piezas[i][j].setEnabled(true);
-                        status[i][j].setIcon(null);
-                        contador = 0;
-
+                for (i = 0; i < 4; i++) {
+                    for (j = 0; j < 3; j++) {
+                        buttons[i][j].setEnabled(true);
+                        labels[i][j].setIcon(null);
                     }
                 }
+                c = 0;
             }
         }
     }
 
-    /**
-     * This method is called from within the constructor to initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is always
-     * regenerated by the Form Editor.
-     */
+   
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -256,115 +253,55 @@ public class rompecabezas02 extends javax.swing.JFrame implements ActionListener
         p1.setBackground(new java.awt.Color(204, 204, 255));
         p1.setFont(new java.awt.Font("sansserif", 0, 36)); // NOI18N
         p1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
-        p1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseDragged(java.awt.event.MouseEvent evt) {
-                p1MouseDragged(evt);
-            }
-        });
-        p1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                p1ActionPerformed(evt);
-            }
-        });
         PIEZAS.add(p1);
 
         p2.setBackground(new java.awt.Color(204, 204, 255));
         p2.setFont(new java.awt.Font("sansserif", 0, 36)); // NOI18N
         p2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
-        p2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                p2ActionPerformed(evt);
-            }
-        });
         PIEZAS.add(p2);
 
         p3.setBackground(new java.awt.Color(204, 204, 255));
         p3.setFont(new java.awt.Font("sansserif", 0, 36)); // NOI18N
         p3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
-        p3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                p3ActionPerformed(evt);
-            }
-        });
         PIEZAS.add(p3);
 
         p4.setBackground(new java.awt.Color(204, 204, 255));
         p4.setFont(new java.awt.Font("sansserif", 0, 36)); // NOI18N
         p4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
-        p4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                p4ActionPerformed(evt);
-            }
-        });
         PIEZAS.add(p4);
 
         p5.setBackground(new java.awt.Color(204, 204, 255));
         p5.setFont(new java.awt.Font("sansserif", 0, 36)); // NOI18N
         p5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
-        p5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                p5ActionPerformed(evt);
-            }
-        });
         PIEZAS.add(p5);
 
         p6.setBackground(new java.awt.Color(204, 204, 255));
         p6.setFont(new java.awt.Font("sansserif", 0, 36)); // NOI18N
         p6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
-        p6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                p6ActionPerformed(evt);
-            }
-        });
         PIEZAS.add(p6);
 
         p7.setBackground(new java.awt.Color(204, 204, 255));
         p7.setFont(new java.awt.Font("sansserif", 0, 36)); // NOI18N
         p7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
-        p7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                p7ActionPerformed(evt);
-            }
-        });
         PIEZAS.add(p7);
 
         p8.setBackground(new java.awt.Color(204, 204, 255));
         p8.setFont(new java.awt.Font("sansserif", 0, 36)); // NOI18N
         p8.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
-        p8.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                p8ActionPerformed(evt);
-            }
-        });
         PIEZAS.add(p8);
 
         p9.setBackground(new java.awt.Color(204, 204, 255));
         p9.setFont(new java.awt.Font("sansserif", 0, 36)); // NOI18N
         p9.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
-        p9.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                p9ActionPerformed(evt);
-            }
-        });
         PIEZAS.add(p9);
 
         p10.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
         PIEZAS.add(p10);
 
         p11.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
-        p11.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                p11ActionPerformed(evt);
-            }
-        });
         PIEZAS.add(p11);
 
         p12.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
-        p12.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                p12ActionPerformed(evt);
-            }
-        });
         PIEZAS.add(p12);
 
         jPanel1.add(PIEZAS, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 130, -1, -1));
@@ -391,10 +328,7 @@ public class rompecabezas02 extends javax.swing.JFrame implements ActionListener
         jPanel1.add(ROMPECABEZAS, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 130, -1, -1));
 
         fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGcars/fondoespacio(3) (1).png"))); // NOI18N
-        fondo.setMaximumSize(new java.awt.Dimension(800, 500));
-        fondo.setMinimumSize(new java.awt.Dimension(800, 500));
         fondo.setOpaque(true);
-        fondo.setPreferredSize(new java.awt.Dimension(800, 500));
         jPanel1.add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 490));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -421,54 +355,6 @@ public class rompecabezas02 extends javax.swing.JFrame implements ActionListener
         }
     }//GEN-LAST:event_limpiarActionPerformed
 
-    private void p1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p1MouseDragged
-        // TODO add your handling code here:
-    }//GEN-LAST:event_p1MouseDragged
-
-    private void p1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_p1ActionPerformed
-
-    }//GEN-LAST:event_p1ActionPerformed
-
-    private void p2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_p2ActionPerformed
-
-    }//GEN-LAST:event_p2ActionPerformed
-
-    private void p3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_p3ActionPerformed
-
-    }//GEN-LAST:event_p3ActionPerformed
-
-    private void p4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_p4ActionPerformed
-
-    }//GEN-LAST:event_p4ActionPerformed
-
-    private void p5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_p5ActionPerformed
-
-    }//GEN-LAST:event_p5ActionPerformed
-
-    private void p6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_p6ActionPerformed
-
-    }//GEN-LAST:event_p6ActionPerformed
-
-    private void p7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_p7ActionPerformed
-
-    }//GEN-LAST:event_p7ActionPerformed
-
-    private void p8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_p8ActionPerformed
-
-    }//GEN-LAST:event_p8ActionPerformed
-
-    private void p9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_p9ActionPerformed
-
-    }//GEN-LAST:event_p9ActionPerformed
-
-    private void p11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_p11ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_p11ActionPerformed
-
-    private void p12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_p12ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_p12ActionPerformed
-
     private void volver1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_volver1ActionPerformed
         rompecabezas a = new rompecabezas(user);
         a.setVisible(true);
@@ -476,20 +362,19 @@ public class rompecabezas02 extends javax.swing.JFrame implements ActionListener
     }//GEN-LAST:event_volver1ActionPerformed
 
     private void btnVolver1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolver1ActionPerformed
-         Principal3 p = new Principal3(user);
+        Principal3 p = new Principal3(user);
         p.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnVolver1ActionPerformed
 
     private void btnVolver1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVolver1MouseEntered
-          labelvolver.setText(" Inicio");  
+        labelvolver.setText(" Inicio");
     }//GEN-LAST:event_btnVolver1MouseEntered
 
     private void btnVolver1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVolver1MouseExited
-          labelvolver.setText("");  
+        labelvolver.setText("");
     }//GEN-LAST:event_btnVolver1MouseExited
 
-    
     /**
      * @param args the command line arguments
      */
