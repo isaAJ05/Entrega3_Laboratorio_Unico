@@ -773,7 +773,6 @@ public class Mesa1 extends javax.swing.JFrame {
         ConteoCartas.setText(Integer.toString(C));
         System.out.println(NumerodeMasos);
         System.out.println(n);
-
         int i, j;
         int contvalorcarta;
         for (i = 0; i < baraja.length; i++) {
@@ -789,7 +788,6 @@ public class Mesa1 extends javax.swing.JFrame {
                         contvalorcarta = contvalorcarta + 1;
                     }
                 }
-
             }
         }
         ocultarA();
