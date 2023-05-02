@@ -74,7 +74,7 @@ private String user;
    
     boolean repartir = false, ganador = false;
     Random ran = new Random();
-    int[][] baraja = new int[n * NumerodeMasos][m];
+   public int[][] baraja = new int[n * NumerodeMasos][m];
     int sumU=0, sumD=0;
     
     @SuppressWarnings("unchecked")
@@ -116,14 +116,19 @@ private String user;
         setSize(new java.awt.Dimension(800, 500));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        Ajustespanel.setBackground(new java.awt.Color(20, 131, 57));
+        Ajustespanel.setBackground(new java.awt.Color(63, 133, 86));
 
         mostrarnummaso.setBackground(new java.awt.Color(204, 204, 204));
+        mostrarnummaso.setFont(new java.awt.Font("Monospaced", 1, 24)); // NOI18N
+        mostrarnummaso.setForeground(new java.awt.Color(51, 51, 51));
+        mostrarnummaso.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        mostrarnummaso.setText("1");
         mostrarnummaso.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         mostrarnummaso.setOpaque(true);
 
         masbtn.setBackground(new java.awt.Color(102, 255, 153));
-        masbtn.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
+        masbtn.setFont(new java.awt.Font("Monospaced", 1, 18)); // NOI18N
+        masbtn.setForeground(new java.awt.Color(51, 51, 51));
         masbtn.setText("+");
         masbtn.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         masbtn.addActionListener(new java.awt.event.ActionListener() {
@@ -133,7 +138,8 @@ private String user;
         });
 
         menosbtn.setBackground(new java.awt.Color(102, 255, 153));
-        menosbtn.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
+        menosbtn.setFont(new java.awt.Font("Monospaced", 1, 18)); // NOI18N
+        menosbtn.setForeground(new java.awt.Color(51, 51, 51));
         menosbtn.setText("-");
         menosbtn.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         menosbtn.addActionListener(new java.awt.event.ActionListener() {
@@ -154,6 +160,7 @@ private String user;
         });
 
         jLabel3.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(51, 51, 51));
         jLabel3.setText("Numero de masos:");
 
         javax.swing.GroupLayout AjustespanelLayout = new javax.swing.GroupLayout(Ajustespanel);
@@ -162,35 +169,38 @@ private String user;
             AjustespanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(AjustespanelLayout.createSequentialGroup()
                 .addGap(30, 30, 30)
-                .addGroup(AjustespanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(valdmasos, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BTNbarajaConfirmar)
+                .addGroup(AjustespanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(AjustespanelLayout.createSequentialGroup()
+                        .addGroup(AjustespanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(valdmasos, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3)
+                            .addComponent(BTNbarajaConfirmar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap(32, Short.MAX_VALUE))
                     .addGroup(AjustespanelLayout.createSequentialGroup()
                         .addComponent(mostrarnummaso, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addGroup(AjustespanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(masbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(menosbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jLabel3))
-                .addContainerGap(32, Short.MAX_VALUE))
+                        .addGroup(AjustespanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(menosbtn, javax.swing.GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE)
+                            .addComponent(masbtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap(23, Short.MAX_VALUE))))
         );
         AjustespanelLayout.setVerticalGroup(
             AjustespanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(AjustespanelLayout.createSequentialGroup()
                 .addGap(44, 44, 44)
                 .addComponent(jLabel3)
-                .addGap(18, 18, 18)
-                .addGroup(AjustespanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(mostrarnummaso, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(AjustespanelLayout.createSequentialGroup()
-                        .addComponent(masbtn)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(menosbtn)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(BTNbarajaConfirmar)
-                .addGap(18, 18, 18)
+                .addGroup(AjustespanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(AjustespanelLayout.createSequentialGroup()
+                        .addComponent(masbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(menosbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(mostrarnummaso, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(16, 16, 16)
+                .addComponent(BTNbarajaConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(valdmasos, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(273, Short.MAX_VALUE))
+                .addContainerGap(285, Short.MAX_VALUE))
         );
 
         getContentPane().add(Ajustespanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 0, 190, 500));
@@ -236,7 +246,8 @@ private String user;
         });
         MovJugadas.add(Pedir1Carta, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 200, 120, 36));
 
-        ConteoCartas.setFont(new java.awt.Font("Engravers MT", 0, 18)); // NOI18N
+        ConteoCartas.setFont(new java.awt.Font("Engravers MT", 1, 18)); // NOI18N
+        ConteoCartas.setForeground(new java.awt.Color(51, 51, 51));
         ConteoCartas.setText("104");
         MovJugadas.add(ConteoCartas, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 20, 41, 30));
 
@@ -749,7 +760,7 @@ private String user;
     }//GEN-LAST:event_btnVolver1ActionPerformed
 
     private void BTNbarajaConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNbarajaConfirmarActionPerformed
-         n=4*NumerodeMasos;//Filas = tipo de carta
+        n=4*NumerodeMasos;//Filas = tipo de carta
         C=n*m; //Numero de cartas por baraja ( fila x columnas -> 8 x 13)
          ConteoCartas.setText(Integer.toString(C));
         System.out.println(NumerodeMasos);
