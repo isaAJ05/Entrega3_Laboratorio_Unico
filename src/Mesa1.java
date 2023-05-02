@@ -10,41 +10,52 @@ import java.awt.Image;
 import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.Toolkit;
+
 /**
  *
  * @author Paula Núñez, Isabella Arrieta y Natalia Carpintero
  */
 public class Mesa1 extends javax.swing.JFrame {
-private String user;
+
+    private String user;
+
     public Mesa1(String name) {
-         
+
         this.user = name;
         initComponents();
         this.setLocationRelativeTo(null);
         //cursor
-        Cursor cursor = Toolkit.getDefaultToolkit().createCustomCursor(new ImageIcon(getClass().getResource("cursor/cursorimg.png")).getImage(),new Point(0,0),"Custom Cursor");
+        Cursor cursor = Toolkit.getDefaultToolkit().createCustomCursor(new ImageIcon(getClass().getResource("cursor/cursorimg.png")).getImage(), new Point(0, 0), "Custom Cursor");
         this.setCursor(cursor);
         this.setResizable(false);
         Ajustespanel.setVisible(true);
-        
-         deshabilitarbtnGame();
-      
+
+        deshabilitarbtnGame();
+
     }
-     public void paint(Graphics gr) {
+
+    public void paint(Graphics gr) {
         super.paint(gr);
         Graphics u = MesaCartas.getGraphics();
-        Font f = new Font("Berlin Sans FB Demi",Font.PLAIN,35);
+        Font f = new Font("Berlin Sans FB Demi", Font.PLAIN, 35);
         u.setFont(f);
-        u.setColor(new Color(102,255,153));
+        u.setColor(new Color(102, 255, 153));
         u.drawString("Dealer", 20, 55);
-        u.setColor(new Color(51,255,204));
+        u.setColor(new Color(51, 255, 204));
         u.drawString(user, 20, 290);
-     }
+    }
 
     int as = 11; //Variable as que puede cambiar dependiendo de la situción
     int h = 0;
     int NumerodeMasos = 1; // validar que este numero no sea ni negativo ni se mayor a 3
     //Solo se aceptaran 3 barajas para jugar
+
+    //Filas = tipo de carta
+    int n = 4, m = 13;
+    int C = n * m; //Numero de cartas por baraja ( fila x columnas -> 8 x 13)
+    int cont = 0;
+    //Vector de las dos barajas usando las filas de la matriz como referencia
+    String Ccolor[] = {"r", "r", "r", "r", "n", "n", "n", "n", "r", "r", "r", "r"};
 
 //Creacion de matriz 2 Barajas
 //    int baraja[][] = {
@@ -59,24 +70,17 @@ private String user;
 //        {as, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10},//Picas
 //        {as, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10}, //Treboles
 //        {as, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10}};// Diamantes
-
     //Filas = tipo de carta
-    int n , m = 13;
-    int C ; //Numero de cartas por cajara ( fila x columnas -> 8 x 13)
-    int cont = 0;
-    //Vector de las dos barajas usando las filas de la matriz como referencia
-   String Ccolor[] = {"r", "r", "r", "r", "n", "n", "n", "n", "r", "r", "r", "r"};
-
     //Corazones = fila 0 y 4
     //Picas= fila 1 y 5
     //Treboles = fila 2 y 6
     //Diamantes = fila 3 y 7
-   
     boolean repartir = false, ganador = false;
     Random ran = new Random();
-   public int[][] baraja = new int[n * NumerodeMasos][m];
-    int sumU=0, sumD=0;
-    
+
+    int sumU = 0, sumD = 0;
+  
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -350,17 +354,17 @@ private String user;
     }//GEN-LAST:event_PararActionPerformed
     int a = 0;
     private void RepartirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RepartirActionPerformed
-       ocultarPanelAjustes();
+        ocultarPanelAjustes();
         if (a == 0) {
             Graphics g = MesaCartas.getGraphics();
-           
+
             repartir = true;
             Pedir1Carta.setVisible(false);
 
             //Usuario Cartas Iniales
             int CartaUs1 = 0, CartaUs2 = 0, Sum0Us;
             String clr, cB1 = "r", cB2 = "n";
-            int dib = 0, type1U=0,type2U=0;
+            int dib = 0, type1U = 0, type2U = 0;
             for (int i = 1; i <= 2; i++) { //Se Inicia con dos cartas Visibles para el usuario
                 int f = ran.nextInt(n); //Con inidices aleoatorios se escoge las cartas dentro de la matriz baraja
                 int c = ran.nextInt(m); //Solo sera necesarios hacer esto dos veces
@@ -377,12 +381,12 @@ private String user;
                 if (i == 1) { //Para la primera carta del usuario 
                     CartaUs1 = baraja[f][c]; //Valor de la carta
                     cB1 = clr;//baraja
-                    type1U=dib;
-                
+                    type1U = dib;
+
                 } else { //Para la segunda carta
                     CartaUs2 = baraja[f][c]; //Valor de la carta
                     cB2 = clr; //Numero de fila dice el color = baraja
-                    type2U=dib;
+                    type2U = dib;
                 }
                 baraja[f][c] = 0; //Se descuenta las cartas ya tomadas
                 cont = i;
@@ -427,30 +431,30 @@ private String user;
 
             }
             switch (type1U) { //Casos para el tipo de tipo de carta 1 (Trebol, corazon, pica, diamante , etc)
-                    case 0:
-                    case 4:
-                        g.setColor(Color.red);
-                         g.setFont(new Font("Tahoma", Font.BOLD, 16));
-                        g.drawString("Corazón ♥" + "", 205, 375);
-                        break;
-                    case 1:
-                    case 5:
-                        g.setColor(Color.blue);
-                         g.setFont(new Font("Tahoma", Font.BOLD, 16));
-                        g.drawString("Picas ♠" + "", 210, 375);
-                        break;
-                    case 2:
-                    case 6:
-                        g.setColor(Color.blue);
-                        g.setFont(new Font("Tahoma", Font.BOLD, 16));
-                        g.drawString("Trebol ♣" + "", 210, 375);
-                        break;
-                    case 3:
-                    case 7:
-                        g.setColor(Color.red);
-                        g.setFont(new Font("Tahoma", Font.BOLD, 14));
-                        g.drawString("Diamantes ♦️" + "", 205, 375);
-                }
+                case 0:
+                case 4:
+                    g.setColor(Color.red);
+                    g.setFont(new Font("Tahoma", Font.BOLD, 16));
+                    g.drawString("Corazón ♥" + "", 205, 375);
+                    break;
+                case 1:
+                case 5:
+                    g.setColor(Color.blue);
+                    g.setFont(new Font("Tahoma", Font.BOLD, 16));
+                    g.drawString("Picas ♠" + "", 210, 375);
+                    break;
+                case 2:
+                case 6:
+                    g.setColor(Color.blue);
+                    g.setFont(new Font("Tahoma", Font.BOLD, 16));
+                    g.drawString("Trebol ♣" + "", 210, 375);
+                    break;
+                case 3:
+                case 7:
+                    g.setColor(Color.red);
+                    g.setFont(new Font("Tahoma", Font.BOLD, 14));
+                    g.drawString("Diamantes ♦️" + "", 205, 375);
+            }
 
             // MOSTRAR NUMERO DE LA CARTA 1 USUARIO
             //C1US.setText(Integer.toString(CartaUs1)); lo que se haria con un label, pero estamos trabajando con la clase graphic
@@ -481,30 +485,34 @@ private String user;
 
             }
             switch (type2U) { //Casos para el tipo de tipo de carta 2 (Trebol, corazon, pica, diamante , etc)
-                    case 0:
-                    case 4:
-                        g.setColor(Color.red);
-                         g.setFont(new Font("Tahoma", Font.BOLD, 16));
-                        g.drawString("Corazón ♥" + "", 356, 375);
-                        break;
-                    case 1:
-                    case 5:
-                        g.setColor(Color.blue);
-                         g.setFont(new Font("Tahoma", Font.BOLD, 16));
-                        g.drawString("Picas ♠" + "", 360, 375);
-                        break;
-                    case 2:
-                    case 6:
-                        g.setColor(Color.blue);
-                        g.setFont(new Font("Tahoma", Font.BOLD, 16));
-                        g.drawString("Trebol ♣" + "", 360, 375);
-                        break;
-                    case 3:
-                    case 7:
-                        g.setColor(Color.red);
-                        g.setFont(new Font("Tahoma", Font.BOLD, 14));
-                        g.drawString("Diamantes ♦" + "", 354, 375);
-                }
+                case 0:
+                case 4:
+                case 8:
+                    g.setColor(Color.red);
+                    g.setFont(new Font("Tahoma", Font.BOLD, 16));
+                    g.drawString("Corazón ♥" + "", 356, 375);
+                    break;
+                case 1:
+                case 5:
+                case 9:
+                    g.setColor(Color.blue);
+                    g.setFont(new Font("Tahoma", Font.BOLD, 16));
+                    g.drawString("Picas ♠" + "", 360, 375);
+                    break;
+                case 2:
+                case 6:
+                case 10:
+                    g.setColor(Color.blue);
+                    g.setFont(new Font("Tahoma", Font.BOLD, 16));
+                    g.drawString("Trebol ♣" + "", 360, 375);
+                    break;
+                case 3:
+                case 7:
+                case 11:
+                    g.setColor(Color.red);
+                    g.setFont(new Font("Tahoma", Font.BOLD, 14));
+                    g.drawString("Diamantes ♦" + "", 354, 375);
+            }
 
             //MOstrar NUmero de la carta 2
             //C2US.setText(Integer.toString(CartaUs2));
@@ -513,40 +521,37 @@ private String user;
             g.drawString(C2US + "", 370, 356);
 
             //Mostrar numero de la suma acumulada del usuario
-             //AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-            g.setColor(new Color(204,255,102)); 
+            g.setColor(new Color(204, 255, 102));
             g.fillOval(50, 305, 40, 40);
             String SumaUs = Integer.toString(Sum0Us);
             g.setColor(Color.BLACK);
             g.drawString(SumaUs + "", 60, 331);
 
-            
-            
-   //Dealer Cartas Iniciales
+            //Dealer Cartas Iniciales
             int CartaDe1 = 0, CartaDe2 = 0, Sum0De;
             String clrd, cB1D = "r", cB2D = "n";
-            int dibDE = 0, type1D=0,type2D=0;
+            int dibDE = 0, type1D = 0, type2D = 0;
             for (int i = 1; i <= 2; i++) { //Se Inicia con dos cartas Visibles para el usuario
                 int f = ran.nextInt(n); //Con inidices aleoatorios se escoge las cartas dentro de la matriz baraja
                 int c = ran.nextInt(m); //Solo sera necesarios hacer esto dos veces
                 clrd = Ccolor[f];
-                dibDE=f;
+                dibDE = f;
                 if (baraja[f][c] == 0) { //Asegurar que la combinación al azar no de una posición que tenga el valor de 0
                     while (baraja[f][c] == 0) {
                         f = ran.nextInt(n);
                         c = ran.nextInt(m);
                         clrd = Ccolor[f];//Que baraja pertenece
-                        dibDE=f;
+                        dibDE = f;
                     }
                 }
                 if (i == 1) { //Para la primera carta del dealer
                     CartaDe1 = baraja[f][c];
                     cB1D = clrd;//baraja
-                    type1D=dibDE;
+                    type1D = dibDE;
                 } else { //Para la segunda carta del dealer
                     CartaDe2 = baraja[f][c];
                     cB2D = clrd;//baraja
-                    type2D=dibDE;
+                    type2D = dibDE;
                 }
                 baraja[f][c] = 0; //Se descuenta las cartas ya tomadas
                 cont = i;
@@ -555,7 +560,7 @@ private String user;
             C = C - cont; // conteo de las cartas que quedan 
             ConteoCartas.setText(Integer.toString(C)); //Mostrar cartas que quedan 
 
-            Sum0De = CartaDe1 + CartaDe2; 
+            Sum0De = CartaDe1 + CartaDe2;
 
             if (Sum0De > 21 & (CartaDe1 == 11 | CartaDe2 == 11)) { //Si sale un as se tomara como 11 siempre y cuando no se pase de 21
                 //as=1;
@@ -600,30 +605,34 @@ private String user;
                     break;
             }
             switch (type2D) { //Casos para el tipo de tipo de carta 2 dealer (Trebol, corazon, pica, diamante , etc)
-                    case 0:
-                    case 4:
-                        g.setColor(Color.red);
-                         g.setFont(new Font("Tahoma", Font.BOLD, 16));
-                        g.drawString("Corazón ♥" + "", 356, 145);
-                        break;
-                    case 1:
-                    case 5:
-                        g.setColor(Color.blue);
-                         g.setFont(new Font("Tahoma", Font.BOLD, 16));
-                        g.drawString("Picas ♠" + "", 360, 145);
-                        break;
-                    case 2:
-                    case 6:
-                        g.setColor(Color.blue);
-                        g.setFont(new Font("Tahoma", Font.BOLD, 16));
-                        g.drawString("Trebol ♣" + "", 360, 145);
-                        break;
-                    case 3:
-                    case 7:
-                        g.setColor(Color.red);
-                        g.setFont(new Font("Tahoma", Font.BOLD, 14));
-                        g.drawString("Diamantes ♦" + "", 354, 145);
-                }
+                case 0:
+                case 4:
+                case 8:
+                    g.setColor(Color.red);
+                    g.setFont(new Font("Tahoma", Font.BOLD, 16));
+                    g.drawString("Corazón ♥" + "", 356, 145);
+                    break;
+                case 1:
+                case 5:
+                case 9:
+                    g.setColor(Color.blue);
+                    g.setFont(new Font("Tahoma", Font.BOLD, 16));
+                    g.drawString("Picas ♠" + "", 360, 145);
+                    break;
+                case 2:
+                case 6:
+                case 10:
+                    g.setColor(Color.blue);
+                    g.setFont(new Font("Tahoma", Font.BOLD, 16));
+                    g.drawString("Trebol ♣" + "", 360, 145);
+                    break;
+                case 3:
+                case 7:
+                case 11:
+                    g.setColor(Color.red);
+                    g.setFont(new Font("Tahoma", Font.BOLD, 14));
+                    g.drawString("Diamantes ♦" + "", 354, 145);
+            }
 
             //Solo se mostrara una carta al usuario, la otra quedara oculta hasta que el usuruario termine de jugar 
             //  CARTA 2
@@ -634,12 +643,11 @@ private String user;
             //Mostrar numero de la suma acumulada del usuario, pero por ahora solo la de la carta 2
             //Cuando se revele la carta si se hara la suma, pero mientras tanto el usuario no saber la carta 1 del dealer
             //Figuras
-            //AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-            g.setColor(new Color(204,255,102));
+            g.setColor(new Color(204, 255, 102));
             g.fillOval(50, 70, 40, 40);
             //Numero SUMA 
             g.setColor(Color.BLACK);
-            g.drawString(C2D + "", 60,96);
+            g.drawString(C2D + "", 60, 96);
 
             Pedir1Carta.setVisible(true); //Activar botones de juego
             a = 1;
@@ -648,7 +656,7 @@ private String user;
             valdRepartir.setText(" Reparte las cartas para iniciar");
         }
     }//GEN-LAST:event_RepartirActionPerformed
-    
+
     private void Pedir1CartaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Pedir1CartaActionPerformed
         if (repartir) { //Validación de repartir las cartas iniciales
             cont++;
@@ -665,9 +673,8 @@ private String user;
         // TODO add your handling code here:
     }//GEN-LAST:event_SliptActionPerformed
 
-    
     //Animacion Subrutinas
-     private void ocultarA() {
+    private void ocultarA() {
         //Si variable es 0 que indica que se esta vizualizando el panel de ajustes
         //se cumple condicion para ocultar el panel de ajustes y solo mostrar el del juego
         Thread th = new Thread() {
@@ -687,10 +694,9 @@ private String user;
         };
         th.start();
         h = 1;//cambiar variable que indiqca que se esta mostrando los juegos y no se muestra el panel de ajustes
-       
 
     }
-     
+
     private void mostrarA() {
 
         //Animacion Slide: Video Guia https://youtu.be/uYRKNVPAc-w
@@ -716,29 +722,31 @@ private String user;
         th.start();
 
     }
-    private void deshabilitarbtnGame(){
+
+    private void deshabilitarbtnGame() {
         Repartir.setEnabled(false);
         Pedir1Carta.setEnabled(false);
         Parar.setEnabled(false);
         Doble.setEnabled(false);
         Slipt.setEnabled(false);
     }
-    private void HabilitarbtnGame(){
-         Repartir.setEnabled(true);
+
+    private void HabilitarbtnGame() {
+        Repartir.setEnabled(true);
         Pedir1Carta.setEnabled(true);
         Parar.setEnabled(true);
         Doble.setEnabled(true);
         Slipt.setEnabled(true);
     }
-    
-   
+
+
     private void MostrarAjustesBlackJackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MostrarAjustesBlackJackActionPerformed
-         h=1;
+        h = 1;
         deshabilitarbtnGame();
         if (h == 0) { //Se ve y se oculta
             ocultarA();
             h = 1;// Estado del panel A : No visible
-            
+
         } else { //no se ve tiene que salir
             mostrarA();
             h = 0;//Estado del panel A : Visible
@@ -746,11 +754,11 @@ private String user;
     }//GEN-LAST:event_MostrarAjustesBlackJackActionPerformed
 
     private void btnVolver1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVolver1MouseEntered
- labelvolver.setText(" Inicio");
+        labelvolver.setText(" Inicio");
     }//GEN-LAST:event_btnVolver1MouseEntered
 
     private void btnVolver1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVolver1MouseExited
- labelvolver.setText("");
+        labelvolver.setText("");
     }//GEN-LAST:event_btnVolver1MouseExited
 
     private void btnVolver1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolver1ActionPerformed
@@ -758,13 +766,14 @@ private String user;
         p.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnVolver1ActionPerformed
-
+      int baraja[][] = new int[n * NumerodeMasos][m];
     private void BTNbarajaConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNbarajaConfirmarActionPerformed
-        n=4*NumerodeMasos;//Filas = tipo de carta
-        C=n*m; //Numero de cartas por baraja ( fila x columnas -> 8 x 13)
-         ConteoCartas.setText(Integer.toString(C));
+        n = 4 * NumerodeMasos;//Filas = tipo de carta
+        C = n * m; //Numero de cartas por baraja ( fila x columnas -> 8 x 13)
+        ConteoCartas.setText(Integer.toString(C));
         System.out.println(NumerodeMasos);
         System.out.println(n);
+
         int i, j;
         int contvalorcarta;
         for (i = 0; i < baraja.length; i++) {
@@ -807,17 +816,17 @@ private String user;
     }//GEN-LAST:event_BTNbarajaConfirmarActionPerformed
 
     private void masbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_masbtnActionPerformed
-         NumerodeMasos = NumerodeMasos + 1; //Aumenta 1
+        NumerodeMasos = NumerodeMasos + 1; //Aumenta 1
         valdmasos.setText("");
         if (NumerodeMasos > 3) {
             valdmasos.setText("(◕ v ◕) Número maximo");
-            NumerodeMasos =3;
+            NumerodeMasos = 3;
         }
         mostrarnummaso.setText(String.valueOf(NumerodeMasos));
     }//GEN-LAST:event_masbtnActionPerformed
 
     private void menosbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menosbtnActionPerformed
-         NumerodeMasos = NumerodeMasos - 1; //dISMINUYE 1
+        NumerodeMasos = NumerodeMasos - 1; //dISMINUYE 1
         valdmasos.setText("");
         if (NumerodeMasos <= 0) {
             valdmasos.setText("(◕ v ◕) Número minimo");
@@ -831,6 +840,7 @@ private String user;
         Ajustespanel.setEnabled(false);
         Ajustespanel.setVisible(false);
     }
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -901,5 +911,4 @@ private String user;
     private javax.swing.JLabel valdmasos;
     // End of variables declaration//GEN-END:variables
 
-   
 }
