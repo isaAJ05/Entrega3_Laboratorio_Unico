@@ -2,6 +2,7 @@
 import PanelesEscaletaYSerpiente.AvataresPanel;
 import PanelesEscaletaYSerpiente.GamePanel1;
 import PanelesEscaletaYSerpiente.GamePanel1no;
+import PanelesEscaletaYSerpiente.GamePanel2;
 import PanelesEscaletaYSerpiente.GamePanelok;
 import PanelesEscaletaYSerpiente.InfoPanel;
 import java.awt.BorderLayout;
@@ -154,7 +155,7 @@ public class SerpienteGAME extends javax.swing.JFrame {
     }//GEN-LAST:event_BTNAvatarActionPerformed
 
     private void JugarBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JugarBTNActionPerformed
-        GamePanelok Game=new GamePanelok();
+        GamePanel2 Game=new GamePanel2();
         ShowPanel(Game);
     }//GEN-LAST:event_JugarBTNActionPerformed
 
