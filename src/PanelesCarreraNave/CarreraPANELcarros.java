@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 import javax.swing.JFrame;
 
+
 /**
  *
  * @author Paula Núñez, Isabella Arrieta y Natalia Carpintero
@@ -100,13 +101,15 @@ public class CarreraPANELcarros extends javax.swing.JPanel {
     private void initComponents() {
 
         InicioBTN = new javax.swing.JButton();
+        AZULc = new javax.swing.JLabel();
         VERDEc = new javax.swing.JLabel();
         NARANJAc = new javax.swing.JLabel();
-        AZULc = new javax.swing.JLabel();
         BonoAzul1 = new javax.swing.JLabel();
         BonoAzul2 = new javax.swing.JLabel();
+        ObsRojo3 = new javax.swing.JLabel();
         ObsRojo2 = new javax.swing.JLabel();
         ObsRojo1 = new javax.swing.JLabel();
+        BonoAzul3 = new javax.swing.JLabel();
         Mensajito = new javax.swing.JLabel();
         pistafondo = new javax.swing.JLabel();
 
@@ -127,19 +130,21 @@ public class CarreraPANELcarros extends javax.swing.JPanel {
         });
         add(InicioBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 150, 140, 70));
 
-        VERDEc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGcars/verdecarro (2).png"))); // NOI18N
-        add(VERDEc, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 130, 70));
-
-        NARANJAc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGcars/naranjacarro_1.png"))); // NOI18N
-        add(NARANJAc, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 240, -1, 70));
-
-        AZULc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGcars/axullcarro (1).png"))); // NOI18N
+        AZULc.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        AZULc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGcars/axullcarro (1)_1.png"))); // NOI18N
+        AZULc.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         AZULc.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 AZULcKeyReleased(evt);
             }
         });
-        add(AZULc, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, 140, -1));
+        add(AZULc, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 130, 70));
+
+        VERDEc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGcars/verdecarro (2).png"))); // NOI18N
+        add(VERDEc, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 39, 130, -1));
+
+        NARANJAc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGcars/naranjacarro_1.png"))); // NOI18N
+        add(NARANJAc, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 240, -1, 70));
 
         BonoAzul1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         BonoAzul1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGcars/BolaAzu60l.png"))); // NOI18N
@@ -147,13 +152,22 @@ public class CarreraPANELcarros extends javax.swing.JPanel {
 
         BonoAzul2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         BonoAzul2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGcars/BolaAzul40.png"))); // NOI18N
-        add(BonoAzul2, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 70, 50, 50));
+        add(BonoAzul2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 70, 40, 40));
+
+        ObsRojo3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGcars/BolaRoja50.png"))); // NOI18N
+        add(ObsRojo3, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 150, 50, -1));
 
         ObsRojo2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGcars/BolaRoja40.png"))); // NOI18N
-        add(ObsRojo2, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 130, 40, 50));
+        add(ObsRojo2, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 280, 40, 30));
 
+        ObsRojo1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         ObsRojo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGcars/BolaRoja60.png"))); // NOI18N
-        add(ObsRojo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 210, 60, 60));
+        ObsRojo1.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        add(ObsRojo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 60, 60, 60));
+
+        BonoAzul3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        BonoAzul3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGcars/BolaAzul50.png"))); // NOI18N
+        add(BonoAzul3, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 210, 50, 50));
 
         Mensajito.setFont(new java.awt.Font("Swis721 Blk BT", 0, 14)); // NOI18N
         Mensajito.setForeground(new java.awt.Color(204, 204, 255));
@@ -217,10 +231,10 @@ public class CarreraPANELcarros extends javax.swing.JPanel {
 
                     if (x < (limiteC - 1) * casilla & espaciopista[y / casilla][(x / casilla) + 1] != 1) {
                         bolita = 1; //Obstaculos y Bonos
-                        if (AZULc.getBounds().intersects(BonoAzul1.getBounds()) || AZULc.getBounds().intersects(BonoAzul2.getBounds())) {
+                        if (AZULc.getBounds().intersects(BonoAzul1.getBounds()) || AZULc.getBounds().intersects(BonoAzul2.getBounds())|| AZULc.getBounds().intersects(BonoAzul3.getBounds())) {
                             bolita = 3; // Si toca una boolita AZUL obtiene bono se movera el triple de casillas
                         }
-                        if (AZULc.getBounds().intersects(ObsRojo1.getBounds()) || AZULc.getBounds().intersects(ObsRojo2.getBounds())) {
+                        if (AZULc.getBounds().intersects(ObsRojo1.getBounds()) || AZULc.getBounds().intersects(ObsRojo2.getBounds())| AZULc.getBounds().intersects(ObsRojo3.getBounds())) {
                             bolita = -1; // Si toca una boolita ROJA obtiene retrocedara una casilla y no podra avanzar si vuelve a tocarla
                         }
                         AZULc.setLocation(x + (casilla * bolita), y);
@@ -284,7 +298,7 @@ public class CarreraPANELcarros extends javax.swing.JPanel {
         return xy;
     }
 //Iteracion
-    Timer timer = new Timer(600, new ActionListener() {
+    Timer timer = new Timer(450, new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
             int AX = AZULc.getX(), AY = AZULc.getY();
@@ -351,11 +365,13 @@ public class CarreraPANELcarros extends javax.swing.JPanel {
     private javax.swing.JLabel AZULc;
     private javax.swing.JLabel BonoAzul1;
     private javax.swing.JLabel BonoAzul2;
+    private javax.swing.JLabel BonoAzul3;
     private javax.swing.JButton InicioBTN;
     private javax.swing.JLabel Mensajito;
     private javax.swing.JLabel NARANJAc;
     private javax.swing.JLabel ObsRojo1;
     private javax.swing.JLabel ObsRojo2;
+    private javax.swing.JLabel ObsRojo3;
     private javax.swing.JLabel VERDEc;
     private javax.swing.JLabel pistafondo;
     // End of variables declaration//GEN-END:variables
