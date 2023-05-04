@@ -19,11 +19,11 @@ import javax.swing.JFrame;
  *
  * @author Paula Núñez, Isabella Arrieta y Natalia Carpintero
  */
-public class CarreraPANELcarros extends javax.swing.JPanel {
+public class CarreraPANELcarrosConArduino extends javax.swing.JPanel {
 
     private String name = null;
 
-    public CarreraPANELcarros(int[][] espaciopista) {
+    public CarreraPANELcarrosConArduino(int[][] espaciopista) {
 
         initComponents();
         this.setFocusable(true);
@@ -44,7 +44,7 @@ public class CarreraPANELcarros extends javax.swing.JPanel {
         });
     }
 
-    public CarreraPANELcarros(String user) {
+    public CarreraPANELcarrosConArduino(String user) {
         this.name = user;
         initComponents();
         this.setFocusable(true);
