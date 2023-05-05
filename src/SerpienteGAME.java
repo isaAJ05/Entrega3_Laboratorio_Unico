@@ -1,4 +1,5 @@
 
+import PanelesEscaletaYSerpiente.AvatarJugador;
 import PanelesEscaletaYSerpiente.AvataresPanel;
 import PanelesEscaletaYSerpiente.GamePanel2;
 import PanelesEscaletaYSerpiente.InfoPanel;
@@ -23,24 +24,16 @@ public class SerpienteGAME extends javax.swing.JFrame {
         AvataresPanel Avatares = new AvataresPanel(avatar);
 
         ShowPanel(Avatares);
-        if (Avatares.isShowing()) {
-            BTNAvatar.setEnabled(false);
-        } else {
-            BTNAvatar.setEnabled(true);
-        }
 
         //cursor
         Cursor cursor = Toolkit.getDefaultToolkit().createCustomCursor(new ImageIcon(getClass().getResource("cursor/cursorimg.png")).getImage(), new Point(0, 0), "Custom Cursor");
         this.setCursor(cursor);
         this.setResizable(false);
-        
-        if (PanelesEscaletaYSerpiente.GamePanel2.posj1 == 0 && PanelesEscaletaYSerpiente.GamePanel2.posj2 == 0) {
-            BTNAvatar.setEnabled(true);
-            System.out.println("Botón habilitado");
-        } else {
-            BTNAvatar.setEnabled(false);
-            System.out.println("Botón deshabilitado");
-        }
+        BTNAvatar.setEnabled(false);
+        BTNAvatar.setVisible(false);
+        atras.setEnabled(false);
+        atras.setVisible(false);
+
         System.out.println("posj1 = " + PanelesEscaletaYSerpiente.GamePanel2.posj1);
         System.out.println("posj2 = " + PanelesEscaletaYSerpiente.GamePanel2.posj2);
 
@@ -60,12 +53,13 @@ public class SerpienteGAME extends javax.swing.JFrame {
     private void initComponents() {
 
         val = new javax.swing.JLabel();
+        atras = new javax.swing.JButton();
+        BTNAvatar = new javax.swing.JButton();
         btnVolver1 = new javax.swing.JButton();
         labelvolver = new javax.swing.JLabel();
         JugarBTN = new javax.swing.JButton();
         visible = new javax.swing.JPanel();
         InfoBTN = new javax.swing.JButton();
-        BTNAvatar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -75,6 +69,26 @@ public class SerpienteGAME extends javax.swing.JFrame {
         val.setFont(new java.awt.Font("Monospaced", 0, 14)); // NOI18N
         val.setForeground(new java.awt.Color(255, 0, 0));
         getContentPane().add(val, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 460, 420, 20));
+
+        atras.setBackground(new java.awt.Color(255, 102, 51));
+        atras.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
+        atras.setText("Atrás");
+        atras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                atrasActionPerformed(evt);
+            }
+        });
+        getContentPane().add(atras, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 20, -1, -1));
+
+        BTNAvatar.setBackground(new java.awt.Color(255, 102, 51));
+        BTNAvatar.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
+        BTNAvatar.setText("Avatar");
+        BTNAvatar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTNAvatarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(BTNAvatar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 460, -1, -1));
 
         btnVolver1.setBackground(new java.awt.Color(255, 153, 255));
         btnVolver1.setFont(new java.awt.Font("Monospaced", 1, 12)); // NOI18N
@@ -115,7 +129,7 @@ public class SerpienteGAME extends javax.swing.JFrame {
                 JugarBTNActionPerformed(evt);
             }
         });
-        getContentPane().add(JugarBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 460, -1, -1));
+        getContentPane().add(JugarBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 460, 80, -1));
 
         visible.setOpaque(false);
 
@@ -140,17 +154,7 @@ public class SerpienteGAME extends javax.swing.JFrame {
                 InfoBTNActionPerformed(evt);
             }
         });
-        getContentPane().add(InfoBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 460, -1, -1));
-
-        BTNAvatar.setBackground(new java.awt.Color(255, 102, 51));
-        BTNAvatar.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
-        BTNAvatar.setText("Avatar");
-        BTNAvatar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BTNAvatarActionPerformed(evt);
-            }
-        });
-        getContentPane().add(BTNAvatar, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 460, -1, -1));
+        getContentPane().add(InfoBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 460, -1, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGescaleraSerp/fondogen.png"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 500));
@@ -161,27 +165,38 @@ public class SerpienteGAME extends javax.swing.JFrame {
     private void InfoBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InfoBTNActionPerformed
         InfoPanel InfoP = new InfoPanel();
         ShowPanel(InfoP);
+        JugarBTN.setEnabled(true);
+        JugarBTN.setVisible(true);
+        BTNAvatar.setEnabled(true);
+        BTNAvatar.setVisible(true);
     }//GEN-LAST:event_InfoBTNActionPerformed
-
-    private void BTNAvatarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNAvatarActionPerformed
-        AvataresPanel AvatarP = new AvataresPanel(avatar);
-        ShowPanel(AvatarP);
-    }//GEN-LAST:event_BTNAvatarActionPerformed
 
     private void JugarBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JugarBTNActionPerformed
         if (PanelesEscaletaYSerpiente.AvatarJugador.avatar != 0) {
             GamePanel2 Game = new GamePanel2(avatar);
             ShowPanel(Game);
             val.setText(null);
+            JugarBTN.setEnabled(false);
+            JugarBTN.setVisible(false);
+            InfoBTN.setEnabled(false);
+            InfoBTN.setVisible(false);
+            atras.setEnabled(true);
+            atras.setVisible(true);
         } else {
-            val.setText("(!) Debe escoger un personaje antes de jugar.");
+            val.setText("(!) Debe escoger un avatar antes de jugar.");
         }
+        BTNAvatar.setEnabled(false);
+        BTNAvatar.setVisible(false);
+
+
     }//GEN-LAST:event_JugarBTNActionPerformed
 
     private void btnVolver1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolver1ActionPerformed
         Principal3 p = new Principal3(user);
         p.setVisible(true);
         this.dispose();
+
+        AvatarJugador.avatar = 0;
     }//GEN-LAST:event_btnVolver1ActionPerformed
 
     private void btnVolver1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVolver1MouseEntered
@@ -191,6 +206,25 @@ public class SerpienteGAME extends javax.swing.JFrame {
     private void btnVolver1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVolver1MouseExited
         labelvolver.setText("");
     }//GEN-LAST:event_btnVolver1MouseExited
+
+    private void BTNAvatarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNAvatarActionPerformed
+        AvataresPanel AvatarP = new AvataresPanel(avatar);
+        ShowPanel(AvatarP);
+        BTNAvatar.setEnabled(false);
+        BTNAvatar.setVisible(false);
+    }//GEN-LAST:event_BTNAvatarActionPerformed
+
+    private void atrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atrasActionPerformed
+        AvataresPanel AvatarP = new AvataresPanel(avatar);
+        ShowPanel(AvatarP);
+        atras.setEnabled(false);
+        atras.setVisible(false);
+        InfoBTN.setEnabled(true);
+        InfoBTN.setVisible(true);
+        JugarBTN.setEnabled(true);
+        JugarBTN.setVisible(true);
+         AvatarJugador.avatar = 0;
+    }//GEN-LAST:event_atrasActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -228,6 +262,7 @@ public class SerpienteGAME extends javax.swing.JFrame {
     private javax.swing.JButton BTNAvatar;
     private javax.swing.JButton InfoBTN;
     private javax.swing.JButton JugarBTN;
+    private javax.swing.JButton atras;
     private javax.swing.JButton btnVolver1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel labelvolver;

@@ -1,14 +1,19 @@
 package PanelesEscaletaYSerpiente;
 
-import static com.sun.java.accessibility.util.AWTEventMonitor.addActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JLabel;
 
 public class AvataresPanel extends javax.swing.JPanel implements ActionListener {
+
+    ClassLoader CL = getClass().getClassLoader();
+    ImageIcon smorado = new ImageIcon(CL.getResource("IMGescaleraSerp/AlienMorado (1).png"));
+    ImageIcon srojo = new ImageIcon(CL.getResource("IMGescaleraSerp/AlienRojo.png"));
+    ImageIcon sverde = new ImageIcon(CL.getResource("IMGescaleraSerp/AlienVerde.png"));
+    ImageIcon morado = new ImageIcon(CL.getResource("IMGescaleraSerp/morado150.png"));
+    ImageIcon rojo = new ImageIcon(CL.getResource("IMGescaleraSerp/rojo150.png"));
+    ImageIcon verde = new ImageIcon(CL.getResource("IMGescaleraSerp/verde150.png"));
 
     public AvataresPanel(int avatar) {
         initComponents();
@@ -25,16 +30,25 @@ public class AvataresPanel extends javax.swing.JPanel implements ActionListener 
             selm.setText("Seleccionado");
             selr.setText("");
             selv.setText("");
+            AmoradoBTN.setIcon(smorado);
+            ArojoBTN.setIcon(rojo);
+            AverdeBTN.setIcon(verde);
         } else if (e.getSource() == ArojoBTN) {
             AvatarJugador.avatar = 2;
             selr.setText("Seleccionado");
             selm.setText("");
             selv.setText("");
+             ArojoBTN.setIcon(srojo);
+            AmoradoBTN.setIcon(morado);
+            AverdeBTN.setIcon(verde);
         } else if (e.getSource() == AverdeBTN) {
             AvatarJugador.avatar = 3;
             selv.setText("Seleccionado");
             selr.setText("");
             selm.setText("");
+            AverdeBTN.setIcon(sverde);
+           ArojoBTN.setIcon(rojo);
+            AmoradoBTN.setIcon(morado);
         }
     }
 
@@ -52,31 +66,40 @@ public class AvataresPanel extends javax.swing.JPanel implements ActionListener 
 
         setOpaque(false);
 
-        ArojoBTN.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGescaleraSerp/AlienRojo.png"))); // NOI18N
+        ArojoBTN.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGescaleraSerp/rojo150.png"))); // NOI18N
         ArojoBTN.setBorderPainted(false);
         ArojoBTN.setContentAreaFilled(false);
         ArojoBTN.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         ArojoBTN.setFocusPainted(false);
         ArojoBTN.setFocusable(false);
+        ArojoBTN.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGescaleraSerp/AlienRojo.png"))); // NOI18N
+        ArojoBTN.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGescaleraSerp/AlienRojo.png"))); // NOI18N
+        ArojoBTN.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGescaleraSerp/AlienRojo.png"))); // NOI18N
 
-        AmoradoBTN.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGescaleraSerp/AlienMorado (1).png"))); // NOI18N
+        AmoradoBTN.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGescaleraSerp/morado150.png"))); // NOI18N
         AmoradoBTN.setBorderPainted(false);
         AmoradoBTN.setContentAreaFilled(false);
         AmoradoBTN.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         AmoradoBTN.setFocusPainted(false);
         AmoradoBTN.setFocusable(false);
+        AmoradoBTN.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGescaleraSerp/AlienMorado (1).png"))); // NOI18N
+        AmoradoBTN.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGescaleraSerp/AlienMorado (1).png"))); // NOI18N
+        AmoradoBTN.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGescaleraSerp/AlienMorado (1).png"))); // NOI18N
         AmoradoBTN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 AmoradoBTNActionPerformed(evt);
             }
         });
 
-        AverdeBTN.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGescaleraSerp/AlienVerde.png"))); // NOI18N
+        AverdeBTN.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGescaleraSerp/verde150.png"))); // NOI18N
         AverdeBTN.setBorderPainted(false);
         AverdeBTN.setContentAreaFilled(false);
         AverdeBTN.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         AverdeBTN.setFocusPainted(false);
         AverdeBTN.setFocusable(false);
+        AverdeBTN.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGescaleraSerp/AlienVerde.png"))); // NOI18N
+        AverdeBTN.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGescaleraSerp/AlienVerde.png"))); // NOI18N
+        AverdeBTN.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGescaleraSerp/AlienVerde.png"))); // NOI18N
         AverdeBTN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 AverdeBTNActionPerformed(evt);
@@ -87,13 +110,13 @@ public class AvataresPanel extends javax.swing.JPanel implements ActionListener 
         jLabel1.setForeground(new java.awt.Color(204, 204, 255));
         jLabel1.setText("Escoja el alien con el que desea jugar");
 
-        selr.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
+        selr.setFont(new java.awt.Font("Monospaced", 1, 16)); // NOI18N
         selr.setForeground(new java.awt.Color(204, 0, 0));
 
-        selv.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
+        selv.setFont(new java.awt.Font("Monospaced", 1, 16)); // NOI18N
         selv.setForeground(new java.awt.Color(0, 102, 0));
 
-        selm.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
+        selm.setFont(new java.awt.Font("Monospaced", 1, 16)); // NOI18N
         selm.setForeground(new java.awt.Color(98, 24, 123));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -101,42 +124,49 @@ public class AvataresPanel extends javax.swing.JPanel implements ActionListener 
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(217, 217, 217))
+                .addGap(32, 32, 32)
+                .addComponent(ArojoBTN, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 517, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(ArojoBTN, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(selr, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(AverdeBTN, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(selv, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(32, 32, 32)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(AmoradoBTN, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(selm, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(9, 9, 9)))
-                .addGap(30, 30, 30))
+                        .addComponent(jLabel1)
+                        .addGap(223, 223, 223))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(AverdeBTN, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(selr, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(75, 75, 75)
+                                .addComponent(selv, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(32, 32, 32)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(selm, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(AmoradoBTN, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(32, 32, 32))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(14, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(40, 40, 40)
+            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(selr, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(selv, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(selm, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(AverdeBTN, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(ArojoBTN)
-                    .addComponent(AmoradoBTN, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(21, 21, 21))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(33, 33, 33)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(selr, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(selv, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(selm, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(ArojoBTN, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(AmoradoBTN, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(AverdeBTN, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 

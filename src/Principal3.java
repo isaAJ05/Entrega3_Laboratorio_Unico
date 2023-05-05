@@ -6,7 +6,6 @@ import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Toolkit;
 import javax.swing.ImageIcon;
-import rompecabezas.rompecabezasMALO;
 
 public class Principal3 extends javax.swing.JFrame {
 
