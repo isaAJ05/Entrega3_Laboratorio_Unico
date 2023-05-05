@@ -9,47 +9,53 @@ import java.awt.BorderLayout;
 import java.awt.Cursor;
 import java.awt.Point;
 import java.awt.Toolkit;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
-
 
 public class SerpienteGAME extends javax.swing.JFrame {
 
-    private String user=null;
+    public static int avatar;
+
+    private String user = null;
+
     public SerpienteGAME(String name) {
-        this.user=name;
+        this.user = name;
         initComponents();
         this.setLocationRelativeTo(null); //centrar ventana
         this.setTitle("Escalerita y serpiente"); //Titulo 
-        
-        AvataresPanel Avatares=new AvataresPanel();
-        ShowPanel(Avatares);   
-        if(Avatares.isShowing()){
+
+        AvataresPanel Avatares = new AvataresPanel(avatar);
+
+        ShowPanel(Avatares);
+        if (Avatares.isShowing()) {
             BTNAvatar.setEnabled(false);
-        }else{
+        } else {
             BTNAvatar.setEnabled(true);
         }
+
         //cursor
-        Cursor cursor = Toolkit.getDefaultToolkit().createCustomCursor(new ImageIcon(getClass().getResource("cursor/cursorimg.png")).getImage(),new Point(0,0),"Custom Cursor");
+        Cursor cursor = Toolkit.getDefaultToolkit().createCustomCursor(new ImageIcon(getClass().getResource("cursor/cursorimg.png")).getImage(), new Point(0, 0), "Custom Cursor");
         this.setCursor(cursor);
         this.setResizable(false);
-
+       
     }
 
-    private void ShowPanel(JPanel p){ //Cambio de paneles metodo
-        p.setSize(765,400);
+    private void ShowPanel(JPanel p) { //Cambio de paneles metodo
+        p.setSize(765, 400);
         p.setLocation(0, 0);
         visible.removeAll();
         visible.add(p);
         visible.revalidate();
         visible.repaint();
     }
- 
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        val = new javax.swing.JLabel();
         btnVolver1 = new javax.swing.JButton();
         labelvolver = new javax.swing.JLabel();
         JugarBTN = new javax.swing.JButton();
@@ -61,6 +67,10 @@ public class SerpienteGAME extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        val.setFont(new java.awt.Font("Monospaced", 0, 14)); // NOI18N
+        val.setForeground(new java.awt.Color(255, 0, 0));
+        getContentPane().add(val, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 460, 420, 20));
 
         btnVolver1.setBackground(new java.awt.Color(255, 153, 255));
         btnVolver1.setFont(new java.awt.Font("Monospaced", 1, 12)); // NOI18N
@@ -145,32 +155,37 @@ public class SerpienteGAME extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void InfoBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InfoBTNActionPerformed
-        InfoPanel InfoP=new InfoPanel();
-        ShowPanel(InfoP); 
+        InfoPanel InfoP = new InfoPanel();
+        ShowPanel(InfoP);
     }//GEN-LAST:event_InfoBTNActionPerformed
 
     private void BTNAvatarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNAvatarActionPerformed
-        AvataresPanel AvatarP=new AvataresPanel();
+        AvataresPanel AvatarP = new AvataresPanel(avatar);
         ShowPanel(AvatarP);
     }//GEN-LAST:event_BTNAvatarActionPerformed
 
     private void JugarBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JugarBTNActionPerformed
-        GamePanel2 Game=new GamePanel2();
-        ShowPanel(Game);
+        if (PanelesEscaletaYSerpiente.AvatarJugador.avatar != 0) {
+            GamePanel2 Game = new GamePanel2(avatar);
+            ShowPanel(Game);
+            val.setText(null);
+        }else{
+            val.setText("(!) Debe escoger un personaje antes de jugar.");
+        }
     }//GEN-LAST:event_JugarBTNActionPerformed
 
     private void btnVolver1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolver1ActionPerformed
-       Principal3 p = new Principal3(user);
+        Principal3 p = new Principal3(user);
         p.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnVolver1ActionPerformed
 
     private void btnVolver1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVolver1MouseEntered
-         labelvolver.setText(" Inicio");
+        labelvolver.setText(" Inicio");
     }//GEN-LAST:event_btnVolver1MouseEntered
 
     private void btnVolver1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVolver1MouseExited
-        labelvolver.setText("");  
+        labelvolver.setText("");
     }//GEN-LAST:event_btnVolver1MouseExited
 
     public static void main(String args[]) {
@@ -212,6 +227,7 @@ public class SerpienteGAME extends javax.swing.JFrame {
     private javax.swing.JButton btnVolver1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel labelvolver;
+    private javax.swing.JLabel val;
     private javax.swing.JPanel visible;
     // End of variables declaration//GEN-END:variables
 }

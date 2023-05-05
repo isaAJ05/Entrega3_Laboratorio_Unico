@@ -1,10 +1,41 @@
-
 package PanelesEscaletaYSerpiente;
 
-public class AvataresPanel extends javax.swing.JPanel {
+import static com.sun.java.accessibility.util.AWTEventMonitor.addActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JLabel;
 
-    public AvataresPanel() {
+public class AvataresPanel extends javax.swing.JPanel implements ActionListener {
+
+    public AvataresPanel(int avatar) {
         initComponents();
+        this.AmoradoBTN.addActionListener(this);
+        this.ArojoBTN.addActionListener(this);
+        this.AverdeBTN.addActionListener(this);
+    }
+    JButton btn;
+
+    public void actionPerformed(ActionEvent e) {
+        btn = (JButton) e.getSource();
+        if (e.getSource() == AmoradoBTN) {
+            AvatarJugador.avatar = 1;
+            selm.setText("Seleccionado");
+            selr.setText("");
+            selv.setText("");
+        } else if (e.getSource() == ArojoBTN) {
+            AvatarJugador.avatar = 2;
+            selr.setText("Seleccionado");
+            selm.setText("");
+            selv.setText("");
+        } else if (e.getSource() == AverdeBTN) {
+            AvatarJugador.avatar = 3;
+            selv.setText("Seleccionado");
+            selr.setText("");
+            selm.setText("");
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -15,6 +46,9 @@ public class AvataresPanel extends javax.swing.JPanel {
         AmoradoBTN = new javax.swing.JButton();
         AverdeBTN = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        selr = new javax.swing.JLabel();
+        selv = new javax.swing.JLabel();
+        selm = new javax.swing.JLabel();
 
         setOpaque(false);
 
@@ -49,33 +83,55 @@ public class AvataresPanel extends javax.swing.JPanel {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Monospaced", 0, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(204, 204, 255));
-        jLabel1.setText("Proximamente Podra elegir a su avatar. Por favor siga con el juego.");
+        jLabel1.setText("Escoja el alien con el que desea jugar");
+
+        selr.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
+        selr.setForeground(new java.awt.Color(204, 0, 0));
+
+        selv.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
+        selv.setForeground(new java.awt.Color(0, 102, 0));
+
+        selm.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
+        selm.setForeground(new java.awt.Color(98, 24, 123));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(217, 217, 217))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(32, 32, 32)
-                .addComponent(ArojoBTN, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(ArojoBTN, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(selr, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
-                .addComponent(AverdeBTN, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(AverdeBTN, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(selv, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(32, 32, 32)
-                .addComponent(AmoradoBTN, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(AmoradoBTN, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(selm, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(9, 9, 9)))
                 .addGap(30, 30, 30))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(154, 154, 154)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 476, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(32, 32, 32)
+                .addContainerGap(14, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                .addGap(40, 40, 40)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(selr, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(selv, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(selm, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(AverdeBTN, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(ArojoBTN)
@@ -98,5 +154,8 @@ public class AvataresPanel extends javax.swing.JPanel {
     private javax.swing.JButton ArojoBTN;
     private javax.swing.JButton AverdeBTN;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel selm;
+    private javax.swing.JLabel selr;
+    private javax.swing.JLabel selv;
     // End of variables declaration//GEN-END:variables
 }

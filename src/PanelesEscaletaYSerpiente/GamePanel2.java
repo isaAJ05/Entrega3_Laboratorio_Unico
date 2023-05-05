@@ -4,18 +4,24 @@ import java.util.Random;
 import javax.swing.Timer;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 import javax.swing.JOptionPane;
 
 public class GamePanel2 extends javax.swing.JPanel {
 
+    ClassLoader CL = getClass().getClassLoader();
+    ImageIcon morado = new ImageIcon(CL.getResource("IMGescaleraSerp/AlienMoradoMini.png"));
+    ImageIcon rojo = new ImageIcon(CL.getResource("IMGescaleraSerp/AlienRojoMini.png"));
+    ImageIcon verde = new ImageIcon(CL.getResource("IMGescaleraSerp/AlienVerdeMini.png"));
+    int avatar = AvatarJugador.avatar;
     public static int dado;
 
-    private void moverAlien(JLabel Alien, int pos, int jug) {
+    private void moverAlien(JLabel Alien, int pos, int jug, int avatar) {
 
         for (int i = 0; i < 34; i++) {
-
 
             if (i == pos) {
 
@@ -85,11 +91,23 @@ public class GamePanel2 extends javax.swing.JPanel {
         return pos;
     }
 
-    public GamePanel2() {
+    public GamePanel2(int avatar) {
+        System.out.println("avt" + avatar);
         initComponents();
         this.setFocusable(true);
         this.requestFocusInWindow();
-
+        this.avatar = avatar;
+        switch (AvatarJugador.avatar) {
+            case 1:
+                AlienU.setIcon(morado);
+                break;
+            case 2:
+                AlienU.setIcon(rojo);
+                break;
+            case 3:
+                AlienU.setIcon(verde);
+                break;
+        }
         //cursor
         //cursor
         // Cursor cursor = Toolkit.getDefaultToolkit().createCustomCursor(new ImageIcon(getClass().getResource("cursor/cursorimg.png")).getImage(),new Point(0,0),"Custom Cursor");
@@ -145,16 +163,15 @@ public class GamePanel2 extends javax.swing.JPanel {
         add(NumDado, new org.netbeans.lib.awtextra.AbsoluteConstraints(645, 174, 72, 46));
 
         AlienR.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        AlienR.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGescaleraSerp/AlienRojoMini.png"))); // NOI18N
+        AlienR.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGescaleraSerp/stellaa (1).png"))); // NOI18N
         AlienR.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 AlienRKeyPressed(evt);
             }
         });
-        add(AlienR, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 300, 90, 90));
+        add(AlienR, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 300, 80, 100));
 
         AlienU.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        AlienU.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGescaleraSerp/AlienVerdeMini.png"))); // NOI18N
         AlienU.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 AlienUKeyPressed(evt);
@@ -187,7 +204,7 @@ public class GamePanel2 extends javax.swing.JPanel {
 
 
     private void TirarDadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TirarDadosActionPerformed
-
+        System.out.println("avt" + AvatarJugador.avatar);///
         NumDado.setText("");
         dado = ran.nextInt(6) + 1;
         NumDado.setText(Integer.toString(dado));
@@ -198,12 +215,12 @@ public class GamePanel2 extends javax.swing.JPanel {
                 posj1 += dado;
                 res(posj1);
                 if (posj1 > 34) {
-                posj1 = posj1 - dado;
-                JOptionPane.showMessageDialog(null, "Oh! Has sacado un numero superior.. \nEspera al próximo turno");
-                turno = 2;
+                    posj1 = posj1 - dado;
+                    JOptionPane.showMessageDialog(null, "Oh! Has sacado un numero superior.. \nEspera al próximo turno");
+                    turno = 2;
+                }
+                moverAlien(AlienU, posj1, 1, avatar);
             }
-                moverAlien(AlienU, posj1, 1);
-            } 
 
         } else {
             if (posj2 < 34) {
@@ -211,12 +228,12 @@ public class GamePanel2 extends javax.swing.JPanel {
                 posj2 += dado;
                 res(posj2);
                 if (posj2 > 34) {
-                posj2 = posj2 - dado;
-                JOptionPane.showMessageDialog(null, "Oh! Has sacado un numero superior.. \nEspera al próximo turno");
-                turno = 1;
+                    posj2 = posj2 - dado;
+                    JOptionPane.showMessageDialog(null, "Oh! Has sacado un numero superior.. \nEspera al próximo turno");
+                    turno = 1;
+                }
+                moverAlien(AlienR, posj2, 2, avatar);
             }
-                moverAlien(AlienR, posj2, 2);
-            } 
 
         }
 
