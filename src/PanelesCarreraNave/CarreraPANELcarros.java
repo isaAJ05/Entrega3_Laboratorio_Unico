@@ -52,20 +52,6 @@ public class CarreraPANELcarros extends javax.swing.JPanel {
 
     }
 
-    // Tomaremos primero a la nave azul como la nave del ususurio, mas adelante se habilitara la opcion de escoger. 
-    //FICHAS Y NAVES
-    public JLabel getAutoAzul() {  //Para el label que tiene el carro azul
-        return AZULc;
-    }
-
-    public JLabel getAutoNaranja() { //Para el label que tiene el carro naranja
-        return NARANJAc;
-    }
-
-    public JLabel getAutoVerde() { //Para el label que tiene el carro verde
-        return VERDEc;
-    }
-
     Random ran = new Random();
     private final int limiteF = 17, limiteC = 34; //Limites de la matriz
     private int casilla = 20;//Lo que medira nuestras casillas imaginarias de la matriz
