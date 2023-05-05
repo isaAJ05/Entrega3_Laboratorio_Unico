@@ -1,6 +1,7 @@
 
 import PanelesCarreraNave.PanelInfo;
 import PanelesCarreraNave.CarreraPANELcarros;
+import PanelesCarreraNave.CarreraPANELcarrosConArduino;
 import java.awt.BorderLayout;
 import java.awt.Cursor;
 import java.awt.Graphics;
@@ -66,6 +67,7 @@ public class Pista extends javax.swing.JFrame {
         InfoBTN = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        ArduinoPista = new javax.swing.JButton();
         SelectNAVEbtn = new javax.swing.JButton();
         btnStart = new javax.swing.JButton();
         visible2 = new javax.swing.JPanel();
@@ -123,12 +125,23 @@ public class Pista extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Engravers MT", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 204, 0));
         jLabel2.setText("STAR GAMES");
-        Visible.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 450, 150, 30));
+        Visible.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 450, 150, 30));
 
         jLabel1.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(153, 153, 255));
         jLabel1.setText("CARRERA DE AUTOS ESPACIALES");
         Visible.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 10, 563, 60));
+
+        ArduinoPista.setBackground(new java.awt.Color(153, 153, 255));
+        ArduinoPista.setFont(new java.awt.Font("Monospaced", 1, 18)); // NOI18N
+        ArduinoPista.setForeground(new java.awt.Color(51, 51, 51));
+        ArduinoPista.setText("Remoto");
+        ArduinoPista.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ArduinoPistaActionPerformed(evt);
+            }
+        });
+        Visible.add(ArduinoPista, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 450, -1, -1));
 
         SelectNAVEbtn.setBackground(new java.awt.Color(153, 153, 255));
         SelectNAVEbtn.setFont(new java.awt.Font("Monospaced", 1, 18)); // NOI18N
@@ -215,6 +228,11 @@ public class Pista extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnVolver1ActionPerformed
 
+    private void ArduinoPistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ArduinoPistaActionPerformed
+        CarreraPANELcarrosConArduino NavePanel=new CarreraPANELcarrosConArduino (user);
+        ShowPanel(NavePanel);//Llamar el metodo para mostrar el panel 
+    }//GEN-LAST:event_ArduinoPistaActionPerformed
+
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -251,6 +269,7 @@ public class Pista extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton ArduinoPista;
     private javax.swing.JButton InfoBTN;
     private javax.swing.JButton SelectNAVEbtn;
     private javax.swing.JPanel Visible;
