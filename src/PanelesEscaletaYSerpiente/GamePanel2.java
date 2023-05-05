@@ -23,7 +23,7 @@ public class GamePanel2 extends javax.swing.JPanel {
 
         for (int i = 0; i < 34; i++) {
 
-            if (i == pos) {
+            if (i == pos) { 
 
                 int x = i;
                 Timer timer = new Timer(10, new ActionListener() {
@@ -107,7 +107,9 @@ public class GamePanel2 extends javax.swing.JPanel {
             case 3:
                 AlienU.setIcon(verde);
                 break;
+                
         }
+        //AvatarJugador.avatar=0;
         //cursor
         //cursor
         // Cursor cursor = Toolkit.getDefaultToolkit().createCustomCursor(new ImageIcon(getClass().getResource("cursor/cursorimg.png")).getImage(),new Point(0,0),"Custom Cursor");
@@ -193,8 +195,8 @@ public class GamePanel2 extends javax.swing.JPanel {
             {500, 140}, {420, 10}, {260, 60}, {260, 10}, {340, 140}, {90, 10}, {10, 10},};
 
     //posicion en el tablero 
-    private int posj1 = 0;
-    private int posj2 = 0;
+    public static int posj1 = 0;
+    public static int posj2 = 0;
 
     //turno de cada jugador
     private int turno = 1;
@@ -204,7 +206,8 @@ public class GamePanel2 extends javax.swing.JPanel {
 
 
     private void TirarDadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TirarDadosActionPerformed
-        System.out.println("avt" + AvatarJugador.avatar);///
+        System.out.println("posj1 = " + PanelesEscaletaYSerpiente.GamePanel2.posj1);
+        System.out.println("posj2 = " + PanelesEscaletaYSerpiente.GamePanel2.posj2);
         NumDado.setText("");
         dado = ran.nextInt(6) + 1;
         NumDado.setText(Integer.toString(dado));

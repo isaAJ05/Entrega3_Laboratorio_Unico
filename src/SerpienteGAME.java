@@ -1,17 +1,11 @@
 
 import PanelesEscaletaYSerpiente.AvataresPanel;
-import PanelesEscaletaYSerpiente.GamePanel1;
-import PanelesEscaletaYSerpiente.GamePanel1no;
 import PanelesEscaletaYSerpiente.GamePanel2;
-import PanelesEscaletaYSerpiente.GamePanelok;
 import PanelesEscaletaYSerpiente.InfoPanel;
-import java.awt.BorderLayout;
 import java.awt.Cursor;
 import java.awt.Point;
 import java.awt.Toolkit;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class SerpienteGAME extends javax.swing.JFrame {
@@ -39,7 +33,17 @@ public class SerpienteGAME extends javax.swing.JFrame {
         Cursor cursor = Toolkit.getDefaultToolkit().createCustomCursor(new ImageIcon(getClass().getResource("cursor/cursorimg.png")).getImage(), new Point(0, 0), "Custom Cursor");
         this.setCursor(cursor);
         this.setResizable(false);
-       
+        
+        if (PanelesEscaletaYSerpiente.GamePanel2.posj1 == 0 && PanelesEscaletaYSerpiente.GamePanel2.posj2 == 0) {
+            BTNAvatar.setEnabled(true);
+            System.out.println("Botón habilitado");
+        } else {
+            BTNAvatar.setEnabled(false);
+            System.out.println("Botón deshabilitado");
+        }
+        System.out.println("posj1 = " + PanelesEscaletaYSerpiente.GamePanel2.posj1);
+        System.out.println("posj2 = " + PanelesEscaletaYSerpiente.GamePanel2.posj2);
+
     }
 
     private void ShowPanel(JPanel p) { //Cambio de paneles metodo
@@ -169,7 +173,7 @@ public class SerpienteGAME extends javax.swing.JFrame {
             GamePanel2 Game = new GamePanel2(avatar);
             ShowPanel(Game);
             val.setText(null);
-        }else{
+        } else {
             val.setText("(!) Debe escoger un personaje antes de jugar.");
         }
     }//GEN-LAST:event_JugarBTNActionPerformed
