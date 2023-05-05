@@ -105,7 +105,6 @@ public class CarreraPANELcarrosConArduino extends javax.swing.JPanel {
         NARANJAc = new javax.swing.JLabel();
         BonoAzul1 = new javax.swing.JLabel();
         BonoAzul2 = new javax.swing.JLabel();
-        ObsRojo3 = new javax.swing.JLabel();
         ObsRojo2 = new javax.swing.JLabel();
         ObsRojo1 = new javax.swing.JLabel();
         BonoAzul3 = new javax.swing.JLabel();
@@ -127,7 +126,7 @@ public class CarreraPANELcarrosConArduino extends javax.swing.JPanel {
                 InicioBTNActionPerformed(evt);
             }
         });
-        add(InicioBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 150, 140, 70));
+        add(InicioBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 150, 140, 70));
 
         AZULc.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         AZULc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGcars/axullcarro (1)_1.png"))); // NOI18N
@@ -147,26 +146,23 @@ public class CarreraPANELcarrosConArduino extends javax.swing.JPanel {
 
         BonoAzul1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         BonoAzul1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGcars/BolaAzu60l.png"))); // NOI18N
-        add(BonoAzul1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 250, 60, 60));
+        add(BonoAzul1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 250, 60, 60));
 
         BonoAzul2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         BonoAzul2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGcars/BolaAzul40.png"))); // NOI18N
-        add(BonoAzul2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 70, 40, 40));
-
-        ObsRojo3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGcars/BolaRoja50.png"))); // NOI18N
-        add(ObsRojo3, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 150, 50, -1));
+        add(BonoAzul2, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 70, 40, 40));
 
         ObsRojo2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGcars/BolaRoja40.png"))); // NOI18N
-        add(ObsRojo2, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 280, 40, 30));
+        add(ObsRojo2, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 80, 40, 30));
 
         ObsRojo1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         ObsRojo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGcars/BolaRoja60.png"))); // NOI18N
         ObsRojo1.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        add(ObsRojo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 60, 60, 60));
+        add(ObsRojo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 160, 60, 60));
 
         BonoAzul3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         BonoAzul3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGcars/BolaAzul50.png"))); // NOI18N
-        add(BonoAzul3, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 210, 50, 50));
+        add(BonoAzul3, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 240, 50, 50));
 
         Mensajito.setFont(new java.awt.Font("Swis721 Blk BT", 0, 14)); // NOI18N
         Mensajito.setForeground(new java.awt.Color(204, 204, 255));
@@ -211,7 +207,7 @@ public class CarreraPANELcarrosConArduino extends javax.swing.JPanel {
         timer.start(); //Iniciar el timer para las otras dos naves competidores
 
     }//GEN-LAST:event_InicioBTNActionPerformed
-    int bolita;
+    int bolita=1;
 // auto del usuario
     private void AZULcKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_AZULcKeyReleased
 
@@ -228,16 +224,6 @@ public class CarreraPANELcarrosConArduino extends javax.swing.JPanel {
                     //(que no cruce el limite de la matriz) Y (verificar el valor dentro de la matriz sea valido (!=1))
                     //Si cumple las condiciones, podra moverse
 
-                    if (x < (limiteC - 1) * casilla & espaciopista[y / casilla][(x / casilla) + 1] != 1) {
-                        bolita = 1; //Obstaculos y Bonos
-                        if (AZULc.getBounds().intersects(BonoAzul1.getBounds()) || AZULc.getBounds().intersects(BonoAzul2.getBounds()) || AZULc.getBounds().intersects(BonoAzul3.getBounds())) {
-                            bolita = 3; // Si toca una boolita AZUL obtiene bono se movera el triple de casillas
-                        }
-                        if (AZULc.getBounds().intersects(ObsRojo1.getBounds()) || AZULc.getBounds().intersects(ObsRojo2.getBounds()) | AZULc.getBounds().intersects(ObsRojo3.getBounds())) {
-                            bolita = -1; // Si toca una boolita ROJA obtiene retrocedara una casilla y no podra avanzar si vuelve a tocarla
-                        }
-                        AZULc.setLocation(x + (casilla * bolita), y);
-                    }
                     break;
                 case KeyEvent.VK_UP: //ARRIBA
                     Mensajito.setText("");
@@ -281,6 +267,7 @@ public class CarreraPANELcarrosConArduino extends javax.swing.JPanel {
         int i = 0, j = 0;
         i = ran.nextInt(4);
         X = X + casilla * Vel[i];//Actualizar Coordenada X
+       
 
         //( Movimiento vertical )
         j = ran.nextInt(2);
@@ -297,6 +284,7 @@ public class CarreraPANELcarrosConArduino extends javax.swing.JPanel {
         return xy;
     }
 //Iteracion
+    int carro;
     Timer timer = new Timer(450, new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -308,8 +296,24 @@ public class CarreraPANELcarrosConArduino extends javax.swing.JPanel {
                 /* Condicianl para que se muevan si aun no ha
                     llegado a la linea de meta( o al final de la matriz */
 
+                //Nave Azul -------------------
+             
+            if (AX < (limiteC - 1) * casilla & espaciopista[AY / casilla][(AX / casilla) + 1] != 1) {
+               
+                bolita = 1; //Obstaculos y Bonos
+                if (AZULc.getBounds().intersects(BonoAzul1.getBounds()) || AZULc.getBounds().intersects(BonoAzul2.getBounds()) || AZULc.getBounds().intersects(BonoAzul3.getBounds())) {
+                    bolita = 4; // Si toca una boolita AZUL obtiene bono se movera el triple de casillas
+                }
+                if (AZULc.getBounds().intersects(ObsRojo1.getBounds()) || AZULc.getBounds().intersects(ObsRojo2.getBounds()) ) {
+                    bolita = -1; // Si toca una boolita ROJA obtiene retrocedara una casilla y no podra avanzar si vuelve a tocarla
+                }
+                AX = AX + casilla*bolita;
+            }
+        
+              
+                AZULc.setLocation(AX, AY);//Actualizar Ubicacion
                 //Nave Naranja ---------------------
-                int[] xy = movimiento(NX, NY, casilla, espaciopista, Pos, Vel);
+               int[] xy = movimiento(NX, NY, casilla, espaciopista, Pos, Vel);
                 NX = xy[0];
                 NY = xy[1];
                 NARANJAc.setLocation(NX, NY);//Actualizar Ubicacion
@@ -334,7 +338,7 @@ public class CarreraPANELcarrosConArduino extends javax.swing.JPanel {
             //si llegan a una casilla con valor 2 ( linea de meta)
             if ((espaciopista[AY / casilla][(AX / casilla)] == 2) || (espaciopista[VY / casilla][(VX / casilla)] == 2) || (espaciopista[NY / casilla][(NX / casilla)] == 2)) {
                 timer.stop();
-                 PermisoParaMover = 1;
+                PermisoParaMover = 1;
                 if (AX > VX & AX > NX) {
                     JOptionPane.showMessageDialog(null, "\t!FELICIDADES " + name + "\n! HA GANADO LA CARRERA:D");
 
@@ -370,7 +374,6 @@ public class CarreraPANELcarrosConArduino extends javax.swing.JPanel {
     private javax.swing.JLabel NARANJAc;
     private javax.swing.JLabel ObsRojo1;
     private javax.swing.JLabel ObsRojo2;
-    private javax.swing.JLabel ObsRojo3;
     private javax.swing.JLabel VERDEc;
     private javax.swing.JLabel pistafondo;
     // End of variables declaration//GEN-END:variables
