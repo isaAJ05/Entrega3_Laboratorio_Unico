@@ -52,20 +52,6 @@ public class CarreraPANELcarros extends javax.swing.JPanel {
 
     }
 
-    // Tomaremos primero a la nave azul como la nave del ususurio, mas adelante se habilitara la opcion de escoger. 
-    //FICHAS Y NAVES
-    public JLabel getAutoAzul() {  //Para el label que tiene el carro azul
-        return AZULc;
-    }
-
-    public JLabel getAutoNaranja() { //Para el label que tiene el carro naranja
-        return NARANJAc;
-    }
-
-    public JLabel getAutoVerde() { //Para el label que tiene el carro verde
-        return VERDEc;
-    }
-
     Random ran = new Random();
     private final int limiteF = 17, limiteC = 34; //Limites de la matriz
     private int casilla = 20;//Lo que medira nuestras casillas imaginarias de la matriz
@@ -127,7 +113,7 @@ public class CarreraPANELcarros extends javax.swing.JPanel {
                 InicioBTNActionPerformed(evt);
             }
         });
-        add(InicioBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 150, 140, 70));
+        add(InicioBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 160, 140, 70));
 
         AZULc.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         AZULc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGcars/axullcarro (1)_1.png"))); // NOI18N
@@ -154,19 +140,18 @@ public class CarreraPANELcarros extends javax.swing.JPanel {
         add(BonoAzul2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 70, 40, 40));
 
         ObsRojo3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGcars/BolaRoja50.png"))); // NOI18N
-        add(ObsRojo3, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 150, 50, -1));
+        add(ObsRojo3, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 130, 50, -1));
 
         ObsRojo2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGcars/BolaRoja40.png"))); // NOI18N
-        add(ObsRojo2, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 280, 40, 30));
+        add(ObsRojo2, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 270, 40, 30));
 
-        ObsRojo1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         ObsRojo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGcars/BolaRoja60.png"))); // NOI18N
         ObsRojo1.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        add(ObsRojo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 60, 60, 60));
+        add(ObsRojo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 70, 60, 50));
 
         BonoAzul3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         BonoAzul3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGcars/BolaAzul50.png"))); // NOI18N
-        add(BonoAzul3, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 210, 50, 50));
+        add(BonoAzul3, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 230, 50, 50));
 
         Mensajito.setFont(new java.awt.Font("Swis721 Blk BT", 0, 14)); // NOI18N
         Mensajito.setForeground(new java.awt.Color(204, 204, 255));
