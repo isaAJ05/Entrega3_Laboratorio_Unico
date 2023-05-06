@@ -1,7 +1,9 @@
 
+import PanelesCarreraNave.SeleccionNavePanel;
 import PanelesCarreraNave.PanelInfo;
 import PanelesCarreraNave.CarreraPANELcarros;
 import PanelesCarreraNave.CarreraPANELcarrosConArduino;
+import PanelesCarreraNave.NaveJugador;
 import java.awt.BorderLayout;
 import java.awt.Cursor;
 import java.awt.Graphics;
@@ -15,6 +17,7 @@ import javax.swing.JPanel;
 
 public class Pista extends javax.swing.JFrame {
 
+    public static int nave;
 //    FondoPanel fondo=new FondoPanel();
     private String user;
 
@@ -25,38 +28,34 @@ public class Pista extends javax.swing.JFrame {
 
         this.setLocationRelativeTo(null);//centrar ventana
         this.setTitle(" Carrera de Autos Espaciales"); //Titulo 
-        
-        SeleccionNavePanel NavePanel=new SeleccionNavePanel(user);
-        ShowPanel(NavePanel);   
-        
-        CarreraPANELcarros Cpanel=new CarreraPANELcarros(user);
+
+        SeleccionNavePanel NavePanel = new SeleccionNavePanel(user, nave);
+        ShowPanel(NavePanel);
+
+        CarreraPANELcarros Cpanel = new CarreraPANELcarros(user);
         add(Cpanel);
-        
+
         //cursor
-        Cursor cursor = Toolkit.getDefaultToolkit().createCustomCursor(new ImageIcon(getClass().getResource("cursor/cursorimg.png")).getImage(),new Point(0,0),"Custom Cursor");
+        Cursor cursor = Toolkit.getDefaultToolkit().createCustomCursor(new ImageIcon(getClass().getResource("cursor/cursorimg.png")).getImage(), new Point(0, 0), "Custom Cursor");
         this.setCursor(cursor);
         this.setResizable(false);
 
-
     }
-    private void ShowPanel(JPanel p){ //Cambio de paneles metodo
-        p.setSize(780,370);
+
+    private void ShowPanel(JPanel p) { //Cambio de paneles metodo
+        p.setSize(780, 370);
         p.setLocation(0, 0);
         visible2.removeAll();
         visible2.add(p, BorderLayout.CENTER);
         visible2.revalidate();
         visible2.repaint();
     }
-    
-    
-    
 
     //Pista donde los carros se moveran de 19x12, se rellenara con ceros y unos
     public static int espaciopista[][];
     public static int limiteF = 20, limiteC = 14, F;
-    int Auto=0;
+    int Auto = 0;
 
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -200,17 +199,17 @@ public class Pista extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartActionPerformed
-       CarreraPANELcarros Cpanel=new CarreraPANELcarros(user);
-       ShowPanel(Cpanel); //Llamar el metodo para mostrar el panel 
+        CarreraPANELcarros Cpanel = new CarreraPANELcarros(user);
+        ShowPanel(Cpanel); //Llamar el metodo para mostrar el panel 
     }//GEN-LAST:event_btnStartActionPerformed
 
     private void InfoBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InfoBTNActionPerformed
-        PanelInfo InfoPANEL=new PanelInfo();
+        PanelInfo InfoPANEL = new PanelInfo();
         ShowPanel(InfoPANEL);//Llamar el metodo para mostrar el panel 
     }//GEN-LAST:event_InfoBTNActionPerformed
 
     private void SelectNAVEbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SelectNAVEbtnActionPerformed
-         SeleccionNavePanel NavePanel=new SeleccionNavePanel(user);
+        SeleccionNavePanel NavePanel = new SeleccionNavePanel(user, nave);
         ShowPanel(NavePanel);//Llamar el metodo para mostrar el panel 
     }//GEN-LAST:event_SelectNAVEbtnActionPerformed
 
@@ -226,13 +225,13 @@ public class Pista extends javax.swing.JFrame {
         Principal3 p = new Principal3(user);
         p.setVisible(true);
         this.setVisible(false);
+        NaveJugador.nave = 0;
     }//GEN-LAST:event_btnVolver1ActionPerformed
 
     private void ArduinoPistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ArduinoPistaActionPerformed
-        CarreraPANELcarrosConArduino NavePanel=new CarreraPANELcarrosConArduino (user);
+        CarreraPANELcarrosConArduino NavePanel = new CarreraPANELcarrosConArduino(user);
         ShowPanel(NavePanel);//Llamar el metodo para mostrar el panel 
     }//GEN-LAST:event_ArduinoPistaActionPerformed
-
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -257,15 +256,14 @@ public class Pista extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(Pista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        
-        
+
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Pista(null).setVisible(true);
             }
         });
-        
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
