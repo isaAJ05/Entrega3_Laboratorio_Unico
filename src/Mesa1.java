@@ -107,11 +107,23 @@ public class Mesa1 extends javax.swing.JFrame {
         labelvolver = new javax.swing.JLabel();
         MesaCartas = new javax.swing.JPanel();
         SumCartasUs = new javax.swing.JLabel();
+        Mensajito = new javax.swing.JLabel();
         C2DE = new javax.swing.JLabel();
         C1DE = new javax.swing.JLabel();
+        C4US = new javax.swing.JLabel();
+        C3US = new javax.swing.JLabel();
         C1US = new javax.swing.JLabel();
         C2US = new javax.swing.JLabel();
+        cartaD4 = new javax.swing.JLabel();
+        cartaD3 = new javax.swing.JLabel();
+        cartaD2 = new javax.swing.JLabel();
+        cartaD1 = new javax.swing.JLabel();
+        cartaU4 = new javax.swing.JLabel();
+        cartaU3 = new javax.swing.JLabel();
+        cartaU2 = new javax.swing.JLabel();
+        cartaU1 = new javax.swing.JLabel();
         SumCartasDE = new javax.swing.JLabel();
+        fondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(36, 39, 38));
@@ -173,14 +185,14 @@ public class Mesa1 extends javax.swing.JFrame {
             AjustespanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(AjustespanelLayout.createSequentialGroup()
                 .addGap(30, 30, 30)
-                .addGroup(AjustespanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(AjustespanelLayout.createSequentialGroup()
+                .addGroup(AjustespanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AjustespanelLayout.createSequentialGroup()
                         .addGroup(AjustespanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(valdmasos, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3)
                             .addComponent(BTNbarajaConfirmar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addContainerGap(32, Short.MAX_VALUE))
-                    .addGroup(AjustespanelLayout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AjustespanelLayout.createSequentialGroup()
                         .addComponent(mostrarnummaso, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addGroup(AjustespanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -328,19 +340,38 @@ public class Mesa1 extends javax.swing.JFrame {
 
         SumCartasUs.setFont(new java.awt.Font("Swis721 Cn BT", 0, 14)); // NOI18N
         MesaCartas.add(SumCartasUs, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 379, 39, 39));
+        MesaCartas.add(Mensajito, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 260, 260, 30));
 
         C2DE.setFont(new java.awt.Font("Snap ITC", 0, 14)); // NOI18N
         MesaCartas.add(C2DE, new org.netbeans.lib.awtextra.AbsoluteConstraints(394, 67, 77, 58));
         MesaCartas.add(C1DE, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 133, 18, 29));
 
+        C4US.setFont(new java.awt.Font("Snap ITC", 0, 14)); // NOI18N
+        MesaCartas.add(C4US, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 370, 39, 52));
+
+        C3US.setFont(new java.awt.Font("Snap ITC", 0, 14)); // NOI18N
+        MesaCartas.add(C3US, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 370, 39, 52));
+
         C1US.setFont(new java.awt.Font("Snap ITC", 0, 14)); // NOI18N
-        MesaCartas.add(C1US, new org.netbeans.lib.awtextra.AbsoluteConstraints(306, 375, 39, 52));
+        MesaCartas.add(C1US, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 370, 39, 52));
 
         C2US.setFont(new java.awt.Font("Snap ITC", 0, 14)); // NOI18N
-        MesaCartas.add(C2US, new org.netbeans.lib.awtextra.AbsoluteConstraints(477, 385, 42, 42));
+        MesaCartas.add(C2US, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 362, 40, 50));
+        MesaCartas.add(cartaD4, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 100, 80, 124));
+        MesaCartas.add(cartaD3, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 100, 80, 124));
+        MesaCartas.add(cartaD2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 100, 80, 124));
+        MesaCartas.add(cartaD1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 100, 80, 124));
+        MesaCartas.add(cartaU4, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 320, 80, 124));
+        MesaCartas.add(cartaU3, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 320, 80, 124));
+        MesaCartas.add(cartaU2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 320, 80, 124));
+        MesaCartas.add(cartaU1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 320, 80, 124));
 
         SumCartasDE.setFont(new java.awt.Font("Swis721 Cn BT", 0, 14)); // NOI18N
         MesaCartas.add(SumCartasDE, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 90, 38, 35));
+
+        fondo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagenesBJK/Ilustración_sin_título (2).png"))); // NOI18N
+        MesaCartas.add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 540, 500));
 
         MovJugadas.add(MesaCartas, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 540, 500));
 
@@ -670,7 +701,7 @@ public class Mesa1 extends javax.swing.JFrame {
     }//GEN-LAST:event_Pedir1CartaActionPerformed
 
     private void SliptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SliptActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_SliptActionPerformed
 
     //Animacion Subrutinas
@@ -886,8 +917,11 @@ public class Mesa1 extends javax.swing.JFrame {
     private javax.swing.JLabel C1US;
     private javax.swing.JLabel C2DE;
     private javax.swing.JLabel C2US;
+    private javax.swing.JLabel C3US;
+    private javax.swing.JLabel C4US;
     private javax.swing.JLabel ConteoCartas;
     private javax.swing.JButton Doble;
+    private javax.swing.JLabel Mensajito;
     private javax.swing.JPanel MesaCartas;
     private javax.swing.JButton MostrarAjustesBlackJack;
     private javax.swing.JPanel MovJugadas;
@@ -898,6 +932,15 @@ public class Mesa1 extends javax.swing.JFrame {
     private javax.swing.JLabel SumCartasDE;
     private javax.swing.JLabel SumCartasUs;
     private javax.swing.JButton btnVolver1;
+    private javax.swing.JLabel cartaD1;
+    private javax.swing.JLabel cartaD2;
+    private javax.swing.JLabel cartaD3;
+    private javax.swing.JLabel cartaD4;
+    private javax.swing.JLabel cartaU1;
+    private javax.swing.JLabel cartaU2;
+    private javax.swing.JLabel cartaU3;
+    private javax.swing.JLabel cartaU4;
+    private javax.swing.JLabel fondo;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
