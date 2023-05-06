@@ -158,11 +158,11 @@ public class GamePanel2 extends javax.swing.JPanel {
         });
         add(Reiniciar, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 350, -1, -1));
 
-        NumDado.setFont(new java.awt.Font("Swis721 Ex BT", 1, 18)); // NOI18N
+        NumDado.setFont(new java.awt.Font("Swis721 Ex BT", 1, 48)); // NOI18N
         NumDado.setForeground(new java.awt.Color(204, 204, 255));
         NumDado.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         NumDado.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        add(NumDado, new org.netbeans.lib.awtextra.AbsoluteConstraints(645, 174, 72, 46));
+        add(NumDado, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 200, 72, 80));
 
         AlienR.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         AlienR.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGescaleraSerp/stellaa (1).png"))); // NOI18N
