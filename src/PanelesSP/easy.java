@@ -40,6 +40,9 @@ public class easy extends javax.swing.JPanel {
     boolean yaloencontre1 = false;
     boolean yaloencontre2 = false;
     boolean yaloencontre3 = false;
+    
+    //HashSet: Un HashSet es una colección de elementos en Java que no permite elementos duplicados.
+    private HashSet<JButton> botonesAfectados = new HashSet<>();
 
     //SUBRUTINAS
     // - Subrutina para que cada vez que el usuario presione un boton guarde su movimiento y posteriormente lo verifique 
@@ -48,7 +51,11 @@ public class easy extends javax.swing.JPanel {
             public void actionPerformed(ActionEvent e) {
                 int f;
                 entre++;
-
+                
+                    
+                    
+               
+                
                 f = comprobacion(entre);//Funcion para saber si he presionado botones dos veces o multiplos de 2
                 //La idea es que cada vez que presione dos botones guarde ese movimiento (con contadores) y verifique si esos dos son una seleccion correcta
 
@@ -85,6 +92,7 @@ public class easy extends javax.swing.JPanel {
         if (movimientos[f][0] == correctos[0][0] && movimientos[f][1] == correctos[0][1]) {
             for (i = 0; i < vector1.length; i++) {
                 vector1[i].setBackground(Color.green);
+                botonesAfectados.add(vector1[i]);
 
             }
 
@@ -96,6 +104,7 @@ public class easy extends javax.swing.JPanel {
         if (movimientos[f][0] == correctos[1][0] && movimientos[f][1] == correctos[1][1]) {
             for (i = 0; i < vector2.length; i++) {
                 vector2[i].setBackground(Color.green);
+                botonesAfectados.add(vector2[i]);
 
             }
 
@@ -107,6 +116,7 @@ public class easy extends javax.swing.JPanel {
         if (movimientos[f][0] == correctos[2][0] && movimientos[f][1] == correctos[2][1]) {
             for (i = 0; i < vector3.length; i++) {
                 vector3[i].setBackground(Color.green);
+                botonesAfectados.add(vector3[i]);
 
             }
 
@@ -142,11 +152,53 @@ public class easy extends javax.swing.JPanel {
             pista.setEnabled(false);
             solucion.setEnabled(false);
             instrucciones.setEnabled(false);
+            
+             
 
         }
 
     }
-    //FUNCIONES
+
+//subrutina para cambiar color de las letras cuando se pasa el mouse por ellas
+private MouseAdapter listener;
+
+private void cambiarcolor(JButton botones[][]) {
+    for (int i = 0; i < 7; i++) {
+        for (int j = 0; j < 5; j++) {
+            final int finalI = i;
+            final int finalJ = j;
+            listener = new MouseAdapter() {
+                @Override
+                public void mouseEntered(MouseEvent evt) {
+                    if (botonesAfectados.contains(botones[finalI][finalJ]) || cont==4) {
+                return; // si el botón ya ha sido afectado, salimos del método sin hacer nada
+            } else {
+                    botones[finalI][finalJ].setBackground(new Color(255, 153, 255));
+                    botones[finalI][finalJ].setFont(new Font("Segoe UI", Font.PLAIN, 11));
+                    Timer timer = new Timer(2000, new ActionListener() {
+                        public void actionPerformed(ActionEvent e) {
+                            botones[finalI][finalJ].setFont(new Font("Segoe UI", Font.PLAIN, 12));
+                            if (botonesAfectados.contains(botones[finalI][finalJ])) {
+                return; // si el botón ya ha sido afectado, salimos del método sin hacer nada
+            } else {
+                            
+                            botones[finalI][finalJ].setBackground(new Color(255, 255, 255));
+                        }
+                    }
+                    });
+                    timer.setRepeats(false);
+                    timer.start();
+                }
+            }
+            };
+            botones[i][j].addMouseListener(listener);
+        }
+    }
+}
+
+
+
+   //FUNCIONES
 
     // - Funcion para saber si he presionado botones dos veces o multiplos de 2
     private int comprobacion(int entre) {
@@ -188,7 +240,7 @@ public class easy extends javax.swing.JPanel {
             for (j = 0; j < 5; j++) {
 
                 botonpresionado(botones[i][j], botones, tierra, ceres, venus, chulito1, chulito2, chulito3);
-//cambiarcolor(botones[i][j]);//EJECUTAR LA SUBRUTINA
+                cambiarcolor(botones);
                 //Letras aleatorias mayusculas usando Random
                 Random random = new Random();
                 char letra = (char) (random.nextInt(26) + 'A');
