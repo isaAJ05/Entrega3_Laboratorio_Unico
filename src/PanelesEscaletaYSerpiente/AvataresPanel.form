@@ -22,7 +22,7 @@
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
               <Component id="ArojoBTN" min="-2" pref="207" max="-2" attributes="0"/>
-              <EmptySpace min="30" pref="517" max="32767" attributes="0"/>
+              <EmptySpace min="30" pref="30" max="32767" attributes="0"/>
           </Group>
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
