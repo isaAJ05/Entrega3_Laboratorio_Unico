@@ -16,6 +16,13 @@ public class GamePanel2 extends javax.swing.JPanel {
     ImageIcon morado = new ImageIcon(CL.getResource("IMGescaleraSerp/AlienMoradoMini.png"));
     ImageIcon rojo = new ImageIcon(CL.getResource("IMGescaleraSerp/AlienRojoMini.png"));
     ImageIcon verde = new ImageIcon(CL.getResource("IMGescaleraSerp/AlienVerdeMini.png"));
+    ImageIcon dado1 = new ImageIcon(CL.getResource("IMGescaleraSerp/dado1.png"));
+    ImageIcon dado2 = new ImageIcon(CL.getResource("IMGescaleraSerp/dado2.png"));
+    ImageIcon dado3 = new ImageIcon(CL.getResource("IMGescaleraSerp/dado3.png"));
+    ImageIcon dado4 = new ImageIcon(CL.getResource("IMGescaleraSerp/dado4.png"));
+    ImageIcon dado5 = new ImageIcon(CL.getResource("IMGescaleraSerp/dado5.png"));
+    ImageIcon dado6 = new ImageIcon(CL.getResource("IMGescaleraSerp/dado6.png"));
+    ImageIcon fondodado = new ImageIcon(CL.getResource("IMGescaleraSerp/fondodado_6.png"));
     int avatar = AvatarJugador.avatar;
     public static int dado;
 
@@ -39,6 +46,23 @@ public class GamePanel2 extends javax.swing.JPanel {
                 });
                 timer.start();
 
+            }
+            if(dadoimg.getIcon()!=null){
+                dado00.setIcon(fondodado);
+            }
+            switch(dado){
+                case 1: dadoimg.setIcon(dado1);
+                break;
+                case 2: dadoimg.setIcon(dado2);
+                break;
+                case 3: dadoimg.setIcon(dado3);
+                break;
+                case 4: dadoimg.setIcon(dado4);
+                break;
+                case 5: dadoimg.setIcon(dado5);
+                break;
+                case 6: dadoimg.setIcon(dado6);
+                break;
             }
 
         }
@@ -121,7 +145,8 @@ public class GamePanel2 extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        dadoimg = new javax.swing.JLabel();
+        dado00 = new javax.swing.JLabel();
         TirarDados = new javax.swing.JButton();
         Reiniciar = new javax.swing.JButton();
         NumDado = new javax.swing.JLabel();
@@ -133,9 +158,18 @@ public class GamePanel2 extends javax.swing.JPanel {
         setOpaque(false);
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGescaleraSerp/Eldado.png"))); // NOI18N
-        jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(628, 18, 108, 104));
+        dadoimg.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        dadoimg.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        dadoimg.setPreferredSize(new java.awt.Dimension(120, 120));
+        add(dadoimg, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 10, 130, 130));
+
+        dado00.setBackground(new java.awt.Color(255, 255, 255));
+        dado00.setForeground(new java.awt.Color(255, 255, 255));
+        dado00.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        dado00.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        dado00.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        dado00.setPreferredSize(new java.awt.Dimension(130, 130));
+        add(dado00, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 10, -1, -1));
 
         TirarDados.setBackground(new java.awt.Color(255, 102, 51));
         TirarDados.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
@@ -146,7 +180,7 @@ public class GamePanel2 extends javax.swing.JPanel {
                 TirarDadosActionPerformed(evt);
             }
         });
-        add(TirarDados, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 140, -1, -1));
+        add(TirarDados, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 150, -1, -1));
 
         Reiniciar.setBackground(new java.awt.Color(255, 102, 0));
         Reiniciar.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
@@ -162,7 +196,7 @@ public class GamePanel2 extends javax.swing.JPanel {
         NumDado.setForeground(new java.awt.Color(204, 204, 255));
         NumDado.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         NumDado.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        add(NumDado, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 200, 72, 80));
+        add(NumDado, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 200, 72, 80));
 
         AlienR.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         AlienR.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGescaleraSerp/stellaa (1).png"))); // NOI18N
@@ -314,6 +348,7 @@ public class GamePanel2 extends javax.swing.JPanel {
     private javax.swing.JLabel NumDado;
     private javax.swing.JButton Reiniciar;
     private javax.swing.JButton TirarDados;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel dado00;
+    private javax.swing.JLabel dadoimg;
     // End of variables declaration//GEN-END:variables
 }
