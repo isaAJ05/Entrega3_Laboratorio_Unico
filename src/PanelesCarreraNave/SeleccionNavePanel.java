@@ -130,10 +130,10 @@ public class SeleccionNavePanel extends javax.swing.JPanel implements ActionList
         });
         add(VerdecBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 100, 210, 150));
 
-        jLabel4.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Monospaced", 1, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(204, 204, 255));
         jLabel4.setText("Escoja el carro espacial con el que desea jugar");
-        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 50, 380, -1));
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 50, 550, -1));
 
         cb3.setBorder(null);
         cb3.setContentAreaFilled(false);
