@@ -8,9 +8,9 @@ import javax.swing.JButton;
 public class AvataresPanel extends javax.swing.JPanel implements ActionListener {
 
     ClassLoader CL = getClass().getClassLoader();
-    ImageIcon smorado = new ImageIcon(CL.getResource("IMGescaleraSerp/AlienMorado (1).png"));
-    ImageIcon srojo = new ImageIcon(CL.getResource("IMGescaleraSerp/AlienRojo.png"));
-    ImageIcon sverde = new ImageIcon(CL.getResource("IMGescaleraSerp/AlienVerde.png"));
+//    ImageIcon smorado = new ImageIcon(CL.getResource("IMGescaleraSerp/smorado.png"));
+//    ImageIcon srojo = new ImageIcon(CL.getResource("IMGescaleraSerp/srojo.png"));
+//    ImageIcon sverde = new ImageIcon(CL.getResource("IMGescaleraSerp/sverde.png"));
     ImageIcon morado = new ImageIcon(CL.getResource("IMGescaleraSerp/morado150.png"));
     ImageIcon rojo = new ImageIcon(CL.getResource("IMGescaleraSerp/rojo150.png"));
     ImageIcon verde = new ImageIcon(CL.getResource("IMGescaleraSerp/verde150.png"));
@@ -30,15 +30,22 @@ public class AvataresPanel extends javax.swing.JPanel implements ActionListener 
             selm.setText("Seleccionado");
             selr.setText("");
             selv.setText("");
-            AmoradoBTN.setIcon(smorado);
+            //AmoradoBTN.setIcon(smorado);
+            AmoradoBTN.setEnabled(false);
+            ArojoBTN.setEnabled(true);
+             AverdeBTN.setEnabled(true);
             ArojoBTN.setIcon(rojo);
             AverdeBTN.setIcon(verde);
+            
         } else if (e.getSource() == ArojoBTN) {
             AvatarJugador.avatar = 2;
             selr.setText("Seleccionado");
             selm.setText("");
             selv.setText("");
-             ArojoBTN.setIcon(srojo);
+            // ArojoBTN.setIcon(srojo);
+             ArojoBTN.setEnabled(false);
+             AmoradoBTN.setEnabled(true);
+             AverdeBTN.setEnabled(true);
             AmoradoBTN.setIcon(morado);
             AverdeBTN.setIcon(verde);
         } else if (e.getSource() == AverdeBTN) {
@@ -46,7 +53,10 @@ public class AvataresPanel extends javax.swing.JPanel implements ActionListener 
             selv.setText("Seleccionado");
             selr.setText("");
             selm.setText("");
-            AverdeBTN.setIcon(sverde);
+           // AverdeBTN.setIcon(sverde);
+            AverdeBTN.setEnabled(false);
+            AmoradoBTN.setEnabled(true);
+             ArojoBTN.setEnabled(true);
            ArojoBTN.setIcon(rojo);
             AmoradoBTN.setIcon(morado);
         }
@@ -70,6 +80,7 @@ public class AvataresPanel extends javax.swing.JPanel implements ActionListener 
         ArojoBTN.setBorderPainted(false);
         ArojoBTN.setContentAreaFilled(false);
         ArojoBTN.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        ArojoBTN.setDisabledIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGescaleraSerp/srojo.png"))); // NOI18N
         ArojoBTN.setFocusPainted(false);
         ArojoBTN.setFocusable(false);
         ArojoBTN.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGescaleraSerp/AlienRojo.png"))); // NOI18N
@@ -80,6 +91,7 @@ public class AvataresPanel extends javax.swing.JPanel implements ActionListener 
         AmoradoBTN.setBorderPainted(false);
         AmoradoBTN.setContentAreaFilled(false);
         AmoradoBTN.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        AmoradoBTN.setDisabledIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGescaleraSerp/smorado.png"))); // NOI18N
         AmoradoBTN.setFocusPainted(false);
         AmoradoBTN.setFocusable(false);
         AmoradoBTN.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGescaleraSerp/AlienMorado (1).png"))); // NOI18N
@@ -95,6 +107,7 @@ public class AvataresPanel extends javax.swing.JPanel implements ActionListener 
         AverdeBTN.setBorderPainted(false);
         AverdeBTN.setContentAreaFilled(false);
         AverdeBTN.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        AverdeBTN.setDisabledIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGescaleraSerp/sverde.png"))); // NOI18N
         AverdeBTN.setFocusPainted(false);
         AverdeBTN.setFocusable(false);
         AverdeBTN.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGescaleraSerp/AlienVerde.png"))); // NOI18N
@@ -128,7 +141,7 @@ public class AvataresPanel extends javax.swing.JPanel implements ActionListener 
                 .addComponent(ArojoBTN, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 517, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(65, 65, 65)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel1)
@@ -138,12 +151,14 @@ public class AvataresPanel extends javax.swing.JPanel implements ActionListener 
                             .addComponent(AverdeBTN, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(selr, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(75, 75, 75)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(selv, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(32, 32, 32)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(selm, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(AmoradoBTN, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(AmoradoBTN, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(selm, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(32, 32, 32))))
         );
         layout.setVerticalGroup(
@@ -155,10 +170,10 @@ public class AvataresPanel extends javax.swing.JPanel implements ActionListener 
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(selr, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(selv, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(selm, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(selm, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(selr, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(ArojoBTN, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
