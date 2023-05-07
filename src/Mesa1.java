@@ -36,8 +36,9 @@ public class Mesa1 extends javax.swing.JFrame {
 
     }
     
-    boolean repartir = false, ganador = false;
+    boolean repartir = false;
     Random ran = new Random();
+    String Ganador, perdedor;
 
     //Variambles que llevan la suma de las cartas
     int sumU = 0, sumD = 0;
@@ -420,6 +421,28 @@ public class Mesa1 extends javax.swing.JFrame {
         
     }//GEN-LAST:event_PararActionPerformed
 
+    public void Comparar (){
+        if(Sum0DE>Sum0US){
+            Ganador="Stella";
+            perdedor=user;
+        }else{
+            if(Sum0DE<Sum0US){
+                Ganador=user;
+                perdedor="Stella";
+            }else{
+                Ganador="Empate";
+            }
+        }
+    }
+    public void Comprobar21(){
+        if(Sum0DE>21 | Sum0US>21){ //Si se pasa de 21 cualquiera de los dos
+            
+        }else{
+            if(Sum0DE==21 | Sum0US==21){ //Si llegan a 21 exacto (BLACKJACK)
+                Comparar();
+            }
+        }
+    }
     public void ColorBarajaMostrar(String cB, JLabel label) {
         switch (cB) {
             case "r": //Baraja Roja
