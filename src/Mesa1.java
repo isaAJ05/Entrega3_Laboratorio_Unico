@@ -420,10 +420,12 @@ public class Mesa1 extends javax.swing.JFrame {
                 break;
         } 
     }
+    
     public void CartaBlanca(JLabel label){
         label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagenesBJK/cartablanca (1).png")));         
     }
     public void TipoDeCarta(int tipodibujo,JLabel label,int valor){
+        
         switch(tipodibujo){
             case 0:
             case 4:
@@ -456,7 +458,7 @@ public class Mesa1 extends javax.swing.JFrame {
         }
     }
     int Sum0US=0;//Suma contador de cartas del usuario
-    
+    int Sum0DE=0;
     int a = 0; //Variable que verifica si antes de jugar ya repartio las cartas
     private void RepartirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RepartirActionPerformed
         ocultarPanelAjustes();
@@ -464,15 +466,21 @@ public class Mesa1 extends javax.swing.JFrame {
             repartir = true;
             Pedir1Carta.setVisible(false);
             // Cartas iniciales para el usuario
-            int CartaUs1 = 0, CartaUs2 = 0,tipodibujo1=0,tipodibujo2=0;
+            int CartaUs1 = 0, CartaUs2 = 0,tipodibujo1=0,tipodibujo2=0, Ucolum1=0,Ucolum2=0;
             String colorB1="n",colorB2="n";
             //carta 1
-            elegircarta( baraja, colorB1, tipodibujo1); //Subrutina para la eleccion de carta al azar 
+            elegircarta( baraja); //Subrutina para la eleccion de carta al azar 
             CartaUs1=valorCarta;
+            tipodibujo1=fila;
+            colorB1=colorB;
+            Ucolum1=columna;
             cont++;
             //carta 2
-            elegircarta( baraja, colorB2, tipodibujo2);
+            elegircarta( baraja);
             CartaUs2=valorCarta;
+            tipodibujo2=fila;
+            colorB2=colorB;
+            Ucolum2=columna;
             cont++;
             System.out.println("Carta 1 "+CartaUs1);
              System.out.println("Carta 2 "+CartaUs2);
@@ -497,7 +505,43 @@ public class Mesa1 extends javax.swing.JFrame {
             TipoDeCarta(tipodibujo1,C2US,CartaUs2);
             
             // Cartas iniciales para Stella (DEALER)
-
+             int CartaDe1 = 0, CartaDe2 = 0,Dtipodibujo1=0,Dtipodibujo2=0,DColum1=0,DColum2=0;
+            String colorDB1="n",colorDB2="n";
+            //carta 1
+            elegircarta( baraja); //Subrutina para la eleccion de carta al azar 
+            CartaDe1=valorCarta;
+            Dtipodibujo1=fila;
+            colorDB1=colorB;
+            DColum1=columna;
+            cont++;
+            //carta 2
+            elegircarta( baraja);
+            CartaDe2=valorCarta;
+            Dtipodibujo2=fila;
+            colorDB2=colorB;
+            DColum2=columna;
+            cont++;
+            System.out.println("Carta 1 "+CartaDe1);
+            System.out.println("Carta 2 "+CartaDe2);
+            Sum0DE=CartaDe1+CartaDe2;//Sumar las dos cartas del usuario
+            //Validacion del sistema
+            if (Sum0DE> 21 & (CartaDe1 == 11 | CartaDe2 == 11)) { //Si sale un as se tomara como 11 siempre y cuando no se pase de 21
+                //as=1;
+                if (CartaDe1 == 11) {
+                    CartaDe1 = 1;
+                }
+                if (CartaDe2 == 11) {
+                    CartaDe2 = 1;
+                }
+                Sum0US = CartaDe1 + CartaDe2;
+            }
+            ConteoCartaSinUsar( C, cont);
+            //Mostrar primera carta
+            CartaBlanca(cartaD1);
+            TipoDeCarta(Dtipodibujo1,C1DE,CartaDe1);
+            //Mostrar segunda carta
+            CartaBlanca(cartaD2);
+            TipoDeCarta(Dtipodibujo1,C2DE,CartaDe2);
             Pedir1Carta.setVisible(true); //Activar botones de juego
             a = 1;
             Repartir.setEnabled(false); //Desspues de repatir que el boton se desactive
@@ -506,17 +550,22 @@ public class Mesa1 extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_RepartirActionPerformed
 int valorCarta;
-    public void elegircarta(int[][] baraja, String colorBaraja, int dibujo) {
+int columna, fila;
+String colorB;
+    public void elegircarta(int[][] baraja) {
         int f = ran.nextInt(n); //Con inidices aleoatorios se escoge las cartas dentro de la matriz baraja
         int c = ran.nextInt(m); //Solo sera necesarios hacer esto dos veces
+       
         if (baraja[f][c] == 0) { //Asegurar que la combinación al azar no de una posición que tenga el valor de 0
             while (baraja[f][c] == 0) {
                 f = ran.nextInt(n); //Posicion en matriz aleatoria
                 c = ran.nextInt(m);
             }
         }
-        colorBaraja= Ccolor[f];//Color de la baraja segun la fila
-        dibujo = f; //Tipo de dibujo segun la fila
+        System.out.println(" F ="+f + "   C= "+c);
+        colorB= Ccolor[f];//Color de la baraja segun la fila
+        fila = f; //Tipo de dibujo segun la fila
+        columna=c;
         valorCarta=baraja[f][c];//Se le asigna el valor de la carta 
         baraja[f][c]=0; //Se descuenta las cartas ya tomadas
     }
@@ -582,7 +631,6 @@ int valorCarta;
             }
         };
         th.start();
-
     }
 
     private void deshabilitarbtnGame() {
@@ -600,7 +648,6 @@ int valorCarta;
         Doble.setEnabled(true);
         Slipt.setEnabled(true);
     }
-
 
     private void MostrarAjustesBlackJackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MostrarAjustesBlackJackActionPerformed
         h = 1;
@@ -697,20 +744,22 @@ int valorCarta;
         Treboles = fila 2 , 6 , 10
         Diamantes = fila 3 , 7, 11
     
-        11 2 3 4 5 6 7 8 9 10 10 10 10  
-        11 2 3 4 5 6 7 8 9 10 10 10 10  
-        11 2 3 4 5 6 7 8 9 10 10 10 10  
-        11 2 3 4 5 6 7 8 9 10 10 10 10 
-        _____________________________
-        11 2 3 4 5 6 7 8 9 10 10 10 10  
-        11 2 3 4 5 6 7 8 9 10 10 10 10  
-        11 2 3 4 5 6 7 8 9 10 10 10 10  
-        11 2 3 4 5 6 7 8 9 10 10 10 10
+   col  0  1 2 3 4 5 6 7 8 9  10 11 12  | fila
         ______________________________
-        11 2 3 4 5 6 7 8 9 10 10 10 10  
-        11 2 3 4 5 6 7 8 9 10 10 10 10  
-        11 2 3 4 5 6 7 8 9 10 10 10 10  
-        11 2 3 4 5 6 7 8 9 10 10 10 10 
+        11 2 3 4 5 6 7 8 9 10 10 10 10  |0
+        11 2 3 4 5 6 7 8 9 10 10 10 10  |1
+        11 2 3 4 5 6 7 8 9 10 10 10 10  |2
+        11 2 3 4 5 6 7 8 9 10 10 10 10  |3
+        _____________________________
+        11 2 3 4 5 6 7 8 9 10 10 10 10  |4
+        11 2 3 4 5 6 7 8 9 10 10 10 10  |5
+        11 2 3 4 5 6 7 8 9 10 10 10 10  |6
+        11 2 3 4 5 6 7 8 9 10 10 10 10  |7
+        ______________________________
+        11 2 3 4 5 6 7 8 9 10 10 10 10  |8
+        11 2 3 4 5 6 7 8 9 10 10 10 10  |9
+        11 2 3 4 5 6 7 8 9 10 10 10 10  |10
+        11 2 3 4 5 6 7 8 9 10 10 10 10  |11
          */
     }//GEN-LAST:event_BTNbarajaConfirmarActionPerformed
 
