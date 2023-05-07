@@ -34,9 +34,6 @@ public class SerpienteGAME extends javax.swing.JFrame {
         atras.setEnabled(false);
         atras.setVisible(false);
 
-        System.out.println("posj1 = " + PanelesEscaletaYSerpiente.GamePanel2.posj1);
-        System.out.println("posj2 = " + PanelesEscaletaYSerpiente.GamePanel2.posj2);
-
     }
 
     private void ShowPanel(JPanel p) { //Cambio de paneles metodo
