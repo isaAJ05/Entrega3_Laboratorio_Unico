@@ -73,7 +73,6 @@ public class Mesa1 extends javax.swing.JFrame {
         ConteoCartas = new javax.swing.JLabel();
         Parar = new javax.swing.JButton();
         Doble = new javax.swing.JButton();
-        Slipt = new javax.swing.JButton();
         valdRepartir = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         btnVolver1 = new javax.swing.JButton();
@@ -155,7 +154,7 @@ public class Mesa1 extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel3.setText("Numero de masos:");
+        jLabel3.setText("Número de masos:");
 
         javax.swing.GroupLayout AjustespanelLayout = new javax.swing.GroupLayout(Ajustespanel);
         Ajustespanel.setLayout(AjustespanelLayout);
@@ -228,7 +227,7 @@ public class Mesa1 extends javax.swing.JFrame {
                 RepartirActionPerformed(evt);
             }
         });
-        MovJugadas.add(Repartir, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 150, 110, 33));
+        MovJugadas.add(Repartir, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 210, 120, 33));
 
         Pedir1Carta.setBackground(new java.awt.Color(96, 211, 98));
         Pedir1Carta.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
@@ -239,7 +238,7 @@ public class Mesa1 extends javax.swing.JFrame {
                 Pedir1CartaActionPerformed(evt);
             }
         });
-        MovJugadas.add(Pedir1Carta, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 200, 120, 36));
+        MovJugadas.add(Pedir1Carta, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 260, 120, 36));
 
         ConteoCartas.setFont(new java.awt.Font("Engravers MT", 1, 24)); // NOI18N
         ConteoCartas.setForeground(new java.awt.Color(0, 0, 0));
@@ -256,24 +255,13 @@ public class Mesa1 extends javax.swing.JFrame {
                 PararActionPerformed(evt);
             }
         });
-        MovJugadas.add(Parar, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 310, 120, 34));
+        MovJugadas.add(Parar, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 360, 120, 34));
 
         Doble.setBackground(new java.awt.Color(102, 255, 153));
         Doble.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
         Doble.setText("Doble (+2)");
         Doble.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        MovJugadas.add(Doble, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 260, 120, 36));
-
-        Slipt.setBackground(new java.awt.Color(102, 255, 153));
-        Slipt.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
-        Slipt.setText("Separar");
-        Slipt.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        Slipt.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SliptActionPerformed(evt);
-            }
-        });
-        MovJugadas.add(Slipt, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 360, 120, 34));
+        MovJugadas.add(Doble, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 310, 120, 36));
 
         valdRepartir.setFont(new java.awt.Font("Monospaced", 0, 14)); // NOI18N
         MovJugadas.add(valdRepartir, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 60, 200, 21));
@@ -281,7 +269,7 @@ public class Mesa1 extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Engravers MT", 1, 24)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 204, 0));
         jLabel4.setText("STAR GAMES");
-        MovJugadas.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 90, 220, -1));
+        MovJugadas.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 160, 220, -1));
 
         btnVolver1.setBackground(new java.awt.Color(107, 138, 91));
         btnVolver1.setFont(new java.awt.Font("Monospaced", 1, 12)); // NOI18N
@@ -595,11 +583,34 @@ String colorB;
         valorCarta=baraja[f][c];//Se le asigna el valor de la carta 
         baraja[f][c]=0; //Se descuenta las cartas ya tomadas
     }
+    int s=3;
     private void Pedir1CartaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Pedir1CartaActionPerformed
         if (repartir) { //Validación de repartir las cartas iniciales
             cont++;
-            C = C - cont;
+            ConteoCartaSinUsar( C, cont);
+            String colorB3,colorB4, colorB5;
+            int CartaUs5,CartaUs3,CartaUs4,tipodibujo3,tipodibujo4,tipodibujo5,Ucolum3,Ucolum4,Ucolum5;
+//        CartaUs2=valorCarta;
+//            tipodibujo2=fila;
+//            colorB2=colorB;
+//            Ucolum2=columna;
+switch(s){
+    case 3:
+        break;
+    case 4:
+        break;
+    case 5:
+        break;
+        
+}
+s++;
+            elegircarta( baraja, Ccolor); //Subrutina para la eleccion de carta al azar 
+            
+            
+            
             //Usuario
+            
+            
 
         } else {
             Pedir1Carta.setVisible(false);
@@ -607,10 +618,7 @@ String colorB;
         }
     }//GEN-LAST:event_Pedir1CartaActionPerformed
 
-    private void SliptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SliptActionPerformed
-
-    }//GEN-LAST:event_SliptActionPerformed
-
+    
     //Animacion Subrutinas
     private void ocultarA() {
         //Si variable es 0 que indica que se esta vizualizando el panel de ajustes
@@ -664,7 +672,6 @@ String colorB;
         Pedir1Carta.setEnabled(false);
         Parar.setEnabled(false);
         Doble.setEnabled(false);
-        Slipt.setEnabled(false);
     }
 
     private void HabilitarbtnGame() {
@@ -672,7 +679,6 @@ String colorB;
         Pedir1Carta.setEnabled(true);
         Parar.setEnabled(true);
         Doble.setEnabled(true);
-        Slipt.setEnabled(true);
     }
 
     private void MostrarAjustesBlackJackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MostrarAjustesBlackJackActionPerformed
@@ -873,7 +879,6 @@ String colorB;
     private javax.swing.JButton Parar;
     private javax.swing.JButton Pedir1Carta;
     private javax.swing.JButton Repartir;
-    private javax.swing.JButton Slipt;
     private javax.swing.JLabel SumCartasDE;
     private javax.swing.JLabel SumCartasU;
     private javax.swing.JButton btnVolver1;
