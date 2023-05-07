@@ -35,18 +35,7 @@ public class Mesa1 extends javax.swing.JFrame {
         deshabilitarbtnGame();
 
     }
-
-    //Nombres
-//    public void paint(Graphics gr) {
-//        super.paint(gr);
-//        Graphics u = MesaCartas.getGraphics();
-//        Font f = new Font("Berlin Sans FB Demi", Font.PLAIN, 35);
-//        u.setFont(f);
-//        u.setColor(new Color(102, 255, 153));
-//        u.drawString("Stella", 20, 45);
-//        u.setColor(new Color(51, 255, 204));
-//        u.drawString(user, 20, 275);
-//    }
+    
     boolean repartir = false, ganador = false;
     Random ran = new Random();
 
@@ -224,6 +213,7 @@ public class Mesa1 extends javax.swing.JFrame {
         Repartir.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
         Repartir.setText("Repartir");
         Repartir.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        Repartir.setBorderPainted(false);
         Repartir.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         Repartir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -315,7 +305,7 @@ public class Mesa1 extends javax.swing.JFrame {
 
         labelNombreUser.setFont(new java.awt.Font("Swis721 BlkCn BT", 0, 36)); // NOI18N
         labelNombreUser.setForeground(new java.awt.Color(0, 153, 102));
-        MesaCartas.add(labelNombreUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, 320, 30));
+        MesaCartas.add(labelNombreUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, 320, 40));
 
         labelStellaNombre.setFont(new java.awt.Font("Swis721 BlkCn BT", 0, 36)); // NOI18N
         labelStellaNombre.setForeground(new java.awt.Color(255, 204, 0));
@@ -423,7 +413,11 @@ public class Mesa1 extends javax.swing.JFrame {
     }
 
     private void PararActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PararActionPerformed
-
+        CartaBlanca(cartaD1); //Se revela la carta oculta de estela
+        TipoDeCarta(Dtipodibujo1, C1DE, CartaDe1);
+        SumCartasDE.setText(String.valueOf(Sum0DE));
+        Pedir1Carta.setEnabled(false);
+        
     }//GEN-LAST:event_PararActionPerformed
 
     public void ColorBarajaMostrar(String cB, JLabel label) {
@@ -476,17 +470,21 @@ public class Mesa1 extends javax.swing.JFrame {
     }
     int Sum0US = 0;//Suma contador de cartas del usuario
     int Sum0DE = 0;
+
+    int CartaUs1 = 0, CartaUs2 = 0, tipodibujo1 = 0, tipodibujo2 = 0, Ucolum1 = 0, Ucolum2 = 0;
+    String colorB1, colorB2;
+
+    int CartaDe1 = 0, CartaDe2 = 0, Dtipodibujo1 = 0, Dtipodibujo2 = 0, DColum1 = 0, DColum2 = 0;
+    String colorDB1 = "n", colorDB2 = "n";
+    
     int a = 0; //Variable que verifica si antes de jugar ya repartio las cartas
     private void RepartirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RepartirActionPerformed
         ocultarPanelAjustes();
         if (a == 0) {
             HabilitarbtnGame();
             repartir = true;
-           // Pedir1Carta.setVisible(false);
 
             // Cartas iniciales para el usuario
-            int CartaUs1 = 0, CartaUs2 = 0, tipodibujo1 = 0, tipodibujo2 = 0, Ucolum1 = 0, Ucolum2 = 0;
-            String colorB1, colorB2;
             //carta 1
             elegircarta(baraja, Ccolor); //Subrutina para la eleccion de carta al azar 
             CartaUs1 = valorCarta;
@@ -525,9 +523,7 @@ public class Mesa1 extends javax.swing.JFrame {
 
             SumCartasU.setText(String.valueOf(Sum0US));
 
-            // Cartas iniciales para Stella (DEALER)
-            int CartaDe1 = 0, CartaDe2 = 0, Dtipodibujo1 = 0, Dtipodibujo2 = 0, DColum1 = 0, DColum2 = 0;
-            String colorDB1 = "n", colorDB2 = "n";
+            // Cartas iniciales para Stella (DEALER)      
             //carta 1
             elegircarta(baraja, Ccolor); //Subrutina para la eleccion de carta al azar 
             CartaDe1 = valorCarta;
@@ -558,9 +554,8 @@ public class Mesa1 extends javax.swing.JFrame {
             }
             ConteoCartaSinUsar(C, cont);
             //Mostrar primera carta
-            // CartaBlanca(cartaD1);
             ColorBarajaMostrar(colorDB1, cartaD1);
-            // TipoDeCarta(Dtipodibujo1,C1DE,CartaDe1);
+
             //Mostrar segunda carta
             CartaBlanca(cartaD2);
             TipoDeCarta(Dtipodibujo2, C2DE, CartaDe2);
@@ -597,6 +592,10 @@ public class Mesa1 extends javax.swing.JFrame {
 
     }
     int s = 3;
+
+    String colorB3, colorB4, colorB5;
+    int CartaUs5=0, CartaUs3=0, CartaUs4=0, tipodibujo3=0, tipodibujo4=0, tipodibujo5=0, Ucolum3=0, Ucolum4=0, Ucolum5=0;
+
     private void Pedir1CartaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Pedir1CartaActionPerformed
         if (repartir) { //Validación de repartir las cartas iniciales
             HabilitarbtnGame();
@@ -605,8 +604,6 @@ public class Mesa1 extends javax.swing.JFrame {
             if (s <= 5) {
                 cont++;
                 ConteoCartaSinUsar(C, cont);
-                String colorB3, colorB4, colorB5;
-                int CartaUs5, CartaUs3, CartaUs4, tipodibujo3, tipodibujo4, tipodibujo5, Ucolum3, Ucolum4, Ucolum5;
 
                 elegircarta(baraja, Ccolor); //Subrutina para la eleccion de carta al azar 
                 switch (s) {
@@ -675,7 +672,6 @@ public class Mesa1 extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_Pedir1CartaActionPerformed
 
-   
     //Animacion Subrutinas
     private void ocultarA() {
         //Si variable es 0 que indica que se esta vizualizando el panel de ajustes
