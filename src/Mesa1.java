@@ -430,29 +430,29 @@ public class Mesa1 extends javax.swing.JFrame {
             case 0:
             case 4:
             case 8://Corazon
-              label.setForeground(new java.awt.Color(204, 0, 0));
+              label.setForeground(new java.awt.Color(204, 0, 0)); //Rojo
               label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagenesBJK/IMGcorazón (1).png"))); 
               label.setText(String.valueOf(valor));
                 break;
             case 1:
             case 5:
             case 9: //Picas
-              label.setForeground(new java.awt.Color(0, 0, 0));
+              label.setForeground(new java.awt.Color(0, 0, 0)); //Negro
               label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagenesBJK/IMGpicas-removebg-preview (1).png"))); 
               label.setText(String.valueOf(valor));
                 break;
             case 2:
             case 6:
             case 10://Trebol
-              label.setForeground(new java.awt.Color(0, 0, 0));
+              label.setForeground(new java.awt.Color(0, 0, 0));//Negro
               label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagenesBJK/IMGtrebol-removebg-preview (1).png"))); 
               label.setText(String.valueOf(valor));
                 break;
             case 3:
             case 7:
             case 11://Diamante
-              label.setForeground(new java.awt.Color(204, 0, 0));
-              label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagenesBJK/IMGdiamante-removebg-preview (1)"))); 
+              label.setForeground(new java.awt.Color(204, 0, 0)); //Rojo
+              label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagenesBJK/IMGdiamante-removebg-preview (1).png"))); 
               label.setText(String.valueOf(valor));
                 break;
         }
@@ -502,7 +502,7 @@ public class Mesa1 extends javax.swing.JFrame {
             TipoDeCarta(tipodibujo1,C1US,CartaUs1);
             //Mostrar segunda carta
             CartaBlanca(cartaU2);
-            TipoDeCarta(tipodibujo1,C2US,CartaUs2);
+            TipoDeCarta(tipodibujo2,C2US,CartaUs2);
             
             // Cartas iniciales para Stella (DEALER)
              int CartaDe1 = 0, CartaDe2 = 0,Dtipodibujo1=0,Dtipodibujo2=0,DColum1=0,DColum2=0;
@@ -541,7 +541,7 @@ public class Mesa1 extends javax.swing.JFrame {
             TipoDeCarta(Dtipodibujo1,C1DE,CartaDe1);
             //Mostrar segunda carta
             CartaBlanca(cartaD2);
-            TipoDeCarta(Dtipodibujo1,C2DE,CartaDe2);
+            TipoDeCarta(Dtipodibujo2,C2DE,CartaDe2);
             Pedir1Carta.setVisible(true); //Activar botones de juego
             a = 1;
             Repartir.setEnabled(false); //Desspues de repatir que el boton se desactive
@@ -651,11 +651,9 @@ String colorB;
 
     private void MostrarAjustesBlackJackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MostrarAjustesBlackJackActionPerformed
         h = 1;
-
         if (h == 0) { //Se ve y se oculta
             ocultarA();
             h = 1;// Estado del panel A : No visible
-
         } else { //no se ve tiene que salir
             mostrarA();
             h = 0;//Estado del panel A : Visible
@@ -760,7 +758,8 @@ String colorB;
         11 2 3 4 5 6 7 8 9 10 10 10 10  |9
         11 2 3 4 5 6 7 8 9 10 10 10 10  |10
         11 2 3 4 5 6 7 8 9 10 10 10 10  |11
-         */
+       
+        */
     }//GEN-LAST:event_BTNbarajaConfirmarActionPerformed
 
     private void masbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_masbtnActionPerformed
