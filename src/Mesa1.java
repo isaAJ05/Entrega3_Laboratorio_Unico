@@ -31,7 +31,7 @@ public class Mesa1 extends javax.swing.JFrame {
         this.setCursor(cursor);
         this.setResizable(false);
         Ajustespanel.setVisible(true);
-        labelNombreUser.setText(user);
+        labelNombreUser.setText(user+":");
         deshabilitarbtnGame();
 
     }
@@ -91,10 +91,12 @@ public class Mesa1 extends javax.swing.JFrame {
         C3US = new javax.swing.JLabel();
         C2US = new javax.swing.JLabel();
         C1US = new javax.swing.JLabel();
+        cartaD5 = new javax.swing.JLabel();
         cartaD4 = new javax.swing.JLabel();
         cartaD3 = new javax.swing.JLabel();
         cartaD2 = new javax.swing.JLabel();
         cartaD1 = new javax.swing.JLabel();
+        cartaU5 = new javax.swing.JLabel();
         cartaU4 = new javax.swing.JLabel();
         cartaU3 = new javax.swing.JLabel();
         cartaU2 = new javax.swing.JLabel();
@@ -239,10 +241,10 @@ public class Mesa1 extends javax.swing.JFrame {
         });
         MovJugadas.add(Pedir1Carta, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 200, 120, 36));
 
-        ConteoCartas.setFont(new java.awt.Font("Engravers MT", 1, 18)); // NOI18N
-        ConteoCartas.setForeground(new java.awt.Color(51, 51, 51));
+        ConteoCartas.setFont(new java.awt.Font("Engravers MT", 1, 24)); // NOI18N
+        ConteoCartas.setForeground(new java.awt.Color(0, 0, 0));
         ConteoCartas.setText("104");
-        MovJugadas.add(ConteoCartas, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 20, 41, 30));
+        MovJugadas.add(ConteoCartas, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 20, 70, 30));
 
         Parar.setBackground(new java.awt.Color(102, 255, 153));
         Parar.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
@@ -317,20 +319,25 @@ public class Mesa1 extends javax.swing.JFrame {
 
         labelNombreUser.setFont(new java.awt.Font("Swis721 BlkCn BT", 0, 36)); // NOI18N
         labelNombreUser.setForeground(new java.awt.Color(0, 153, 102));
-        MesaCartas.add(labelNombreUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, 90, 30));
+        MesaCartas.add(labelNombreUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, 320, 30));
 
         labelStellaNombre.setFont(new java.awt.Font("Swis721 BlkCn BT", 0, 36)); // NOI18N
         labelStellaNombre.setForeground(new java.awt.Color(255, 204, 0));
-        labelStellaNombre.setText("Stella");
-        MesaCartas.add(labelStellaNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 90, 30));
+        labelStellaNombre.setText("Stella:");
+        MesaCartas.add(labelStellaNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 100, 30));
 
+        SumCartasU.setBackground(new java.awt.Color(0, 51, 0));
         SumCartasU.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 0, 36)); // NOI18N
         SumCartasU.setForeground(new java.awt.Color(255, 255, 153));
-        MesaCartas.add(SumCartasU, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 250, 50, 35));
+        SumCartasU.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        SumCartasU.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        MesaCartas.add(SumCartasU, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 260, 70, 35));
 
         SumCartasDE.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 0, 36)); // NOI18N
         SumCartasDE.setForeground(new java.awt.Color(255, 255, 153));
-        MesaCartas.add(SumCartasDE, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 30, 50, 35));
+        SumCartasDE.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        SumCartasDE.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        MesaCartas.add(SumCartasDE, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 30, 70, 35));
 
         C4DE.setFont(new java.awt.Font("Snap ITC", 0, 14)); // NOI18N
         C4DE.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -338,7 +345,7 @@ public class Mesa1 extends javax.swing.JFrame {
         C4DE.setText("5");
         C4DE.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         C4DE.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
-        MesaCartas.add(C4DE, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 80, 60, 110));
+        MesaCartas.add(C4DE, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 110, 60, 110));
 
         C3DE.setFont(new java.awt.Font("Snap ITC", 0, 14)); // NOI18N
         C3DE.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -346,7 +353,7 @@ public class Mesa1 extends javax.swing.JFrame {
         C3DE.setText("5");
         C3DE.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         C3DE.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
-        MesaCartas.add(C3DE, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 80, 60, 110));
+        MesaCartas.add(C3DE, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 110, 60, 110));
 
         C2DE.setFont(new java.awt.Font("Snap ITC", 0, 14)); // NOI18N
         C2DE.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -388,10 +395,12 @@ public class Mesa1 extends javax.swing.JFrame {
         C1US.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         C1US.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
         MesaCartas.add(C1US, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 330, 60, 110));
+        MesaCartas.add(cartaD5, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 100, 80, 124));
         MesaCartas.add(cartaD4, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 100, 80, 124));
         MesaCartas.add(cartaD3, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 100, 80, 124));
         MesaCartas.add(cartaD2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 100, 80, 124));
         MesaCartas.add(cartaD1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 80, 124));
+        MesaCartas.add(cartaU5, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 320, 80, 124));
         MesaCartas.add(cartaU4, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 320, 80, 124));
         MesaCartas.add(cartaU3, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 320, 80, 124));
         MesaCartas.add(cartaU2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 320, 80, 124));
@@ -471,8 +480,11 @@ public class Mesa1 extends javax.swing.JFrame {
     private void RepartirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RepartirActionPerformed
         ocultarPanelAjustes();
         if (a == 0) {
+            
             repartir = true;
             Pedir1Carta.setVisible(false);
+            
+         
             // Cartas iniciales para el usuario
             int CartaUs1 = 0, CartaUs2 = 0,tipodibujo1=0,tipodibujo2=0, Ucolum1=0,Ucolum2=0;
             String colorB1,colorB2;
@@ -511,6 +523,8 @@ public class Mesa1 extends javax.swing.JFrame {
             //Mostrar segunda carta
             CartaBlanca(cartaU2);
             TipoDeCarta(tipodibujo2,C2US,CartaUs2);
+            
+            SumCartasU.setText(String.valueOf(Sum0US));
             
             // Cartas iniciales para Stella (DEALER)
              int CartaDe1 = 0, CartaDe2 = 0,Dtipodibujo1=0,Dtipodibujo2=0,DColum1=0,DColum2=0;
@@ -551,6 +565,8 @@ public class Mesa1 extends javax.swing.JFrame {
             //Mostrar segunda carta
             CartaBlanca(cartaD2);
             TipoDeCarta(Dtipodibujo2,C2DE,CartaDe2);
+            
+            SumCartasDE.setText(String.valueOf(CartaDe2));
             
             Pedir1Carta.setVisible(true); //Activar botones de juego
             a = 1;
@@ -865,10 +881,12 @@ String colorB;
     private javax.swing.JLabel cartaD2;
     private javax.swing.JLabel cartaD3;
     private javax.swing.JLabel cartaD4;
+    private javax.swing.JLabel cartaD5;
     private javax.swing.JLabel cartaU1;
     private javax.swing.JLabel cartaU2;
     private javax.swing.JLabel cartaU3;
     private javax.swing.JLabel cartaU4;
+    private javax.swing.JLabel cartaU5;
     private javax.swing.JLabel fondo;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
