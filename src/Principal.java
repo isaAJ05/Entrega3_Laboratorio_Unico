@@ -6,26 +6,61 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.net.URL;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 /**
  *
- * @author nunez, Arrieta, Carpintero 
+ * @author nunez, Arrieta, Carpintero
  */
 public class Principal extends javax.swing.JFrame {
-FondoPanel fondo = new FondoPanel();
+
+    FondoPanel fondo = new FondoPanel();
+    //SUBRUTINA PARA APLICAR SONIDO
+    private void sonido(String cadena) {
+        try {
+            Clip clip = AudioSystem.getClip();
+            URL url = getClass().getResource(cadena);
+            AudioInputStream audioIn = AudioSystem.getAudioInputStream(url);
+            clip.open(audioIn);
+            clip.start();
+
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+    }
+
     public Principal() {
         initComponents();
         this.setLocationRelativeTo(null);
         //cursor
-        Cursor cursor = Toolkit.getDefaultToolkit().createCustomCursor(new ImageIcon(getClass().getResource("cursor/cursorimg.png")).getImage(),new Point(0,0),"Custom Cursor");
+        Cursor cursor = Toolkit.getDefaultToolkit().createCustomCursor(new ImageIcon(getClass().getResource("cursor/cursorimg.png")).getImage(), new Point(0, 0), "Custom Cursor");
         this.setCursor(cursor);
         this.setResizable(false);
+        try {
+            Clip clip = AudioSystem.getClip();
+            URL url = getClass().getResource("/Sonidos/satellite.wav");
+            AudioInputStream audioIn = AudioSystem.getAudioInputStream(url);
+            clip.open(audioIn);
+            clip.start();
+            continuar.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    clip.stop();
+
+                }
+            });
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
 
     }
 
-  
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -90,6 +125,7 @@ FondoPanel fondo = new FondoPanel();
     private void continuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_continuarActionPerformed
         Principal2 a = new Principal2();
         a.setVisible(true);
+        sonido("/Sonidos/boop.wav");
         this.dispose();
     }//GEN-LAST:event_continuarActionPerformed
 
@@ -97,7 +133,7 @@ FondoPanel fondo = new FondoPanel();
     public void paint(Graphics g) {
         super.paint(g);
         Graphics gr = panel.getGraphics();
-        
+
 //        gr.setColor(Color.yellow);
 //        int[] vx = {60, 123, 150, 177, 240, 190, 200, 150, 100, 110};
 //        int[] vy = {160, 160, 100, 160, 160, 200, 260, 220, 260, 200};
@@ -129,13 +165,13 @@ FondoPanel fondo = new FondoPanel();
 //        gr.fillPolygon(xt5, yt5, 3);
 //        
         gr.setColor(Color.white);
-        Font f1 = new Font("Elephant",Font.BOLD,20);
+        Font f1 = new Font("Elephant", Font.BOLD, 20);
         gr.setFont(f1);
         gr.drawString("BIENVENIDX  A" + "", 442, 160);
-        Font f2 = new Font("Monospaced",Font.PLAIN,17);
+        Font f2 = new Font("Monospaced", Font.PLAIN, 17);
         gr.setFont(f2);
         gr.drawString("by NIP creations" + "", 465, 230);
-        
+
 //        g.fillOval(141, 200, 8, 13);
 //        g.fillOval(167, 200, 8, 13);
 //        
@@ -147,9 +183,8 @@ FondoPanel fondo = new FondoPanel();
 //        g.fillOval(141, 217, 35, 20);
 //        gr.setColor(Color.yellow);
 //        gr.fillRect(133, 185, 35, 9);
-        
         gr.setColor(Color.orange);
-        Font f3 = new Font("Engravers MT",Font.BOLD,25);       
+        Font f3 = new Font("Engravers MT", Font.BOLD, 25);
         gr.setFont(f3);
         gr.drawString("STAR Games" + "", 428, 200);
 
@@ -208,6 +243,5 @@ FondoPanel fondo = new FondoPanel();
             super.paint(g);
         }
     }
-    
 
 }
