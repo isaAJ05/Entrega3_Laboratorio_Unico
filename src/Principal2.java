@@ -1,4 +1,5 @@
 
+import Resultado.usuario;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Font;
@@ -12,7 +13,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 public class Principal2 extends javax.swing.JFrame {
-
+    String name = usuario.name;
     FondoPanel fondo = new FondoPanel();
 
     public Principal2() {
@@ -28,14 +29,17 @@ public class Principal2 extends javax.swing.JFrame {
                     if (nombre.getText().equals("")) {
                         labeluser.setText("[!]Debe ingresar un nombre o apodo.");
                         user = nombre.getText();
+                        name=user;
                     } else {
                         user = nombre.getText();
+                        name=user;
                         Principal3 a = new Principal3(user);
                         a.setVisible(true);
                         dispose();
                     }
                 }
             }
+            
         });
         //cursor
         Cursor cursor = Toolkit.getDefaultToolkit().createCustomCursor(new ImageIcon(getClass().getResource("cursor/cursorimg.png")).getImage(),new Point(0,0),"Custom Cursor");
@@ -146,8 +150,10 @@ public class Principal2 extends javax.swing.JFrame {
         if (nombre.getText().equals("")) {
             labeluser.setText("[!]Debe ingresar un nombre o apodo.");
             user = nombre.getText();
+            name=user;
         } else {
             user = nombre.getText();
+            name=user;
             Principal3 a = new Principal3(user);
             a.setVisible(true);
             this.dispose();

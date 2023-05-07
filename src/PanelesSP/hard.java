@@ -204,7 +204,8 @@ public class hard extends javax.swing.JPanel {
         }
         //JOPTION PANE para mostrar aviso de que ha ganado al usuario
         if (cont == 7) {
-            JOptionPane.showMessageDialog(null, "¡Felicidades " + name + "! \nHas resuelto el primer nivel\nPresiona NEXT LEVEL para seguir con el siguiente");
+            Resultado.Ganador g = new Resultado.Ganador();
+           // JOptionPane.showMessageDialog(null, "¡Felicidades " + name + "! \nHas resuelto el primer nivel\nPresiona NEXT LEVEL para seguir con el siguiente");
             //Para que no se realicen mas cambios en la sopa
 
             //para que no pueda pedir mas pistas ver la solucion o instrucciones

@@ -6,7 +6,6 @@ import java.awt.Point;
 import java.awt.Toolkit;
 import javax.swing.ImageIcon;
 
-import rompecabezas.*;
 
 
 public class rompecabezas extends javax.swing.JFrame {

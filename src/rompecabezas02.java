@@ -1,6 +1,5 @@
 
 import java.awt.Cursor;
-import rompecabezas.*;
 import java.awt.Font;
 import java.awt.Point;
 import java.awt.Toolkit;
@@ -115,8 +114,9 @@ public class rompecabezas02 extends javax.swing.JFrame implements ActionListener
             }
             UIManager.put("OptionPane.messageFont", new Font("Monospaced", Font.BOLD, 20));
             if (k) {
-                ImageIcon ganaste = new ImageIcon(CL.getResource("imagenes/happy.gif"));
-                JOptionPane.showMessageDialog(null, "¡FELICIDADES!\nEres todo un ganador.", "ROMPECABEZAS", JOptionPane.PLAIN_MESSAGE, ganaste);
+                Resultado.Ganador g = new Resultado.Ganador();
+//                ImageIcon ganaste = new ImageIcon(CL.getResource("imagenes/happy.gif"));
+//                JOptionPane.showMessageDialog(null, "¡FELICIDADES!\nEres todo un ganador.", "ROMPECABEZAS", JOptionPane.PLAIN_MESSAGE, ganaste);
                 for (i = 0; i < 4; i++) {
                     for (j = 0; j < 3; j++) {
                         buttons[i][j].setEnabled(true);
@@ -125,8 +125,9 @@ public class rompecabezas02 extends javax.swing.JFrame implements ActionListener
                 }
                 c = 0;
             } else {
-                ImageIcon perdiste = new ImageIcon(CL.getResource("imagenes/sad.gif"));
-                JOptionPane.showMessageDialog(null, "GAME OVER\nPerdiste esta vez,\nsuerte para la próxima.", "ROMPECABEZAS", JOptionPane.PLAIN_MESSAGE, perdiste);
+                Resultado.Perdedor g = new Resultado.Perdedor();
+//                ImageIcon perdiste = new ImageIcon(CL.getResource("imagenes/sad.gif"));
+//                JOptionPane.showMessageDialog(null, "GAME OVER\nPerdiste esta vez,\nsuerte para la próxima.", "ROMPECABEZAS", JOptionPane.PLAIN_MESSAGE, perdiste);
                 for (i = 0; i < 4; i++) {
                     for (j = 0; j < 3; j++) {
                         buttons[i][j].setEnabled(true);

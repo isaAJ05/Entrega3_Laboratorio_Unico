@@ -46,7 +46,7 @@ public class hardmusica extends javax.swing.JPanel {
     boolean yaloencontre4 = false;
     boolean yaloencontre5 = false;
     boolean yaloencontre6 = false;
-    
+
     //HashSet: Un HashSet es una colección de elementos en Java que no permite elementos duplicados.
     private HashSet<JButton> botonesAfectados = new HashSet<>();
 
@@ -207,7 +207,9 @@ public class hardmusica extends javax.swing.JPanel {
         }
         //JOPTION PANE para mostrar aviso de que ha ganado al usuario
         if (cont == 7) {
-            JOptionPane.showMessageDialog(null, "¡Felicidades " + name + "! \nHas resuelto el primer nivel\nPresiona NEXT LEVEL para seguir con el siguiente");
+
+            Resultado.Ganador g = new Resultado.Ganador();
+            //JOptionPane.showMessageDialog(null, "¡Felicidades " + name + "! \nHas resuelto el primer nivel\nPresiona NEXT LEVEL para seguir con el siguiente");
             //Para que no se realicen mas cambios en la sopa
 
             //para que no pueda pedir mas pistas ver la solucion o instrucciones
@@ -219,41 +221,41 @@ public class hardmusica extends javax.swing.JPanel {
 
     }
     //subrutina para cambiar color de las letras cuando se pasa el mouse por ellas
-private MouseAdapter listener;
+    private MouseAdapter listener;
 
-private void cambiarcolor(JButton botones[][]) {
-    for (int i = 0; i < 8; i++) {
-        for (int j = 0; j < 8; j++) {
-            final int finalI = i;
-            final int finalJ = j;
-            listener = new MouseAdapter() {
-                @Override
-                public void mouseEntered(MouseEvent evt) {
-                    if (botonesAfectados.contains(botones[finalI][finalJ]) || cont==4) {
-                return; // si el botón ya ha sido afectado, salimos del método sin hacer nada
-            } else {
-                    botones[finalI][finalJ].setBackground(new Color(255, 153, 255));
-                    botones[finalI][finalJ].setFont(new Font("Segoe UI", Font.PLAIN, 11));
-                    Timer timer = new Timer(2000, new ActionListener() {
-                        public void actionPerformed(ActionEvent e) {
-                            botones[finalI][finalJ].setFont(new Font("Segoe UI", Font.PLAIN, 12));
-                            if (botonesAfectados.contains(botones[finalI][finalJ])) {
-                return; // si el botón ya ha sido afectado, salimos del método sin hacer nada
-            } else {
-                            
-                            botones[finalI][finalJ].setBackground(new Color(255, 255, 255));
+    private void cambiarcolor(JButton botones[][]) {
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                final int finalI = i;
+                final int finalJ = j;
+                listener = new MouseAdapter() {
+                    @Override
+                    public void mouseEntered(MouseEvent evt) {
+                        if (botonesAfectados.contains(botones[finalI][finalJ]) || cont == 4) {
+                            return; // si el botón ya ha sido afectado, salimos del método sin hacer nada
+                        } else {
+                            botones[finalI][finalJ].setBackground(new Color(255, 153, 255));
+                            botones[finalI][finalJ].setFont(new Font("Segoe UI", Font.PLAIN, 11));
+                            Timer timer = new Timer(2000, new ActionListener() {
+                                public void actionPerformed(ActionEvent e) {
+                                    botones[finalI][finalJ].setFont(new Font("Segoe UI", Font.PLAIN, 12));
+                                    if (botonesAfectados.contains(botones[finalI][finalJ])) {
+                                        return; // si el botón ya ha sido afectado, salimos del método sin hacer nada
+                                    } else {
+
+                                        botones[finalI][finalJ].setBackground(new Color(255, 255, 255));
+                                    }
+                                }
+                            });
+                            timer.setRepeats(false);
+                            timer.start();
                         }
                     }
-                    });
-                    timer.setRepeats(false);
-                    timer.start();
-                }
+                };
+                botones[i][j].addMouseListener(listener);
             }
-            };
-            botones[i][j].addMouseListener(listener);
         }
     }
-}
     //FUNCIONES
 
     // - Funcion para saber si he presionado botones dos veces o multiplos de 2
@@ -285,22 +287,22 @@ private void cambiarcolor(JButton botones[][]) {
         //Vector de cantantes [8] pero solo se usan 6 espacios
         String[] cantantes = {"STRAYK", "MANESKIN", "BIGTR", "5SOS", "QUEEN", "NIRVANA", "", ""};
         //NIRVANA
-        JButton[] nirvana = {boton28, boton27, boton26, boton25, boton24, boton23, boton22, };
+        JButton[] nirvana = {boton28, boton27, boton26, boton25, boton24, boton23, boton22,};
 
         //MANESKIN
-        JButton[] maneskin = {boton87, boton77, boton67, boton57, boton47, boton37, boton27, boton17, };
+        JButton[] maneskin = {boton87, boton77, boton67, boton57, boton47, boton37, boton27, boton17,};
 
         //5SOS
-        JButton[] fiveSOS = {boton85, boton84, boton83, boton82, };
+        JButton[] fiveSOS = {boton85, boton84, boton83, boton82,};
 
         //STRAYK
-        JButton[] strayK = {boton32, boton33, boton34, boton35, boton36, boton37, };
+        JButton[] strayK = {boton32, boton33, boton34, boton35, boton36, boton37,};
 
         //BIGTR
-        JButton[] bigTR = {boton81, boton72, boton63, boton54, boton45, };
+        JButton[] bigTR = {boton81, boton72, boton63, boton54, boton45,};
 
         //QUEEN
-        JButton[] queen = {boton11, boton21, boton31, boton41, boton51, };
+        JButton[] queen = {boton11, boton21, boton31, boton41, boton51,};
 
         //Asignacion de letras a texto de la matriz de botones
         for (i = 0; i < 8; i++) {
@@ -311,7 +313,7 @@ private void cambiarcolor(JButton botones[][]) {
                 char letra = (char) (random.nextInt(26) + 'A');
                 String letraStr = String.valueOf(letra);
                 botones[i][j].setText(letraStr);// se le asigna una letra aleatoria al texto de los botones
-                 botonpresionado(botones[i][j], botones, strayK, maneskin, bigTR, fiveSOS, queen, nirvana, chulito1, chulito2, chulito3, chulito4, chulito5, chulito6);
+                botonpresionado(botones[i][j], botones, strayK, maneskin, bigTR, fiveSOS, queen, nirvana, chulito1, chulito2, chulito3, chulito4, chulito5, chulito6);
                 cambiarcolor(botones);
                 //ORGANIZAR LETRAS DE PALABRAS SEGUN LA POSICIÓN DESEADA
                 //De acuerdo a mi matriz planteada:
@@ -368,7 +370,7 @@ private void cambiarcolor(JButton botones[][]) {
                 }
             }
         }
- 
+
         //Hacer invisible estrellas al inicio de apertura de la ventana
         chulito1.setVisible(false);
         chulito2.setVisible(false);
@@ -1347,15 +1349,15 @@ private void cambiarcolor(JButton botones[][]) {
     }// </editor-fold>//GEN-END:initComponents
 
     private void boton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton11ActionPerformed
-        
+
     }//GEN-LAST:event_boton11ActionPerformed
-  
+
     private void boton81ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton81ActionPerformed
-        
+
     }//GEN-LAST:event_boton81ActionPerformed
-  
+
     private void boton32ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton32ActionPerformed
-        
+
     }//GEN-LAST:event_boton32ActionPerformed
 
     private void boton72ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton72ActionPerformed
@@ -1387,7 +1389,7 @@ private void cambiarcolor(JButton botones[][]) {
     }//GEN-LAST:event_boton16ActionPerformed
 
     private void boton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton17ActionPerformed
-        
+
     }//GEN-LAST:event_boton17ActionPerformed
 
     private void boton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton18ActionPerformed
@@ -1431,7 +1433,7 @@ private void cambiarcolor(JButton botones[][]) {
     }//GEN-LAST:event_boton35ActionPerformed
 
     private void boton45ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton45ActionPerformed
-        
+
     }//GEN-LAST:event_boton45ActionPerformed
 
     private void boton55ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton55ActionPerformed
@@ -1445,9 +1447,9 @@ private void cambiarcolor(JButton botones[][]) {
     private void boton75ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton75ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_boton75ActionPerformed
-   
+
     private void boton85ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton85ActionPerformed
-       
+
     }//GEN-LAST:event_boton85ActionPerformed
 
     private void boton26ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton26ActionPerformed
@@ -1483,7 +1485,7 @@ private void cambiarcolor(JButton botones[][]) {
     }//GEN-LAST:event_boton27ActionPerformed
 
     private void boton37ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton37ActionPerformed
-        
+
     }//GEN-LAST:event_boton37ActionPerformed
 
     private void boton47ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton47ActionPerformed
@@ -1501,13 +1503,13 @@ private void cambiarcolor(JButton botones[][]) {
     private void boton77ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton77ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_boton77ActionPerformed
-   
+
     private void boton87ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton87ActionPerformed
-       
+
     }//GEN-LAST:event_boton87ActionPerformed
- 
+
     private void boton28ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton28ActionPerformed
-       
+
     }//GEN-LAST:event_boton28ActionPerformed
 
     private void boton38ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton38ActionPerformed
@@ -1533,30 +1535,30 @@ private void cambiarcolor(JButton botones[][]) {
     private void boton88ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton88ActionPerformed
 
     }//GEN-LAST:event_boton88ActionPerformed
-    int contp=0;
+    int contp = 0;
     private void pistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pistaActionPerformed
         //Para mostrar pistas:
-        
+
         //la pista consiste en crear un fondo verde en la inicial o final de la letra de un planeta que no haya encontrado el usuario
-        if (yaloencontre5 == false&&contp<4) {//pista letra inicial QUEEN
+        if (yaloencontre5 == false && contp < 4) {//pista letra inicial QUEEN
             boton11.setBackground(new Color(153, 255, 153));
 
-        } else if (yaloencontre3 == false&&contp<4) {//pista letra inicial BIGTR
-             boton81.setBackground(new Color(153, 255, 153));//Letra B
-    
-        } else if (yaloencontre4 == false&&contp<4) {//pista letra inicisl 5SOS
-           
+        } else if (yaloencontre3 == false && contp < 4) {//pista letra inicial BIGTR
+            boton81.setBackground(new Color(153, 255, 153));//Letra B
+
+        } else if (yaloencontre4 == false && contp < 4) {//pista letra inicisl 5SOS
+
             boton85.setBackground(new Color(153, 255, 153));
-  
-        } else if (yaloencontre1 == false&&contp<4) {//pista letra final STRAYK
+
+        } else if (yaloencontre1 == false && contp < 4) {//pista letra final STRAYK
             boton37.setBackground(new Color(153, 255, 153));
-        ;
-        } else if (yaloencontre2 == false&&contp<4) {//pista letra final MANESKIN
+            ;
+        } else if (yaloencontre2 == false && contp < 4) {//pista letra final MANESKIN
             boton17.setBackground(new Color(153, 255, 153));
-   
-        } else if (yaloencontre6 == false&&contp<4) {//pista letra final NIRVANA
+
+        } else if (yaloencontre6 == false && contp < 4) {//pista letra final NIRVANA
             boton22.setBackground(new Color(153, 255, 153));
-        
+
         }
         contp += 1;
         if (contp > 4) {
@@ -1652,11 +1654,11 @@ private void cambiarcolor(JButton botones[][]) {
     }//GEN-LAST:event_siguiente1ActionPerformed
 
     private void boton22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton22ActionPerformed
-       
+
     }//GEN-LAST:event_boton22ActionPerformed
 
     private void boton82ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton82ActionPerformed
-        
+
     }//GEN-LAST:event_boton82ActionPerformed
 
     private void boton51ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton51ActionPerformed

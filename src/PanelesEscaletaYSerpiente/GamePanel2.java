@@ -30,7 +30,7 @@ public class GamePanel2 extends javax.swing.JPanel {
 
         for (int i = 0; i < 34; i++) {
 
-            if (i == pos) { 
+            if (i == pos) {
 
                 int x = i;
                 Timer timer = new Timer(10, new ActionListener() {
@@ -47,22 +47,28 @@ public class GamePanel2 extends javax.swing.JPanel {
                 timer.start();
 
             }
-            if(dadoimg.getIcon()!=null){
+            if (dadoimg.getIcon() != null) {
                 dado00.setIcon(fondodado);
             }
-            switch(dado){
-                case 1: dadoimg.setIcon(dado1);
-                break;
-                case 2: dadoimg.setIcon(dado2);
-                break;
-                case 3: dadoimg.setIcon(dado3);
-                break;
-                case 4: dadoimg.setIcon(dado4);
-                break;
-                case 5: dadoimg.setIcon(dado5);
-                break;
-                case 6: dadoimg.setIcon(dado6);
-                break;
+            switch (dado) {
+                case 1:
+                    dadoimg.setIcon(dado1);
+                    break;
+                case 2:
+                    dadoimg.setIcon(dado2);
+                    break;
+                case 3:
+                    dadoimg.setIcon(dado3);
+                    break;
+                case 4:
+                    dadoimg.setIcon(dado4);
+                    break;
+                case 5:
+                    dadoimg.setIcon(dado5);
+                    break;
+                case 6:
+                    dadoimg.setIcon(dado6);
+                    break;
             }
 
         }
@@ -70,7 +76,12 @@ public class GamePanel2 extends javax.swing.JPanel {
         if (pos == 34) {
 
             TirarDados.setEnabled(false);
-            JOptionPane.showMessageDialog(null, "el jugador " + jug + " ha ganado");
+            if (jug == 1) {
+                Resultado.Ganador g = new Resultado.Ganador();
+            } else if (jug == 2) {
+                Resultado.Perdedor g = new Resultado.Perdedor();
+            }
+            //JOptionPane.showMessageDialog(null, "el jugador " + jug + " ha ganado");
             Alien.setLocation(movimientosok[34][0], movimientosok[34][1]);
         }
         if (jug == 1) {
@@ -131,7 +142,7 @@ public class GamePanel2 extends javax.swing.JPanel {
             case 3:
                 AlienU.setIcon(verde);
                 break;
-                
+
         }
         //AvatarJugador.avatar=0;
         //cursor
