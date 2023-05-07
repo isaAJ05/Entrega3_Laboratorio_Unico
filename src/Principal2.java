@@ -9,12 +9,31 @@ import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.net.URL;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 public class Principal2 extends javax.swing.JFrame {
+
     String name = usuario.name;
     FondoPanel fondo = new FondoPanel();
+
+    //SUBRUTINA PARA APLICAR SONIDO
+    private void sonido(String cadena) {
+        try {
+            Clip clip = AudioSystem.getClip();
+            URL url = getClass().getResource(cadena);
+            AudioInputStream audioIn = AudioSystem.getAudioInputStream(url);
+            clip.open(audioIn);
+            clip.start();
+
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+    }
 
     public Principal2() {
         initComponents();
@@ -27,24 +46,26 @@ public class Principal2 extends javax.swing.JFrame {
                 String user;
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
                     if (nombre.getText().equals("")) {
+                        sonido("/Sonidos/error.wav");
                         labeluser.setText("[!]Debe ingresar un nombre o apodo.");
                         user = nombre.getText();
-                        name=user;
+                        name = user;
                     } else {
+                        sonido("/Sonidos/boop.wav");
                         user = nombre.getText();
-                        name=user;
+                        name = user;
                         Principal3 a = new Principal3(user);
                         a.setVisible(true);
                         dispose();
                     }
                 }
             }
-            
+
         });
         //cursor
-        Cursor cursor = Toolkit.getDefaultToolkit().createCustomCursor(new ImageIcon(getClass().getResource("cursor/cursorimg.png")).getImage(),new Point(0,0),"Custom Cursor");
+        Cursor cursor = Toolkit.getDefaultToolkit().createCustomCursor(new ImageIcon(getClass().getResource("cursor/cursorimg.png")).getImage(), new Point(0, 0), "Custom Cursor");
         this.setCursor(cursor);
-        
+
         this.setResizable(false);
     }
 
@@ -148,14 +169,16 @@ public class Principal2 extends javax.swing.JFrame {
 
         String user;
         if (nombre.getText().equals("")) {
+            sonido("/Sonidos/error.wav");
             labeluser.setText("[!]Debe ingresar un nombre o apodo.");
             user = nombre.getText();
-            name=user;
+            name = user;
         } else {
             user = nombre.getText();
-            name=user;
+            name = user;
             Principal3 a = new Principal3(user);
             a.setVisible(true);
+            sonido("/Sonidos/boop.wav");
             this.dispose();
         }
     }//GEN-LAST:event_OKActionPerformed
@@ -177,6 +200,7 @@ public class Principal2 extends javax.swing.JFrame {
     }//GEN-LAST:event_panelKeyPressed
 
     private void volverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_volverActionPerformed
+        sonido("/Sonidos/boop.wav");
         Principal a = new Principal();
         a.setVisible(true);
         this.dispose();
