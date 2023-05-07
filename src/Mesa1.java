@@ -31,22 +31,22 @@ public class Mesa1 extends javax.swing.JFrame {
         this.setCursor(cursor);
         this.setResizable(false);
         Ajustespanel.setVisible(true);
-        
+        labelNombreUser.setText(user);
         deshabilitarbtnGame();
 
     }
 
     //Nombres
-    public void paint(Graphics gr) {
-        super.paint(gr);
-        Graphics u = MesaCartas.getGraphics();
-        Font f = new Font("Berlin Sans FB Demi", Font.PLAIN, 35);
-        u.setFont(f);
-        u.setColor(new Color(102, 255, 153));
-        u.drawString("Stella", 20, 55);
-        u.setColor(new Color(51, 255, 204));
-        u.drawString(user, 20, 290);
-    }
+//    public void paint(Graphics gr) {
+//        super.paint(gr);
+//        Graphics u = MesaCartas.getGraphics();
+//        Font f = new Font("Berlin Sans FB Demi", Font.PLAIN, 35);
+//        u.setFont(f);
+//        u.setColor(new Color(102, 255, 153));
+//        u.drawString("Stella", 20, 45);
+//        u.setColor(new Color(51, 255, 204));
+//        u.drawString(user, 20, 275);
+//    }
 
     boolean repartir = false, ganador = false;
     Random ran = new Random();
@@ -79,8 +79,10 @@ public class Mesa1 extends javax.swing.JFrame {
         btnVolver1 = new javax.swing.JButton();
         labelvolver = new javax.swing.JLabel();
         MesaCartas = new javax.swing.JPanel();
-        SumCartasUs = new javax.swing.JLabel();
-        Mensajito = new javax.swing.JLabel();
+        labelNombreUser = new javax.swing.JLabel();
+        labelStellaNombre = new javax.swing.JLabel();
+        SumCartasU = new javax.swing.JLabel();
+        SumCartasDE = new javax.swing.JLabel();
         C4DE = new javax.swing.JLabel();
         C3DE = new javax.swing.JLabel();
         C2DE = new javax.swing.JLabel();
@@ -97,7 +99,6 @@ public class Mesa1 extends javax.swing.JFrame {
         cartaU3 = new javax.swing.JLabel();
         cartaU2 = new javax.swing.JLabel();
         cartaU1 = new javax.swing.JLabel();
-        SumCartasDE = new javax.swing.JLabel();
         fondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -314,9 +315,22 @@ public class Mesa1 extends javax.swing.JFrame {
         MesaCartas.setEnabled(false);
         MesaCartas.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        SumCartasUs.setFont(new java.awt.Font("Swis721 Cn BT", 0, 14)); // NOI18N
-        MesaCartas.add(SumCartasUs, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 379, 39, 39));
-        MesaCartas.add(Mensajito, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 260, 260, 30));
+        labelNombreUser.setFont(new java.awt.Font("Swis721 BlkCn BT", 0, 36)); // NOI18N
+        labelNombreUser.setForeground(new java.awt.Color(0, 153, 102));
+        MesaCartas.add(labelNombreUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, 90, 30));
+
+        labelStellaNombre.setFont(new java.awt.Font("Swis721 BlkCn BT", 0, 36)); // NOI18N
+        labelStellaNombre.setForeground(new java.awt.Color(255, 204, 0));
+        labelStellaNombre.setText("Stella");
+        MesaCartas.add(labelStellaNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 90, 30));
+
+        SumCartasU.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 0, 36)); // NOI18N
+        SumCartasU.setForeground(new java.awt.Color(255, 255, 153));
+        MesaCartas.add(SumCartasU, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 250, 50, 35));
+
+        SumCartasDE.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 0, 36)); // NOI18N
+        SumCartasDE.setForeground(new java.awt.Color(255, 255, 153));
+        MesaCartas.add(SumCartasDE, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 30, 50, 35));
 
         C4DE.setFont(new java.awt.Font("Snap ITC", 0, 14)); // NOI18N
         C4DE.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -324,7 +338,7 @@ public class Mesa1 extends javax.swing.JFrame {
         C4DE.setText("5");
         C4DE.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         C4DE.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
-        MesaCartas.add(C4DE, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 80, 60, 110));
+        MesaCartas.add(C4DE, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 80, 60, 110));
 
         C3DE.setFont(new java.awt.Font("Snap ITC", 0, 14)); // NOI18N
         C3DE.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -332,19 +346,19 @@ public class Mesa1 extends javax.swing.JFrame {
         C3DE.setText("5");
         C3DE.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         C3DE.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
-        MesaCartas.add(C3DE, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 80, 60, 110));
+        MesaCartas.add(C3DE, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 80, 60, 110));
 
         C2DE.setFont(new java.awt.Font("Snap ITC", 0, 14)); // NOI18N
         C2DE.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         C2DE.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         C2DE.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
-        MesaCartas.add(C2DE, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 110, 60, 110));
+        MesaCartas.add(C2DE, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 110, 60, 110));
 
         C1DE.setFont(new java.awt.Font("Snap ITC", 0, 14)); // NOI18N
         C1DE.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         C1DE.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         C1DE.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
-        MesaCartas.add(C1DE, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 110, 60, 110));
+        MesaCartas.add(C1DE, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, 60, 110));
 
         C4US.setFont(new java.awt.Font("Snap ITC", 0, 14)); // NOI18N
         C4US.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -352,7 +366,7 @@ public class Mesa1 extends javax.swing.JFrame {
         C4US.setText("5");
         C4US.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         C4US.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
-        MesaCartas.add(C4US, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 330, 60, 110));
+        MesaCartas.add(C4US, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 330, 60, 110));
 
         C3US.setFont(new java.awt.Font("Snap ITC", 0, 14)); // NOI18N
         C3US.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -360,31 +374,28 @@ public class Mesa1 extends javax.swing.JFrame {
         C3US.setText("5");
         C3US.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         C3US.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
-        MesaCartas.add(C3US, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 330, 60, 110));
+        MesaCartas.add(C3US, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 330, 60, 110));
 
         C2US.setFont(new java.awt.Font("Snap ITC", 0, 14)); // NOI18N
         C2US.setForeground(new java.awt.Color(204, 0, 0));
         C2US.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         C2US.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         C2US.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
-        MesaCartas.add(C2US, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 330, 60, 110));
+        MesaCartas.add(C2US, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 330, 60, 110));
 
         C1US.setFont(new java.awt.Font("Snap ITC", 0, 14)); // NOI18N
         C1US.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         C1US.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         C1US.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
-        MesaCartas.add(C1US, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 330, 60, 110));
-        MesaCartas.add(cartaD4, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 100, 80, 124));
-        MesaCartas.add(cartaD3, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 100, 80, 124));
-        MesaCartas.add(cartaD2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 100, 80, 124));
-        MesaCartas.add(cartaD1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 100, 80, 124));
-        MesaCartas.add(cartaU4, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 320, 80, 124));
-        MesaCartas.add(cartaU3, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 320, 80, 124));
-        MesaCartas.add(cartaU2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 320, 80, 124));
-        MesaCartas.add(cartaU1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 320, 80, 124));
-
-        SumCartasDE.setFont(new java.awt.Font("Swis721 Cn BT", 0, 14)); // NOI18N
-        MesaCartas.add(SumCartasDE, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 90, 38, 35));
+        MesaCartas.add(C1US, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 330, 60, 110));
+        MesaCartas.add(cartaD4, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 100, 80, 124));
+        MesaCartas.add(cartaD3, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 100, 80, 124));
+        MesaCartas.add(cartaD2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 100, 80, 124));
+        MesaCartas.add(cartaD1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 80, 124));
+        MesaCartas.add(cartaU4, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 320, 80, 124));
+        MesaCartas.add(cartaU3, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 320, 80, 124));
+        MesaCartas.add(cartaU2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 320, 80, 124));
+        MesaCartas.add(cartaU1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, 80, 124));
 
         fondo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagenesBJK/Ilustración_sin_título (2).png"))); // NOI18N
@@ -840,7 +851,6 @@ String colorB;
     private javax.swing.JLabel C4US;
     private javax.swing.JLabel ConteoCartas;
     private javax.swing.JButton Doble;
-    private javax.swing.JLabel Mensajito;
     private javax.swing.JPanel MesaCartas;
     private javax.swing.JButton MostrarAjustesBlackJack;
     private javax.swing.JPanel MovJugadas;
@@ -849,7 +859,7 @@ String colorB;
     private javax.swing.JButton Repartir;
     private javax.swing.JButton Slipt;
     private javax.swing.JLabel SumCartasDE;
-    private javax.swing.JLabel SumCartasUs;
+    private javax.swing.JLabel SumCartasU;
     private javax.swing.JButton btnVolver1;
     private javax.swing.JLabel cartaD1;
     private javax.swing.JLabel cartaD2;
@@ -863,6 +873,8 @@ String colorB;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel labelNombreUser;
+    private javax.swing.JLabel labelStellaNombre;
     private javax.swing.JLabel labelvolver;
     private javax.swing.JButton masbtn;
     private javax.swing.JButton menosbtn;
