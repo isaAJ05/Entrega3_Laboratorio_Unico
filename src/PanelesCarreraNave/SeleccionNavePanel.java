@@ -132,6 +132,7 @@ public class SeleccionNavePanel extends javax.swing.JPanel implements ActionList
 
         jLabel4.setFont(new java.awt.Font("Monospaced", 1, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(204, 204, 255));
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Escoja el carro espacial con el que desea jugar");
         add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 50, 550, -1));
 

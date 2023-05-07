@@ -27,9 +27,7 @@ public class Ganador extends javax.swing.JFrame {
         this.setSize(356, 225);
         this.dispose();
         this.setUndecorated(true);
-
         this.setLocationRelativeTo(null);
-
         Cursor cursor = Toolkit.getDefaultToolkit().createCustomCursor(new ImageIcon(getClass().getResource("cursorimg.png")).getImage(), new Point(0, 0), "Custom Cursor");
         this.setCursor(cursor);
         this.setVisible(true);

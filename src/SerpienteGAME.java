@@ -33,6 +33,7 @@ public class SerpienteGAME extends javax.swing.JFrame {
         BTNAvatar.setVisible(false);
         atras.setEnabled(false);
         atras.setVisible(false);
+        
 
     }
 
@@ -65,7 +66,7 @@ public class SerpienteGAME extends javax.swing.JFrame {
 
         val.setFont(new java.awt.Font("Monospaced", 0, 14)); // NOI18N
         val.setForeground(new java.awt.Color(255, 0, 0));
-        getContentPane().add(val, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 460, 420, 20));
+        getContentPane().add(val, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 460, 420, 20));
 
         atras.setBackground(new java.awt.Color(255, 102, 51));
         atras.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
@@ -75,7 +76,7 @@ public class SerpienteGAME extends javax.swing.JFrame {
                 atrasActionPerformed(evt);
             }
         });
-        getContentPane().add(atras, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 20, -1, -1));
+        getContentPane().add(atras, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 20, -1, -1));
 
         BTNAvatar.setBackground(new java.awt.Color(255, 102, 51));
         BTNAvatar.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
@@ -179,11 +180,12 @@ public class SerpienteGAME extends javax.swing.JFrame {
             InfoBTN.setVisible(false);
             atras.setEnabled(true);
             atras.setVisible(true);
+            BTNAvatar.setEnabled(false);
+            BTNAvatar.setVisible(false);
         } else {
             val.setText("(!) Debe escoger un avatar antes de jugar.");
+           
         }
-        BTNAvatar.setEnabled(false);
-        BTNAvatar.setVisible(false);
 
 
     }//GEN-LAST:event_JugarBTNActionPerformed
@@ -220,7 +222,7 @@ public class SerpienteGAME extends javax.swing.JFrame {
         InfoBTN.setVisible(true);
         JugarBTN.setEnabled(true);
         JugarBTN.setVisible(true);
-         AvatarJugador.avatar = 0;
+        AvatarJugador.avatar = 0;
     }//GEN-LAST:event_atrasActionPerformed
 
     public static void main(String args[]) {

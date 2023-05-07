@@ -39,6 +39,10 @@ public class Pista extends javax.swing.JFrame {
         Cursor cursor = Toolkit.getDefaultToolkit().createCustomCursor(new ImageIcon(getClass().getResource("cursor/cursorimg.png")).getImage(), new Point(0, 0), "Custom Cursor");
         this.setCursor(cursor);
         this.setResizable(false);
+        SelectNAVEbtn.setEnabled(false);
+        SelectNAVEbtn.setVisible(false);
+        atras.setEnabled(false);
+        atras.setVisible(false);
 
     }
 
@@ -61,13 +65,14 @@ public class Pista extends javax.swing.JFrame {
     private void initComponents() {
 
         Visible = new javax.swing.JPanel();
+        SelectNAVEbtn = new javax.swing.JButton();
+        val = new javax.swing.JLabel();
+        atras = new javax.swing.JButton();
+        ArduinoPista = new javax.swing.JButton();
         btnVolver1 = new javax.swing.JButton();
         labelvolver = new javax.swing.JLabel();
         InfoBTN = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        ArduinoPista = new javax.swing.JButton();
-        SelectNAVEbtn = new javax.swing.JButton();
         btnStart = new javax.swing.JButton();
         visible2 = new javax.swing.JPanel();
         fondo = new javax.swing.JLabel();
@@ -78,6 +83,43 @@ public class Pista extends javax.swing.JFrame {
 
         Visible.setBackground(new java.awt.Color(0, 0, 51));
         Visible.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        SelectNAVEbtn.setBackground(new java.awt.Color(153, 153, 255));
+        SelectNAVEbtn.setFont(new java.awt.Font("Monospaced", 1, 18)); // NOI18N
+        SelectNAVEbtn.setForeground(new java.awt.Color(51, 51, 51));
+        SelectNAVEbtn.setText("Naves");
+        SelectNAVEbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SelectNAVEbtnActionPerformed(evt);
+            }
+        });
+        Visible.add(SelectNAVEbtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 450, 90, -1));
+
+        val.setFont(new java.awt.Font("Monospaced", 0, 14)); // NOI18N
+        val.setForeground(new java.awt.Color(255, 0, 0));
+        Visible.add(val, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 460, 360, 20));
+
+        atras.setBackground(new java.awt.Color(153, 153, 255));
+        atras.setFont(new java.awt.Font("Monospaced", 1, 18)); // NOI18N
+        atras.setForeground(new java.awt.Color(51, 51, 51));
+        atras.setText("Atrás");
+        atras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                atrasActionPerformed(evt);
+            }
+        });
+        Visible.add(atras, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 20, -1, -1));
+
+        ArduinoPista.setBackground(new java.awt.Color(153, 153, 255));
+        ArduinoPista.setFont(new java.awt.Font("Monospaced", 1, 18)); // NOI18N
+        ArduinoPista.setForeground(new java.awt.Color(51, 51, 51));
+        ArduinoPista.setText("Remoto");
+        ArduinoPista.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ArduinoPistaActionPerformed(evt);
+            }
+        });
+        Visible.add(ArduinoPista, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 450, -1, -1));
 
         btnVolver1.setBackground(new java.awt.Color(255, 153, 255));
         btnVolver1.setFont(new java.awt.Font("Monospaced", 1, 12)); // NOI18N
@@ -119,39 +161,12 @@ public class Pista extends javax.swing.JFrame {
                 InfoBTNActionPerformed(evt);
             }
         });
-        Visible.add(InfoBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 450, -1, -1));
-
-        jLabel2.setFont(new java.awt.Font("Engravers MT", 1, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 204, 0));
-        jLabel2.setText("STAR GAMES");
-        Visible.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 450, 150, 30));
+        Visible.add(InfoBTN, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 450, -1, -1));
 
         jLabel1.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(153, 153, 255));
         jLabel1.setText("CARRERA DE AUTOS ESPACIALES");
-        Visible.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 10, 563, 60));
-
-        ArduinoPista.setBackground(new java.awt.Color(153, 153, 255));
-        ArduinoPista.setFont(new java.awt.Font("Monospaced", 1, 18)); // NOI18N
-        ArduinoPista.setForeground(new java.awt.Color(51, 51, 51));
-        ArduinoPista.setText("Remoto");
-        ArduinoPista.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ArduinoPistaActionPerformed(evt);
-            }
-        });
-        Visible.add(ArduinoPista, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 450, -1, -1));
-
-        SelectNAVEbtn.setBackground(new java.awt.Color(153, 153, 255));
-        SelectNAVEbtn.setFont(new java.awt.Font("Monospaced", 1, 18)); // NOI18N
-        SelectNAVEbtn.setForeground(new java.awt.Color(51, 51, 51));
-        SelectNAVEbtn.setText("Naves");
-        SelectNAVEbtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SelectNAVEbtnActionPerformed(evt);
-            }
-        });
-        Visible.add(SelectNAVEbtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 450, -1, -1));
+        Visible.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 10, 563, 60));
 
         btnStart.setBackground(new java.awt.Color(153, 153, 255));
         btnStart.setFont(new java.awt.Font("Monospaced", 1, 18)); // NOI18N
@@ -162,7 +177,7 @@ public class Pista extends javax.swing.JFrame {
                 btnStartActionPerformed(evt);
             }
         });
-        Visible.add(btnStart, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 450, -1, -1));
+        Visible.add(btnStart, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 450, -1, -1));
 
         visible2.setBackground(new java.awt.Color(0, 0, 51));
         visible2.setEnabled(false);
@@ -199,18 +214,38 @@ public class Pista extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartActionPerformed
-        CarreraPANELcarros Cpanel = new CarreraPANELcarros(user);
-        ShowPanel(Cpanel); //Llamar el metodo para mostrar el panel 
+        if (PanelesCarreraNave.NaveJugador.nave != 0) {
+            CarreraPANELcarros Cpanel = new CarreraPANELcarros(user);
+            ShowPanel(Cpanel); //Llamar el metodo para mostrar el panel 
+            val.setText(null);
+            btnStart.setEnabled(false);
+            btnStart.setVisible(false);
+            InfoBTN.setEnabled(false);
+            InfoBTN.setVisible(false);
+            atras.setEnabled(true);
+            atras.setVisible(true);
+            SelectNAVEbtn.setEnabled(false);
+            SelectNAVEbtn.setVisible(false);
+        } else {
+            val.setText("(!) Debe escoger una nave antes de jugar.");
+        }
+
     }//GEN-LAST:event_btnStartActionPerformed
 
     private void InfoBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InfoBTNActionPerformed
         PanelInfo InfoPANEL = new PanelInfo();
         ShowPanel(InfoPANEL);//Llamar el metodo para mostrar el panel 
+        SelectNAVEbtn.setEnabled(true);
+        SelectNAVEbtn.setVisible(true);
+        btnStart.setEnabled(true);
+        btnStart.setVisible(true);
     }//GEN-LAST:event_InfoBTNActionPerformed
 
     private void SelectNAVEbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SelectNAVEbtnActionPerformed
         SeleccionNavePanel NavePanel = new SeleccionNavePanel(user, nave);
         ShowPanel(NavePanel);//Llamar el metodo para mostrar el panel 
+        SelectNAVEbtn.setEnabled(false);
+        SelectNAVEbtn.setVisible(false);
     }//GEN-LAST:event_SelectNAVEbtnActionPerformed
 
     private void btnVolver1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVolver1MouseEntered
@@ -232,6 +267,18 @@ public class Pista extends javax.swing.JFrame {
         CarreraPANELcarrosConArduino NavePanel = new CarreraPANELcarrosConArduino(user);
         ShowPanel(NavePanel);//Llamar el metodo para mostrar el panel 
     }//GEN-LAST:event_ArduinoPistaActionPerformed
+
+    private void atrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atrasActionPerformed
+        PanelInfo InfoPANEL = new PanelInfo();
+        ShowPanel(InfoPANEL);//Llamar el metodo para mostrar el panel 
+         atras.setEnabled(false);
+        atras.setVisible(false);
+        SelectNAVEbtn.setEnabled(true);
+        SelectNAVEbtn.setVisible(true);
+        btnStart.setEnabled(true);
+        btnStart.setVisible(true);
+        PanelesCarreraNave.NaveJugador.nave = 0;
+    }//GEN-LAST:event_atrasActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -271,12 +318,13 @@ public class Pista extends javax.swing.JFrame {
     private javax.swing.JButton InfoBTN;
     private javax.swing.JButton SelectNAVEbtn;
     private javax.swing.JPanel Visible;
+    private javax.swing.JButton atras;
     private javax.swing.JButton btnStart;
     private javax.swing.JButton btnVolver1;
     private javax.swing.JLabel fondo;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel labelvolver;
+    private javax.swing.JLabel val;
     private javax.swing.JPanel visible2;
     // End of variables declaration//GEN-END:variables
 

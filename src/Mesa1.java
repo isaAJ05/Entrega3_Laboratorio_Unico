@@ -25,6 +25,7 @@ public class Mesa1 extends javax.swing.JFrame {
         this.user = name;
         initComponents();
         this.setLocationRelativeTo(null);
+        this.setTitle("Blackjack");
         //cursor
         Cursor cursor = Toolkit.getDefaultToolkit().createCustomCursor(new ImageIcon(getClass().getResource("cursor/cursorimg.png")).getImage(), new Point(0, 0), "Custom Cursor");
         this.setCursor(cursor);
