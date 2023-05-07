@@ -31,7 +31,7 @@ public class Mesa1 extends javax.swing.JFrame {
         this.setCursor(cursor);
         this.setResizable(false);
         Ajustespanel.setVisible(true);
-        labelNombreUser.setText(user+":");
+        labelNombreUser.setText(user + ":");
         deshabilitarbtnGame();
 
     }
@@ -47,7 +47,6 @@ public class Mesa1 extends javax.swing.JFrame {
 //        u.setColor(new Color(51, 255, 204));
 //        u.drawString(user, 20, 275);
 //    }
-
     boolean repartir = false, ganador = false;
     Random ran = new Random();
 
@@ -66,6 +65,7 @@ public class Mesa1 extends javax.swing.JFrame {
         valdmasos = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         MovJugadas = new javax.swing.JPanel();
+        Mensajito = new javax.swing.JLabel();
         MostrarAjustesBlackJack = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         Repartir = new javax.swing.JButton();
@@ -82,10 +82,12 @@ public class Mesa1 extends javax.swing.JFrame {
         labelStellaNombre = new javax.swing.JLabel();
         SumCartasU = new javax.swing.JLabel();
         SumCartasDE = new javax.swing.JLabel();
+        C5DE = new javax.swing.JLabel();
         C4DE = new javax.swing.JLabel();
         C3DE = new javax.swing.JLabel();
         C2DE = new javax.swing.JLabel();
         C1DE = new javax.swing.JLabel();
+        C5US = new javax.swing.JLabel();
         C4US = new javax.swing.JLabel();
         C3US = new javax.swing.JLabel();
         C2US = new javax.swing.JLabel();
@@ -169,7 +171,7 @@ public class Mesa1 extends javax.swing.JFrame {
                             .addGroup(AjustespanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(valdmasos, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(BTNbarajaConfirmar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addContainerGap(72, Short.MAX_VALUE)))
+                            .addContainerGap(55, Short.MAX_VALUE)))
                     .addGroup(AjustespanelLayout.createSequentialGroup()
                         .addComponent(mostrarnummaso, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -201,6 +203,7 @@ public class Mesa1 extends javax.swing.JFrame {
 
         MovJugadas.setBackground(new java.awt.Color(107, 138, 91));
         MovJugadas.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        MovJugadas.add(Mensajito, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 100, 200, 50));
 
         MostrarAjustesBlackJack.setBackground(new java.awt.Color(102, 255, 153));
         MostrarAjustesBlackJack.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
@@ -261,6 +264,11 @@ public class Mesa1 extends javax.swing.JFrame {
         Doble.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
         Doble.setText("Doble (+2)");
         Doble.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        Doble.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DobleActionPerformed(evt);
+            }
+        });
         MovJugadas.add(Doble, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 310, 120, 36));
 
         valdRepartir.setFont(new java.awt.Font("Monospaced", 0, 14)); // NOI18N
@@ -327,18 +335,20 @@ public class Mesa1 extends javax.swing.JFrame {
         SumCartasDE.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         MesaCartas.add(SumCartasDE, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 30, 70, 35));
 
+        C5DE.setFont(new java.awt.Font("Snap ITC", 0, 14)); // NOI18N
+        C5DE.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        C5DE.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        C5DE.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+        MesaCartas.add(C5DE, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 110, 60, 110));
+
         C4DE.setFont(new java.awt.Font("Snap ITC", 0, 14)); // NOI18N
         C4DE.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        C4DE.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagenesBJK/IMGpicas-removebg-preview (1).png"))); // NOI18N
-        C4DE.setText("5");
         C4DE.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         C4DE.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
         MesaCartas.add(C4DE, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 110, 60, 110));
 
         C3DE.setFont(new java.awt.Font("Snap ITC", 0, 14)); // NOI18N
         C3DE.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        C3DE.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagenesBJK/IMGpicas-removebg-preview (1).png"))); // NOI18N
-        C3DE.setText("5");
         C3DE.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         C3DE.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
         MesaCartas.add(C3DE, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 110, 60, 110));
@@ -355,18 +365,20 @@ public class Mesa1 extends javax.swing.JFrame {
         C1DE.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
         MesaCartas.add(C1DE, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, 60, 110));
 
+        C5US.setFont(new java.awt.Font("Snap ITC", 0, 14)); // NOI18N
+        C5US.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        C5US.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        C5US.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+        MesaCartas.add(C5US, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 330, 60, 110));
+
         C4US.setFont(new java.awt.Font("Snap ITC", 0, 14)); // NOI18N
         C4US.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        C4US.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagenesBJK/IMGpicas-removebg-preview (1).png"))); // NOI18N
-        C4US.setText("5");
         C4US.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         C4US.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
         MesaCartas.add(C4US, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 330, 60, 110));
 
         C3US.setFont(new java.awt.Font("Snap ITC", 0, 14)); // NOI18N
         C3US.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        C3US.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagenesBJK/IMGpicas-removebg-preview (1).png"))); // NOI18N
-        C3US.setText("5");
         C3US.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         C3US.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
         MesaCartas.add(C3US, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 330, 60, 110));
@@ -405,96 +417,95 @@ public class Mesa1 extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public void ConteoCartaSinUsar(int C,int cont){
-        C=C-cont;//Toatl de cartas menos las que se repartieron
+    public void ConteoCartaSinUsar(int C, int cont) {
+        C = C - cont;//Toatl de cartas menos las que se repartieron
         ConteoCartas.setText(Integer.toString(C)); //Imprimir numero de cartas actual sin usar
     }
-    
+
     private void PararActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PararActionPerformed
 
     }//GEN-LAST:event_PararActionPerformed
 
-    public void ColorBarajaMostrar(String cB, JLabel label){
-        switch(cB){
+    public void ColorBarajaMostrar(String cB, JLabel label) {
+        switch (cB) {
             case "r": //Baraja Roja
-                label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagenesBJK/cartaroj80a.png"))); 
+                label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagenesBJK/cartaroj80a.png")));
                 break;
             case "n"://Baraja Azul
-                label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagenesBJK/cartaazul80.png"))); 
+                label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagenesBJK/cartaazul80.png")));
                 break;
-        } 
+        }
     }
-    
-    public void CartaBlanca(JLabel label){
-        label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagenesBJK/cartablanca (1).png")));         
+
+    public void CartaBlanca(JLabel label) {
+        label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagenesBJK/cartablanca (1).png")));
     }
-    
-    public void TipoDeCarta(int tipodibujo,JLabel label,int valor){
-        
-        switch(tipodibujo){
+
+    public void TipoDeCarta(int tipodibujo, JLabel label, int valor) {
+
+        switch (tipodibujo) {
             case 0:
             case 4:
             case 8://Corazon
-              label.setForeground(new java.awt.Color(204, 0, 0)); //Rojo
-              label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagenesBJK/IMGcorazón (1).png"))); 
-              label.setText(String.valueOf(valor));
+                label.setForeground(new java.awt.Color(204, 0, 0)); //Rojo
+                label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagenesBJK/IMGcorazón (1).png")));
+                label.setText(String.valueOf(valor));
                 break;
             case 1:
             case 5:
             case 9: //Picas
-              label.setForeground(new java.awt.Color(0, 0, 0)); //Negro
-              label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagenesBJK/IMGpicas-removebg-preview (1).png"))); 
-              label.setText(String.valueOf(valor));
+                label.setForeground(new java.awt.Color(0, 0, 0)); //Negro
+                label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagenesBJK/IMGpicas-removebg-preview (1).png")));
+                label.setText(String.valueOf(valor));
                 break;
             case 2:
             case 6:
             case 10://Trebol
-              label.setForeground(new java.awt.Color(0, 0, 0));//Negro
-              label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagenesBJK/IMGtrebol-removebg-preview (1).png"))); 
-              label.setText(String.valueOf(valor));
+                label.setForeground(new java.awt.Color(0, 0, 0));//Negro
+                label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagenesBJK/IMGtrebol-removebg-preview (1).png")));
+                label.setText(String.valueOf(valor));
                 break;
             case 3:
             case 7:
             case 11://Diamante
-              label.setForeground(new java.awt.Color(204, 0, 0)); //Rojo
-              label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagenesBJK/IMGdiamante-removebg-preview (1).png"))); 
-              label.setText(String.valueOf(valor));
+                label.setForeground(new java.awt.Color(204, 0, 0)); //Rojo
+                label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagenesBJK/IMGdiamante-removebg-preview (1).png")));
+                label.setText(String.valueOf(valor));
                 break;
         }
     }
-    int Sum0US=0;//Suma contador de cartas del usuario
-    int Sum0DE=0;
+    int Sum0US = 0;//Suma contador de cartas del usuario
+    int Sum0DE = 0;
     int a = 0; //Variable que verifica si antes de jugar ya repartio las cartas
     private void RepartirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RepartirActionPerformed
         ocultarPanelAjustes();
         if (a == 0) {
-            
+            HabilitarbtnGame();
             repartir = true;
-            Pedir1Carta.setVisible(false);
-            
-         
+           // Pedir1Carta.setVisible(false);
+
             // Cartas iniciales para el usuario
-            int CartaUs1 = 0, CartaUs2 = 0,tipodibujo1=0,tipodibujo2=0, Ucolum1=0,Ucolum2=0;
-            String colorB1,colorB2;
+            int CartaUs1 = 0, CartaUs2 = 0, tipodibujo1 = 0, tipodibujo2 = 0, Ucolum1 = 0, Ucolum2 = 0;
+            String colorB1, colorB2;
             //carta 1
-            elegircarta( baraja, Ccolor); //Subrutina para la eleccion de carta al azar 
-            CartaUs1=valorCarta;
-            tipodibujo1=fila;
-            colorB1=colorB;
-            Ucolum1=columna;
+            elegircarta(baraja, Ccolor); //Subrutina para la eleccion de carta al azar 
+            CartaUs1 = valorCarta;
+            tipodibujo1 = fila;
+            colorB1 = colorB;
+            Ucolum1 = columna;
             cont++;
             //carta 2
-            elegircarta( baraja, Ccolor);
-            CartaUs2=valorCarta;
-            tipodibujo2=fila;
-            colorB2=colorB;
-            Ucolum2=columna;
+            elegircarta(baraja, Ccolor);
+            CartaUs2 = valorCarta;
+            tipodibujo2 = fila;
+            colorB2 = colorB;
+            Ucolum2 = columna;
             cont++;
-            System.out.println("Carta 1 "+CartaUs1);
-             System.out.println("Carta 2 "+CartaUs2);
-            Sum0US=CartaUs1+CartaUs2;//Sumar las dos cartas del usuario
+            System.out.println("Carta 1 " + CartaUs1);
+            System.out.println("Carta 2 " + CartaUs2);
+            Sum0US = CartaUs1 + CartaUs2;//Sumar las dos cartas del usuario
             //Validacion del sistema
-            if (Sum0US> 21 & (CartaUs1 == 11 | CartaUs2 == 11)) { //Si sale un as se tomara como 11 siempre y cuando no se pase de 21
+            if (Sum0US > 21 & (CartaUs1 == 11 | CartaUs2 == 11)) { //Si sale un as se tomara como 11 siempre y cuando no se pase de 21
                 //as=1;
                 if (CartaUs1 == 11) {
                     CartaUs1 = 1;
@@ -504,38 +515,38 @@ public class Mesa1 extends javax.swing.JFrame {
                 }
                 Sum0US = CartaUs1 + CartaUs2;
             }
-            ConteoCartaSinUsar( C, cont);
+            ConteoCartaSinUsar(C, cont);
             //Mostrar primera carta
             CartaBlanca(cartaU1);
-            TipoDeCarta(tipodibujo1,C1US,CartaUs1);
+            TipoDeCarta(tipodibujo1, C1US, CartaUs1);
             //Mostrar segunda carta
             CartaBlanca(cartaU2);
-            TipoDeCarta(tipodibujo2,C2US,CartaUs2);
-            
+            TipoDeCarta(tipodibujo2, C2US, CartaUs2);
+
             SumCartasU.setText(String.valueOf(Sum0US));
-            
+
             // Cartas iniciales para Stella (DEALER)
-             int CartaDe1 = 0, CartaDe2 = 0,Dtipodibujo1=0,Dtipodibujo2=0,DColum1=0,DColum2=0;
-            String colorDB1="n",colorDB2="n";
+            int CartaDe1 = 0, CartaDe2 = 0, Dtipodibujo1 = 0, Dtipodibujo2 = 0, DColum1 = 0, DColum2 = 0;
+            String colorDB1 = "n", colorDB2 = "n";
             //carta 1
-            elegircarta( baraja, Ccolor); //Subrutina para la eleccion de carta al azar 
-            CartaDe1=valorCarta;
-            Dtipodibujo1=fila;
-            colorDB1=colorB;
-            DColum1=columna;
+            elegircarta(baraja, Ccolor); //Subrutina para la eleccion de carta al azar 
+            CartaDe1 = valorCarta;
+            Dtipodibujo1 = fila;
+            colorDB1 = colorB;
+            DColum1 = columna;
             cont++;
             //carta 2
-            elegircarta( baraja, Ccolor);
-            CartaDe2=valorCarta;
-            Dtipodibujo2=fila;
-            colorDB2=colorB;
-            DColum2=columna;
+            elegircarta(baraja, Ccolor);
+            CartaDe2 = valorCarta;
+            Dtipodibujo2 = fila;
+            colorDB2 = colorB;
+            DColum2 = columna;
             cont++;
-            System.out.println("Carta 1 "+CartaDe1);
-            System.out.println("Carta 2 "+CartaDe2);
-            Sum0DE=CartaDe1+CartaDe2;//Sumar las dos cartas del usuario
+            System.out.println("Carta 1 " + CartaDe1);
+            System.out.println("Carta 2 " + CartaDe2);
+            Sum0DE = CartaDe1 + CartaDe2;//Sumar las dos cartas del usuario
             //Validacion del sistema
-            if (Sum0DE> 21 & (CartaDe1 == 11 | CartaDe2 == 11)) { //Si sale un as se tomara como 11 siempre y cuando no se pase de 21
+            if (Sum0DE > 21 & (CartaDe1 == 11 | CartaDe2 == 11)) { //Si sale un as se tomara como 11 siempre y cuando no se pase de 21
                 //as=1;
                 if (CartaDe1 == 11) {
                     CartaDe1 = 1;
@@ -545,17 +556,17 @@ public class Mesa1 extends javax.swing.JFrame {
                 }
                 Sum0US = CartaDe1 + CartaDe2;
             }
-            ConteoCartaSinUsar( C, cont);
+            ConteoCartaSinUsar(C, cont);
             //Mostrar primera carta
-           // CartaBlanca(cartaD1);
-            ColorBarajaMostrar(colorDB1,  cartaD1);
-           // TipoDeCarta(Dtipodibujo1,C1DE,CartaDe1);
+            // CartaBlanca(cartaD1);
+            ColorBarajaMostrar(colorDB1, cartaD1);
+            // TipoDeCarta(Dtipodibujo1,C1DE,CartaDe1);
             //Mostrar segunda carta
             CartaBlanca(cartaD2);
-            TipoDeCarta(Dtipodibujo2,C2DE,CartaDe2);
-            
+            TipoDeCarta(Dtipodibujo2, C2DE, CartaDe2);
+
             SumCartasDE.setText(String.valueOf(CartaDe2));
-            
+
             Pedir1Carta.setVisible(true); //Activar botones de juego
             a = 1;
             Repartir.setEnabled(false); //Desspues de repatir que el boton se desactive
@@ -563,62 +574,108 @@ public class Mesa1 extends javax.swing.JFrame {
             valdRepartir.setText(" Reparte las cartas para iniciar");
         }
     }//GEN-LAST:event_RepartirActionPerformed
-int valorCarta;
-int columna, fila;
-String colorB;
-    public void elegircarta(int[][] baraja, String []Ccolor) {
+    int valorCarta;
+    int columna, fila;
+    String colorB;
+
+    public void elegircarta(int[][] baraja, String[] Ccolor) {
         int f = ran.nextInt(n); //Con inidices aleoatorios se escoge las cartas dentro de la matriz baraja
         int c = ran.nextInt(m); //Solo sera necesarios hacer esto dos veces
-       
+
         if (baraja[f][c] == 0) { //Asegurar que la combinación al azar no de una posición que tenga el valor de 0
             while (baraja[f][c] == 0) {
                 f = ran.nextInt(n); //Posicion en matriz aleatoria
                 c = ran.nextInt(m);
             }
         }
-        System.out.println(" F ="+f + "   C= "+c);
-        colorB= Ccolor[f];//Color de la baraja segun la fila
+        System.out.println(" F =" + f + "   C= " + c);
+        colorB = Ccolor[f];//Color de la baraja segun la fila
         fila = f; //Tipo de dibujo segun la fila
-        columna=c;
-        valorCarta=baraja[f][c];//Se le asigna el valor de la carta 
-        baraja[f][c]=0; //Se descuenta las cartas ya tomadas
+        columna = c;
+        valorCarta = baraja[f][c];//Se le asigna el valor de la carta 
+        baraja[f][c] = 0; //Se descuenta las cartas ya tomadas
+
     }
-    int s=3;
+    int s = 3;
     private void Pedir1CartaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Pedir1CartaActionPerformed
         if (repartir) { //Validación de repartir las cartas iniciales
-            cont++;
-            ConteoCartaSinUsar( C, cont);
-            String colorB3,colorB4, colorB5;
-            int CartaUs5,CartaUs3,CartaUs4,tipodibujo3,tipodibujo4,tipodibujo5,Ucolum3,Ucolum4,Ucolum5;
-//        CartaUs2=valorCarta;
-//            tipodibujo2=fila;
-//            colorB2=colorB;
-//            Ucolum2=columna;
-switch(s){
-    case 3:
-        break;
-    case 4:
-        break;
-    case 5:
-        break;
-        
-}
-s++;
-            elegircarta( baraja, Ccolor); //Subrutina para la eleccion de carta al azar 
-            
-            
-            
-            //Usuario
-            
-            
+            HabilitarbtnGame();
+            Doble.setEnabled(false);
+            Repartir.setEnabled(false);
+            if (s <= 5) {
+                cont++;
+                ConteoCartaSinUsar(C, cont);
+                String colorB3, colorB4, colorB5;
+                int CartaUs5, CartaUs3, CartaUs4, tipodibujo3, tipodibujo4, tipodibujo5, Ucolum3, Ucolum4, Ucolum5;
 
+                elegircarta(baraja, Ccolor); //Subrutina para la eleccion de carta al azar 
+                switch (s) {
+                    case 3:
+                        CartaUs3 = valorCarta;
+                        tipodibujo3 = fila;
+                        colorB3 = colorB;
+                        Ucolum3 = columna;
+                        Sum0US = CartaUs3 + Sum0US;
+                        if (Sum0US > 21 & CartaUs3 == 11) { //Si sale un as se tomara como 11 siempre y cuando no se pase de 21
+                            //as=1;
+                            CartaUs3 = 1;
+                            Sum0US = CartaUs3 + Sum0US;
+                        }
+                        ConteoCartaSinUsar(C, cont);
+                        //Mostrar carta
+                        CartaBlanca(cartaU3);
+                        TipoDeCarta(tipodibujo3, C3US, CartaUs3);
+                        break;
+                    case 4:
+                        CartaUs4 = valorCarta;
+                        tipodibujo4 = fila;
+                        colorB4 = colorB;
+                        Ucolum4 = columna;
+                        Sum0US = CartaUs4 + Sum0US;
+                        if (Sum0US > 21 & CartaUs4 == 11) { //Si sale un as se tomara como 11 siempre y cuando no se pase de 21
+                            //as=1;
+                            CartaUs4 = 1;
+                            Sum0US = CartaUs4 + Sum0US;
+                        }
+                        ConteoCartaSinUsar(C, cont);
+                        //Mostrar carta
+                        CartaBlanca(cartaU4);
+                        TipoDeCarta(tipodibujo4, C4US, CartaUs4);
+                        break;
+                    case 5:
+                        CartaUs5 = valorCarta;
+                        tipodibujo5 = fila;
+                        colorB5 = colorB;
+                        Ucolum5 = columna;
+                        Sum0US = CartaUs5 + Sum0US;
+                        if (Sum0US > 21 & CartaUs5 == 11) { //Si sale un as se tomara como 11 siempre y cuando no se pase de 21
+                            //as=1;
+                            CartaUs5 = 1;
+                            Sum0US = CartaUs5 + Sum0US;
+                        }
+                        ConteoCartaSinUsar(C, cont);
+                        //Mostrar carta
+                        CartaBlanca(cartaU5);
+                        TipoDeCarta(tipodibujo5, C5US, CartaUs5);
+                        break;
+                }
+                SumCartasU.setText(String.valueOf(Sum0US));
+                s++;
+            } else {
+                Mensajito.setText("Ya no puede  pedir mas cartas");
+
+                Pedir1Carta.setEnabled(false);
+                //mensajito de se lleno, ya no puede pedir mas
+            }
         } else {
-            Pedir1Carta.setVisible(false);
+            Pedir1Carta.setEnabled(false);
+            Parar.setEnabled(false);
+            Doble.setEnabled(false);
             JOptionPane.showMessageDialog(null, "No se han repartido cartas", "BlackJack∙", 2);
         }
     }//GEN-LAST:event_Pedir1CartaActionPerformed
 
-    
+   
     //Animacion Subrutinas
     private void ocultarA() {
         //Si variable es 0 que indica que se esta vizualizando el panel de ajustes
@@ -722,12 +779,12 @@ s++;
     String Ccolor[] = {"r", "r", "r", "r", "n", "n", "n", "n", "r", "r", "r", "r"};
 
     int baraja[][] = new int[100][100];
-    
-    public int [][]llenarM(int n, int m){
+
+    public int[][] llenarM(int n, int m) {
         int i, j;
         int contvalorcarta;
-        int [][]B=new int[n][m];
-        
+        int[][] B = new int[n][m];
+
         for (i = 0; i < n; i++) {
             contvalorcarta = 2;
             for (j = 0; j < m; j++) {
@@ -751,7 +808,7 @@ s++;
         ConteoCartas.setText(Integer.toString(C));
         System.out.println(NumerodeMasos);
         System.out.println(n);
-        baraja=llenarM(n,m);
+        baraja = llenarM(n, m);
         ocultarA();
         HabilitarbtnGame();
         h = 0;
@@ -791,7 +848,7 @@ s++;
         11 2 3 4 5 6 7 8 9 10 10 10 10  |10
         11 2 3 4 5 6 7 8 9 10 10 10 10  |11
        
-        */
+         */
     }//GEN-LAST:event_BTNbarajaConfirmarActionPerformed
 
     private void masbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_masbtnActionPerformed
@@ -814,6 +871,39 @@ s++;
 
         mostrarnummaso.setText(String.valueOf(NumerodeMasos));
     }//GEN-LAST:event_menosbtnActionPerformed
+
+    private void DobleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DobleActionPerformed
+        if (repartir) { //Validación de repartir las cartas iniciales
+            HabilitarbtnGame();
+            if (s == 3) {
+                Pedir1Carta.setEnabled(false);
+                String colorB3;
+                int CartaUs3, tipodibujo3, Ucolum3;
+                elegircarta(baraja, Ccolor);
+                CartaUs3 = valorCarta;
+                tipodibujo3 = fila;
+                colorB3 = colorB;
+                Ucolum3 = columna;
+                Sum0US = CartaUs3 + Sum0US;
+                if (Sum0US > 21 & CartaUs3 == 11) { //Si sale un as se tomara como 11 siempre y cuando no se pase de 21
+                    //as=1;
+                    CartaUs3 = 1;
+                    Sum0US = CartaUs3 + Sum0US;
+                }
+                ConteoCartaSinUsar(C, cont);
+                //Mostrar carta
+                CartaBlanca(cartaU3);
+                TipoDeCarta(tipodibujo3, C3US, CartaUs3);
+            } else {
+                Doble.setEnabled(false);
+            }
+        } else {
+            Pedir1Carta.setEnabled(false);
+            Parar.setEnabled(false);
+            Doble.setEnabled(false);
+            JOptionPane.showMessageDialog(null, "No se han repartido cartas", "BlackJack∙", 2);
+        }
+    }//GEN-LAST:event_DobleActionPerformed
 
     void ocultarPanelAjustes() { //Subrutina Deshabiliatar Ajustes del todo 
         Ajustespanel.setEnabled(false);
@@ -871,8 +961,11 @@ s++;
     private javax.swing.JLabel C3US;
     private javax.swing.JLabel C4DE;
     private javax.swing.JLabel C4US;
+    private javax.swing.JLabel C5DE;
+    private javax.swing.JLabel C5US;
     private javax.swing.JLabel ConteoCartas;
     private javax.swing.JButton Doble;
+    private javax.swing.JLabel Mensajito;
     private javax.swing.JPanel MesaCartas;
     private javax.swing.JButton MostrarAjustesBlackJack;
     private javax.swing.JPanel MovJugadas;
