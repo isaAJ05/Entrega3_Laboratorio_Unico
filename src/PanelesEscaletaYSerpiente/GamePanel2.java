@@ -4,7 +4,6 @@ import java.util.Random;
 import javax.swing.Timer;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
@@ -12,6 +11,8 @@ import javax.swing.JOptionPane;
 
 public class GamePanel2 extends javax.swing.JPanel {
 
+    //Variables Globales
+    //- Imagenes
     ClassLoader CL = getClass().getClassLoader();
     ImageIcon morado = new ImageIcon(CL.getResource("IMGescaleraSerp/AlienMoradoMini.png"));
     ImageIcon rojo = new ImageIcon(CL.getResource("IMGescaleraSerp/AlienRojoMini.png"));
@@ -23,30 +24,51 @@ public class GamePanel2 extends javax.swing.JPanel {
     ImageIcon dado5 = new ImageIcon(CL.getResource("IMGescaleraSerp/dado5.png"));
     ImageIcon dado6 = new ImageIcon(CL.getResource("IMGescaleraSerp/dado6.png"));
     ImageIcon fondodado = new ImageIcon(CL.getResource("IMGescaleraSerp/fondodado_6.png"));
+
+    //- Seleccion de avatar
     int avatar = AvatarJugador.avatar;
-    public static int dado;
 
+    //- Matriz de movimientos coordenadas x y y de cada posicion del tablero
+    int movimientosok[][]
+            = {{500, 300}, {410, 300}, {330, 300}, {250, 300}, {170, 300}, {90, 300}, {20, 300},
+            {20, 220}, {90, 220}, {170, 220}, {250, 220}, {330, 220}, {410, 220}, {500, 220},
+            {500, 150}, {410, 150}, {330, 150}, {250, 150}, {170, 150}, {90, 150}, {20, 150},
+            {20, 70}, {90, 70}, {170, 70}, {250, 70}, {330, 70}, {410, 70}, {500, 70},
+            {500, 0}, {410, 0}, {330, 0}, {250, 0}, {170, 0}, {90, 0}, {20, 0},};
+
+    //- Posicion en el tablero 
+    int jugador1 = 0;
+    int jugador2 = 0;
+
+    //- Turno de cada jugador
+    int turno = 1;
+
+    //- Generar numeros aleatorios - Dados
+    Random ran = new Random();
+    int dado;
+
+    //SUBRUTINAS
+    // - Subrutina para realizar movimientos de los personajes en el tablero
     private void moverAlien(JLabel Alien, int pos, int jug, int avatar) {
-
+        // Este codigo está inspirado en base a 
+       
         for (int i = 0; i < 34; i++) {
-
             if (i == pos) {
-
-                int x = i;
                 Timer timer = new Timer(10, new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        if (jug == 1) {
+                        if (jug == 1) {//Se valida que jugador es
                             // Actualizar la posición del JLabel
-                            Alien.setLocation(movimientosok[posj1][0], movimientosok[posj1][1]);
+                            Alien.setLocation(movimientosok[jugador1][0], movimientosok[jugador1][1]);
                         } else {
-                            Alien.setLocation(movimientosok[posj2][0], movimientosok[posj2][1]);
+                            Alien.setLocation(movimientosok[jugador2][0], movimientosok[jugador2][1]);
                         }
                     }
                 });
                 timer.start();
 
             }
+            //Para agregar imagen del # de dado acorde al numero aleatorio generado
             if (dadoimg.getIcon() != null) {
                 dado00.setIcon(fondodado);
             }
@@ -72,10 +94,9 @@ public class GamePanel2 extends javax.swing.JPanel {
             }
 
         }
-
+        //Para verificar si ha ganado un usuario o en su defecto Stella:)
         if (pos == 34) {
-
-            TirarDados.setEnabled(false);
+            TirarDados.setEnabled(false);//Deshabilitar boton de tirar
             if (jug == 1) {
                 Resultado.Ganador g = new Resultado.Ganador();
             } else if (jug == 2) {
@@ -84,6 +105,7 @@ public class GamePanel2 extends javax.swing.JPanel {
             //JOptionPane.showMessageDialog(null, "el jugador " + jug + " ha ganado");
             Alien.setLocation(movimientosok[34][0], movimientosok[34][1]);
         }
+        //Ceder turnos
         if (jug == 1) {
             turno = 2;
         } else if (jug == 2) {
@@ -91,8 +113,8 @@ public class GamePanel2 extends javax.swing.JPanel {
         }
 
     }
-
-    public static int res(int pos) {
+    // -Subrutina para verificar si la posicion de x jugador lo conlleva a una escalera o una serpiente
+    public void res(int pos) {
         //Arriba
         if (pos == 3) {
             pos = 9;
@@ -123,7 +145,13 @@ public class GamePanel2 extends javax.swing.JPanel {
         if (pos == 28) {
             pos = 15;
         }
-        return pos;
+        //Para asignar nueva posicion al jugador correspondiente
+        if (turno == 1) {
+            jugador1 = pos;
+        } else {
+            jugador2 = pos;
+        }
+
     }
 
     public GamePanel2(int avatar) {
@@ -144,12 +172,7 @@ public class GamePanel2 extends javax.swing.JPanel {
                 break;
 
         }
-        //AvatarJugador.avatar=0;
-        //cursor
-        //cursor
-        // Cursor cursor = Toolkit.getDefaultToolkit().createCustomCursor(new ImageIcon(getClass().getResource("cursor/cursorimg.png")).getImage(),new Point(0,0),"Custom Cursor");
-        //this.setCursor(cursor);
-        // Agregar un temporizador
+       
     }
 
     @SuppressWarnings("unchecked")
@@ -230,58 +253,39 @@ public class GamePanel2 extends javax.swing.JPanel {
         add(Fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 400));
     }// </editor-fold>//GEN-END:initComponents
 
-//Para el alien del usuario
-//Matriz de movimientos coordenadas x y y 
-    int movimientosok[][]
-            = {{500, 300}, {420, 300}, {340, 300}, {170, 220}, {170, 300}, {90, 300}, {10, 300},
-            {90, 300}, {420, 10}, {170, 220}, {260, 220}, {340, 220}, {420, 220}, {500, 220},
-            {500, 140}, {420, 140}, {340, 140}, {240, 140}, {170, 140}, {10, 60}, {10, 140},
-            {10, 60}, {90, 140}, {170, 60}, {260, 60}, {420, 10}, {420, 60}, {500, 60},
-            {500, 140}, {420, 10}, {260, 60}, {260, 10}, {340, 140}, {90, 10}, {10, 10},};
-
-    //posicion en el tablero 
-    public static int posj1 = 0;
-    public static int posj2 = 0;
-
-    //turno de cada jugador
-    private int turno = 1;
-
-    //generar numeros aleatorios
-    private Random ran = new Random();
-
 
     private void TirarDadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TirarDadosActionPerformed
-        System.out.println("posj1 = " + PanelesEscaletaYSerpiente.GamePanel2.posj1);
-        System.out.println("posj2 = " + PanelesEscaletaYSerpiente.GamePanel2.posj2);
-        NumDado.setText("");
-        dado = ran.nextInt(6) + 1;
-        NumDado.setText(Integer.toString(dado));
 
+        NumDado.setText("");//Label que contiene el numero del dado
+        dado = ran.nextInt(6) + 1;//variable que se le asigna numero aleatorio entre el 1 y 6
+        NumDado.setText(Integer.toString(dado));
+        //De acuerdo al turno manejar posiciones (ya que tenemos variables globales, se dificulto manejar todo en una sola subrutina)
         if (turno == 1) {
-            if (posj1 < 34) {
+            if (jugador1 < 34) { //validacion 1
                 //nueva posicion
-                posj1 += dado;
-                res(posj1);
-                if (posj1 > 34) {
-                    posj1 = posj1 - dado;
-                    JOptionPane.showMessageDialog(null, "Oh! Has sacado un numero superior.. \nEspera al próximo turno");
+                jugador1 += dado;
+                res(jugador1);//Ejecutar subrutina que verifica si se encuentra en una escalera o serpiente
+
+                if (jugador1 > 34) { // validacion 2
+                    jugador1 = jugador1 - dado;
+                    JOptionPane.showMessageDialog(null, "GAMER\nOh! Has sacado un numero superior.. \nEspera al próximo turno");
                     turno = 2;
                 }
-                moverAlien(AlienU, posj1, 1, avatar);
             }
+            moverAlien(AlienU, jugador1, 1, avatar);// Ejecutar subrutina que mueve JLabel osea icono asignado
 
         } else {
-            if (posj2 < 34) {
+            if (jugador2 < 34) {
                 //nueva posicion
-                posj2 += dado;
-                res(posj2);
-                if (posj2 > 34) {
-                    posj2 = posj2 - dado;
-                    JOptionPane.showMessageDialog(null, "Oh! Has sacado un numero superior.. \nEspera al próximo turno");
+                jugador2 += dado;
+                res(jugador2);
+                if (jugador2 > 34) {
+                    jugador2 = jugador2 - dado;
+                    JOptionPane.showMessageDialog(null, "STELLA\nOh! Has sacado un numero superior.. \nEspera al próximo turno");
                     turno = 1;
                 }
-                moverAlien(AlienR, posj2, 2, avatar);
             }
+            moverAlien(AlienR, jugador2, 2, avatar);
 
         }
 
@@ -289,9 +293,10 @@ public class GamePanel2 extends javax.swing.JPanel {
     }//GEN-LAST:event_TirarDadosActionPerformed
 
     private void ReiniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReiniciarActionPerformed
+        //Volver variables a sus posiciones/valores originales
         dado = 0;
-        posj1 = 0;
-        posj2 = 0;
+        jugador1 = 0;
+        jugador2 = 0;
         TirarDados.setEnabled(true);
         AlienU.setLocation(movimientosok[0][0], movimientosok[0][1]);
         AlienR.setLocation(movimientosok[0][0], movimientosok[0][1]);
