@@ -241,7 +241,7 @@ public class Mesa1 extends javax.swing.JFrame {
         ConteoCartas.setFont(new java.awt.Font("Engravers MT", 1, 18)); // NOI18N
         ConteoCartas.setForeground(new java.awt.Color(51, 51, 51));
         ConteoCartas.setText("104");
-        MovJugadas.add(ConteoCartas, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 20, 41, 30));
+        MovJugadas.add(ConteoCartas, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 20, 41, 30));
 
         Parar.setBackground(new java.awt.Color(102, 255, 153));
         Parar.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
@@ -336,19 +336,15 @@ public class Mesa1 extends javax.swing.JFrame {
 
         C2DE.setFont(new java.awt.Font("Snap ITC", 0, 14)); // NOI18N
         C2DE.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        C2DE.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagenesBJK/IMGpicas-removebg-preview (1).png"))); // NOI18N
-        C2DE.setText("5");
         C2DE.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         C2DE.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
-        MesaCartas.add(C2DE, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 90, 60, 110));
+        MesaCartas.add(C2DE, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 110, 60, 110));
 
         C1DE.setFont(new java.awt.Font("Snap ITC", 0, 14)); // NOI18N
         C1DE.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        C1DE.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagenesBJK/IMGpicas-removebg-preview (1).png"))); // NOI18N
-        C1DE.setText("5");
         C1DE.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         C1DE.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
-        MesaCartas.add(C1DE, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 90, 60, 110));
+        MesaCartas.add(C1DE, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 110, 60, 110));
 
         C4US.setFont(new java.awt.Font("Snap ITC", 0, 14)); // NOI18N
         C4US.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -374,7 +370,6 @@ public class Mesa1 extends javax.swing.JFrame {
         MesaCartas.add(C2US, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 330, 60, 110));
 
         C1US.setFont(new java.awt.Font("Snap ITC", 0, 14)); // NOI18N
-        C1US.setForeground(new java.awt.Color(0, 0, 0));
         C1US.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         C1US.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         C1US.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
@@ -425,6 +420,7 @@ public class Mesa1 extends javax.swing.JFrame {
     public void CartaBlanca(JLabel label){
         label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagenesBJK/cartablanca (1).png")));         
     }
+    
     public void TipoDeCarta(int tipodibujo,JLabel label,int valor){
         
         switch(tipodibujo){
@@ -468,16 +464,16 @@ public class Mesa1 extends javax.swing.JFrame {
             Pedir1Carta.setVisible(false);
             // Cartas iniciales para el usuario
             int CartaUs1 = 0, CartaUs2 = 0,tipodibujo1=0,tipodibujo2=0, Ucolum1=0,Ucolum2=0;
-            String colorB1="n",colorB2="n";
+            String colorB1,colorB2;
             //carta 1
-            elegircarta( baraja); //Subrutina para la eleccion de carta al azar 
+            elegircarta( baraja, Ccolor); //Subrutina para la eleccion de carta al azar 
             CartaUs1=valorCarta;
             tipodibujo1=fila;
             colorB1=colorB;
             Ucolum1=columna;
             cont++;
             //carta 2
-            elegircarta( baraja);
+            elegircarta( baraja, Ccolor);
             CartaUs2=valorCarta;
             tipodibujo2=fila;
             colorB2=colorB;
@@ -509,14 +505,14 @@ public class Mesa1 extends javax.swing.JFrame {
              int CartaDe1 = 0, CartaDe2 = 0,Dtipodibujo1=0,Dtipodibujo2=0,DColum1=0,DColum2=0;
             String colorDB1="n",colorDB2="n";
             //carta 1
-            elegircarta( baraja); //Subrutina para la eleccion de carta al azar 
+            elegircarta( baraja, Ccolor); //Subrutina para la eleccion de carta al azar 
             CartaDe1=valorCarta;
             Dtipodibujo1=fila;
             colorDB1=colorB;
             DColum1=columna;
             cont++;
             //carta 2
-            elegircarta( baraja);
+            elegircarta( baraja, Ccolor);
             CartaDe2=valorCarta;
             Dtipodibujo2=fila;
             colorDB2=colorB;
@@ -538,11 +534,13 @@ public class Mesa1 extends javax.swing.JFrame {
             }
             ConteoCartaSinUsar( C, cont);
             //Mostrar primera carta
-            CartaBlanca(cartaD1);
-            TipoDeCarta(Dtipodibujo1,C1DE,CartaDe1);
+           // CartaBlanca(cartaD1);
+            ColorBarajaMostrar(colorDB1,  cartaD1);
+           // TipoDeCarta(Dtipodibujo1,C1DE,CartaDe1);
             //Mostrar segunda carta
             CartaBlanca(cartaD2);
             TipoDeCarta(Dtipodibujo2,C2DE,CartaDe2);
+            
             Pedir1Carta.setVisible(true); //Activar botones de juego
             a = 1;
             Repartir.setEnabled(false); //Desspues de repatir que el boton se desactive
@@ -553,7 +551,7 @@ public class Mesa1 extends javax.swing.JFrame {
 int valorCarta;
 int columna, fila;
 String colorB;
-    public void elegircarta(int[][] baraja) {
+    public void elegircarta(int[][] baraja, String []Ccolor) {
         int f = ran.nextInt(n); //Con inidices aleoatorios se escoge las cartas dentro de la matriz baraja
         int c = ran.nextInt(m); //Solo sera necesarios hacer esto dos veces
        
