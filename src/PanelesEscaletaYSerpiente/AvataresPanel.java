@@ -1,12 +1,70 @@
 package PanelesEscaletaYSerpiente;
 
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.net.URL;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 public class AvataresPanel extends javax.swing.JPanel implements ActionListener {
 
+    //SUBRUTINAS PARA APLICAR SONIDO
+    // - subrutina 1
+    private void sonido(String cadena) {
+        try {
+            Clip clip = AudioSystem.getClip();
+            URL url = getClass().getResource(cadena);
+            AudioInputStream audioIn = AudioSystem.getAudioInputStream(url);
+            clip.open(audioIn);
+            clip.start();
+
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+
+    }
+    // - subrutina 2
+    private Clip clip;
+     public void sonido2(JButton boton, String archivoSonido) {
+        boton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                super.mouseEntered(e);
+                try {
+                    
+                    clip = AudioSystem.getClip();
+                    URL url = getClass().getResource(archivoSonido);
+                    AudioInputStream audioIn = AudioSystem.getAudioInputStream(url);
+                    clip.open(audioIn);
+                    clip.start();
+                    boton.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    clip.stop();
+                    sonido("/Sonidos/seleccion.wav");
+                    
+
+                }
+            });
+                } catch (Exception ex) {
+                    System.err.println(ex.getMessage());
+                }
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                super.mouseExited(e);
+                if (clip != null) {
+                    clip.stop();
+                }
+            }
+        });
+    }
     ClassLoader CL = getClass().getClassLoader();
     ImageIcon morado = new ImageIcon(CL.getResource("IMGescaleraSerp/morado150.png"));
     ImageIcon rojo = new ImageIcon(CL.getResource("IMGescaleraSerp/rojo150.png"));
@@ -18,6 +76,10 @@ public class AvataresPanel extends javax.swing.JPanel implements ActionListener 
         this.AmoradoBTN.addActionListener(this);
         this.ArojoBTN.addActionListener(this);
         this.AverdeBTN.addActionListener(this);
+        //APLIOAR SONIDOS
+         sonido2(ArojoBTN,"/Sonidos/rojo.wav");
+         sonido2(AverdeBTN,"/Sonidos/verde.wav");
+         sonido2(AmoradoBTN,"/Sonidos/morado.wav");
     }
     JButton btn;
 
@@ -112,6 +174,11 @@ public class AvataresPanel extends javax.swing.JPanel implements ActionListener 
         ArojoBTN.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGescaleraSerp/AlienRojo.png"))); // NOI18N
         ArojoBTN.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGescaleraSerp/AlienRojo.png"))); // NOI18N
         ArojoBTN.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGescaleraSerp/AlienRojo.png"))); // NOI18N
+        ArojoBTN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ArojoBTNActionPerformed(evt);
+            }
+        });
 
         AmoradoBTN.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGescaleraSerp/morado150.png"))); // NOI18N
         AmoradoBTN.setBorderPainted(false);
@@ -161,8 +228,7 @@ public class AvataresPanel extends javax.swing.JPanel implements ActionListener 
                         .addComponent(ArojoBTN, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(129, 129, 129)
-                        .addComponent(cb1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(cb1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
@@ -223,6 +289,10 @@ public class AvataresPanel extends javax.swing.JPanel implements ActionListener 
     private void cb3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cb3ActionPerformed
+
+    private void ArojoBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ArojoBTNActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ArojoBTNActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
