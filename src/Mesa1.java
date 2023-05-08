@@ -35,7 +35,7 @@ public class Mesa1 extends javax.swing.JFrame {
         deshabilitarbtnGame();
 
     }
-    
+
     boolean repartir = false;
     Random ran = new Random();
     String Ganador, perdedor;
@@ -58,6 +58,7 @@ public class Mesa1 extends javax.swing.JFrame {
         Mensajito = new javax.swing.JLabel();
         MostrarAjustesBlackJack = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
+        VolveraJugar = new javax.swing.JButton();
         Repartir = new javax.swing.JButton();
         Pedir1Carta = new javax.swing.JButton();
         ConteoCartas = new javax.swing.JLabel();
@@ -193,7 +194,10 @@ public class Mesa1 extends javax.swing.JFrame {
 
         MovJugadas.setBackground(new java.awt.Color(107, 138, 91));
         MovJugadas.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        MovJugadas.add(Mensajito, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 100, 200, 50));
+
+        Mensajito.setFont(new java.awt.Font("Monospaced", 1, 12)); // NOI18N
+        Mensajito.setForeground(new java.awt.Color(255, 0, 0));
+        MovJugadas.add(Mensajito, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 60, 200, 50));
 
         MostrarAjustesBlackJack.setBackground(new java.awt.Color(102, 255, 153));
         MostrarAjustesBlackJack.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
@@ -210,6 +214,13 @@ public class Mesa1 extends javax.swing.JFrame {
         jLabel2.setText("Cartas");
         MovJugadas.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 30, -1, -1));
 
+        VolveraJugar.setBackground(new java.awt.Color(102, 255, 153));
+        VolveraJugar.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
+        VolveraJugar.setText("Volver a Jugar");
+        VolveraJugar.setAutoscrolls(true);
+        VolveraJugar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        MovJugadas.add(VolveraJugar, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 360, 180, 34));
+
         Repartir.setBackground(new java.awt.Color(0, 102, 51));
         Repartir.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
         Repartir.setText("Repartir");
@@ -221,7 +232,7 @@ public class Mesa1 extends javax.swing.JFrame {
                 RepartirActionPerformed(evt);
             }
         });
-        MovJugadas.add(Repartir, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 210, 120, 33));
+        MovJugadas.add(Repartir, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 172, 120, 33));
 
         Pedir1Carta.setBackground(new java.awt.Color(96, 211, 98));
         Pedir1Carta.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
@@ -232,16 +243,15 @@ public class Mesa1 extends javax.swing.JFrame {
                 Pedir1CartaActionPerformed(evt);
             }
         });
-        MovJugadas.add(Pedir1Carta, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 260, 120, 36));
+        MovJugadas.add(Pedir1Carta, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 215, 120, 36));
 
         ConteoCartas.setFont(new java.awt.Font("Engravers MT", 1, 24)); // NOI18N
-        ConteoCartas.setForeground(new java.awt.Color(0, 0, 0));
         ConteoCartas.setText("104");
         MovJugadas.add(ConteoCartas, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 20, 70, 30));
 
         Parar.setBackground(new java.awt.Color(102, 255, 153));
         Parar.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
-        Parar.setText("Parar");
+        Parar.setText("Plantar");
         Parar.setAutoscrolls(true);
         Parar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         Parar.addActionListener(new java.awt.event.ActionListener() {
@@ -249,7 +259,7 @@ public class Mesa1 extends javax.swing.JFrame {
                 PararActionPerformed(evt);
             }
         });
-        MovJugadas.add(Parar, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 360, 120, 34));
+        MovJugadas.add(Parar, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 306, 120, 34));
 
         Doble.setBackground(new java.awt.Color(102, 255, 153));
         Doble.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
@@ -260,7 +270,7 @@ public class Mesa1 extends javax.swing.JFrame {
                 DobleActionPerformed(evt);
             }
         });
-        MovJugadas.add(Doble, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 310, 120, 36));
+        MovJugadas.add(Doble, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 260, 120, 36));
 
         valdRepartir.setFont(new java.awt.Font("Monospaced", 0, 14)); // NOI18N
         MovJugadas.add(valdRepartir, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 60, 200, 21));
@@ -268,7 +278,7 @@ public class Mesa1 extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Engravers MT", 1, 24)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 204, 0));
         jLabel4.setText("STAR GAMES");
-        MovJugadas.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 160, 220, -1));
+        MovJugadas.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 120, 220, -1));
 
         btnVolver1.setBackground(new java.awt.Color(107, 138, 91));
         btnVolver1.setFont(new java.awt.Font("Monospaced", 1, 12)); // NOI18N
@@ -313,17 +323,20 @@ public class Mesa1 extends javax.swing.JFrame {
         labelStellaNombre.setText("Stella:");
         MesaCartas.add(labelStellaNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 100, 30));
 
-        SumCartasU.setBackground(new java.awt.Color(0, 51, 0));
-        SumCartasU.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 0, 36)); // NOI18N
-        SumCartasU.setForeground(new java.awt.Color(255, 255, 153));
+        SumCartasU.setBackground(new java.awt.Color(102, 255, 102));
+        SumCartasU.setFont(new java.awt.Font("Felix Titling", 1, 24)); // NOI18N
+        SumCartasU.setForeground(new java.awt.Color(0, 153, 0));
         SumCartasU.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        SumCartasU.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        SumCartasU.setBorder(javax.swing.BorderFactory.createMatteBorder(3, 3, 3, 3, new java.awt.Color(0, 153, 0)));
+        SumCartasU.setOpaque(true);
         MesaCartas.add(SumCartasU, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 260, 70, 35));
 
-        SumCartasDE.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 0, 36)); // NOI18N
-        SumCartasDE.setForeground(new java.awt.Color(255, 255, 153));
+        SumCartasDE.setBackground(new java.awt.Color(102, 255, 102));
+        SumCartasDE.setFont(new java.awt.Font("Felix Titling", 1, 24)); // NOI18N
+        SumCartasDE.setForeground(new java.awt.Color(0, 153, 0));
         SumCartasDE.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        SumCartasDE.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        SumCartasDE.setBorder(javax.swing.BorderFactory.createMatteBorder(3, 3, 3, 3, new java.awt.Color(0, 153, 0)));
+        SumCartasDE.setOpaque(true);
         MesaCartas.add(SumCartasDE, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 30, 70, 35));
 
         C5DE.setFont(new java.awt.Font("Snap ITC", 0, 14)); // NOI18N
@@ -418,31 +431,33 @@ public class Mesa1 extends javax.swing.JFrame {
         TipoDeCarta(Dtipodibujo1, C1DE, CartaDe1);
         SumCartasDE.setText(String.valueOf(Sum0DE));
         Pedir1Carta.setEnabled(false);
-        
+
     }//GEN-LAST:event_PararActionPerformed
 
-    public void Comparar (){
-        if(Sum0DE>Sum0US){
-            Ganador="Stella";
-            perdedor=user;
-        }else{
-            if(Sum0DE<Sum0US){
-                Ganador=user;
-                perdedor="Stella";
-            }else{
-                Ganador="Empate";
+    public void Comparar() {
+        if (Sum0DE > Sum0US) {
+            Ganador = "Stella";
+            perdedor = user;
+        } else {
+            if (Sum0DE < Sum0US) {
+                Ganador = user;
+                perdedor = "Stella";
+            } else {
+                Ganador = "Empate";
             }
         }
     }
-    public void Comprobar21(){
-        if(Sum0DE>21 | Sum0US>21){ //Si se pasa de 21 cualquiera de los dos
-            
-        }else{
-            if(Sum0DE==21 | Sum0US==21){ //Si llegan a 21 exacto (BLACKJACK)
+
+    public void Comprobar21() {
+        if (Sum0DE > 21 | Sum0US > 21) { //Si se pasa de 21 cualquiera de los dos
+
+        } else {
+            if (Sum0DE == 21 | Sum0US == 21) { //Si llegan a 21 exacto (BLACKJACK)
                 Comparar();
             }
         }
     }
+
     public void ColorBarajaMostrar(String cB, JLabel label) {
         switch (cB) {
             case "r": //Baraja Roja
@@ -499,7 +514,7 @@ public class Mesa1 extends javax.swing.JFrame {
 
     int CartaDe1 = 0, CartaDe2 = 0, Dtipodibujo1 = 0, Dtipodibujo2 = 0, DColum1 = 0, DColum2 = 0;
     String colorDB1 = "n", colorDB2 = "n";
-    
+
     int a = 0; //Variable que verifica si antes de jugar ya repartio las cartas
     private void RepartirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RepartirActionPerformed
         ocultarPanelAjustes();
@@ -569,9 +584,10 @@ public class Mesa1 extends javax.swing.JFrame {
                 //as=1;
                 if (CartaDe1 == 11) {
                     CartaDe1 = 1;
-                }
-                if (CartaDe2 == 11) {
-                    CartaDe2 = 1;
+                } else {
+                    if (CartaDe2 == 11) {
+                        CartaDe2 = 1;
+                    }
                 }
                 Sum0US = CartaDe1 + CartaDe2;
             }
@@ -617,7 +633,7 @@ public class Mesa1 extends javax.swing.JFrame {
     int s = 3;
 
     String colorB3, colorB4, colorB5;
-    int CartaUs5=0, CartaUs3=0, CartaUs4=0, tipodibujo3=0, tipodibujo4=0, tipodibujo5=0, Ucolum3=0, Ucolum4=0, Ucolum5=0;
+    int CartaUs5 = 0, CartaUs3 = 0, CartaUs4 = 0, tipodibujo3 = 0, tipodibujo4 = 0, tipodibujo5 = 0, Ucolum3 = 0, Ucolum4 = 0, Ucolum5 = 0;
 
     private void Pedir1CartaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Pedir1CartaActionPerformed
         if (repartir) { //Validación de repartir las cartas iniciales
@@ -639,7 +655,7 @@ public class Mesa1 extends javax.swing.JFrame {
                         if (Sum0US > 21 & CartaUs3 == 11) { //Si sale un as se tomara como 11 siempre y cuando no se pase de 21
                             //as=1;
                             CartaUs3 = 1;
-                            Sum0US = CartaUs3 + Sum0US;
+                            Sum0US = CartaUs3 + (Sum0US - 11);
                         }
                         ConteoCartaSinUsar(C, cont);
                         //Mostrar carta
@@ -655,7 +671,7 @@ public class Mesa1 extends javax.swing.JFrame {
                         if (Sum0US > 21 & CartaUs4 == 11) { //Si sale un as se tomara como 11 siempre y cuando no se pase de 21
                             //as=1;
                             CartaUs4 = 1;
-                            Sum0US = CartaUs4 + Sum0US;
+                            Sum0US = CartaUs4 + (Sum0US - 11);
                         }
                         ConteoCartaSinUsar(C, cont);
                         //Mostrar carta
@@ -671,7 +687,7 @@ public class Mesa1 extends javax.swing.JFrame {
                         if (Sum0US > 21 & CartaUs5 == 11) { //Si sale un as se tomara como 11 siempre y cuando no se pase de 21
                             //as=1;
                             CartaUs5 = 1;
-                            Sum0US = CartaUs5 + Sum0US;
+                            Sum0US = CartaUs5 + (Sum0US - 11);
                         }
                         ConteoCartaSinUsar(C, cont);
                         //Mostrar carta
@@ -748,6 +764,7 @@ public class Mesa1 extends javax.swing.JFrame {
         Pedir1Carta.setEnabled(false);
         Parar.setEnabled(false);
         Doble.setEnabled(false);
+        VolveraJugar.setEnabled(false);
     }
 
     private void HabilitarbtnGame() {
@@ -755,6 +772,7 @@ public class Mesa1 extends javax.swing.JFrame {
         Pedir1Carta.setEnabled(true);
         Parar.setEnabled(true);
         Doble.setEnabled(true);
+        VolveraJugar.setEnabled(true);
     }
 
     private void MostrarAjustesBlackJackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MostrarAjustesBlackJackActionPerformed
@@ -894,6 +912,8 @@ public class Mesa1 extends javax.swing.JFrame {
     private void DobleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DobleActionPerformed
         if (repartir) { //Validación de repartir las cartas iniciales
             HabilitarbtnGame();
+            Repartir.setEnabled(false);
+            Doble.setEnabled(false);
             if (s == 3) {
                 Pedir1Carta.setEnabled(false);
                 String colorB3;
@@ -907,12 +927,13 @@ public class Mesa1 extends javax.swing.JFrame {
                 if (Sum0US > 21 & CartaUs3 == 11) { //Si sale un as se tomara como 11 siempre y cuando no se pase de 21
                     //as=1;
                     CartaUs3 = 1;
-                    Sum0US = CartaUs3 + Sum0US;
+                    Sum0US = CartaUs3 + (Sum0US - 11);
                 }
                 ConteoCartaSinUsar(C, cont);
                 //Mostrar carta
                 CartaBlanca(cartaU3);
                 TipoDeCarta(tipodibujo3, C3US, CartaUs3);
+                SumCartasU.setText(String.valueOf(Sum0US));
             } else {
                 Doble.setEnabled(false);
             }
@@ -993,6 +1014,7 @@ public class Mesa1 extends javax.swing.JFrame {
     private javax.swing.JButton Repartir;
     private javax.swing.JLabel SumCartasDE;
     private javax.swing.JLabel SumCartasU;
+    private javax.swing.JButton VolveraJugar;
     private javax.swing.JButton btnVolver1;
     private javax.swing.JLabel cartaD1;
     private javax.swing.JLabel cartaD2;
