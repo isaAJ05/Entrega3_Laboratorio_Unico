@@ -14,6 +14,7 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
+import javax.swing.JProgressBar;
 
 /**
  *
@@ -34,6 +35,9 @@ public class Principal extends javax.swing.JFrame {
         } catch (Exception e) {
             System.err.println(e.getMessage());
         }
+        
+       
+
     }
 
     public Principal() {
@@ -58,8 +62,11 @@ public class Principal extends javax.swing.JFrame {
         } catch (Exception e) {
             System.err.println(e.getMessage());
         }
-
+        
+        
     }
+
+    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -98,14 +105,13 @@ public class Principal extends javax.swing.JFrame {
         panelLayout.setVerticalGroup(
             panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelLayout.createSequentialGroup()
-                .addContainerGap(94, Short.MAX_VALUE)
+                .addContainerGap(85, Short.MAX_VALUE)
                 .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelLayout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(151, 151, 151))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelLayout.createSequentialGroup()
                         .addComponent(continuar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(170, 170, 170))))
+                        .addGap(16, 16, 16)))
+                .addGap(160, 160, 160))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -126,6 +132,7 @@ public class Principal extends javax.swing.JFrame {
         Principal2 a = new Principal2();
         a.setVisible(true);
         sonido("/Sonidos/boop.wav");
+        
         this.dispose();
     }//GEN-LAST:event_continuarActionPerformed
 
