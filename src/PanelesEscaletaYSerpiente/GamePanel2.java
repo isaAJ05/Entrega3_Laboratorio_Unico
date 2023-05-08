@@ -38,8 +38,8 @@ public class GamePanel2 extends javax.swing.JPanel {
     ImageIcon dado6 = new ImageIcon(CL.getResource("IMGescaleraSerp/dado6.png"));
     ImageIcon stellaimg = new ImageIcon(CL.getResource("IMGescaleraSerp/stellaa (1).png"));
     ImageIcon fondodado = new ImageIcon(CL.getResource("IMGescaleraSerp/fondodado_6.png"));
-    ImageIcon stellafeliz = new ImageIcon(CL.getResource("resultados/stellafeliz.png"));
-    ImageIcon stellatriste = new ImageIcon(CL.getResource("IMGescaleraSerp/resultados/stellafeliz.png"));
+    ImageIcon stellafeliz = new ImageIcon(CL.getResource("resultado/stellafeliz.png"));
+    ImageIcon stellatriste = new ImageIcon(CL.getResource("resultado/stellatriste.png"));
 
     private Component componenteEncima = null;
     //- Seleccion de avatar
@@ -126,27 +126,31 @@ public class GamePanel2 extends javax.swing.JPanel {
 
             }
             //Para agregar imagen del # de dado acorde al numero aleatorio generado
-            if (dadoimg.getIcon() != null) {
-                dado00.setIcon(fondodado);
-            }
+            
             switch (dado) {
                 case 1:
                     dadoimg.setIcon(dado1);
+                    dado00.setIcon(fondodado);
                     break;
                 case 2:
                     dadoimg.setIcon(dado2);
+                    dado00.setIcon(fondodado);
                     break;
                 case 3:
                     dadoimg.setIcon(dado3);
+                    dado00.setIcon(fondodado);
                     break;
                 case 4:
                     dadoimg.setIcon(dado4);
+                    dado00.setIcon(fondodado);
                     break;
                 case 5:
                     dadoimg.setIcon(dado5);
+                    dado00.setIcon(fondodado);
                     break;
                 case 6:
                     dadoimg.setIcon(dado6);
+                    dado00.setIcon(fondodado);
                     break;
             }
 
@@ -170,7 +174,7 @@ public class GamePanel2 extends javax.swing.JPanel {
                 Resultado.Perdedor g = new Resultado.Perdedor(user);
                 g.t1.setText("¡Te gané!");
                 g.t2.setText("¿Qué tal eso? ¡Soy la mejor!");
-                g.stellares.setIcon(stellatriste);
+                g.stellares.setIcon(stellafeliz);
             }
 
             Alien.setLocation(movimientosok[34][0], movimientosok[34][1]);
@@ -235,34 +239,33 @@ public class GamePanel2 extends javax.swing.JPanel {
     }
 
     private void movimientolow(int num, JLabel Alien) {
-    // Obtener la nueva posición del Alien
-    int x = movimientosok[posiciones(num)][0];
-    int y = movimientosok[posiciones(num)][1];
-    // Mover el Alien a la nueva posición
-    Alien.setLocation(x, y);
-    
-    // Crear un temporizador para reproducir el sonido y mover el Alien a su posición final
-    Timer timer2 = new Timer(1000, new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            //Sonido de subir
-            if (num == 9 | num == 26 | num == 21 | num == 29) {
-                // Reproducir sonido de subir
-            }
-            //sonido de bajar
-            if (num == 5 | num == 18 | num == 16 | num == 24 | num == 15) {
-                // Reproducir sonido de bajar
-            }
-            // Mover el Alien a su posición final
-            Alien.setLocation(movimientosok[num][0], movimientosok[num][1]);
-        }
-    });
-    timer2.setRepeats(false); // Se asegura de que el Timer se ejecute solo una vez
+        // Obtener la nueva posición del Alien
+        int x = movimientosok[posiciones(num)][0];
+        int y = movimientosok[posiciones(num)][1];
+        // Mover el Alien a la nueva posición
+        Alien.setLocation(x, y);
 
-    // Inicia el Timer
-    timer2.start();
-}
+        // Crear un temporizador para reproducir el sonido y mover el Alien a su posición final
+        Timer timer2 = new Timer(1000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //Sonido de subir
+                if (num == 9 | num == 26 | num == 21 | num == 29) {
+                    // Reproducir sonido de subir
+                }
+                //sonido de bajar
+                if (num == 5 | num == 18 | num == 16 | num == 24 | num == 15) {
+                    // Reproducir sonido de bajar
+                }
+                // Mover el Alien a su posición final
+                Alien.setLocation(movimientosok[num][0], movimientosok[num][1]);
+            }
+        });
+        timer2.setRepeats(false); // Se asegura de que el Timer se ejecute solo una vez
 
+        // Inicia el Timer
+        timer2.start();
+    }
 
     public int posiciones(int pos) {
         //Arriba
@@ -512,21 +515,27 @@ public class GamePanel2 extends javax.swing.JPanel {
                 switch (dado) {
                     case 1:
                         dadoimg.setIcon(dado1);
+                        dado00.setIcon(fondodado);
                         break;
                     case 2:
                         dadoimg.setIcon(dado2);
+                        dado00.setIcon(fondodado);
                         break;
                     case 3:
                         dadoimg.setIcon(dado3);
+                        dado00.setIcon(fondodado);
                         break;
                     case 4:
                         dadoimg.setIcon(dado4);
+                        dado00.setIcon(fondodado);
                         break;
                     case 5:
                         dadoimg.setIcon(dado5);
+                        dado00.setIcon(fondodado);
                         break;
                     case 6:
                         dadoimg.setIcon(dado6);
+                        dado00.setIcon(fondodado);
                         break;
                 }
                 // Se crea un nuevo Timer 

@@ -102,7 +102,7 @@ public class Ganador extends javax.swing.JFrame {
         t2.setForeground(new java.awt.Color(255, 255, 255));
         t2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         t2.setText("!Eres un genio!");
-        getContentPane().add(t2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, 240, 30));
+        getContentPane().add(t2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 270, 30));
 
         cerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resultado/cerrar.png"))); // NOI18N
         cerrar.setContentAreaFilled(false);
