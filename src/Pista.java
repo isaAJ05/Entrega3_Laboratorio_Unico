@@ -2,6 +2,7 @@
 import PanelesCarreraNave.SeleccionNavePanel;
 import PanelesCarreraNave.PanelInfo;
 import PanelesCarreraNave.CarreraPANELcarros;
+import PanelesCarreraNave.CarreraPANELcarros.Utilidades;
 import PanelesCarreraNave.CarreraPANELcarrosConArduino;
 import PanelesCarreraNave.NaveJugador;
 import java.awt.BorderLayout;
@@ -321,6 +322,7 @@ public class Pista extends javax.swing.JFrame {
 
     private void btnVolver1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolver1ActionPerformed
        sonido("/Sonidos/boop.wav");
+       Utilidades.detenerMusica();
         Principal3 p = new Principal3(user);
         p.setVisible(true);
         this.setVisible(false);
@@ -329,12 +331,14 @@ public class Pista extends javax.swing.JFrame {
 
     private void ArduinoPistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ArduinoPistaActionPerformed
         sonido("/Sonidos/boop.wav");
+        Utilidades.detenerMusica();
         CarreraPANELcarrosConArduino NavePanel = new CarreraPANELcarrosConArduino(user);
         ShowPanel(NavePanel);//Llamar el metodo para mostrar el panel 
     }//GEN-LAST:event_ArduinoPistaActionPerformed
 
     private void atrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atrasActionPerformed
         sonido("/Sonidos/boop.wav");
+        Utilidades.detenerMusica();
         PanelInfo InfoPANEL = new PanelInfo();
         ShowPanel(InfoPANEL);//Llamar el metodo para mostrar el panel 
         atras.setEnabled(false);
