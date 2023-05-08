@@ -325,6 +325,7 @@ public class Principal3 extends javax.swing.JFrame {
 
     private void cyanActionPerformed(java.awt.event.ActionEvent evt) {
         // SERPIENTES Y ESCALERAS
+        //sonido("/Sonidos/aliens.wav");
         SerpienteGAME a = new SerpienteGAME(name);
         a.setVisible(true);
         this.dispose();
