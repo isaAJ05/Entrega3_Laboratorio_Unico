@@ -3,11 +3,67 @@ package PanelesCarreraNave;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.net.URL;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 public class SeleccionNavePanel extends javax.swing.JPanel implements ActionListener {
+    //SUBRUTINAS PARA APLICAR SONIDO
 
+    private void sonido(String cadena) {
+        try {
+            Clip clip = AudioSystem.getClip();
+            URL url = getClass().getResource(cadena);
+            AudioInputStream audioIn = AudioSystem.getAudioInputStream(url);
+            clip.open(audioIn);
+            clip.start();
+
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+
+    }
+    private Clip clip;
+
+    public void sonido2(JButton boton, String archivoSonido) {
+        boton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                super.mouseEntered(e);
+                try {
+                    clip = AudioSystem.getClip();
+                    URL url = getClass().getResource(archivoSonido);
+                    AudioInputStream audioIn = AudioSystem.getAudioInputStream(url);
+                    clip.open(audioIn);
+                    clip.start();
+                    boton.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    clip.stop();
+                    sonido("/Sonidos/seleccion.wav");
+                    
+
+                }
+            });
+                } catch (Exception ex) {
+                    System.err.println(ex.getMessage());
+                }
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                super.mouseExited(e);
+                if (clip != null) {
+                    clip.stop();
+                    clip.close();
+                }
+            }
+        });
+    }
     private String name = null;
     ClassLoader CL = getClass().getClassLoader();
     ImageIcon cb = new ImageIcon(CL.getResource("IMGcars/Check.png"));
@@ -20,6 +76,10 @@ public class SeleccionNavePanel extends javax.swing.JPanel implements ActionList
         this.NaranjacBTN.addActionListener(this);
         this.AzulcBTN.addActionListener(this);
         this.VerdecBTN.addActionListener(this);
+        //APLIOAR SONIDOS
+         sonido2(NaranjacBTN,"/Sonidos/auto1.wav");
+         sonido2(AzulcBTN,"/Sonidos/auto2.wav");
+         sonido2(VerdecBTN,"/Sonidos/auto3.wav");
     }
     JButton btn;
     
