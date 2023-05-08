@@ -21,7 +21,7 @@ public class Mesa1 extends javax.swing.JFrame {
     private String user;
 
     public Mesa1(String name) {
-
+setIconImage(new ImageIcon(getClass().getResource("general/stellaicono.png")).getImage());
         this.user = name;
         initComponents();
         this.setLocationRelativeTo(null);

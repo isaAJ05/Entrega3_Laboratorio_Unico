@@ -20,6 +20,7 @@ public class carrerastart extends javax.swing.JFrame {
     
 private String user;
     public carrerastart(String name) {
+        setIconImage(new ImageIcon(getClass().getResource("general/stellaicono.png")).getImage());
         Cursor cursor = Toolkit.getDefaultToolkit().createCustomCursor(new ImageIcon(getClass().getResource("cursor/cursorimg.png")).getImage(),new Point(0,0),"Custom Cursor");
         this.setCursor(cursor);
         initComponents();

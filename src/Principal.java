@@ -41,6 +41,7 @@ public class Principal extends javax.swing.JFrame {
     }
 
     public Principal() {
+        setIconImage(new ImageIcon(getClass().getResource("general/stellaicono.png")).getImage());
         initComponents();
         this.setLocationRelativeTo(null);
         //cursor
@@ -224,7 +225,7 @@ public class Principal extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Principal().setVisible(true);
+                        new Principal().setVisible(true);
 
             }
         });

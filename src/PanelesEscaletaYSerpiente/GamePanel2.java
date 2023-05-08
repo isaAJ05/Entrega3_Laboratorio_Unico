@@ -38,6 +38,8 @@ public class GamePanel2 extends javax.swing.JPanel {
     ImageIcon dado6 = new ImageIcon(CL.getResource("IMGescaleraSerp/dado6.png"));
     ImageIcon stellaimg = new ImageIcon(CL.getResource("IMGescaleraSerp/stellaa (1).png"));
     ImageIcon fondodado = new ImageIcon(CL.getResource("IMGescaleraSerp/fondodado_6.png"));
+    ImageIcon stellafeliz = new ImageIcon(CL.getResource("resultados/stellafeliz.png"));
+    ImageIcon stellatriste = new ImageIcon(CL.getResource("IMGescaleraSerp/resultados/stellafeliz.png"));
 
     private Component componenteEncima = null;
     //- Seleccion de avatar
@@ -162,11 +164,13 @@ public class GamePanel2 extends javax.swing.JPanel {
                 Resultado.Ganador g = new Resultado.Ganador(user);
                 g.t1.setText("¡Me ganaste!");
                 g.t2.setText("¡No me rendiré tan fácilmente!");
+                g.stellares.setIcon(stellatriste);
 
             } else if (jug == 2) {
                 Resultado.Perdedor g = new Resultado.Perdedor(user);
                 g.t1.setText("¡Te gané!");
                 g.t2.setText("¿Qué tal eso? ¡Soy la mejor!");
+                g.stellares.setIcon(stellatriste);
             }
 
             Alien.setLocation(movimientosok[34][0], movimientosok[34][1]);

@@ -34,6 +34,7 @@ public class SerpienteGAME extends javax.swing.JFrame {
     private String user = null;
 
     public SerpienteGAME(String name) {
+        setIconImage(new ImageIcon(getClass().getResource("general/stellaicono.png")).getImage());
         this.user = name;
         initComponents();
         this.setLocationRelativeTo(null); //centrar ventana

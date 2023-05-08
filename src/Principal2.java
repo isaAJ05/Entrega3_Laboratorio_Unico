@@ -36,6 +36,7 @@ public class Principal2 extends javax.swing.JFrame {
     }
 
     public Principal2() {
+        setIconImage(new ImageIcon(getClass().getResource("general/stellaicono.png")).getImage());
         initComponents();
         this.setLocationRelativeTo(null);
         //para cuando se le de enter al label continue al siguiente

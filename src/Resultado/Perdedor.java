@@ -78,28 +78,31 @@ public class Perdedor extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        t1.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
+        t1.setFont(new java.awt.Font("Felix Titling", 1, 14)); // NOI18N
         t1.setForeground(new java.awt.Color(255, 255, 255));
         t1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         t1.setText("Lo siento");
         getContentPane().add(t1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 80, 100, 30));
 
-        t2.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
+        t2.setFont(new java.awt.Font("Felix Titling", 1, 14)); // NOI18N
         t2.setForeground(new java.awt.Color(255, 255, 255));
         t2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         t2.setText("Buena suerte para la próxima");
-        getContentPane().add(t2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, 240, 30));
+        getContentPane().add(t2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, 260, 30));
 
-        nombre.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
+        nombre.setFont(new java.awt.Font("Felix Titling", 1, 14)); // NOI18N
         nombre.setForeground(new java.awt.Color(255, 255, 255));
         nombre.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        getContentPane().add(nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 110, 90, 30));
+        getContentPane().add(nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 110, 120, 30));
 
         res00.setFont(new java.awt.Font("Elephant", 0, 24)); // NOI18N
         res00.setForeground(new java.awt.Color(255, 255, 255));
         res00.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         res00.setText("GAME OVER");
         getContentPane().add(res00, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 320, 60));
+
+        stellares.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        stellares.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resultado/stellatriste.png"))); // NOI18N
         getContentPane().add(stellares, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 70, 110, 110));
 
         cerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resultado/cerrar.png"))); // NOI18N
@@ -182,7 +185,7 @@ public class Perdedor extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel nombre;
     private javax.swing.JLabel res00;
-    private javax.swing.JLabel stellares;
+    public static javax.swing.JLabel stellares;
     public static javax.swing.JLabel t1;
     public static javax.swing.JLabel t2;
     // End of variables declaration//GEN-END:variables

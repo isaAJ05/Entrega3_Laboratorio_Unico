@@ -82,20 +82,23 @@ public class Ganador extends javax.swing.JFrame {
         res00.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         res00.setText("¡GANASTE!");
         getContentPane().add(res00, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 320, 60));
-        getContentPane().add(stellares, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 86, 110, 110));
 
-        nombre.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
+        stellares.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resultado/stellafeliz.png"))); // NOI18N
+        stellares.setDisabledIcon(null);
+        getContentPane().add(stellares, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, 110, 110));
+
+        nombre.setFont(new java.awt.Font("Felix Titling", 1, 14)); // NOI18N
         nombre.setForeground(new java.awt.Color(255, 255, 255));
         nombre.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        getContentPane().add(nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 130, 90, 30));
+        getContentPane().add(nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 130, 150, 30));
 
-        t1.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
+        t1.setFont(new java.awt.Font("Felix Titling", 1, 14)); // NOI18N
         t1.setForeground(new java.awt.Color(255, 255, 255));
         t1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         t1.setText("Felicidades");
         getContentPane().add(t1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 90, 110, 30));
 
-        t2.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
+        t2.setFont(new java.awt.Font("Felix Titling", 1, 14)); // NOI18N
         t2.setForeground(new java.awt.Color(255, 255, 255));
         t2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         t2.setText("!Eres un genio!");
@@ -181,7 +184,7 @@ public class Ganador extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel nombre;
     private javax.swing.JLabel res00;
-    private javax.swing.JLabel stellares;
+    public static javax.swing.JLabel stellares;
     public static javax.swing.JLabel t1;
     public static javax.swing.JLabel t2;
     // End of variables declaration//GEN-END:variables

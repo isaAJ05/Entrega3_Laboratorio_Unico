@@ -16,6 +16,7 @@ public class ASOPAstar extends javax.swing.JFrame {
     private String user;
 
     public ASOPAstar(String name) {
+        setIconImage(new ImageIcon(getClass().getResource("general/stellaicono.png")).getImage());
         initComponents();
         this.user = name;
         this.setContentPane(fondo);

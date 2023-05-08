@@ -21,6 +21,7 @@ public class SOPASTARthisno extends javax.swing.JFrame {
     private String user;
 
     public SOPASTARthisno(String name) {
+        setIconImage(new ImageIcon(getClass().getResource("general/stellaicono.png")).getImage());
         this.user = name;
         this.setContentPane(fondo);
         initComponents();

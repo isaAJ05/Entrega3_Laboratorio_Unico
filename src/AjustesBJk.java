@@ -12,6 +12,7 @@ public class AjustesBJk extends javax.swing.JFrame {
      * Creates new form AjustesBJk
      */
     public AjustesBJk() {
+        setIconImage(new ImageIcon(getClass().getResource("general/stellaicono.png")).getImage());
         initComponents();
         this.setLocationRelativeTo(null);
         //cursor

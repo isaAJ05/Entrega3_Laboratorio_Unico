@@ -1,6 +1,7 @@
 
 import java.awt.Color;
 import java.awt.Cursor;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Point;
 import java.awt.Toolkit;
@@ -11,6 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
+import javax.swing.border.LineBorder;
 
 // Créditos gif ganador: https://tenor.com/view/cute-panda-happy-love-yay-gif-16763329
 // Créditos gif perdedor: https://images.app.goo.gl/FLzFLSCFVXRhy6NX8
@@ -29,9 +31,11 @@ public class rompecabezas01 extends javax.swing.JFrame implements ActionListener
     ImageIcon pp7 = new ImageIcon(CL.getResource("imagenes/r7.png"));
     ImageIcon pp8 = new ImageIcon(CL.getResource("imagenes/r8.png"));
     ImageIcon pp9 = new ImageIcon(CL.getResource("imagenes/r9.png"));
+    ImageIcon stella = new ImageIcon(CL.getResource("imagenes/stellap.png"));
     private String user;
 
     public rompecabezas01(String name) {
+       setIconImage(new ImageIcon(getClass().getResource("general/stellaicono.png")).getImage());
         this.user = name;
         initComponents();
         this.setSize(800, 500);
@@ -144,6 +148,7 @@ public class rompecabezas01 extends javax.swing.JFrame implements ActionListener
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
+        verimg = new javax.swing.JLabel();
         rompecabezas = new javax.swing.JLabel();
         label = new javax.swing.JLabel();
         btnVolver1 = new javax.swing.JButton();
@@ -203,6 +208,10 @@ public class rompecabezas01 extends javax.swing.JFrame implements ActionListener
             }
         });
         getContentPane().add(ver, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 40, -1, 30));
+
+        verimg.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        verimg.setPreferredSize(new java.awt.Dimension(306, 238));
+        getContentPane().add(verimg, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 140, -1, -1));
 
         rompecabezas.setFont(new java.awt.Font("Elephant", 1, 48)); // NOI18N
         rompecabezas.setForeground(new java.awt.Color(51, 51, 255));
@@ -470,7 +479,7 @@ public class rompecabezas01 extends javax.swing.JFrame implements ActionListener
 
     private void lastMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lastMouseEntered
         label.setText("Rehacer última pieza");
-       label.setHorizontalAlignment(JLabel.CENTER);
+        label.setHorizontalAlignment(JLabel.CENTER);
     }//GEN-LAST:event_lastMouseEntered
 
     private void lastMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lastMouseExited
@@ -479,23 +488,24 @@ public class rompecabezas01 extends javax.swing.JFrame implements ActionListener
 
     private void limpiarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_limpiarMouseEntered
         label.setText("Reintentar todo");
-       label.setHorizontalAlignment(JLabel.CENTER);
+        label.setHorizontalAlignment(JLabel.CENTER);
     }//GEN-LAST:event_limpiarMouseEntered
 
     private void limpiarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_limpiarMouseExited
-         label.setText(null);
+        label.setText(null);
     }//GEN-LAST:event_limpiarMouseExited
- imagenes.romp1 r = new imagenes.romp1();
- 
+
     private void verMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_verMouseEntered
-       r.setVisible(true);
-       r.setOpacity(0.6f);
-       jLabel1.setForeground(Color.CYAN);
+
+        jLabel1.setForeground(Color.CYAN);
+        verimg.setBorder(new LineBorder(Color.WHITE));
+        verimg.setIcon(stella);
     }//GEN-LAST:event_verMouseEntered
 
     private void verMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_verMouseExited
-     r.setVisible(false);
-     jLabel1.setForeground(Color.WHITE);
+        jLabel1.setForeground(Color.WHITE);
+        verimg.setBorder(null);
+        verimg.setIcon(null);
     }//GEN-LAST:event_verMouseExited
 
     private void verActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verActionPerformed
@@ -568,6 +578,7 @@ public class rompecabezas01 extends javax.swing.JFrame implements ActionListener
     private javax.swing.JLabel rompecabezas;
     private javax.swing.JLabel vbtn;
     private final javax.swing.JButton ver = new javax.swing.JButton();
+    private javax.swing.JLabel verimg;
     private javax.swing.JButton volver;
     // End of variables declaration//GEN-END:variables
 }

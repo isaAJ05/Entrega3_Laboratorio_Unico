@@ -13,6 +13,7 @@ import javax.swing.border.LineBorder;
 public class rompecabezas extends javax.swing.JFrame {
   private String user;
     public rompecabezas(String name) {
+        setIconImage(new ImageIcon(getClass().getResource("general/stellaicono.png")).getImage());
         this.user = name;
         setPreferredSize(new Dimension(800, 500));
         this.setResizable(false);

@@ -73,22 +73,24 @@ public class Empate extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setFont(new java.awt.Font("Monospaced", 0, 14)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Felix Titling", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Buena jugada");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 80, 100, 30));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 80, 130, 30));
 
-        nombre.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
+        nombre.setFont(new java.awt.Font("Felix Titling", 1, 14)); // NOI18N
         nombre.setForeground(new java.awt.Color(255, 255, 255));
         nombre.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        getContentPane().add(nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 130, 90, 30));
+        getContentPane().add(nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 130, 120, 30));
 
         res00.setFont(new java.awt.Font("Elephant", 0, 24)); // NOI18N
         res00.setForeground(new java.awt.Color(255, 255, 255));
         res00.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         res00.setText("EMPATE");
         getContentPane().add(res00, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 320, 60));
+
+        stellares.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resultado/stellaemp.png"))); // NOI18N
         getContentPane().add(stellares, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 86, 110, 110));
 
         cerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resultado/cerrar.png"))); // NOI18N
@@ -172,6 +174,6 @@ public class Empate extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel nombre;
     private javax.swing.JLabel res00;
-    private javax.swing.JLabel stellares;
+    public static javax.swing.JLabel stellares;
     // End of variables declaration//GEN-END:variables
 }

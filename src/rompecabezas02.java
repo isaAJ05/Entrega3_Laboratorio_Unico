@@ -1,6 +1,7 @@
 
 import java.awt.Color;
 import java.awt.Cursor;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Point;
 import java.awt.Toolkit;
@@ -11,6 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
+import javax.swing.border.LineBorder;
 
 // Créditos de la imagen: https://www.nationalgeographic.com.es/ciencia/sistema-solar-que-es-como-se-formo-y-datos-principales_18430
 // Créditos gif ganador: https://tenor.com/view/cute-panda-happy-love-yay-gif-16763329
@@ -33,10 +35,12 @@ public class rompecabezas02 extends javax.swing.JFrame implements ActionListener
     ImageIcon pp10 = new ImageIcon(CL.getResource("imagenes/3.jpg"));
     ImageIcon pp11 = new ImageIcon(CL.getResource("imagenes/2.jpg"));
     ImageIcon pp12 = new ImageIcon(CL.getResource("imagenes/1.jpg"));
+    ImageIcon sists = new ImageIcon(CL.getResource("imagenes/puzzle2.jpg"));
 
     private String user;
 
     public rompecabezas02(String name) {
+      setIconImage(new ImageIcon(getClass().getResource("general/stellaicono.png")).getImage());
         this.user = name;
         initComponents();
         this.setVisible(true);
@@ -139,6 +143,7 @@ public class rompecabezas02 extends javax.swing.JFrame implements ActionListener
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        verimg = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         label = new javax.swing.JLabel();
         btnVolver1 = new javax.swing.JButton();
@@ -181,6 +186,10 @@ public class rompecabezas02 extends javax.swing.JFrame implements ActionListener
 
         jPanel1.setBackground(new java.awt.Color(0, 0, 51));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        verimg.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        verimg.setPreferredSize(new java.awt.Dimension(306, 306));
+        jPanel1.add(verimg, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 110, -1, -1));
 
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
@@ -523,16 +532,17 @@ public class rompecabezas02 extends javax.swing.JFrame implements ActionListener
     private void limpiarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_limpiarMouseExited
         label.setText(null);
     }//GEN-LAST:event_limpiarMouseExited
-imagenes.romp2 r = new imagenes.romp2();
+
     private void verMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_verMouseEntered
-        r.setVisible(true);
-        r.setOpacity(0.7f);
-        jLabel1.setForeground(Color.CYAN);
+       jLabel1.setForeground(Color.CYAN);
+        verimg.setBorder(new LineBorder(Color.WHITE));
+        verimg.setIcon(sists);
     }//GEN-LAST:event_verMouseEntered
 
     private void verMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_verMouseExited
-        r.setVisible(false);
         jLabel1.setForeground(Color.WHITE);
+        verimg.setBorder(null);
+        verimg.setIcon(null);
     }//GEN-LAST:event_verMouseExited
 
     private void verActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verActionPerformed
@@ -622,6 +632,7 @@ imagenes.romp2 r = new imagenes.romp2();
     private javax.swing.JLabel rompecabezas;
     private javax.swing.JLabel vbtn;
     private final javax.swing.JButton ver = new javax.swing.JButton();
+    private javax.swing.JLabel verimg;
     private javax.swing.JButton volver1;
     // End of variables declaration//GEN-END:variables
 }
