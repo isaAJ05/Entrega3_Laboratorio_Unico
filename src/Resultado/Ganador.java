@@ -7,6 +7,10 @@ package Resultado;
 import java.awt.Cursor;
 import java.awt.Point;
 import java.awt.Toolkit;
+import java.net.URL;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
 
 /**
@@ -20,6 +24,21 @@ public class Ganador extends javax.swing.JFrame {
      */
     //String name = usuario.name;
     String name;
+    //SUBRUTINAS PARA APLICAR SONIDO
+
+    private void sonido(String cadena) {
+        try {
+            Clip clip = AudioSystem.getClip();
+            URL url = getClass().getResource(cadena);
+            AudioInputStream audioIn = AudioSystem.getAudioInputStream(url);
+            clip.open(audioIn);
+            clip.start();
+
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+
+    }
 
     public Ganador(String name) {
         this.name = name;
@@ -34,6 +53,7 @@ public class Ganador extends javax.swing.JFrame {
         this.setVisible(true);
 
         nombre.setText(name);
+        sonido("/Sonidos/gane.wav");//Sonido ganador
     }
 
     /**
@@ -116,6 +136,7 @@ public class Ganador extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cerrarActionPerformed
+       sonido("/Sonidos/boop.wav");
         this.dispose();
     }//GEN-LAST:event_cerrarActionPerformed
 
