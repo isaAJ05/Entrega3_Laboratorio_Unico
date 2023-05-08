@@ -6,11 +6,29 @@ import PanelesEscaletaYSerpiente.InfoPanel;
 import java.awt.Cursor;
 import java.awt.Point;
 import java.awt.Toolkit;
+import java.net.URL;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 public class SerpienteGAME extends javax.swing.JFrame {
+//SUBRUTINAS PARA APLICAR SONIDO
 
+    private void sonido(String cadena) {
+        try {
+            Clip clip = AudioSystem.getClip();
+            URL url = getClass().getResource(cadena);
+            AudioInputStream audioIn = AudioSystem.getAudioInputStream(url);
+            clip.open(audioIn);
+            clip.start();
+
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+
+    }
     public static int avatar;
 
     private String user = null;
@@ -160,6 +178,7 @@ public class SerpienteGAME extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void InfoBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InfoBTNActionPerformed
+        sonido("/Sonidos/boop.wav");
         InfoPanel InfoP = new InfoPanel();
         ShowPanel(InfoP);
         JugarBTN.setEnabled(true);
@@ -170,6 +189,7 @@ public class SerpienteGAME extends javax.swing.JFrame {
 
     private void JugarBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JugarBTNActionPerformed
         if (PanelesEscaletaYSerpiente.AvatarJugador.avatar != 0) {
+            sonido("/Sonidos/boop.wav");
             GamePanel2 Game = new GamePanel2(avatar,user);
             ShowPanel(Game);
             val.setText(null);
@@ -182,6 +202,7 @@ public class SerpienteGAME extends javax.swing.JFrame {
             BTNAvatar.setEnabled(false);
             BTNAvatar.setVisible(false);
         } else {
+            sonido("/Sonidos/error.wav");
             val.setText("(!) Debe escoger un avatar antes de jugar.");
            
         }
@@ -190,6 +211,7 @@ public class SerpienteGAME extends javax.swing.JFrame {
     }//GEN-LAST:event_JugarBTNActionPerformed
 
     private void btnVolver1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolver1ActionPerformed
+        sonido("/Sonidos/boop.wav");
         Principal3 p = new Principal3(user);
         p.setVisible(true);
         this.dispose();
@@ -206,6 +228,7 @@ public class SerpienteGAME extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVolver1MouseExited
 
     private void BTNAvatarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNAvatarActionPerformed
+        sonido("/Sonidos/boop.wav");
         AvataresPanel AvatarP = new AvataresPanel(avatar);
         ShowPanel(AvatarP);
         BTNAvatar.setEnabled(false);
@@ -213,6 +236,7 @@ public class SerpienteGAME extends javax.swing.JFrame {
     }//GEN-LAST:event_BTNAvatarActionPerformed
 
     private void atrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atrasActionPerformed
+        sonido("/Sonidos/boop.wav");
         AvataresPanel AvatarP = new AvataresPanel(avatar);
         ShowPanel(AvatarP);
         atras.setEnabled(false);
