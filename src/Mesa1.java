@@ -901,6 +901,8 @@ public class Mesa1 extends javax.swing.JFrame {
             HabilitarbtnGame();
             if (s == 3) {
                 Pedir1Carta.setEnabled(false);
+                Doble.setEnabled(false);
+                Repartir.setEnabled(false);
                 String colorB3;
                 int CartaUs3, tipodibujo3, Ucolum3;
                 elegircarta(baraja, Ccolor);
@@ -918,6 +920,7 @@ public class Mesa1 extends javax.swing.JFrame {
                 //Mostrar carta
                 CartaBlanca(cartaU3);
                 TipoDeCarta(tipodibujo3, C3US, CartaUs3);
+                SumCartasU.setText(String.valueOf(Sum0US));
             } else {
                 Doble.setEnabled(false);
             }
