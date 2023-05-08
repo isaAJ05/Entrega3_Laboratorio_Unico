@@ -5,6 +5,8 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.net.URL;
@@ -43,6 +45,12 @@ public class Principal3 extends javax.swing.JFrame {
                     AudioInputStream audioIn = AudioSystem.getAudioInputStream(url);
                     clip.open(audioIn);
                     clip.start();
+                    boton.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    clip.stop();
+
+                }
+            });
                 } catch (Exception ex) {
                     System.err.println(ex.getMessage());
                 }
