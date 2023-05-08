@@ -20,9 +20,10 @@ public class Perdedor extends javax.swing.JFrame {
     /**
      * Creates new form Perdedor
      */
-    public Perdedor() {
+    String name;
+    public Perdedor(String name) {
         initComponents();
-       
+       this.name = name;
         this.setSize(356,225);
         this.dispose();
         this.setUndecorated(true);
@@ -31,6 +32,7 @@ public class Perdedor extends javax.swing.JFrame {
         Cursor cursor = Toolkit.getDefaultToolkit().createCustomCursor(new ImageIcon(getClass().getResource("cursorimg.png")).getImage(),new Point(0,0),"Custom Cursor");
         this.setCursor(cursor);
         this.setVisible(true);
+        nombre.setText(name);
         
        
     }
@@ -44,9 +46,11 @@ public class Perdedor extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        t1 = new javax.swing.JLabel();
+        t2 = new javax.swing.JLabel();
+        nombre = new javax.swing.JLabel();
         res00 = new javax.swing.JLabel();
         stellares = new javax.swing.JLabel();
-        label = new javax.swing.JLabel();
         cerrar = new javax.swing.JButton();
         fondo = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
@@ -54,13 +58,29 @@ public class Perdedor extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        t1.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
+        t1.setForeground(new java.awt.Color(255, 255, 255));
+        t1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        t1.setText("Lo siento");
+        getContentPane().add(t1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 80, 100, 30));
+
+        t2.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
+        t2.setForeground(new java.awt.Color(255, 255, 255));
+        t2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        t2.setText("Buena suerte para la próxima");
+        getContentPane().add(t2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, 240, 30));
+
+        nombre.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
+        nombre.setForeground(new java.awt.Color(255, 255, 255));
+        nombre.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        getContentPane().add(nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 110, 90, 30));
+
         res00.setFont(new java.awt.Font("Elephant", 0, 24)); // NOI18N
         res00.setForeground(new java.awt.Color(255, 255, 255));
         res00.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         res00.setText("GAME OVER");
         getContentPane().add(res00, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 320, 60));
-        getContentPane().add(stellares, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 86, 110, 110));
-        getContentPane().add(label, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 120, 105, 27));
+        getContentPane().add(stellares, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 70, 110, 110));
 
         cerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resultado/cerrar.png"))); // NOI18N
         cerrar.setContentAreaFilled(false);
@@ -130,7 +150,7 @@ public class Perdedor extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Perdedor().setVisible(true);
+                new Perdedor(null).setVisible(true);
             }
         });
     }
@@ -139,8 +159,10 @@ public class Perdedor extends javax.swing.JFrame {
     private javax.swing.JButton cerrar;
     private javax.swing.JLabel fondo;
     private javax.swing.JPanel jPanel1;
-    public static javax.swing.JLabel label;
+    private javax.swing.JLabel nombre;
     private javax.swing.JLabel res00;
     private javax.swing.JLabel stellares;
+    public static javax.swing.JLabel t1;
+    public static javax.swing.JLabel t2;
     // End of variables declaration//GEN-END:variables
 }

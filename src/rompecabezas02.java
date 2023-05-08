@@ -113,7 +113,7 @@ public class rompecabezas02 extends javax.swing.JFrame implements ActionListener
 
             }
             if (k) {
-                Resultado.Ganador g = new Resultado.Ganador();
+                Resultado.Ganador g = new Resultado.Ganador(user);
                 for (i = 0; i < 4; i++) {
                     for (j = 0; j < 3; j++) {
                         buttons[i][j].setEnabled(true);
@@ -122,7 +122,7 @@ public class rompecabezas02 extends javax.swing.JFrame implements ActionListener
                 }
                 c = 0;
             } else {
-                Resultado.Perdedor g = new Resultado.Perdedor();
+                Resultado.Perdedor g = new Resultado.Perdedor(user);
                 for (i = 0; i < 4; i++) {
                     for (j = 0; j < 3; j++) {
                         buttons[i][j].setEnabled(true);

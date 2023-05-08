@@ -32,7 +32,7 @@ public class Principal extends javax.swing.JFrame {
             clip.start();
 
         } catch (Exception e) {
-            System.err.println(e.getMessage());
+           // System.err.println(e.getMessage());
         }
     }
 
@@ -56,7 +56,7 @@ public class Principal extends javax.swing.JFrame {
                 }
             });
         } catch (Exception e) {
-            System.err.println(e.getMessage());
+            //System.err.println(e.getMessage());
         }
 
     }

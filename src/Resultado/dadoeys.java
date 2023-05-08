@@ -4,27 +4,27 @@
  */
 package Resultado;
 
+import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Point;
 import java.awt.Toolkit;
 import javax.swing.ImageIcon;
+import javax.swing.JScrollPane;
 
 /**
  *
  * @author Usuario
  */
-public class Ganador extends javax.swing.JFrame {
+public class dadoeys extends javax.swing.JFrame {
 
     /**
-     * Creates new form Ganador
+     * Creates new form Empate
      */
-    //String name = usuario.name;
     String name;
 
-    public Ganador(String name) {
-        this.name = name;
+    public dadoeys(String name) {
         initComponents();
-
+        this.name = name;
         this.setSize(356, 225);
         this.dispose();
         this.setUndecorated(true);
@@ -32,8 +32,10 @@ public class Ganador extends javax.swing.JFrame {
         Cursor cursor = Toolkit.getDefaultToolkit().createCustomCursor(new ImageIcon(getClass().getResource("cursorimg.png")).getImage(), new Point(0, 0), "Custom Cursor");
         this.setCursor(cursor);
         this.setVisible(true);
+        texto.setCaretColor(new Color(0, 0, 0, 0));
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
+        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 
-        nombre.setText(name);
     }
 
     /**
@@ -45,11 +47,10 @@ public class Ganador extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        res00 = new javax.swing.JLabel();
-        stellares = new javax.swing.JLabel();
+        scrollPane = new javax.swing.JScrollPane();
+        texto = new javax.swing.JTextArea();
         nombre = new javax.swing.JLabel();
-        t1 = new javax.swing.JLabel();
-        t2 = new javax.swing.JLabel();
+        img = new javax.swing.JLabel();
         cerrar = new javax.swing.JButton();
         fondo = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
@@ -57,29 +58,26 @@ public class Ganador extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        res00.setFont(new java.awt.Font("Elephant", 0, 24)); // NOI18N
-        res00.setForeground(new java.awt.Color(255, 255, 255));
-        res00.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        res00.setText("¡GANASTE!");
-        getContentPane().add(res00, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 320, 60));
-        getContentPane().add(stellares, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 86, 110, 110));
+        texto.setEditable(false);
+        texto.setBackground(new java.awt.Color(204, 204, 255));
+        texto.setColumns(20);
+        texto.setFont(new java.awt.Font("Monospaced", 1, 13)); // NOI18N
+        texto.setRows(5);
+        texto.setText("¡Oh! Has sacado un número\nsuperior.\n\nEspera al próximo turno");
+        texto.setAutoscrolls(false);
+        texto.setVerifyInputWhenFocusTarget(false);
+        scrollPane.setViewportView(texto);
 
-        nombre.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
+        getContentPane().add(scrollPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 80, 230, 100));
+
+        nombre.setFont(new java.awt.Font("Elephant", 0, 24)); // NOI18N
         nombre.setForeground(new java.awt.Color(255, 255, 255));
         nombre.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        getContentPane().add(nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 130, 90, 30));
+        getContentPane().add(nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 320, 60));
 
-        t1.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
-        t1.setForeground(new java.awt.Color(255, 255, 255));
-        t1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        t1.setText("Felicidades");
-        getContentPane().add(t1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 90, 110, 30));
-
-        t2.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
-        t2.setForeground(new java.awt.Color(255, 255, 255));
-        t2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        t2.setText("!Eres un genio!");
-        getContentPane().add(t2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, 240, 30));
+        img.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        img.setPreferredSize(new java.awt.Dimension(75, 85));
+        getContentPane().add(img, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, -1, -1));
 
         cerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resultado/cerrar.png"))); // NOI18N
         cerrar.setContentAreaFilled(false);
@@ -136,20 +134,21 @@ public class Ganador extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Ganador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(dadoeys.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Ganador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(dadoeys.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Ganador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(dadoeys.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Ganador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(dadoeys.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Ganador(null).setVisible(true);
+                new dadoeys(null).setVisible(true);
             }
         });
     }
@@ -157,11 +156,10 @@ public class Ganador extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cerrar;
     private javax.swing.JLabel fondo;
+    public static javax.swing.JLabel img;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JLabel nombre;
-    private javax.swing.JLabel res00;
-    private javax.swing.JLabel stellares;
-    public static javax.swing.JLabel t1;
-    public static javax.swing.JLabel t2;
+    public static javax.swing.JLabel nombre;
+    private javax.swing.JScrollPane scrollPane;
+    private javax.swing.JTextArea texto;
     // End of variables declaration//GEN-END:variables
 }

@@ -162,7 +162,7 @@ public class mediummusica extends javax.swing.JPanel {
             palabrasencontradas.setText("4/4");
             cont += 1;
         }
-        Resultado.Ganador g = new Resultado.Ganador();
+        Resultado.Ganador g = new Resultado.Ganador(name);
         //JOPTION PANE para mostrar aviso de que ha ganado al usuario
         if (cont == 5) {
             JOptionPane.showMessageDialog(null, "¡Felicidades " + name + "! \nHas resuelto el primer nivel\nPresiona NEXT LEVEL para seguir con el siguiente");
