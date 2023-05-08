@@ -1,26 +1,62 @@
 package PanelesCarreraNave;
 
-import PanelesEscaletaYSerpiente.AvatarJugador;
-import java.awt.Cursor;
-import java.awt.Point;
-import java.awt.Toolkit;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.net.URL;
 import java.util.Random;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.Timer;
-import javax.swing.JFrame;
 
 /**
  *
  * @author Paula Núñez, Isabella Arrieta y Natalia Carpintero
  */
 public class CarreraPANELcarros extends javax.swing.JPanel {
+//SUBRUTINAS PARA APLICAR SONIDO
+
+    private void sonido(String cadena) {
+        try {
+            Clip clip = AudioSystem.getClip();
+            URL url = getClass().getResource(cadena);
+            AudioInputStream audioIn = AudioSystem.getAudioInputStream(url);
+            clip.open(audioIn);
+            clip.start();
+
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+
+    }
+
+    //sonido mientras juega
+    public static Clip clip;
+
+    private void sonido2(String cadena) {
+        try {
+            URL url = getClass().getResource(cadena);
+            AudioInputStream audioIn = AudioSystem.getAudioInputStream(url);
+            clip = AudioSystem.getClip();
+            clip.open(audioIn);
+            clip.start();
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+    }
+
+    public class Utilidades {
+    public static void detenerMusica() {
+        if (clip != null) {
+            clip.stop();
+        }
+    }
+}
+
 
     ClassLoader CL = getClass().getClassLoader();
     ImageIcon naranja = new ImageIcon(CL.getResource("IMGcars/naranjacarro_1.png"));
@@ -28,14 +64,12 @@ public class CarreraPANELcarros extends javax.swing.JPanel {
     ImageIcon verde = new ImageIcon(CL.getResource("IMGcars/verdecarro (2).png"));
     private String name = null;
     int nave = NaveJugador.nave;
-    
+
     public CarreraPANELcarros(int[][] espaciopista, int nave) {
         initComponents();
         this.setFocusable(true);
         this.requestFocusInWindow();
         this.nave = nave;
-        
-      
 
         addKeyListener(new KeyListener() { //EVENTOS DEL TECLADO 
             @Override
@@ -51,15 +85,13 @@ public class CarreraPANELcarros extends javax.swing.JPanel {
             }
         });
     }
-    
-   
 
     public CarreraPANELcarros(String user) {
         this.name = user;
         initComponents();
         this.setFocusable(true);
         this.requestFocusInWindow();
-          System.out.println("CARRO" + NaveJugador.nave);  
+        System.out.println("CARRO" + NaveJugador.nave);
         switch (NaveJugador.nave) {
             case 1:
                 carrousuario.setIcon(naranja);
@@ -79,7 +111,6 @@ public class CarreraPANELcarros extends javax.swing.JPanel {
         }
 
     }
-     
 
     Random ran = new Random();
     private final int limiteF = 17, limiteC = 34; //Limites de la matriz
@@ -124,6 +155,7 @@ public class CarreraPANELcarros extends javax.swing.JPanel {
         ObsRojo2 = new javax.swing.JLabel();
         ObsRojo1 = new javax.swing.JLabel();
         BonoAzul3 = new javax.swing.JLabel();
+        cuenta = new javax.swing.JLabel();
         Mensajito = new javax.swing.JLabel();
         pistafondo = new javax.swing.JLabel();
 
@@ -176,6 +208,7 @@ public class CarreraPANELcarros extends javax.swing.JPanel {
         BonoAzul3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         BonoAzul3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGcars/BolaAzul50.png"))); // NOI18N
         add(BonoAzul3, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 230, 50, 50));
+        add(cuenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 120, 160, 190));
 
         Mensajito.setFont(new java.awt.Font("Swis721 Blk BT", 0, 14)); // NOI18N
         Mensajito.setForeground(new java.awt.Color(204, 204, 255));
@@ -205,19 +238,50 @@ public class CarreraPANELcarros extends javax.swing.JPanel {
 //        bolita.setLocation(X, Y);
 //    }
     private void InicioBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InicioBTNActionPerformed
+        sonido("/Sonidos/boop.wav");
         InicioBTN.setVisible(false);
         Mensajito.setText("");
-        PermisoParaMover = 0;
+        // Crea un Timer de 3 segundos para mostrar el GIF
+        Timer timer2 = new Timer(10, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Para Mostrar el GIF de Cuenta regresiva
+                ImageIcon gifIcon = new ImageIcon(getClass().getResource("/IMGCars/countdown.gif"));
+                Image gifImage = gifIcon.getImage().getScaledInstance(cuenta.getWidth(), cuenta.getHeight(), Image.SCALE_DEFAULT);
+                cuenta.setIcon(new ImageIcon(gifImage));
 
-        //Primero la ubicacion de inicio para todas las naves
-        carrousuario.setLocation(0, carrousuario.getLocation().y);
-        carro2.setLocation(0, carro2.getLocation().y);
-        carro1.setLocation(0, carro1.getLocation().y);
+                //Sonido cuenta regresiva
+                sonido("/Sonidos/cuenta3.wav");
+                // Se crea un nuevo Timer para ocultar el GIF después de 4 segundos
+                Timer timer3 = new Timer(4000, new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        // Oculta el GIF
+                        cuenta.setIcon(null);
 
-        espaciopista = Hacerespaciopista(); //llamar al que crea la matriz
+                        //sonido de carreras
+                        sonido2("/Sonidos/jugandocarreras.wav");
+                        PermisoParaMover = 0;
+                        //Primero la ubicacion de inicio para todas las naves
+                        carrousuario.setLocation(0, carrousuario.getLocation().y);
+                        carro2.setLocation(0, carro2.getLocation().y);
+                        carro1.setLocation(0, carro1.getLocation().y);
 
-        carrousuario.requestFocus(); //CENTRAR EL MOVIMIENTO CON TECLAS A LA NAVE DEL USUARIO
-        timer.start(); //Iniciar el timer para las otras dos naves competidores
+                        espaciopista = Hacerespaciopista(); //llamar al que crea la matriz
+
+                        carrousuario.requestFocus(); //CENTRAR EL MOVIMIENTO CON TECLAS A LA NAVE DEL USUARIO
+                        timer.start(); //Iniciar el timer para las otras dos naves competidores
+                    }
+                });
+                timer3.setRepeats(false);
+                timer3.start();
+            }
+        });
+        timer2.setRepeats(false); // Se asegura de que el Timer se ejecute solo una vez
+
+        // Inicia el Timer
+        timer2.start();
+
 
     }//GEN-LAST:event_InicioBTNActionPerformed
     int bolita;
@@ -241,9 +305,12 @@ public class CarreraPANELcarros extends javax.swing.JPanel {
                         bolita = 1; //Obstaculos y Bonos
                         if (carrousuario.getBounds().intersects(BonoAzul1.getBounds()) || carrousuario.getBounds().intersects(BonoAzul2.getBounds()) || carrousuario.getBounds().intersects(BonoAzul3.getBounds())) {
                             bolita = 3; // Si toca una boolita AZUL obtiene bono se movera el triple de casillas
+                            sonido("/Sonidos/bonus.wav");//Sonido bonus
+                            
                         }
                         if (carrousuario.getBounds().intersects(ObsRojo1.getBounds()) || carrousuario.getBounds().intersects(ObsRojo2.getBounds()) | carrousuario.getBounds().intersects(ObsRojo3.getBounds())) {
                             bolita = -1; // Si toca una boolita ROJA obtiene retrocedara una casilla y no podra avanzar si vuelve a tocarla
+                            sonido("/Sonidos/golpe.wav");//Sonido que alerte que no puede pasar
                         }
                         carrousuario.setLocation(x + (casilla * bolita), y);
                     }
@@ -264,8 +331,10 @@ public class CarreraPANELcarros extends javax.swing.JPanel {
                     break;
                 case KeyEvent.VK_LEFT: //Izquierda No PODRA retroceder, si lo hace empieza desde el inicio XD
                     Mensajito.setText(" No puedes retroceder !");
+                    sonido("/Sonidos/error.wav");
                     carrousuario.setLocation(x, y);
                     InicioBTN.setVisible(true);
+                    Utilidades.detenerMusica();
                     timer.stop();
                     break;
 
@@ -338,15 +407,20 @@ public class CarreraPANELcarros extends javax.swing.JPanel {
             } else {
 
                 PermisoParaMover = 1;
+                Utilidades.detenerMusica();
                 timer.stop();
             }
             //si llegan a una casilla con valor 2 ( linea de meta)
             if ((espaciopista[AY / casilla][(AX / casilla)] == 2) || (espaciopista[VY / casilla][(VX / casilla)] == 2) || (espaciopista[NY / casilla][(NX / casilla)] == 2)) {
+                
                 timer.stop();
+                Utilidades.detenerMusica();
                 PermisoParaMover = 1;
+
                 if (AX > VX & AX > NX) {
                     Resultado.Ganador g = new Resultado.Ganador(name);
-                   // JOptionPane.showMessageDialog(null, "\t!FELICIDADES " + name + "\n! HA GANADO LA CARRERA:D");
+                    
+                    // JOptionPane.showMessageDialog(null, "\t!FELICIDADES " + name + "\n! HA GANADO LA CARRERA:D");
 
                 }
                 if ((NX > VX & NX > AX) | (VX > AX & VX > NX) | (VX == NX)) {
@@ -385,6 +459,7 @@ public class CarreraPANELcarros extends javax.swing.JPanel {
     private javax.swing.JLabel carro1;
     private javax.swing.JLabel carro2;
     private javax.swing.JLabel carrousuario;
+    private javax.swing.JLabel cuenta;
     private javax.swing.JLabel pistafondo;
     // End of variables declaration//GEN-END:variables
 
