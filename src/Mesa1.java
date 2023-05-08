@@ -115,10 +115,11 @@ public class Mesa1 extends javax.swing.JFrame {
         mostrarnummaso.setOpaque(true);
 
         masbtn.setBackground(new java.awt.Color(102, 255, 153));
-        masbtn.setFont(new java.awt.Font("Monospaced", 1, 18)); // NOI18N
+        masbtn.setFont(new java.awt.Font("Monospaced", 1, 16)); // NOI18N
         masbtn.setForeground(new java.awt.Color(51, 51, 51));
         masbtn.setText("+");
         masbtn.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        masbtn.setPreferredSize(new java.awt.Dimension(60, 33));
         masbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 masbtnActionPerformed(evt);
@@ -126,10 +127,11 @@ public class Mesa1 extends javax.swing.JFrame {
         });
 
         menosbtn.setBackground(new java.awt.Color(102, 255, 153));
-        menosbtn.setFont(new java.awt.Font("Monospaced", 1, 18)); // NOI18N
+        menosbtn.setFont(new java.awt.Font("Monospaced", 1, 16)); // NOI18N
         menosbtn.setForeground(new java.awt.Color(51, 51, 51));
         menosbtn.setText("-");
         menosbtn.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        menosbtn.setPreferredSize(new java.awt.Dimension(60, 33));
         menosbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menosbtnActionPerformed(evt);
@@ -149,7 +151,7 @@ public class Mesa1 extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel3.setText("Número de masos:");
+        jLabel3.setText("Número de mazos:");
 
         javax.swing.GroupLayout AjustespanelLayout = new javax.swing.GroupLayout(Ajustespanel);
         Ajustespanel.setLayout(AjustespanelLayout);
@@ -167,11 +169,11 @@ public class Mesa1 extends javax.swing.JFrame {
                             .addContainerGap(55, Short.MAX_VALUE)))
                     .addGroup(AjustespanelLayout.createSequentialGroup()
                         .addComponent(mostrarnummaso, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(AjustespanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(menosbtn, javax.swing.GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE)
-                            .addComponent(masbtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(menosbtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(masbtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(47, Short.MAX_VALUE))))
         );
         AjustespanelLayout.setVerticalGroup(
             AjustespanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -181,15 +183,15 @@ public class Mesa1 extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(AjustespanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(AjustespanelLayout.createSequentialGroup()
-                        .addComponent(masbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(masbtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(menosbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(menosbtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(mostrarnummaso, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(16, 16, 16)
                 .addComponent(BTNbarajaConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(valdmasos, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(285, Short.MAX_VALUE))
+                .addContainerGap(273, Short.MAX_VALUE))
         );
 
         getContentPane().add(Ajustespanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 0, 190, 500));
@@ -205,12 +207,13 @@ public class Mesa1 extends javax.swing.JFrame {
         MostrarAjustesBlackJack.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
         MostrarAjustesBlackJack.setText("Ajustes");
         MostrarAjustesBlackJack.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        MostrarAjustesBlackJack.setDisabledIcon(new javax.swing.ImageIcon(getClass().getResource("/general/btnoff.png"))); // NOI18N
         MostrarAjustesBlackJack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 MostrarAjustesBlackJackActionPerformed(evt);
             }
         });
-        MovJugadas.add(MostrarAjustesBlackJack, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 450, -1, -1));
+        MovJugadas.add(MostrarAjustesBlackJack, new org.netbeans.lib.awtextra.AbsoluteConstraints(566, 450, 150, -1));
 
         jLabel2.setFont(new java.awt.Font("Engravers MT", 0, 14)); // NOI18N
         jLabel2.setText("Cartas");
@@ -221,6 +224,7 @@ public class Mesa1 extends javax.swing.JFrame {
         VolveraJugar.setText("Volver a Jugar");
         VolveraJugar.setAutoscrolls(true);
         VolveraJugar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        VolveraJugar.setDisabledIcon(new javax.swing.ImageIcon(getClass().getResource("/general/btnoff.png"))); // NOI18N
         VolveraJugar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 VolveraJugarActionPerformed(evt);
@@ -230,27 +234,31 @@ public class Mesa1 extends javax.swing.JFrame {
 
         Repartir.setBackground(new java.awt.Color(0, 102, 51));
         Repartir.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
+        Repartir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/general/btnon.png"))); // NOI18N
         Repartir.setText("Repartir");
         Repartir.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         Repartir.setBorderPainted(false);
         Repartir.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        Repartir.setDisabledIcon(new javax.swing.ImageIcon(getClass().getResource("/general/btnoff.png"))); // NOI18N
         Repartir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 RepartirActionPerformed(evt);
             }
         });
-        MovJugadas.add(Repartir, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 172, 120, 33));
+        MovJugadas.add(Repartir, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 170, 160, 33));
 
-        Pedir1Carta.setBackground(new java.awt.Color(96, 211, 98));
+        Pedir1Carta.setBackground(new java.awt.Color(102, 255, 153));
         Pedir1Carta.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
+        Pedir1Carta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/general/btnon.png"))); // NOI18N
         Pedir1Carta.setText("Pedir Carta");
         Pedir1Carta.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        Pedir1Carta.setDisabledIcon(new javax.swing.ImageIcon(getClass().getResource("/general/btnoff.png"))); // NOI18N
         Pedir1Carta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Pedir1CartaActionPerformed(evt);
             }
         });
-        MovJugadas.add(Pedir1Carta, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 215, 120, 36));
+        MovJugadas.add(Pedir1Carta, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 220, 160, 36));
 
         ConteoCartas.setFont(new java.awt.Font("Engravers MT", 1, 24)); // NOI18N
         ConteoCartas.setText("104");
@@ -258,26 +266,30 @@ public class Mesa1 extends javax.swing.JFrame {
 
         Parar.setBackground(new java.awt.Color(102, 255, 153));
         Parar.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
+        Parar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/general/btnon.png"))); // NOI18N
         Parar.setText("Plantar");
         Parar.setAutoscrolls(true);
         Parar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        Parar.setDisabledIcon(new javax.swing.ImageIcon(getClass().getResource("/general/btnoff.png"))); // NOI18N
         Parar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 PararActionPerformed(evt);
             }
         });
-        MovJugadas.add(Parar, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 306, 120, 34));
+        MovJugadas.add(Parar, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 310, 160, 34));
 
         Doble.setBackground(new java.awt.Color(102, 255, 153));
         Doble.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
+        Doble.setIcon(new javax.swing.ImageIcon(getClass().getResource("/general/btnon.png"))); // NOI18N
         Doble.setText("Doble (+2)");
         Doble.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        Doble.setDisabledIcon(new javax.swing.ImageIcon(getClass().getResource("/general/btnoff.png"))); // NOI18N
         Doble.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 DobleActionPerformed(evt);
             }
         });
-        MovJugadas.add(Doble, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 260, 120, 36));
+        MovJugadas.add(Doble, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 260, 160, 36));
 
         valdRepartir.setFont(new java.awt.Font("Monospaced", 0, 14)); // NOI18N
         MovJugadas.add(valdRepartir, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 60, 200, 21));
@@ -584,6 +596,9 @@ public class Mesa1 extends javax.swing.JFrame {
 
     int a = 0; //Variable que verifica si antes de jugar ya repartio las cartas
     private void RepartirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RepartirActionPerformed
+    if(!Repartir.isEnabled()){
+        Repartir.setBackground(Color.BLACK);
+    }
         ocultarPanelAjustes();
         VolveraJugar.setEnabled(false);
         MostrarAjustesBlackJack.setEnabled(false);
@@ -1032,8 +1047,11 @@ public class Mesa1 extends javax.swing.JFrame {
         NumerodeMasos = NumerodeMasos + 1; //Aumenta 1
         valdmasos.setText("");
         if (NumerodeMasos > 3) {
-            valdmasos.setText("(◕ v ◕) Número maximo");
+            masbtn.setText("max.");
             NumerodeMasos = 3;
+        } else if (NumerodeMasos < 3 && NumerodeMasos > 0) {
+            masbtn.setText("+");
+            menosbtn.setText("-");
         }
         mostrarnummaso.setText(String.valueOf(NumerodeMasos));
     }//GEN-LAST:event_masbtnActionPerformed
@@ -1042,8 +1060,13 @@ public class Mesa1 extends javax.swing.JFrame {
         NumerodeMasos = NumerodeMasos - 1; //dISMINUYE 1
         valdmasos.setText("");
         if (NumerodeMasos <= 0) {
-            valdmasos.setText("(◕ v ◕) Número minimo");
+            
+            menosbtn.setText("min.");
             NumerodeMasos = 1;
+        } else if (NumerodeMasos < 3 && NumerodeMasos > 0) {
+            
+            menosbtn.setText("-");
+            masbtn.setText("+");
         }
 
         mostrarnummaso.setText(String.valueOf(NumerodeMasos));
