@@ -18,10 +18,11 @@ public class Ganador extends javax.swing.JFrame {
     /**
      * Creates new form Ganador
      */
-    String name = usuario.name;
+    //String name = usuario.name;
+    String name;
 
-    public Ganador() {
-
+    public Ganador(String name) {
+        this.name = name;
         initComponents();
 
         this.setSize(356, 225);
@@ -32,6 +33,7 @@ public class Ganador extends javax.swing.JFrame {
         this.setCursor(cursor);
         this.setVisible(true);
 
+        nombre.setText(name);
     }
 
     /**
@@ -46,7 +48,8 @@ public class Ganador extends javax.swing.JFrame {
         res00 = new javax.swing.JLabel();
         stellares = new javax.swing.JLabel();
         nombre = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        t1 = new javax.swing.JLabel();
+        t2 = new javax.swing.JLabel();
         cerrar = new javax.swing.JButton();
         fondo = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
@@ -61,15 +64,22 @@ public class Ganador extends javax.swing.JFrame {
         getContentPane().add(res00, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 320, 60));
         getContentPane().add(stellares, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 86, 110, 110));
 
-        nombre.setFont(new java.awt.Font("Monospaced", 0, 14)); // NOI18N
+        nombre.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
         nombre.setForeground(new java.awt.Color(255, 255, 255));
-        getContentPane().add(nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 130, 90, 30));
-        nombre.setText(name);
+        nombre.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        getContentPane().add(nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 130, 90, 30));
 
-        jLabel2.setFont(new java.awt.Font("Monospaced", 0, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Felicidades");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 90, 90, 30));
+        t1.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
+        t1.setForeground(new java.awt.Color(255, 255, 255));
+        t1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        t1.setText("Felicidades");
+        getContentPane().add(t1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 90, 110, 30));
+
+        t2.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
+        t2.setForeground(new java.awt.Color(255, 255, 255));
+        t2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        t2.setText("!Eres un genio!");
+        getContentPane().add(t2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, 240, 30));
 
         cerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resultado/cerrar.png"))); // NOI18N
         cerrar.setContentAreaFilled(false);
@@ -139,7 +149,7 @@ public class Ganador extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Ganador().setVisible(true);
+                new Ganador(null).setVisible(true);
             }
         });
     }
@@ -147,10 +157,11 @@ public class Ganador extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cerrar;
     private javax.swing.JLabel fondo;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel nombre;
     private javax.swing.JLabel res00;
     private javax.swing.JLabel stellares;
+    public static javax.swing.JLabel t1;
+    public static javax.swing.JLabel t2;
     // End of variables declaration//GEN-END:variables
 }

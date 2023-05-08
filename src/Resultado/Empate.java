@@ -18,8 +18,10 @@ public class Empate extends javax.swing.JFrame {
     /**
      * Creates new form Empate
      */
-    public Empate() {
+     String name;
+    public Empate( String name) {
         initComponents();
+        this.name = name;
         this.setSize(356,225);
         this.dispose();
         this.setUndecorated(true);
@@ -27,7 +29,7 @@ public class Empate extends javax.swing.JFrame {
         Cursor cursor = Toolkit.getDefaultToolkit().createCustomCursor(new ImageIcon(getClass().getResource("cursorimg.png")).getImage(),new Point(0,0),"Custom Cursor");
         this.setCursor(cursor);
         this.setVisible(true);
-        
+        nombre.setText(name);
         
     }
 
@@ -40,6 +42,8 @@ public class Empate extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel2 = new javax.swing.JLabel();
+        nombre = new javax.swing.JLabel();
         res00 = new javax.swing.JLabel();
         stellares = new javax.swing.JLabel();
         cerrar = new javax.swing.JButton();
@@ -48,6 +52,17 @@ public class Empate extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel2.setFont(new java.awt.Font("Monospaced", 0, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("Buena jugada");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 80, 100, 30));
+
+        nombre.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
+        nombre.setForeground(new java.awt.Color(255, 255, 255));
+        nombre.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        getContentPane().add(nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 130, 90, 30));
 
         res00.setFont(new java.awt.Font("Elephant", 0, 24)); // NOI18N
         res00.setForeground(new java.awt.Color(255, 255, 255));
@@ -124,7 +139,7 @@ public class Empate extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Empate().setVisible(true);
+                new Empate(null).setVisible(true);
             }
         });
     }
@@ -132,7 +147,9 @@ public class Empate extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cerrar;
     private javax.swing.JLabel fondo;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel nombre;
     private javax.swing.JLabel res00;
     private javax.swing.JLabel stellares;
     // End of variables declaration//GEN-END:variables

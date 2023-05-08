@@ -113,7 +113,7 @@ public class rompecabezas01 extends javax.swing.JFrame implements ActionListener
             }
             UIManager.put("OptionPane.messageFont", new Font("Monospaced", Font.BOLD, 20));
             if (k) {
-                Resultado.Ganador g = new Resultado.Ganador();
+                Resultado.Ganador g = new Resultado.Ganador(user);
 //                ImageIcon ganaste = new ImageIcon(CL.getResource("imagenes/happy.gif"));
 //                JOptionPane.showMessageDialog(null, "¡FELICIDADES!\nEres todo un ganador.", "ROMPECABEZAS", JOptionPane.PLAIN_MESSAGE, ganaste);
                 for (i = 0; i < 3; i++) {
@@ -124,7 +124,7 @@ public class rompecabezas01 extends javax.swing.JFrame implements ActionListener
                 }
                 c = 0;
             } else {
-                Resultado.Perdedor g = new Resultado.Perdedor();
+                Resultado.Perdedor g = new Resultado.Perdedor(user);
 
 //                ImageIcon perdiste = new ImageIcon(CL.getResource("imagenes/sad.gif"));
 //                JOptionPane.showMessageDialog(null, "GAME OVER\nPerdiste esta vez,\nsuerte para la próxima.", "ROMPECABEZAS", JOptionPane.PLAIN_MESSAGE, perdiste);

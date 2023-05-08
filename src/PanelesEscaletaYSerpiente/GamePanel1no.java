@@ -50,6 +50,7 @@ public class GamePanel1no extends javax.swing.JPanel {
         Fondo = new javax.swing.JLabel();
         PlanetaSube4 = new javax.swing.JLabel();
         PlanetaSube5 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(0, 0, 51));
         setOpaque(false);
@@ -105,8 +106,16 @@ public class GamePanel1no extends javax.swing.JPanel {
 
         Fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGescaleraSerp/tablero serp 1.png"))); // NOI18N
         add(Fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 400));
-        add(PlanetaSube4, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 250, 50, 50));
+        add(PlanetaSube4, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 250, 50, 50));
         add(PlanetaSube5, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 250, 50, 50));
+
+        jLabel2.setBackground(new java.awt.Color(102, 255, 102));
+        jLabel2.setFont(new java.awt.Font("Felix Titling", 1, 12)); // NOI18N
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("jLabel2");
+        jLabel2.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(0, 102, 0)));
+        jLabel2.setOpaque(true);
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 260, 60, 40));
     }// </editor-fold>//GEN-END:initComponents
 int x, y;
 
@@ -285,5 +294,6 @@ int x, y;
     private javax.swing.JButton TirarDados;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables
 }

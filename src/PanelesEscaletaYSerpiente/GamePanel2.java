@@ -1,13 +1,22 @@
 package PanelesEscaletaYSerpiente;
 
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
 import java.util.Random;
 import javax.swing.Timer;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 import javax.swing.JOptionPane;
+import javax.swing.SwingConstants;
 
 public class GamePanel2 extends javax.swing.JPanel {
 
@@ -23,8 +32,10 @@ public class GamePanel2 extends javax.swing.JPanel {
     ImageIcon dado4 = new ImageIcon(CL.getResource("IMGescaleraSerp/dado4.png"));
     ImageIcon dado5 = new ImageIcon(CL.getResource("IMGescaleraSerp/dado5.png"));
     ImageIcon dado6 = new ImageIcon(CL.getResource("IMGescaleraSerp/dado6.png"));
+    ImageIcon stellaimg = new ImageIcon(CL.getResource("IMGescaleraSerp/stellaa (1).png"));
     ImageIcon fondodado = new ImageIcon(CL.getResource("IMGescaleraSerp/fondodado_6.png"));
 
+    private Component componenteEncima = null;
     //- Seleccion de avatar
     int avatar = AvatarJugador.avatar;
 
@@ -51,7 +62,7 @@ public class GamePanel2 extends javax.swing.JPanel {
     // - Subrutina para realizar movimientos de los personajes en el tablero
     private void moverAlien(JLabel Alien, int pos, int jug, int avatar) {
         // Este codigo está inspirado en base a 
-       
+
         for (int i = 0; i < 34; i++) {
             if (i == pos) {
                 Timer timer = new Timer(10, new ActionListener() {
@@ -97,12 +108,23 @@ public class GamePanel2 extends javax.swing.JPanel {
         //Para verificar si ha ganado un usuario o en su defecto Stella:)
         if (pos == 34) {
             TirarDados.setEnabled(false);//Deshabilitar boton de tirar
+            TirarDados.setVisible(false);
+            textoturno.setText(null);
+            jugturno.setText(null);
+            dadoimg.setIcon(null);
+            dado00.setIcon(null);
+            NumDado.setText(null);
             if (jug == 1) {
-                Resultado.Ganador g = new Resultado.Ganador();
+                Resultado.Ganador g = new Resultado.Ganador(user);
+                g.t1.setText("¡Me ganaste!");
+                g.t2.setText("¡No me rendiré tan fácilmente!");
+
             } else if (jug == 2) {
-                Resultado.Perdedor g = new Resultado.Perdedor();
+                Resultado.Perdedor g = new Resultado.Perdedor(user);
+                g.t1.setText("¡Te gané!");
+                g.t2.setText("¿Qué tal eso? ¡Soy la mejor!");
             }
-            //JOptionPane.showMessageDialog(null, "el jugador " + jug + " ha ganado");
+
             Alien.setLocation(movimientosok[34][0], movimientosok[34][1]);
         }
         //Ceder turnos
@@ -111,8 +133,8 @@ public class GamePanel2 extends javax.swing.JPanel {
         } else if (jug == 2) {
             turno = 1;
         }
-
     }
+
     // -Subrutina para verificar si la posicion de x jugador lo conlleva a una escalera o una serpiente
     public void res(int pos) {
         //Arriba
@@ -153,9 +175,10 @@ public class GamePanel2 extends javax.swing.JPanel {
         }
 
     }
+    private String user;
 
-    public GamePanel2(int avatar) {
-        System.out.println("avt" + avatar);
+    public GamePanel2(int avatar, String name) {
+        this.user = name;
         initComponents();
         this.setFocusable(true);
         this.requestFocusInWindow();
@@ -172,17 +195,67 @@ public class GamePanel2 extends javax.swing.JPanel {
                 break;
 
         }
-       
+        TirarDados.setPreferredSize(new Dimension(90, 26));
+        TirarDados.setHorizontalAlignment(SwingConstants.CENTER);
+
     }
 
+//    private MouseListener ML() {
+//        return new MouseListener() {
+//            @Override
+//            public void mouseEntered(MouseEvent e) {
+//                if (turno == 1) {
+//                    TirarDados.setBackground(Color.GREEN);
+//                    TirarDados.setText(user);
+//
+//                } else {
+//                    TirarDados.setBackground(Color.RED);
+//                    TirarDados.setText("Stella");
+//                }
+//            }
+//
+//            @Override
+//            public void mouseExited(MouseEvent e) {
+//                if (turno == 1) {
+//                    if (jugador1 != 0) {
+//                        TirarDados.setBackground(Color.RED);
+//                        TirarDados.setText("Stella");
+//                    } else {
+//                        TirarDados.setBackground(new java.awt.Color(255, 102, 0));
+//                        TirarDados.setText("Tirar");
+//                    }
+//                } else {
+//                    TirarDados.setBackground(Color.GREEN);
+//                    TirarDados.setText(user);
+//                }
+//            }
+//
+//            @Override
+//            public void mouseClicked(MouseEvent e) {
+//                // throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+//            }
+//
+//            @Override
+//            public void mousePressed(MouseEvent e) {
+//                //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+//            }
+//
+//            @Override
+//            public void mouseReleased(MouseEvent e) {
+//                // throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+//            }
+//        };
+//    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jugturno = new javax.swing.JLabel();
+        textoturno = new javax.swing.JLabel();
+        Reiniciar = new javax.swing.JButton();
         dadoimg = new javax.swing.JLabel();
         dado00 = new javax.swing.JLabel();
         TirarDados = new javax.swing.JButton();
-        Reiniciar = new javax.swing.JButton();
         NumDado = new javax.swing.JLabel();
         AlienR = new javax.swing.JLabel();
         AlienU = new javax.swing.JLabel();
@@ -191,6 +264,38 @@ public class GamePanel2 extends javax.swing.JPanel {
         setBackground(new java.awt.Color(0, 0, 51));
         setOpaque(false);
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jugturno.setFont(new java.awt.Font("Monospaced", 1, 15)); // NOI18N
+        jugturno.setForeground(new java.awt.Color(204, 204, 255));
+        jugturno.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        add(jugturno, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 310, 130, 20));
+
+        textoturno.setFont(new java.awt.Font("Monospaced", 1, 15)); // NOI18N
+        textoturno.setForeground(new java.awt.Color(204, 204, 255));
+        textoturno.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        add(textoturno, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 290, 130, 20));
+
+        Reiniciar.setBackground(new java.awt.Color(255, 102, 0));
+        Reiniciar.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
+        Reiniciar.setText("Reintentar");
+        Reiniciar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        Reiniciar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ReiniciarMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                ReiniciarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                ReiniciarMouseExited(evt);
+            }
+        });
+        Reiniciar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ReiniciarActionPerformed(evt);
+            }
+        });
+        add(Reiniciar, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 340, -1, -1));
 
         dadoimg.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         dadoimg.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -205,26 +310,28 @@ public class GamePanel2 extends javax.swing.JPanel {
         dado00.setPreferredSize(new java.awt.Dimension(130, 130));
         add(dado00, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 10, -1, -1));
 
-        TirarDados.setBackground(new java.awt.Color(255, 102, 51));
+        TirarDados.setBackground(new java.awt.Color(255, 102, 0));
         TirarDados.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
-        TirarDados.setText("Tirar");
+        TirarDados.setText("START");
         TirarDados.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        TirarDados.setPreferredSize(new java.awt.Dimension(110, 50));
+        TirarDados.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TirarDadosMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                TirarDadosMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                TirarDadosMouseExited(evt);
+            }
+        });
         TirarDados.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 TirarDadosActionPerformed(evt);
             }
         });
-        add(TirarDados, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 150, -1, -1));
-
-        Reiniciar.setBackground(new java.awt.Color(255, 102, 0));
-        Reiniciar.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
-        Reiniciar.setText("Reiniciar");
-        Reiniciar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ReiniciarActionPerformed(evt);
-            }
-        });
-        add(Reiniciar, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 350, -1, -1));
+        add(TirarDados, new org.netbeans.lib.awtextra.AbsoluteConstraints(632, 150, -1, -1));
 
         NumDado.setFont(new java.awt.Font("Swis721 Ex BT", 1, 48)); // NOI18N
         NumDado.setForeground(new java.awt.Color(204, 204, 255));
@@ -261,6 +368,11 @@ public class GamePanel2 extends javax.swing.JPanel {
         NumDado.setText(Integer.toString(dado));
         //De acuerdo al turno manejar posiciones (ya que tenemos variables globales, se dificulto manejar todo en una sola subrutina)
         if (turno == 1) {
+            textoturno.setText("Turno de ");
+            jugturno.setText(user);
+            TirarDados.setPreferredSize(new Dimension(110, 50));
+            TirarDados.setBackground(Color.red);
+            TirarDados.setText("<html><center><font size=\"3\">Tirar dado de <br> Stella</font></center></html>");
             if (jugador1 < 34) { //validacion 1
                 //nueva posicion
                 jugador1 += dado;
@@ -268,41 +380,84 @@ public class GamePanel2 extends javax.swing.JPanel {
 
                 if (jugador1 > 34) { // validacion 2
                     jugador1 = jugador1 - dado;
-                    JOptionPane.showMessageDialog(null, "GAMER\nOh! Has sacado un numero superior.. \nEspera al próximo turno");
+                    switch (dado) {
+                        case 1:
+                            dadoimg.setIcon(dado1);
+                            break;
+                        case 2:
+                            dadoimg.setIcon(dado2);
+                            break;
+                        case 3:
+                            dadoimg.setIcon(dado3);
+                            break;
+                        case 4:
+                            dadoimg.setIcon(dado4);
+                            break;
+                        case 5:
+                            dadoimg.setIcon(dado5);
+                            break;
+                        case 6:
+                            dadoimg.setIcon(dado6);
+                            break;
+                    }
+                    Resultado.dadoeys g = new Resultado.dadoeys(user);
+                    g.nombre.setText(user);
+                    g.img.setIcon(AlienU.getIcon());
+                    //JOptionPane.showMessageDialog(null, "GAMER\nOh! Has sacado un numero superior.. \nEspera al próximo turno");
                     turno = 2;
+
                 }
             }
             moverAlien(AlienU, jugador1, 1, avatar);// Ejecutar subrutina que mueve JLabel osea icono asignado
 
         } else {
+            textoturno.setText("Turno de");
+            jugturno.setText("Stella");
+            TirarDados.setPreferredSize(new Dimension(110, 50));
+            TirarDados.setBackground(Color.green);
+            TirarDados.setText("<html><center><font size=\"3\">Tirar dado de <br>" + user + "</font></center></html>");
             if (jugador2 < 34) {
                 //nueva posicion
                 jugador2 += dado;
                 res(jugador2);
+
                 if (jugador2 > 34) {
                     jugador2 = jugador2 - dado;
-                    JOptionPane.showMessageDialog(null, "STELLA\nOh! Has sacado un numero superior.. \nEspera al próximo turno");
+                    switch (dado) {
+                        case 1:
+                            dadoimg.setIcon(dado1);
+                            break;
+                        case 2:
+                            dadoimg.setIcon(dado2);
+                            break;
+                        case 3:
+                            dadoimg.setIcon(dado3);
+                            break;
+                        case 4:
+                            dadoimg.setIcon(dado4);
+                            break;
+                        case 5:
+                            dadoimg.setIcon(dado5);
+                            break;
+                        case 6:
+                            dadoimg.setIcon(dado6);
+                            break;
+                    }
+                    Resultado.dadoeys g = new Resultado.dadoeys(user);
+                    g.nombre.setText("STELLA");
+                    g.img.setIcon(stellaimg);
+
+                    //JOptionPane.showMessageDialog(null, "STELLA\nOh! Has sacado un numero superior.. \nEspera al próximo turno");
                     turno = 1;
+
                 }
             }
             moverAlien(AlienR, jugador2, 2, avatar);
 
         }
 
-
     }//GEN-LAST:event_TirarDadosActionPerformed
 
-    private void ReiniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReiniciarActionPerformed
-        //Volver variables a sus posiciones/valores originales
-        dado = 0;
-        jugador1 = 0;
-        jugador2 = 0;
-        TirarDados.setEnabled(true);
-        AlienU.setLocation(movimientosok[0][0], movimientosok[0][1]);
-        AlienR.setLocation(movimientosok[0][0], movimientosok[0][1]);
-        NumDado.setText("");
-
-    }//GEN-LAST:event_ReiniciarActionPerformed
 
     private void AlienUKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_AlienUKeyPressed
 
@@ -312,6 +467,49 @@ public class GamePanel2 extends javax.swing.JPanel {
     private void AlienRKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_AlienRKeyPressed
         // TODO add your handling code here:
     }//GEN-LAST:event_AlienRKeyPressed
+
+
+    private void TirarDadosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TirarDadosMouseEntered
+
+    }//GEN-LAST:event_TirarDadosMouseEntered
+
+    private void TirarDadosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TirarDadosMouseExited
+
+
+    }//GEN-LAST:event_TirarDadosMouseExited
+
+    private void TirarDadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TirarDadosMouseClicked
+
+    }//GEN-LAST:event_TirarDadosMouseClicked
+
+    private void ReiniciarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ReiniciarMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ReiniciarMouseClicked
+
+    private void ReiniciarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ReiniciarMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ReiniciarMouseEntered
+
+    private void ReiniciarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ReiniciarMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ReiniciarMouseExited
+
+    private void ReiniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReiniciarActionPerformed
+
+        dado = 0;
+        jugador1 = 0;
+        jugador2 = 0;
+        TirarDados.setEnabled(true);
+        TirarDados.setVisible(true);
+        NumDado.setText(null);
+        dadoimg.setIcon(null);
+        dado00.setIcon(null);
+        textoturno.setText(null);
+        jugturno.setText(null);
+        AlienU.setLocation(movimientosok[0][0], movimientosok[0][1]);
+        AlienR.setLocation(movimientosok[0][0], movimientosok[0][1]);
+        NumDado.setText("");
+    }//GEN-LAST:event_ReiniciarActionPerformed
 
     //Matriz Tablero
     //Tablero donde el alien (USUARIO)
@@ -366,5 +564,11 @@ public class GamePanel2 extends javax.swing.JPanel {
     private javax.swing.JButton TirarDados;
     private javax.swing.JLabel dado00;
     private javax.swing.JLabel dadoimg;
+    private javax.swing.JLabel jugturno;
+    private javax.swing.JLabel textoturno;
     // End of variables declaration//GEN-END:variables
+
+    private Color Color(int i, int i0, int i1) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

@@ -31,7 +31,7 @@ public class Principal2 extends javax.swing.JFrame {
             clip.start();
 
         } catch (Exception e) {
-            System.err.println(e.getMessage());
+            //System.err.println(e.getMessage());
         }
     }
 

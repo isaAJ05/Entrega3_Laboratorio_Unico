@@ -20,13 +20,12 @@ public class SerpienteGAME extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null); //centrar ventana
         this.setTitle("Escalerita y serpiente"); //Titulo 
-
         AvataresPanel Avatares = new AvataresPanel(avatar);
 
         ShowPanel(Avatares);
 
         //cursor
-        Cursor cursor = Toolkit.getDefaultToolkit().createCustomCursor(new ImageIcon(getClass().getResource("cursor/cursorimg.png")).getImage(), new Point(0, 0), "Custom Cursor");
+       Cursor cursor = Toolkit.getDefaultToolkit().createCustomCursor(new ImageIcon(getClass().getResource("cursor/cursorimg.png")).getImage(), new Point(0, 0), "Custom Cursor");
         this.setCursor(cursor);
         this.setResizable(false);
         BTNAvatar.setEnabled(false);
@@ -171,7 +170,7 @@ public class SerpienteGAME extends javax.swing.JFrame {
 
     private void JugarBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JugarBTNActionPerformed
         if (PanelesEscaletaYSerpiente.AvatarJugador.avatar != 0) {
-            GamePanel2 Game = new GamePanel2(avatar);
+            GamePanel2 Game = new GamePanel2(avatar,user);
             ShowPanel(Game);
             val.setText(null);
             JugarBTN.setEnabled(false);

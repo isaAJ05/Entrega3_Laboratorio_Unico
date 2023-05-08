@@ -345,20 +345,20 @@ public class CarreraPANELcarros extends javax.swing.JPanel {
                 timer.stop();
                 PermisoParaMover = 1;
                 if (AX > VX & AX > NX) {
-                    Resultado.Ganador g = new Resultado.Ganador();
+                    Resultado.Ganador g = new Resultado.Ganador(name);
                    // JOptionPane.showMessageDialog(null, "\t!FELICIDADES " + name + "\n! HA GANADO LA CARRERA:D");
 
                 }
                 if ((NX > VX & NX > AX) | (VX > AX & VX > NX) | (VX == NX)) {
-                    Resultado.Perdedor g = new Resultado.Perdedor();
+                    Resultado.Perdedor g = new Resultado.Perdedor(name);
                     //JOptionPane.showMessageDialog(null, "\t Game Over " + name);
 
                 } else {
                     if (AX == NX) {
-                        Resultado.Empate emp = new Resultado.Empate();
+                        Resultado.Empate emp = new Resultado.Empate(name);
                         //JOptionPane.showMessageDialog(null, "\t Empate " + name);
                     } else if (AX == VX) {
-                        Resultado.Empate emp = new Resultado.Empate();
+                        Resultado.Empate emp = new Resultado.Empate(name);
                         //JOptionPane.showMessageDialog(null, "\t Empate " + name);
 
                     }
