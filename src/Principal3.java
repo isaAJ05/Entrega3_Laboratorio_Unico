@@ -69,7 +69,12 @@ public class Principal3 extends javax.swing.JFrame {
         Cursor cursor = Toolkit.getDefaultToolkit().createCustomCursor(new ImageIcon(getClass().getResource("cursor/cursorimg.png")).getImage(), new Point(0, 0), "Custom Cursor");
         this.setCursor(cursor);
         this.setResizable(false);
+        //APLIOAR SONIDOS
          sonido2(cyan,"/Sonidos/cascabel.wav");
+         sonido2(magenta,"/Sonidos/carrera.wav");
+         sonido2(red,"/Sonidos/cartas.wav");
+         sonido2(green,"/Sonidos/fichas.wav");
+         sonido2(blue,"/Sonidos/burbujas.wav");
 
     }
 
