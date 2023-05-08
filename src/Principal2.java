@@ -39,6 +39,7 @@ public class Principal2 extends javax.swing.JFrame {
         setIconImage(new ImageIcon(getClass().getResource("general/stellaicono.png")).getImage());
         initComponents();
         this.setLocationRelativeTo(null);
+         this.setTitle("Star Games");
         //para cuando se le de enter al label continue al siguiente
         nombre.setFocusable(true); // Hacer que el label sea "focusable"
         nombre.addKeyListener(new KeyAdapter() {
