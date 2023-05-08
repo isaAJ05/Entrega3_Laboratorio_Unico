@@ -503,10 +503,10 @@ setIconImage(new ImageIcon(getClass().getResource("general/stellaicono.png")).ge
     private void PararActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PararActionPerformed
         if (repartir) {
             cartasdealer();
-            if(Sum0US==Sum0DE){
+            if(Sum0US==21 &(Sum0DE<21|Sum0DE>21)){
                 
             }
-            if(Sum0US==21 &(Sum0DE<21|Sum0DE>21)){
+             if(Sum0US==Sum0DE){ //
                 
             }
         } else {
@@ -582,6 +582,7 @@ setIconImage(new ImageIcon(getClass().getResource("general/stellaicono.png")).ge
     private void RepartirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RepartirActionPerformed
         ocultarPanelAjustes();
         VolveraJugar.setEnabled(false);
+        MostrarAjustesBlackJack.setEnabled(false);
         if (a == 0) {
             HabilitarbtnGame();
             repartir = true;
@@ -714,11 +715,13 @@ setIconImage(new ImageIcon(getClass().getResource("general/stellaicono.png")).ge
     int CartaUs5 = 0, CartaUs3 = 0, CartaUs4 = 0, tipodibujo3 = 0, tipodibujo4 = 0, tipodibujo5 = 0, Ucolum3 = 0, Ucolum4 = 0, Ucolum5 = 0;
 
     private void Pedir1CartaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Pedir1CartaActionPerformed
+      
         if (repartir) { //Validación de repartir las cartas iniciales
             HabilitarbtnGame();
             Doble.setEnabled(false);
             Repartir.setEnabled(false);
             VolveraJugar.setEnabled(false);
+            Parar.setEnabled(true);
             if (s <= 5) {
                 cont++;
                 ConteoCartaSinUsar(C, cont);
@@ -868,7 +871,8 @@ setIconImage(new ImageIcon(getClass().getResource("general/stellaicono.png")).ge
     }
 
     private void MostrarAjustesBlackJackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MostrarAjustesBlackJackActionPerformed
-        
+        h=1;
+        Ajustespanel.setVisible(true);
         if (h == 0) { //Se ve y se oculta
             ocultarA();
             h = 1;// Estado del panel A : No visible
@@ -943,6 +947,7 @@ setIconImage(new ImageIcon(getClass().getResource("general/stellaicono.png")).ge
         HabilitarbtnGame();
         h = 0;
         MostrarAjustesBlackJack.setEnabled(false);
+        a=0;
 
         //Creacion de matriz 2 Barajas EJEMPLO
         /*int baraja[][] = {
@@ -1055,12 +1060,12 @@ setIconImage(new ImageIcon(getClass().getResource("general/stellaicono.png")).ge
     }//GEN-LAST:event_DobleActionPerformed
 
     private void VolveraJugarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VolveraJugarActionPerformed
-        if (repartir) {//Validación de repartir las cartas iniciales
+        //if (repartir) {//Validación de repartir las cartas iniciales
            mostrarA();
             MostrarAjustesBlackJack.setEnabled(true);
             h = 0;//Estado del panel A : Visible
-            deshabilitarbtnGame();
-            NumerodeMasos = 1; cont=0;Sum0US=0;Sum0DE=0;C=0;
+           
+            NumerodeMasos = 1; cont=0;Sum0US=0;Sum0DE=0;C=0;s=3;
             cartaU1.setIcon(null);cartaU2.setIcon(null);cartaU3.setIcon(null);cartaU4.setIcon(null);cartaU5.setIcon(null);
             cartaD1.setIcon(null); cartaD2.setIcon(null); cartaD3.setIcon(null); cartaD4.setIcon(null); cartaD5.setIcon(null);
             C1US.setIcon(null);C2US.setIcon(null);C3US.setIcon(null);C4US.setIcon(null);C5US.setIcon(null);
@@ -1071,13 +1076,15 @@ setIconImage(new ImageIcon(getClass().getResource("general/stellaicono.png")).ge
             C1DE.setText(""); C2DE.setText(""); C3DE.setText(""); C4DE.setText(""); C5DE.setText("");
             SumCartasU.setText("");SumCartasDE.setText("");
             HabilitarbtnGame();
-        } else {
+            repartir=false;
+//       
             Pedir1Carta.setEnabled(false);
             Parar.setEnabled(false);
             Doble.setEnabled(false);
+            Repartir.setEnabled(false);
             VolveraJugar.setEnabled(false);
-            JOptionPane.showMessageDialog(null, "No se han repartido cartas", "BlackJack∙", 2);
-        }
+//            JOptionPane.showMessageDialog(null, "No se han repartido cartas", "BlackJack∙", 2);
+//       
     }//GEN-LAST:event_VolveraJugarActionPerformed
 
     void ocultarPanelAjustes() { //Subrutina Deshabiliatar Ajustes del todo 
