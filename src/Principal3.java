@@ -73,6 +73,7 @@ public class Principal3 extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.name = user;
+         this.setTitle("Star Games");
         volver.setBackground(new Color(153, 51, 255));
         //cursor
         Cursor cursor = Toolkit.getDefaultToolkit().createCustomCursor(new ImageIcon(getClass().getResource("cursor/cursorimg.png")).getImage(), new Point(0, 0), "Custom Cursor");
