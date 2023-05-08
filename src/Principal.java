@@ -48,6 +48,7 @@ public class Principal extends javax.swing.JFrame {
         Cursor cursor = Toolkit.getDefaultToolkit().createCustomCursor(new ImageIcon(getClass().getResource("cursor/cursorimg.png")).getImage(), new Point(0, 0), "Custom Cursor");
         this.setCursor(cursor);
         this.setResizable(false);
+        this.setTitle("Star Games");
         try {
             Clip clip = AudioSystem.getClip();
             URL url = getClass().getResource("/Sonidos/satellite.wav");
