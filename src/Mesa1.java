@@ -58,7 +58,6 @@ public class Mesa1 extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         MovJugadas = new javax.swing.JPanel();
         Mensajito = new javax.swing.JLabel();
-        MostrarAjustesBlackJack = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         VolveraJugar = new javax.swing.JButton();
         Repartir = new javax.swing.JButton();
@@ -202,18 +201,6 @@ public class Mesa1 extends javax.swing.JFrame {
         Mensajito.setFont(new java.awt.Font("Monospaced", 1, 12)); // NOI18N
         Mensajito.setForeground(new java.awt.Color(255, 0, 0));
         MovJugadas.add(Mensajito, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 60, 200, 50));
-
-        MostrarAjustesBlackJack.setBackground(new java.awt.Color(102, 255, 153));
-        MostrarAjustesBlackJack.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
-        MostrarAjustesBlackJack.setText("Ajustes");
-        MostrarAjustesBlackJack.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        MostrarAjustesBlackJack.setDisabledIcon(new javax.swing.ImageIcon(getClass().getResource("/general/btnoff.png"))); // NOI18N
-        MostrarAjustesBlackJack.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MostrarAjustesBlackJackActionPerformed(evt);
-            }
-        });
-        MovJugadas.add(MostrarAjustesBlackJack, new org.netbeans.lib.awtextra.AbsoluteConstraints(566, 450, 150, -1));
 
         jLabel2.setFont(new java.awt.Font("Engravers MT", 0, 14)); // NOI18N
         jLabel2.setText("Cartas");
@@ -368,13 +355,13 @@ public class Mesa1 extends javax.swing.JFrame {
         C4DE.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         C4DE.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         C4DE.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
-        MesaCartas.add(C4DE, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 110, 60, 110));
+        MesaCartas.add(C4DE, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 110, 60, 110));
 
         C3DE.setFont(new java.awt.Font("Snap ITC", 0, 14)); // NOI18N
         C3DE.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         C3DE.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         C3DE.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
-        MesaCartas.add(C3DE, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 110, 60, 110));
+        MesaCartas.add(C3DE, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 110, 60, 110));
 
         C2DE.setFont(new java.awt.Font("Snap ITC", 0, 14)); // NOI18N
         C2DE.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -596,12 +583,11 @@ public class Mesa1 extends javax.swing.JFrame {
 
     int a = 0; //Variable que verifica si antes de jugar ya repartio las cartas
     private void RepartirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RepartirActionPerformed
-    if(!Repartir.isEnabled()){
-        Repartir.setBackground(Color.BLACK);
-    }
+        if (!Repartir.isEnabled()) {
+            Repartir.setBackground(Color.BLACK);
+        }
         ocultarPanelAjustes();
         VolveraJugar.setEnabled(false);
-        MostrarAjustesBlackJack.setEnabled(false);
         if (a == 0) {
             HabilitarbtnGame();
             repartir = true;
@@ -908,6 +894,8 @@ public class Mesa1 extends javax.swing.JFrame {
             }
         };
         th.start();
+        h=0;
+        Ajustespanel.setVisible(true);
     }
 
     private void deshabilitarbtnGame() {
@@ -926,8 +914,7 @@ public class Mesa1 extends javax.swing.JFrame {
         VolveraJugar.setEnabled(true);
     }
 
-    private void MostrarAjustesBlackJackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MostrarAjustesBlackJackActionPerformed
-        h = 1;
+    /* h = 1;
         Ajustespanel.setVisible(true);
         if (h == 0) { //Se ve y se oculta
             ocultarA();
@@ -936,10 +923,7 @@ public class Mesa1 extends javax.swing.JFrame {
             mostrarA();
             h = 0;//Estado del panel A : Visible
             deshabilitarbtnGame();
-        }
-
-    }//GEN-LAST:event_MostrarAjustesBlackJackActionPerformed
-
+        }*/
     private void btnVolver1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVolver1MouseEntered
         labelvolver.setText(" Inicio");
     }//GEN-LAST:event_btnVolver1MouseEntered
@@ -1002,7 +986,6 @@ public class Mesa1 extends javax.swing.JFrame {
         ocultarA();
         HabilitarbtnGame();
         h = 0;
-        MostrarAjustesBlackJack.setEnabled(false);
         a = 0;
 
         //Creacion de matriz 2 Barajas EJEMPLO
@@ -1060,11 +1043,11 @@ public class Mesa1 extends javax.swing.JFrame {
         NumerodeMasos = NumerodeMasos - 1; //dISMINUYE 1
         valdmasos.setText("");
         if (NumerodeMasos <= 0) {
-            
+
             menosbtn.setText("min.");
             NumerodeMasos = 1;
         } else if (NumerodeMasos < 3 && NumerodeMasos > 0) {
-            
+
             menosbtn.setText("-");
             masbtn.setText("+");
         }
@@ -1124,10 +1107,22 @@ public class Mesa1 extends javax.swing.JFrame {
     }//GEN-LAST:event_DobleActionPerformed
 
     private void VolveraJugarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VolveraJugarActionPerformed
-        //if (repartir) {//Validación de repartir las cartas iniciales
-        mostrarA();
-        MostrarAjustesBlackJack.setEnabled(true);
-        h = 0;//Estado del panel A : Visible
+
+//        //Ajustespanel.setVisible(true);
+//        if (h == 0) { //Se ve y se oculta
+//            ocultarA();
+//            h = 1;// Estado del panel A : No visible
+//        } 
+//        if(h==1){//no se ve tiene que salir
+            mostrarA();
+            h = 0;//Estado del panel A : Visible
+            deshabilitarbtnGame();
+        
+
+        
+        
+        //MostrarAjustesBlackJack.setEnabled(true);
+        //Estado del panel A : Visible
 
         NumerodeMasos = 1;
         cont = 0;
@@ -1180,15 +1175,16 @@ public class Mesa1 extends javax.swing.JFrame {
         C5DE.setText("");
         SumCartasU.setText("");
         SumCartasDE.setText("");
-        HabilitarbtnGame();
+      //  HabilitarbtnGame();
         repartir = false;
 //       
-        Pedir1Carta.setEnabled(false);
-        Parar.setEnabled(false);
-        Doble.setEnabled(false);
-        Repartir.setEnabled(false);
-        VolveraJugar.setEnabled(false);
-//            JOptionPane.showMessageDialog(null, "No se han repartido cartas", "BlackJack∙", 2);
+//        Pedir1Carta.setEnabled(false);
+//        Parar.setEnabled(false);
+//        Doble.setEnabled(false);
+//        Repartir.setEnabled(false);
+//        VolveraJugar.setEnabled(false);
+       
+//     JOptionPane.showMessageDialog(null, "No se han repartido cartas", "BlackJack∙", 2);
 //       
     }//GEN-LAST:event_VolveraJugarActionPerformed
 
@@ -1253,7 +1249,6 @@ public class Mesa1 extends javax.swing.JFrame {
     private javax.swing.JButton Doble;
     private javax.swing.JLabel Mensajito;
     private javax.swing.JPanel MesaCartas;
-    private javax.swing.JButton MostrarAjustesBlackJack;
     private javax.swing.JPanel MovJugadas;
     private javax.swing.JButton Parar;
     private javax.swing.JButton Pedir1Carta;
