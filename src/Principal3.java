@@ -17,7 +17,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 public class Principal3 extends javax.swing.JFrame {
-//SUBRUTINA PARA APLICAR SONIDO
+//SUBRUTINAS PARA APLICAR SONIDO
 
     private void sonido(String cadena) {
         try {
