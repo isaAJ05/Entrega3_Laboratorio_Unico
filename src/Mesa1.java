@@ -680,7 +680,7 @@ public class Mesa1 extends javax.swing.JFrame {
                 Doble.setEnabled(false);
                 VolveraJugar.setEnabled(true);
                 cartasdealer();
-                if (Sum0DE > 21) { //Se mira quien esta mas cerca a 21
+                //Se mira quien esta mas cerca a 21
                     if (Sum0US < Sum0DE) {
                         Resultado.Ganador g = new Resultado.Ganador(user);
                         g.t1.setText("¡Me ganaste!");
@@ -699,16 +699,12 @@ public class Mesa1 extends javax.swing.JFrame {
                             ConteoCartaSinUsar(C, cont);
                             elegircarta(baraja, Ccolor);
                             cartasdealer();
-                            if (Sum0DE == Sum0US) {
+                            if (Sum0DE == Sum0US) { //Si ambos tienen el mismo numero
                                 Resultado.Empate emp = new Resultado.Empate(user);
                             }
                         }
                     }
-                } else {
-                    if (Sum0DE <= 21) {
-                        Resultado.Perdedor g = new Resultado.Perdedor(user);
-                    }
-                }
+                
             }
             if (Sum0US == 21) { //Panel de GANO
                 Pedir1Carta.setEnabled(false);
@@ -722,17 +718,19 @@ public class Mesa1 extends javax.swing.JFrame {
                         Resultado.Empate emp = new Resultado.Empate(user);
                     }
                 }
-
             }
         } else {
             deshabilitarbtnGame();
             valdRepartir.setText(" Reparte las cartas para iniciar");
         }
     }//GEN-LAST:event_RepartirActionPerformed
+
+
     int valorCarta;
     int columna, fila;
     String colorB;
 
+    //Subrutina para la eleccion de cartas al azar
     public void elegircarta(int[][] baraja, String[] Ccolor) {
         int f = ran.nextInt(n); //Con inidices aleoatorios se escoge las cartas dentro de la matriz baraja
         int c = ran.nextInt(m); //Solo sera necesarios hacer esto dos veces
@@ -820,24 +818,77 @@ public class Mesa1 extends javax.swing.JFrame {
                 }
                 SumCartasU.setText(String.valueOf(Sum0US));
                 s++;
-
-                if (Sum0US > 21) {
-                    Pedir1Carta.setEnabled(false);
-                    Doble.setEnabled(false);
-                    VolveraJugar.setEnabled(true);
-                    cartasdealer();
-                }
                 if (Sum0US == 21) { //Ya Gano
                     Pedir1Carta.setEnabled(false);
                     Doble.setEnabled(false);
                     VolveraJugar.setEnabled(true);
                     cartasdealer();
+                    if (Sum0DE > 21 | Sum0DE < 21) {
+                        Resultado.Ganador g = new Resultado.Ganador(user);
+                    } else {
+                        if (Sum0DE == 21) {
+                            Resultado.Empate emp = new Resultado.Empate(user);
+                        }
+                    }
                 }
+                if (Sum0US > 21) {
+                    Pedir1Carta.setEnabled(false);
+                    Doble.setEnabled(false);
+                    VolveraJugar.setEnabled(true);
+                    cartasdealer();
+                    if (Sum0DE > 21) { //Se mira quien esta mas cerca a 21
+                        if (Sum0US < Sum0DE) {
+                            Resultado.Ganador g = new Resultado.Ganador(user);
+                            g.t1.setText("¡Me ganaste!");
+                            g.t2.setText("¡No me rendiré tan fácilmente!");
+                            g.stellares.setIcon(stellatriste);
+
+                        } else {
+                            if (Sum0US > Sum0DE) {
+                                Resultado.Perdedor g = new Resultado.Perdedor(user);
+                                g.t1.setText("¡Te gané!");
+                                g.t2.setText("¿Qué tal eso? ¡Soy la mejor!");
+                                g.stellares.setIcon(stellafeliz);
+                            } else {
+
+                                cont++;
+                                ConteoCartaSinUsar(C, cont);
+                                elegircarta(baraja, Ccolor);
+                                cartasdealer();
+                                if (Sum0DE == Sum0US) { //Si ambos tienen el mismo numero
+                                    Resultado.Empate emp = new Resultado.Empate(user);
+                                }
+                            }
+                        }
+                    }
+                }
+
             } else {
                 Mensajito.setText("Ya no puede pedir mas cartas");
 
                 Pedir1Carta.setEnabled(false);
+
                 //mensajito de se lleno, ya no puede pedir mas
+                if (Sum0US > 21) { //Si sigue sin llegar a 21 que se evalue las cartas del dealer
+                    Pedir1Carta.setEnabled(false);
+                    Doble.setEnabled(false);
+                    VolveraJugar.setEnabled(true);
+                    cartasdealer();
+                    if (Sum0US < Sum0DE) {
+                        Resultado.Perdedor g = new Resultado.Perdedor(user);
+                        g.t1.setText("¡Te gané!");
+                        g.t2.setText("¿Qué tal eso? ¡Soy la mejor!");
+                        g.stellares.setIcon(stellafeliz);
+
+                    } else {
+                        if (Sum0US > Sum0DE) {
+                            Resultado.Ganador g = new Resultado.Ganador(user);
+                            g.t1.setText("¡Me ganaste!");
+                            g.t2.setText("¡No me rendiré tan fácilmente!");
+                            g.stellares.setIcon(stellatriste);
+                        }
+                    }
+                }
             }
         } else {
             Pedir1Carta.setEnabled(false);
@@ -894,10 +945,11 @@ public class Mesa1 extends javax.swing.JFrame {
             }
         };
         th.start();
-        h=0;
+        h = 0;
         Ajustespanel.setVisible(true);
     }
 
+    //Subrutinas para activar y desactivar todos los botones
     private void deshabilitarbtnGame() {
         Repartir.setEnabled(false);
         Pedir1Carta.setEnabled(false);
@@ -924,6 +976,7 @@ public class Mesa1 extends javax.swing.JFrame {
             h = 0;//Estado del panel A : Visible
             deshabilitarbtnGame();
         }*/
+    //Efectos
     private void btnVolver1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVolver1MouseEntered
         labelvolver.setText(" Inicio");
     }//GEN-LAST:event_btnVolver1MouseEntered
@@ -953,6 +1006,7 @@ public class Mesa1 extends javax.swing.JFrame {
     String Ccolor[] = {"r", "r", "r", "r", "n", "n", "n", "n", "r", "r", "r", "r"};
 
     int baraja[][] = new int[100][100];
+//Funcion para llenar la matriz de barajas
 
     public int[][] llenarM(int n, int m) {
         int i, j;
@@ -1025,7 +1079,7 @@ public class Mesa1 extends javax.swing.JFrame {
        
          */
     }//GEN-LAST:event_BTNbarajaConfirmarActionPerformed
-
+//Botones de los masos (+)/(-)
     private void masbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_masbtnActionPerformed
         NumerodeMasos = NumerodeMasos + 1; //Aumenta 1
         valdmasos.setText("");
@@ -1084,17 +1138,20 @@ public class Mesa1 extends javax.swing.JFrame {
 
             Doble.setEnabled(false);
 
-            if (Sum0US > 21) { //Si el usuario se pasa
-                Pedir1Carta.setEnabled(false);
-                Doble.setEnabled(false);
-                VolveraJugar.setEnabled(true);
-                cartasdealer();
-            }
             if (Sum0US == 21) { //Panel de GANO
                 Pedir1Carta.setEnabled(false);
                 Doble.setEnabled(false);
                 VolveraJugar.setEnabled(true);
                 cartasdealer();
+                if (Sum0DE > 21 | Sum0DE < 21) {
+                    Resultado.Ganador g = new Resultado.Ganador(user);
+                } else {
+                    if (Sum0DE == 21) {
+                        Resultado.Empate emp = new Resultado.Empate(user);
+                    }
+                }
+            } else {
+
             }
 
         } else {
@@ -1108,20 +1165,9 @@ public class Mesa1 extends javax.swing.JFrame {
 
     private void VolveraJugarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VolveraJugarActionPerformed
 
-//        //Ajustespanel.setVisible(true);
-//        if (h == 0) { //Se ve y se oculta
-//            ocultarA();
-//            h = 1;// Estado del panel A : No visible
-//        } 
-//        if(h==1){//no se ve tiene que salir
-            mostrarA();
-            h = 0;//Estado del panel A : Visible
-            deshabilitarbtnGame();
-        
-
-        
-        
-        //MostrarAjustesBlackJack.setEnabled(true);
+        mostrarA();
+        h = 0;//Estado del panel A : Visible
+        deshabilitarbtnGame();
         //Estado del panel A : Visible
 
         NumerodeMasos = 1;
@@ -1175,7 +1221,7 @@ public class Mesa1 extends javax.swing.JFrame {
         C5DE.setText("");
         SumCartasU.setText("");
         SumCartasDE.setText("");
-      //  HabilitarbtnGame();
+        //  HabilitarbtnGame();
         repartir = false;
 //       
 //        Pedir1Carta.setEnabled(false);
@@ -1183,7 +1229,7 @@ public class Mesa1 extends javax.swing.JFrame {
 //        Doble.setEnabled(false);
 //        Repartir.setEnabled(false);
 //        VolveraJugar.setEnabled(false);
-       
+
 //     JOptionPane.showMessageDialog(null, "No se han repartido cartas", "BlackJack∙", 2);
 //       
     }//GEN-LAST:event_VolveraJugarActionPerformed
