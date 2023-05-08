@@ -219,6 +219,11 @@ public class Mesa1 extends javax.swing.JFrame {
         VolveraJugar.setText("Volver a Jugar");
         VolveraJugar.setAutoscrolls(true);
         VolveraJugar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        VolveraJugar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                VolveraJugarActionPerformed(evt);
+            }
+        });
         MovJugadas.add(VolveraJugar, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 360, 180, 34));
 
         Repartir.setBackground(new java.awt.Color(0, 102, 51));
@@ -427,10 +432,21 @@ public class Mesa1 extends javax.swing.JFrame {
     }
 
     private void PararActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PararActionPerformed
+        if (repartir) {
         CartaBlanca(cartaD1); //Se revela la carta oculta de estela
         TipoDeCarta(Dtipodibujo1, C1DE, CartaDe1);
         SumCartasDE.setText(String.valueOf(Sum0DE));
         Pedir1Carta.setEnabled(false);
+        Parar.setEnabled(false);
+        VolveraJugar.setEnabled(true);
+        }else{
+            
+            Pedir1Carta.setEnabled(false);
+            Parar.setEnabled(false);
+            Doble.setEnabled(false);
+            VolveraJugar.setEnabled(false);
+            JOptionPane.showMessageDialog(null, "No se han repartido cartas", "BlackJack∙", 2);
+        }
 
     }//GEN-LAST:event_PararActionPerformed
 
@@ -518,10 +534,10 @@ public class Mesa1 extends javax.swing.JFrame {
     int a = 0; //Variable que verifica si antes de jugar ya repartio las cartas
     private void RepartirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RepartirActionPerformed
         ocultarPanelAjustes();
+           VolveraJugar.setEnabled(false);
         if (a == 0) {
             HabilitarbtnGame();
             repartir = true;
-
             // Cartas iniciales para el usuario
             //carta 1
             elegircarta(baraja, Ccolor); //Subrutina para la eleccion de carta al azar 
@@ -582,13 +598,13 @@ public class Mesa1 extends javax.swing.JFrame {
             //Validacion del sistema
             if (Sum0DE > 21 & (CartaDe1 == 11 | CartaDe2 == 11)) { //Si sale un as se tomara como 11 siempre y cuando no se pase de 21
                 //as=1;
-                if (CartaDe1 == 11) {
-                    CartaDe1 = 1;
-                } else {
-                    if (CartaDe2 == 11) {
-                        CartaDe2 = 1;
+                    if (CartaDe1 == 11) {
+                        CartaDe1 = 1;
+                    } else {
+                        if (CartaDe2 == 11) {
+                            CartaDe2 = 1;
+                        }
                     }
-                }
                 Sum0US = CartaDe1 + CartaDe2;
             }
             ConteoCartaSinUsar(C, cont);
@@ -600,11 +616,13 @@ public class Mesa1 extends javax.swing.JFrame {
             TipoDeCarta(Dtipodibujo2, C2DE, CartaDe2);
 
             SumCartasDE.setText(String.valueOf(CartaDe2));
-
+            
             Pedir1Carta.setVisible(true); //Activar botones de juego
             a = 1;
             Repartir.setEnabled(false); //Desspues de repatir que el boton se desactive
+             VolveraJugar.setEnabled(false);
         } else {
+            deshabilitarbtnGame();
             valdRepartir.setText(" Reparte las cartas para iniciar");
         }
     }//GEN-LAST:event_RepartirActionPerformed
@@ -640,6 +658,7 @@ public class Mesa1 extends javax.swing.JFrame {
             HabilitarbtnGame();
             Doble.setEnabled(false);
             Repartir.setEnabled(false);
+            VolveraJugar.setEnabled(false);
             if (s <= 5) {
                 cont++;
                 ConteoCartaSinUsar(C, cont);
@@ -707,6 +726,7 @@ public class Mesa1 extends javax.swing.JFrame {
             Pedir1Carta.setEnabled(false);
             Parar.setEnabled(false);
             Doble.setEnabled(false);
+            VolveraJugar.setEnabled(false);
             JOptionPane.showMessageDialog(null, "No se han repartido cartas", "BlackJack∙", 2);
         }
     }//GEN-LAST:event_Pedir1CartaActionPerformed
@@ -914,6 +934,7 @@ public class Mesa1 extends javax.swing.JFrame {
             HabilitarbtnGame();
             Repartir.setEnabled(false);
             Doble.setEnabled(false);
+            VolveraJugar.setEnabled(false);
             if (s == 3) {
                 Pedir1Carta.setEnabled(false);
                 String colorB3;
@@ -941,9 +962,22 @@ public class Mesa1 extends javax.swing.JFrame {
             Pedir1Carta.setEnabled(false);
             Parar.setEnabled(false);
             Doble.setEnabled(false);
+            VolveraJugar.setEnabled(false);
             JOptionPane.showMessageDialog(null, "No se han repartido cartas", "BlackJack∙", 2);
         }
     }//GEN-LAST:event_DobleActionPerformed
+
+    private void VolveraJugarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VolveraJugarActionPerformed
+         if (repartir) {//Validación de repartir las cartas iniciales
+             
+         }else{
+              Pedir1Carta.setEnabled(false);
+            Parar.setEnabled(false);
+            Doble.setEnabled(false);
+            VolveraJugar.setEnabled(false);
+            JOptionPane.showMessageDialog(null, "No se han repartido cartas", "BlackJack∙", 2);
+         }
+    }//GEN-LAST:event_VolveraJugarActionPerformed
 
     void ocultarPanelAjustes() { //Subrutina Deshabiliatar Ajustes del todo 
         Ajustespanel.setEnabled(false);
