@@ -11,6 +11,10 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.net.URL;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -51,6 +55,10 @@ public class GamePanel2 extends javax.swing.JPanel {
     int jugador1 = 0;
     int jugador2 = 0;
 
+    //comprobacion
+    boolean j1 = false;
+    boolean j2 = false;
+
     //- Turno de cada jugador
     int turno = 1;
 
@@ -59,24 +67,60 @@ public class GamePanel2 extends javax.swing.JPanel {
     int dado;
 
     //SUBRUTINAS
+    // - subrutina sonido
+    private void sonido(String cadena) {
+        try {
+            Clip clip = AudioSystem.getClip();
+            URL url = getClass().getResource(cadena);
+            AudioInputStream audioIn = AudioSystem.getAudioInputStream(url);
+            clip.open(audioIn);
+            clip.start();
+
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+
+    }
+
     // - Subrutina para realizar movimientos de los personajes en el tablero
     private void moverAlien(JLabel Alien, int pos, int jug, int avatar) {
         // Este codigo está inspirado en base a 
 
         for (int i = 0; i < 34; i++) {
             if (i == pos) {
-                Timer timer = new Timer(10, new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        if (jug == 1) {//Se valida que jugador es
-                            // Actualizar la posición del JLabel
-                            Alien.setLocation(movimientosok[jugador1][0], movimientosok[jugador1][1]);
-                        } else {
-                            Alien.setLocation(movimientosok[jugador2][0], movimientosok[jugador2][1]);
-                        }
+                if (jug == 1) {//Se valida que jugador es
+                    // Actualizar la posición del JLabel
+                    if (j1 == true) {
+                        movimientolow(jugador1, Alien);
+                    } else {
+                        Timer timer = new Timer(10, new ActionListener() {
+                            @Override
+                            public void actionPerformed(ActionEvent e) {
+
+                                // Actualizar la posición del JLabel
+                                Alien.setLocation(movimientosok[jugador1][0], movimientosok[jugador1][1]);
+
+                            }
+                        });
+                        timer.start();
                     }
-                });
-                timer.start();
+
+                } else {
+                    if (j2 == true) {
+                        movimientolow(jugador2, Alien);
+                    } else {
+                        Timer timer = new Timer(10, new ActionListener() {
+                            @Override
+                            public void actionPerformed(ActionEvent e) {
+
+                                Alien.setLocation(movimientosok[jugador2][0], movimientosok[jugador2][1]);
+
+                            }
+                        });
+                        timer.start();
+                    }
+
+                }
 
             }
             //Para agregar imagen del # de dado acorde al numero aleatorio generado
@@ -169,11 +213,85 @@ public class GamePanel2 extends javax.swing.JPanel {
         }
         //Para asignar nueva posicion al jugador correspondiente
         if (turno == 1) {
+            if (jugador1 == 3 | jugador1 == 8 | jugador1 == 19 | jugador1 == 25 | jugador1 == 7 | jugador1 == 22 | jugador1 == 32 | jugador1 == 30 | jugador1 == 28) {
+                j1 = true;
+            } else {
+                j1 = false;
+            }
             jugador1 = pos;
         } else {
+            if (jugador2 == 3 | jugador2 == 8 | jugador2 == 19 | jugador2 == 25 | jugador2 == 7 | jugador2 == 22 | jugador2 == 32 | jugador2 == 30 | jugador2 == 28) {
+                j2 = true;
+            } else {
+                j2 = false;
+            }
             jugador2 = pos;
         }
 
+    }
+
+    private void movimientolow(int num, JLabel Alien) {
+    // Obtener la nueva posición del Alien
+    int x = movimientosok[posiciones(num)][0];
+    int y = movimientosok[posiciones(num)][1];
+    // Mover el Alien a la nueva posición
+    Alien.setLocation(x, y);
+    
+    // Crear un temporizador para reproducir el sonido y mover el Alien a su posición final
+    Timer timer2 = new Timer(1000, new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            //Sonido de subir
+            if (num == 9 | num == 26 | num == 21 | num == 29) {
+                // Reproducir sonido de subir
+            }
+            //sonido de bajar
+            if (num == 5 | num == 18 | num == 16 | num == 24 | num == 15) {
+                // Reproducir sonido de bajar
+            }
+            // Mover el Alien a su posición final
+            Alien.setLocation(movimientosok[num][0], movimientosok[num][1]);
+        }
+    });
+    timer2.setRepeats(false); // Se asegura de que el Timer se ejecute solo una vez
+
+    // Inicia el Timer
+    timer2.start();
+}
+
+
+    public int posiciones(int pos) {
+        //Arriba
+        if (pos == 9) {
+            pos = 3;
+        }
+        if (pos == 26) {
+            pos = 28;
+        }
+        if (pos == 21) {
+            pos = 19;
+        }
+        if (pos == 29) {
+            pos = 25;
+        }
+
+        //Abajo
+        if (pos == 5) {
+            pos = 7;
+        }
+        if (pos == 18) {
+            pos = 22;
+        }
+        if (pos == 16) {
+            pos = 32;
+        }
+        if (pos == 24) {
+            pos = 30;
+        }
+        if (pos == 15) {
+            pos = 28;
+        }
+        return pos;
     }
     private String user;
 
@@ -360,101 +478,124 @@ public class GamePanel2 extends javax.swing.JPanel {
         add(Fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 400));
     }// </editor-fold>//GEN-END:initComponents
 
-
+    boolean s = false;
+    boolean s2 = false;
     private void TirarDadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TirarDadosActionPerformed
+//Timer para que primero se escuchen los dados antes de que se muevan los personajes
+        Timer timer2 = new Timer(10, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                NumDado.setText("");//Label que contiene el numero del dado
+                dado = ran.nextInt(6) + 1;//variable que se le asigna numero aleatorio entre el 1 y 6
+                NumDado.setText(Integer.toString(dado));
+                //Sonido dado
+                sonido("/Sonidos/dados.wav");
 
-        NumDado.setText("");//Label que contiene el numero del dado
-        dado = ran.nextInt(6) + 1;//variable que se le asigna numero aleatorio entre el 1 y 6
-        NumDado.setText(Integer.toString(dado));
-        //De acuerdo al turno manejar posiciones (ya que tenemos variables globales, se dificulto manejar todo en una sola subrutina)
-        if (turno == 1) {
-            textoturno.setText("Turno de ");
-            jugturno.setText(user);
-            TirarDados.setPreferredSize(new Dimension(110, 50));
-            TirarDados.setBackground(Color.red);
-            TirarDados.setText("<html><center><font size=\"3\">Tirar dado de <br> Stella</font></center></html>");
-            if (jugador1 < 34) { //validacion 1
-                //nueva posicion
-                jugador1 += dado;
-                res(jugador1);//Ejecutar subrutina que verifica si se encuentra en una escalera o serpiente
+                if (turno == 1) {
+                    textoturno.setText("Turno de ");
+                    jugturno.setText(user);
+                    TirarDados.setPreferredSize(new Dimension(110, 50));
+                    TirarDados.setBackground(Color.red);
+                    TirarDados.setText("<html><center><font size=\"3\">Tirar dado de <br> Stella</font></center></html>");
 
-                if (jugador1 > 34) { // validacion 2
-                    jugador1 = jugador1 - dado;
-                    switch (dado) {
-                        case 1:
-                            dadoimg.setIcon(dado1);
-                            break;
-                        case 2:
-                            dadoimg.setIcon(dado2);
-                            break;
-                        case 3:
-                            dadoimg.setIcon(dado3);
-                            break;
-                        case 4:
-                            dadoimg.setIcon(dado4);
-                            break;
-                        case 5:
-                            dadoimg.setIcon(dado5);
-                            break;
-                        case 6:
-                            dadoimg.setIcon(dado6);
-                            break;
-                    }
-                    Resultado.dadoeys g = new Resultado.dadoeys(user);
-                    g.nombre.setText(user);
-                    g.img.setIcon(AlienU.getIcon());
-                    //JOptionPane.showMessageDialog(null, "GAMER\nOh! Has sacado un numero superior.. \nEspera al próximo turno");
-                    turno = 2;
-
+                } else {
+                    textoturno.setText("Turno de");
+                    jugturno.setText("Stella");
+                    TirarDados.setPreferredSize(new Dimension(110, 50));
+                    TirarDados.setBackground(Color.green);
+                    TirarDados.setText("<html><center><font size=\"3\">Tirar dado de <br>" + user + "</font></center></html>");
                 }
-            }
-            moverAlien(AlienU, jugador1, 1, avatar);// Ejecutar subrutina que mueve JLabel osea icono asignado
-
-        } else {
-            textoturno.setText("Turno de");
-            jugturno.setText("Stella");
-            TirarDados.setPreferredSize(new Dimension(110, 50));
-            TirarDados.setBackground(Color.green);
-            TirarDados.setText("<html><center><font size=\"3\">Tirar dado de <br>" + user + "</font></center></html>");
-            if (jugador2 < 34) {
-                //nueva posicion
-                jugador2 += dado;
-                res(jugador2);
-
-                if (jugador2 > 34) {
-                    jugador2 = jugador2 - dado;
-                    switch (dado) {
-                        case 1:
-                            dadoimg.setIcon(dado1);
-                            break;
-                        case 2:
-                            dadoimg.setIcon(dado2);
-                            break;
-                        case 3:
-                            dadoimg.setIcon(dado3);
-                            break;
-                        case 4:
-                            dadoimg.setIcon(dado4);
-                            break;
-                        case 5:
-                            dadoimg.setIcon(dado5);
-                            break;
-                        case 6:
-                            dadoimg.setIcon(dado6);
-                            break;
-                    }
-                    Resultado.dadoeys g = new Resultado.dadoeys(user);
-                    g.nombre.setText("STELLA");
-                    g.img.setIcon(stellaimg);
-
-                    //JOptionPane.showMessageDialog(null, "STELLA\nOh! Has sacado un numero superior.. \nEspera al próximo turno");
-                    turno = 1;
-
+                switch (dado) {
+                    case 1:
+                        dadoimg.setIcon(dado1);
+                        break;
+                    case 2:
+                        dadoimg.setIcon(dado2);
+                        break;
+                    case 3:
+                        dadoimg.setIcon(dado3);
+                        break;
+                    case 4:
+                        dadoimg.setIcon(dado4);
+                        break;
+                    case 5:
+                        dadoimg.setIcon(dado5);
+                        break;
+                    case 6:
+                        dadoimg.setIcon(dado6);
+                        break;
                 }
-            }
-            moverAlien(AlienR, jugador2, 2, avatar);
+                // Se crea un nuevo Timer 
+                Timer timer3 = new Timer(500, new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
 
-        }
+                        //De acuerdo al turno manejar posiciones (ya que tenemos variables globales, se dificulto manejar todo en una sola subrutina)
+                        if (turno == 1) {
+
+                            if (jugador1 < 34) { //validacion 1
+                                //nueva posicion
+                                jugador1 += dado;
+                                res(jugador1);//Ejecutar subrutina que verifica si se encuentra en una escalera o serpiente
+
+                                if (jugador1 > 34) { // validacion 2
+                                    jugador1 = jugador1 - dado;
+                                    s = true;
+
+                                    Resultado.dadoeys g = new Resultado.dadoeys(user);
+
+                                    g.nombre.setText(user);
+                                    g.img.setIcon(AlienU.getIcon());
+                                    //JOptionPane.showMessageDialog(null, "GAMER\nOh! Has sacado un numero superior.. \nEspera al próximo turno");
+                                    turno = 2;
+
+                                }
+                            }
+                            if (s == false) {
+                                sonido("/Sonidos/mover.wav");
+                            }
+                            moverAlien(AlienU, jugador1, 1, avatar);// Ejecutar subrutina que mueve JLabel osea icono asignado
+
+                        } else {
+                            textoturno.setText("Turno de");
+                            jugturno.setText("Stella");
+                            TirarDados.setPreferredSize(new Dimension(110, 50));
+                            TirarDados.setBackground(Color.green);
+                            TirarDados.setText("<html><center><font size=\"3\">Tirar dado de <br>" + user + "</font></center></html>");
+                            if (jugador2 < 34) {
+                                //nueva posicion
+                                jugador2 += dado;
+                                res(jugador2);
+
+                                if (jugador2 > 34) {
+                                    jugador2 = jugador2 - dado;
+
+                                    Resultado.dadoeys g = new Resultado.dadoeys(user);
+                                    g.nombre.setText("STELLA");
+                                    g.img.setIcon(stellaimg);
+
+                                    //JOptionPane.showMessageDialog(null, "STELLA\nOh! Has sacado un numero superior.. \nEspera al próximo turno");
+                                    turno = 1;
+
+                                }
+                            }
+                            if (s2 == false) {
+                                sonido("/Sonidos/pastella.wav");
+                            }
+                            moverAlien(AlienR, jugador2, 2, avatar);
+
+                        }
+                    }
+                });
+                timer3.setRepeats(false);
+                timer3.start();
+            }
+        });
+        timer2.setRepeats(false); // Se asegura de que el Timer se ejecute solo una vez
+
+        // Inicia el Timer
+        timer2.start();
+
 
     }//GEN-LAST:event_TirarDadosActionPerformed
 
@@ -495,7 +636,7 @@ public class GamePanel2 extends javax.swing.JPanel {
     }//GEN-LAST:event_ReiniciarMouseExited
 
     private void ReiniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReiniciarActionPerformed
-
+        sonido("/Sonidos/boop.wav");
         dado = 0;
         jugador1 = 0;
         jugador2 = 0;
