@@ -7,6 +7,10 @@ import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.URL;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -37,6 +41,21 @@ public class rompecabezas02 extends javax.swing.JFrame implements ActionListener
     ImageIcon pp12 = new ImageIcon(CL.getResource("imagenes/1.jpg"));
     ImageIcon sists = new ImageIcon(CL.getResource("imagenes/puzzle2.jpg"));
 
+    //SUBRUTINAS PARA APLICAR SONIDO
+
+    private void sonido(String cadena) {
+        try {
+            Clip clip = AudioSystem.getClip();
+            URL url = getClass().getResource(cadena);
+            AudioInputStream audioIn = AudioSystem.getAudioInputStream(url);
+            clip.open(audioIn);
+            clip.start();
+
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+
+    }
     private String user;
 
     public rompecabezas02(String name) {
@@ -88,6 +107,7 @@ public class rompecabezas02 extends javax.swing.JFrame implements ActionListener
             c = columnas[i];
             if (status[f][c].getIcon() == null) {
                 status[f][c].setIcon(btn.getIcon());
+                sonido("/Sonidos/ficha.wav");
                 btn.setEnabled(false);
                 if (contador == 12) {
                     break;
@@ -430,8 +450,10 @@ public class rompecabezas02 extends javax.swing.JFrame implements ActionListener
 
     private void limpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limpiarActionPerformed
         if (contador == 0 || btn == null) {
+            sonido("/Sonidos/error.wav");
             vbtn.setText("Debe iniciar para usar esta función.");
         } else {
+            sonido("/Sonidos/boop.wav");
             vbtn.setText(null);
             for (int i = 0; i < 4; i++) {
                 for (int j = 0; j < 3; j++) {
@@ -445,12 +467,14 @@ public class rompecabezas02 extends javax.swing.JFrame implements ActionListener
     }//GEN-LAST:event_limpiarActionPerformed
 
     private void volver1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_volver1ActionPerformed
+        sonido("/Sonidos/boop.wav");
         rompecabezas a = new rompecabezas(user);
         a.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_volver1ActionPerformed
 
     private void btnVolver1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolver1ActionPerformed
+        sonido("/Sonidos/boop.wav");
         Principal3 p = new Principal3(user);
         p.setVisible(true);
         this.dispose();
@@ -474,9 +498,10 @@ public class rompecabezas02 extends javax.swing.JFrame implements ActionListener
         int[] columnas = {0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2};
         JButton lastbtn = null;
         if (contador == 0 || btn == null) {
+            sonido("/Sonidos/error.wav");
             vbtn.setText("Debe iniciar para usar esta función.");
         } else {
-
+            sonido("/Sonidos/boop.wav");
             for (i = 0; i < 12; i++) {
                 f = filas[i];
                 c = columnas[i];
@@ -534,7 +559,8 @@ public class rompecabezas02 extends javax.swing.JFrame implements ActionListener
     }//GEN-LAST:event_limpiarMouseExited
 
     private void verMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_verMouseEntered
-       jLabel1.setForeground(Color.CYAN);
+        sonido("/Sonidos/pista.wav");
+        jLabel1.setForeground(Color.CYAN);
         verimg.setBorder(new LineBorder(Color.WHITE));
         verimg.setIcon(sists);
     }//GEN-LAST:event_verMouseEntered

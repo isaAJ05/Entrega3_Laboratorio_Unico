@@ -7,6 +7,10 @@ import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.URL;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -32,6 +36,21 @@ public class rompecabezas01 extends javax.swing.JFrame implements ActionListener
     ImageIcon pp8 = new ImageIcon(CL.getResource("imagenes/r8.png"));
     ImageIcon pp9 = new ImageIcon(CL.getResource("imagenes/r9.png"));
     ImageIcon stella = new ImageIcon(CL.getResource("imagenes/stellap.png"));
+    //SUBRUTINAS PARA APLICAR SONIDO
+
+    private void sonido(String cadena) {
+        try {
+            Clip clip = AudioSystem.getClip();
+            URL url = getClass().getResource(cadena);
+            AudioInputStream audioIn = AudioSystem.getAudioInputStream(url);
+            clip.open(audioIn);
+            clip.start();
+
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+
+    }
     private String user;
 
     public rompecabezas01(String name) {
@@ -86,6 +105,7 @@ public class rompecabezas01 extends javax.swing.JFrame implements ActionListener
             c = columnas[i];
             if (status[f][c].getIcon() == null) {
                 status[f][c].setIcon(btn.getIcon());
+                sonido("/Sonidos/ficha.wav");
                 btn.setEnabled(false);
                 if (contador == 9) {
                     break;
@@ -274,6 +294,11 @@ public class rompecabezas01 extends javax.swing.JFrame implements ActionListener
         p1.setBackground(new java.awt.Color(204, 204, 255));
         p1.setFont(new java.awt.Font("sansserif", 0, 36)); // NOI18N
         p1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        p1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                p1ActionPerformed(evt);
+            }
+        });
         PIEZAS.add(p1);
 
         p2.setBackground(new java.awt.Color(204, 204, 255));
@@ -396,6 +421,7 @@ public class rompecabezas01 extends javax.swing.JFrame implements ActionListener
     }// </editor-fold>//GEN-END:initComponents
 
     private void volverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_volverActionPerformed
+sonido("/Sonidos/boop.wav");
         rompecabezas a = new rompecabezas(user);
         a.setVisible(true);
         this.dispose();
@@ -403,8 +429,11 @@ public class rompecabezas01 extends javax.swing.JFrame implements ActionListener
 
     private void limpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limpiarActionPerformed
         if (contador == 0 || btn == null) {
+            sonido("/Sonidos/error.wav");
             vbtn.setText("Debe iniciar para usar esta función.");
+            
         } else {
+            sonido("/Sonidos/boop.wav");
             for (int i = 0; i < 3; i++) {
                 for (int j = 0; j < 3; j++) {
                     piezas[i][j].setEnabled(true);
@@ -416,6 +445,7 @@ public class rompecabezas01 extends javax.swing.JFrame implements ActionListener
     }//GEN-LAST:event_limpiarActionPerformed
 
     private void btnVolver1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolver1ActionPerformed
+       sonido("/Sonidos/boop.wav");
         Principal3 p = new Principal3(user);
         p.setVisible(true);
         this.dispose();
@@ -430,14 +460,16 @@ public class rompecabezas01 extends javax.swing.JFrame implements ActionListener
     }//GEN-LAST:event_btnVolver1MouseExited
 
     private void lastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lastActionPerformed
+        
         int lastf = -1, lastc = -1, f, c, i, j;
         int[] filas = {0, 0, 0, 1, 1, 1, 2, 2, 2};
         int[] columnas = {0, 1, 2, 0, 1, 2, 0, 1, 2};
         JButton lastbtn = null;
         if (contador == 0 || btn == null) {
+            sonido("/Sonidos/error.wav");
             vbtn.setText("Debe iniciar para usar esta función.");
         } else {
-
+            sonido("/Sonidos/boop.wav");
             for (i = 0; i < 9; i++) {
                 //for (j = 0; j < 9; j++) {
                 f = filas[i];
@@ -496,7 +528,7 @@ public class rompecabezas01 extends javax.swing.JFrame implements ActionListener
     }//GEN-LAST:event_limpiarMouseExited
 
     private void verMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_verMouseEntered
-
+        sonido("/Sonidos/pista.wav");
         jLabel1.setForeground(Color.CYAN);
         verimg.setBorder(new LineBorder(Color.WHITE));
         verimg.setIcon(stella);
@@ -509,8 +541,12 @@ public class rompecabezas01 extends javax.swing.JFrame implements ActionListener
     }//GEN-LAST:event_verMouseExited
 
     private void verActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_verActionPerformed
+
+    private void p1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_p1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_p1ActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

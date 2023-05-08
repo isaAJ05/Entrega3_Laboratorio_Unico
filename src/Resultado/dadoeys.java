@@ -8,6 +8,10 @@ import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Point;
 import java.awt.Toolkit;
+import java.net.URL;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
 import javax.swing.JScrollPane;
 
@@ -21,7 +25,19 @@ public class dadoeys extends javax.swing.JFrame {
      * Creates new form Empate
      */
     String name;
+private void sonido(String cadena) {
+        try {
+            Clip clip = AudioSystem.getClip();
+            URL url = getClass().getResource(cadena);
+            AudioInputStream audioIn = AudioSystem.getAudioInputStream(url);
+            clip.open(audioIn);
+            clip.start();
 
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+
+    }
     public dadoeys(String name) {
         initComponents();
         this.name = name;
@@ -114,6 +130,7 @@ public class dadoeys extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cerrarActionPerformed
+       sonido("/Sonidos/boop.wav");
         this.dispose();
     }//GEN-LAST:event_cerrarActionPerformed
 
