@@ -11,7 +11,15 @@ import java.awt.Image;
 import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.net.URL;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -20,6 +28,55 @@ public class Pista extends javax.swing.JFrame {
     public static int nave;
 //    FondoPanel fondo=new FondoPanel();
     private String user;
+
+    //SUBRUTINAS PARA APLICAR SONIDO
+    private void sonido(String cadena) {
+        try {
+            Clip clip = AudioSystem.getClip();
+            URL url = getClass().getResource(cadena);
+            AudioInputStream audioIn = AudioSystem.getAudioInputStream(url);
+            clip.open(audioIn);
+            clip.start();
+
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+
+    }
+    private Clip clip;
+
+    public void sonido2(JButton boton, String archivoSonido) {
+        boton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                super.mouseEntered(e);
+                try {
+                    clip = AudioSystem.getClip();
+                    URL url = getClass().getResource(archivoSonido);
+                    AudioInputStream audioIn = AudioSystem.getAudioInputStream(url);
+                    clip.open(audioIn);
+                    clip.start();
+                    boton.addActionListener(new ActionListener() {
+                        public void actionPerformed(ActionEvent e) {
+                            clip.stop();
+
+                        }
+                    });
+                } catch (Exception ex) {
+                    System.err.println(ex.getMessage());
+                }
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                super.mouseExited(e);
+                if (clip != null) {
+                    clip.stop();
+                    clip.close();
+                }
+            }
+        });
+    }
 
     public Pista(String name) {
         this.user = name;
@@ -43,6 +100,8 @@ public class Pista extends javax.swing.JFrame {
         SelectNAVEbtn.setVisible(false);
         atras.setEnabled(false);
         atras.setVisible(false);
+
+        
 
     }
 
@@ -215,6 +274,7 @@ public class Pista extends javax.swing.JFrame {
 
     private void btnStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartActionPerformed
         if (PanelesCarreraNave.NaveJugador.nave != 0) {
+            sonido("/Sonidos/boop.wav");
             CarreraPANELcarros Cpanel = new CarreraPANELcarros(user);
             ShowPanel(Cpanel); //Llamar el metodo para mostrar el panel 
             val.setText(null);
@@ -227,12 +287,14 @@ public class Pista extends javax.swing.JFrame {
             SelectNAVEbtn.setEnabled(false);
             SelectNAVEbtn.setVisible(false);
         } else {
+            sonido("/Sonidos/error.wav");
             val.setText("(!) Debe escoger una nave antes de jugar.");
         }
 
     }//GEN-LAST:event_btnStartActionPerformed
 
     private void InfoBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InfoBTNActionPerformed
+        sonido("/Sonidos/boop.wav");
         PanelInfo InfoPANEL = new PanelInfo();
         ShowPanel(InfoPANEL);//Llamar el metodo para mostrar el panel 
         SelectNAVEbtn.setEnabled(true);
@@ -242,6 +304,7 @@ public class Pista extends javax.swing.JFrame {
     }//GEN-LAST:event_InfoBTNActionPerformed
 
     private void SelectNAVEbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SelectNAVEbtnActionPerformed
+        sonido("/Sonidos/boop.wav");
         SeleccionNavePanel NavePanel = new SeleccionNavePanel(user, nave);
         ShowPanel(NavePanel);//Llamar el metodo para mostrar el panel 
         SelectNAVEbtn.setEnabled(false);
@@ -257,6 +320,7 @@ public class Pista extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVolver1MouseExited
 
     private void btnVolver1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolver1ActionPerformed
+       sonido("/Sonidos/boop.wav");
         Principal3 p = new Principal3(user);
         p.setVisible(true);
         this.setVisible(false);
@@ -264,14 +328,16 @@ public class Pista extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVolver1ActionPerformed
 
     private void ArduinoPistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ArduinoPistaActionPerformed
+        sonido("/Sonidos/boop.wav");
         CarreraPANELcarrosConArduino NavePanel = new CarreraPANELcarrosConArduino(user);
         ShowPanel(NavePanel);//Llamar el metodo para mostrar el panel 
     }//GEN-LAST:event_ArduinoPistaActionPerformed
 
     private void atrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atrasActionPerformed
+        sonido("/Sonidos/boop.wav");
         PanelInfo InfoPANEL = new PanelInfo();
         ShowPanel(InfoPANEL);//Llamar el metodo para mostrar el panel 
-         atras.setEnabled(false);
+        atras.setEnabled(false);
         atras.setVisible(false);
         SelectNAVEbtn.setEnabled(true);
         SelectNAVEbtn.setVisible(true);
