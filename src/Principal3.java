@@ -5,22 +5,71 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Toolkit;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.net.URL;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 
 public class Principal3 extends javax.swing.JFrame {
+//SUBRUTINA PARA APLICAR SONIDO
 
+    private void sonido(String cadena) {
+        try {
+            Clip clip = AudioSystem.getClip();
+            URL url = getClass().getResource(cadena);
+            AudioInputStream audioIn = AudioSystem.getAudioInputStream(url);
+            clip.open(audioIn);
+            clip.start();
 
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+
+    }
+    private Clip clip;
+
+    public void sonido2(JButton boton, String archivoSonido) {
+        boton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                super.mouseEntered(e);
+                try {
+                    clip = AudioSystem.getClip();
+                    URL url = getClass().getResource(archivoSonido);
+                    AudioInputStream audioIn = AudioSystem.getAudioInputStream(url);
+                    clip.open(audioIn);
+                    clip.start();
+                } catch (Exception ex) {
+                    System.err.println(ex.getMessage());
+                }
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                super.mouseExited(e);
+                if (clip != null) {
+                    clip.stop();
+                    clip.close();
+                }
+            }
+        });
+    }
     private String name = null;
 
     public Principal3(String user) {
         initComponents();
         this.setLocationRelativeTo(null);
         this.name = user;
-        volver.setBackground(new Color(153,51,255));
+        volver.setBackground(new Color(153, 51, 255));
         //cursor
-        Cursor cursor = Toolkit.getDefaultToolkit().createCustomCursor(new ImageIcon(getClass().getResource("cursor/cursorimg.png")).getImage(),new Point(0,0),"Custom Cursor");
+        Cursor cursor = Toolkit.getDefaultToolkit().createCustomCursor(new ImageIcon(getClass().getResource("cursor/cursorimg.png")).getImage(), new Point(0, 0), "Custom Cursor");
         this.setCursor(cursor);
         this.setResizable(false);
+         sonido2(cyan,"/Sonidos/cascabel.wav");
 
     }
 
@@ -92,6 +141,7 @@ public class Principal3 extends javax.swing.JFrame {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 redMouseEntered(evt);
             }
+
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 redMouseExited(evt);
             }
@@ -115,6 +165,7 @@ public class Principal3 extends javax.swing.JFrame {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 magentaMouseEntered(evt);
             }
+
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 magentaMouseExited(evt);
             }
@@ -139,6 +190,7 @@ public class Principal3 extends javax.swing.JFrame {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 greenMouseEntered(evt);
             }
+
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 greenMouseExited(evt);
             }
@@ -162,6 +214,7 @@ public class Principal3 extends javax.swing.JFrame {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 blueMouseEntered(evt);
             }
+
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 blueMouseExited(evt);
             }
@@ -185,6 +238,7 @@ public class Principal3 extends javax.swing.JFrame {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 cyanMouseEntered(evt);
             }
+
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 cyanMouseExited(evt);
             }
@@ -216,100 +270,104 @@ public class Principal3 extends javax.swing.JFrame {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(panel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>                        
 
-    private void redActionPerformed(java.awt.event.ActionEvent evt) {                                    
+    private void redActionPerformed(java.awt.event.ActionEvent evt) {
         // BLACKJACK
         Mesa1 a = new Mesa1(name);
         a.setVisible(true);
         this.dispose();
-    }                                   
+    }
 
-    private void magentaActionPerformed(java.awt.event.ActionEvent evt) {                                        
+    private void magentaActionPerformed(java.awt.event.ActionEvent evt) {
         // CARRERAS
         Pista a = new Pista(name);
         a.setVisible(true);
         this.dispose();
-    }                                       
+    }
 
-    private void greenActionPerformed(java.awt.event.ActionEvent evt) {                                      
+    private void greenActionPerformed(java.awt.event.ActionEvent evt) {
         // ROMPECABEZAS
-      rompecabezas a=new rompecabezas(name);
-      a.setVisible(true);
+        rompecabezas a = new rompecabezas(name);
+        a.setVisible(true);
         this.dispose();
-        
-    }                                     
 
-    private void blueActionPerformed(java.awt.event.ActionEvent evt) {                                     
+    }
+
+    private void blueActionPerformed(java.awt.event.ActionEvent evt) {
         // SOPA DE LETRAS
-     ASOPAstar a=new ASOPAstar(name);
-      a.setVisible(true);
-      this.dispose();
-    }                                    
+        ASOPAstar a = new ASOPAstar(name);
+        a.setVisible(true);
+        this.dispose();
+    }
 
-    private void cyanActionPerformed(java.awt.event.ActionEvent evt) {                                     
-       // SERPIENTES Y ESCALERAS
+    private void cyanActionPerformed(java.awt.event.ActionEvent evt) {
+        // SERPIENTES Y ESCALERAS
         SerpienteGAME a = new SerpienteGAME(name);
         a.setVisible(true);
         this.dispose();
-    }                                    
+    }
 
-    private void volverActionPerformed(java.awt.event.ActionEvent evt) {                                       
-
+    private void volverActionPerformed(java.awt.event.ActionEvent evt) {
+        sonido("/Sonidos/boop.wav");
         Principal2 a = new Principal2();
         a.setVisible(true);
         this.dispose();
-    }                                      
+    }
 
-    private void redMouseEntered(java.awt.event.MouseEvent evt) {                                 
-       // red.setText("Black Jack");// cuando entra al boton se ve el texto (nombre del botón)
-       LabelCarta.setText("Black Jack");
-    }                                
+    private void redMouseEntered(java.awt.event.MouseEvent evt) {
+        // red.setText("Black Jack");// cuando entra al boton se ve el texto (nombre del botón)
+        LabelCarta.setText("Black Jack");
+    }
 
-    private void redMouseExited(java.awt.event.MouseEvent evt) {                                
-       LabelCarta.setText(""); // Si no esta el mouse, no se ve el texto
-    }                               
- // Lo mismo para el resto de los botones
-    private void magentaMouseEntered(java.awt.event.MouseEvent evt) {                                     
+    private void redMouseExited(java.awt.event.MouseEvent evt) {
+        LabelCarta.setText(""); // Si no esta el mouse, no se ve el texto
+    }
+    // Lo mismo para el resto de los botones
+
+    private void magentaMouseEntered(java.awt.event.MouseEvent evt) {
         LabelCarrera.setText("Carrera de Naves");
-    }                                    
+    }
 
-    private void magentaMouseExited(java.awt.event.MouseEvent evt) {                                    
+    private void magentaMouseExited(java.awt.event.MouseEvent evt) {
         LabelCarrera.setText("");
-    }                                   
+    }
 
-    private void cyanMouseEntered(java.awt.event.MouseEvent evt) {                                  
+    private void cyanMouseEntered(java.awt.event.MouseEvent evt) {
+
         LabelSerpEscl.setText("Escaleras y Serpintes");
-    }                                 
+    }
 
-    private void cyanMouseExited(java.awt.event.MouseEvent evt) {                                 
+    private void cyanMouseExited(java.awt.event.MouseEvent evt) {
+
         LabelSerpEscl.setText("");
-    }                                
+    }
 
-    private void blueMouseEntered(java.awt.event.MouseEvent evt) {                                  
+    private void blueMouseEntered(java.awt.event.MouseEvent evt) {
         LabelSopaLetras.setText("Sopa de letras");
-    }                                 
+    }
 
-    private void blueMouseExited(java.awt.event.MouseEvent evt) {                                 
+    private void blueMouseExited(java.awt.event.MouseEvent evt) {
         LabelSopaLetras.setText("");
-    }                                
+    }
 
-    private void greenMouseEntered(java.awt.event.MouseEvent evt) {                                   
+    private void greenMouseEntered(java.awt.event.MouseEvent evt) {
         LabelRompecabezas.setText("Rompecabezas");
-    }                                  
+    }
 
-    private void greenMouseExited(java.awt.event.MouseEvent evt) {                                  
+    private void greenMouseExited(java.awt.event.MouseEvent evt) {
         LabelRompecabezas.setText("");
-    }                                 
+    }
+
     @Override
     public void paint(Graphics g) {
         super.paint(g);
@@ -379,12 +437,11 @@ public class Principal3 extends javax.swing.JFrame {
 //        gr.drawString("  AZUL: Sopa de letras", 320, 250);
 //        gr.drawString("  VERDE: Rompecabezas", 320, 270);
 //
-        gr.drawString("Hola "+name + " !", 500, 65);
+        gr.drawString("Hola " + name + " !", 500, 65);
         gr.drawString("¿Que deseas Jugar?", 500, 80);
 
     }
 
-   
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
