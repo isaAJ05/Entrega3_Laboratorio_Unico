@@ -5,12 +5,72 @@ import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.net.URL;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.border.LineBorder;
 
 
 
 public class rompecabezas extends javax.swing.JFrame {
+    //SUBRUTINAS PARA APLICAR SONIDO
+
+    private void sonido(String cadena) {
+        try {
+            Clip clip = AudioSystem.getClip();
+            URL url = getClass().getResource(cadena);
+            AudioInputStream audioIn = AudioSystem.getAudioInputStream(url);
+            clip.open(audioIn);
+            clip.start();
+
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+
+    }
+    // - subrutina 2
+    private Clip clip;
+     public void sonido2(JButton boton, String archivoSonido) {
+        boton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                super.mouseEntered(e);
+                try {
+                    
+                    clip = AudioSystem.getClip();
+                    URL url = getClass().getResource(archivoSonido);
+                    AudioInputStream audioIn = AudioSystem.getAudioInputStream(url);
+                    clip.open(audioIn);
+                    clip.start();
+                    boton.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    clip.stop();
+                    sonido("/Sonidos/seleccion.wav");
+                    
+
+                }
+            });
+                } catch (Exception ex) {
+                    System.err.println(ex.getMessage());
+                }
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                super.mouseExited(e);
+                if (clip != null) {
+                    clip.stop();
+                }
+            }
+        });
+    }
   private String user;
     public rompecabezas(String name) {
         setIconImage(new ImageIcon(getClass().getResource("general/stellaicono.png")).getImage());
@@ -26,6 +86,9 @@ public class rompecabezas extends javax.swing.JFrame {
         Cursor cursor = Toolkit.getDefaultToolkit().createCustomCursor(new ImageIcon(getClass().getResource("cursor/cursorimg.png")).getImage(),new Point(0,0),"Custom Cursor");
         this.setCursor(cursor);
         this.setResizable(false);
+        //APLIOAR SONIDOS
+         sonido2(r1,"/Sonidos/nivel1.wav");
+         sonido2(r2,"/Sonidos/nivel2.wav");
 
 
     }
@@ -177,6 +240,7 @@ public class rompecabezas extends javax.swing.JFrame {
     }//GEN-LAST:event_r2ActionPerformed
 
     private void btnVolver1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolver1ActionPerformed
+        sonido("/Sonidos/boop.wav");
         Principal3 p = new Principal3(user);
         p.setVisible(true);
         this.dispose();
