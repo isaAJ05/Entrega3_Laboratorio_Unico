@@ -94,7 +94,8 @@ public class GamePanel2 extends javax.swing.JPanel {
                     // Actualizar la posición del JLabel
                     if (j1 == true) {
                         movimientolow(jugador1, Alien);
-                    } else {
+                        Alien.setLocation(movimientosok[jugador1][0], movimientosok[jugador1][1]);
+                    } 
                         Timer timer = new Timer(10, new ActionListener() {
                             @Override
                             public void actionPerformed(ActionEvent e) {
@@ -105,12 +106,13 @@ public class GamePanel2 extends javax.swing.JPanel {
                             }
                         });
                         timer.start();
-                    }
+                    
 
                 } else {
                     if (j2 == true) {
                         movimientolow(jugador2, Alien);
-                    } else {
+                        Alien.setLocation(movimientosok[jugador2][0], movimientosok[jugador2][1]);
+                    } 
                         Timer timer = new Timer(10, new ActionListener() {
                             @Override
                             public void actionPerformed(ActionEvent e) {
@@ -120,7 +122,7 @@ public class GamePanel2 extends javax.swing.JPanel {
                             }
                         });
                         timer.start();
-                    }
+                    
 
                 }
 
@@ -243,25 +245,26 @@ public class GamePanel2 extends javax.swing.JPanel {
         int x = movimientosok[posiciones(num)][0];
         int y = movimientosok[posiciones(num)][1];
         // Mover el Alien a la nueva posición
-        Alien.setLocation(x, y);
+        //Alien.setLocation(x, y);
 
         // Crear un temporizador para reproducir el sonido y mover el Alien a su posición final
-        Timer timer2 = new Timer(1000, new ActionListener() {
+        Timer timer2 = new Timer(10, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //Sonido de subir
                 if (num == 9 | num == 26 | num == 21 | num == 29) {
                     // Reproducir sonido de subir
+                    sonido("/Sonidos/subir.wav");
                 }
                 //sonido de bajar
                 if (num == 5 | num == 18 | num == 16 | num == 24 | num == 15) {
                     // Reproducir sonido de bajar
+                    sonido("/Sonidos/bajar.wav");
                 }
-                // Mover el Alien a su posición final
-                Alien.setLocation(movimientosok[num][0], movimientosok[num][1]);
             }
         });
         timer2.setRepeats(false); // Se asegura de que el Timer se ejecute solo una vez
+        
 
         // Inicia el Timer
         timer2.start();
@@ -494,6 +497,7 @@ public class GamePanel2 extends javax.swing.JPanel {
             public void actionPerformed(ActionEvent e) {
                 NumDado.setText("");//Label que contiene el numero del dado
                 dado = ran.nextInt(6) + 1;//variable que se le asigna numero aleatorio entre el 1 y 6
+                
                 NumDado.setText(Integer.toString(dado));
                 //Sonido dado
                 sonido("/Sonidos/dados.wav");
@@ -545,7 +549,7 @@ public class GamePanel2 extends javax.swing.JPanel {
 
                         //De acuerdo al turno manejar posiciones (ya que tenemos variables globales, se dificulto manejar todo en una sola subrutina)
                         if (turno == 1) {
-
+                            
                             if (jugador1 < 34) { //validacion 1
                                 //nueva posicion
                                 jugador1 += dado;
@@ -554,7 +558,7 @@ public class GamePanel2 extends javax.swing.JPanel {
                                 if (jugador1 > 34) { // validacion 2
                                     jugador1 = jugador1 - dado;
                                     s = true;
-
+                                    sonido("/Sonidos/error.wav");
                                     Resultado.dadoeys g = new Resultado.dadoeys(user);
 
                                     g.nombre.setText(user);
@@ -570,6 +574,7 @@ public class GamePanel2 extends javax.swing.JPanel {
                             moverAlien(AlienU, jugador1, 1, avatar);// Ejecutar subrutina que mueve JLabel osea icono asignado
 
                         } else {
+                            
                             textoturno.setText("Turno de");
                             jugturno.setText("Stella");
                             TirarDados.setPreferredSize(new Dimension(110, 50));
@@ -582,7 +587,7 @@ public class GamePanel2 extends javax.swing.JPanel {
 
                                 if (jugador2 > 34) {
                                     jugador2 = jugador2 - dado;
-
+                                    sonido("/Sonidos/error.wav");
                                     Resultado.dadoeys g = new Resultado.dadoeys(user);
                                     g.nombre.setText("STELLA");
                                     g.img.setIcon(stellaimg);
@@ -596,7 +601,6 @@ public class GamePanel2 extends javax.swing.JPanel {
                                 sonido("/Sonidos/pastella.wav");
                             }
                             moverAlien(AlienR, jugador2, 2, avatar);
-
                         }
                     }
                 });
