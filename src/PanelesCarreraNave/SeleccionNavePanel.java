@@ -77,8 +77,8 @@ public class SeleccionNavePanel extends javax.swing.JPanel implements ActionList
         this.AzulcBTN.addActionListener(this);
         this.VerdecBTN.addActionListener(this);
         //APLIOAR SONIDOS
-         sonido2(NaranjacBTN,"/Sonidos/auto1.wav");
-         sonido2(AzulcBTN,"/Sonidos/auto2.wav");
+         sonido2(NaranjacBTN,"/Sonidos/auto2.wav");
+         sonido2(AzulcBTN,"/Sonidos/auto1.wav");
          sonido2(VerdecBTN,"/Sonidos/auto3.wav");
     }
     JButton btn;
