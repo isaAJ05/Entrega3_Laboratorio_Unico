@@ -505,6 +505,10 @@ public class Mesa1 extends javax.swing.JFrame {
     private void PararActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PararActionPerformed
         if (repartir) {
             cartasdealer();
+            Pedir1Carta.setEnabled(false);
+            Parar.setEnabled(false);
+            Doble.setEnabled(false);
+
             if (Sum0US == 21 & (Sum0DE < 21 | Sum0DE > 21)) {
                 Resultado.Ganador g = new Resultado.Ganador(user);
                 g.t1.setText("¡Me ganaste!");
@@ -520,6 +524,49 @@ public class Mesa1 extends javax.swing.JFrame {
                 g.t2.setText("¿Qué tal eso? ¡Soy la mejor!");
                 g.stellares.setIcon(stellafeliz);
             }
+            if (Sum0DE > 21 & Sum0US > 21 & Sum0DE != Sum0US) { //Si ambos superan 21
+                if (Sum0DE > Sum0US) {
+                    Resultado.Ganador g = new Resultado.Ganador(user);
+                    g.t1.setText("¡Me ganaste!");
+                    g.t2.setText("¡No me rendiré tan fácilmente!");
+                    g.stellares.setIcon(stellatriste);
+                } else {
+                    if (Sum0DE < Sum0US) {
+                        Resultado.Perdedor g = new Resultado.Perdedor(user);
+                        g.t1.setText("¡Te gané!");
+                        g.t2.setText("¿Qué tal eso? ¡Soy la mejor!");
+                        g.stellares.setIcon(stellafeliz);
+                    }
+                }
+            }
+            if (Sum0DE < 21 & Sum0US < 21 & Sum0DE != Sum0US) { //Si ambos aun son  menores a 21
+                if (Sum0DE > Sum0US) {
+                    Resultado.Perdedor g = new Resultado.Perdedor(user);
+                    g.t1.setText("¡Te gané!");
+                    g.t2.setText("¿Qué tal eso? ¡Soy la mejor!");
+                    g.stellares.setIcon(stellafeliz);
+                } else {
+                    if (Sum0DE < Sum0US) {
+
+                        Resultado.Ganador g = new Resultado.Ganador(user);
+                        g.t1.setText("¡Me ganaste!");
+                        g.t2.setText("¡No me rendiré tan fácilmente!");
+                        g.stellares.setIcon(stellatriste);
+                    }
+                }
+            }
+            if (Sum0DE > 21 & Sum0US < 21) {
+                Resultado.Ganador g = new Resultado.Ganador(user);
+                g.t1.setText("¡Me ganaste!");
+                g.t2.setText("¡No me rendiré tan fácilmente!");
+                g.stellares.setIcon(stellatriste);
+            }
+            if (Sum0US > 21 & Sum0DE < 21) {
+                Resultado.Perdedor g = new Resultado.Perdedor(user);
+                g.t1.setText("¡Te gané!");
+                g.t2.setText("¿Qué tal eso? ¡Soy la mejor!");
+                g.stellares.setIcon(stellafeliz);
+            }
         } else {
             Pedir1Carta.setEnabled(false);
             Parar.setEnabled(false);
@@ -529,8 +576,6 @@ public class Mesa1 extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_PararActionPerformed
-
-    boolean Ganador;
 
     public void ColorBarajaMostrar(String cB, JLabel label) {
         switch (cB) {
