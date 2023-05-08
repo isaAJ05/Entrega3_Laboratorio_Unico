@@ -506,10 +506,19 @@ public class Mesa1 extends javax.swing.JFrame {
         if (repartir) {
             cartasdealer();
             if (Sum0US == 21 & (Sum0DE < 21 | Sum0DE > 21)) {
-
+                Resultado.Ganador g = new Resultado.Ganador(user);
+                g.t1.setText("¡Me ganaste!");
+                g.t2.setText("¡No me rendiré tan fácilmente!");
+                g.stellares.setIcon(stellatriste);
             }
-            if (Sum0US == Sum0DE) { //
-
+            if (Sum0US == Sum0DE) {
+                Resultado.Empate emp = new Resultado.Empate(user);
+            }
+            if (Sum0DE == 21 & (Sum0US < 21 | Sum0US > 21)) {
+                Resultado.Perdedor g = new Resultado.Perdedor(user);
+                g.t1.setText("¡Te gané!");
+                g.t2.setText("¿Qué tal eso? ¡Soy la mejor!");
+                g.stellares.setIcon(stellafeliz);
             }
         } else {
             Pedir1Carta.setEnabled(false);
@@ -681,30 +690,30 @@ public class Mesa1 extends javax.swing.JFrame {
                 VolveraJugar.setEnabled(true);
                 cartasdealer();
                 //Se mira quien esta mas cerca a 21
-                    if (Sum0US < Sum0DE) {
-                        Resultado.Ganador g = new Resultado.Ganador(user);
-                        g.t1.setText("¡Me ganaste!");
-                        g.t2.setText("¡No me rendiré tan fácilmente!");
-                        g.stellares.setIcon(stellatriste);
+                if (Sum0US < Sum0DE) {
+                    Resultado.Ganador g = new Resultado.Ganador(user);
+                    g.t1.setText("¡Me ganaste!");
+                    g.t2.setText("¡No me rendiré tan fácilmente!");
+                    g.stellares.setIcon(stellatriste);
 
+                } else {
+                    if (Sum0US > Sum0DE) {
+                        Resultado.Perdedor g = new Resultado.Perdedor(user);
+                        g.t1.setText("¡Te gané!");
+                        g.t2.setText("¿Qué tal eso? ¡Soy la mejor!");
+                        g.stellares.setIcon(stellafeliz);
                     } else {
-                        if (Sum0US > Sum0DE) {
-                            Resultado.Perdedor g = new Resultado.Perdedor(user);
-                            g.t1.setText("¡Te gané!");
-                            g.t2.setText("¿Qué tal eso? ¡Soy la mejor!");
-                            g.stellares.setIcon(stellafeliz);
-                        } else {
 
-                            cont++;
-                            ConteoCartaSinUsar(C, cont);
-                            elegircarta(baraja, Ccolor);
-                            cartasdealer();
-                            if (Sum0DE == Sum0US) { //Si ambos tienen el mismo numero
-                                Resultado.Empate emp = new Resultado.Empate(user);
-                            }
+                        cont++;
+                        ConteoCartaSinUsar(C, cont);
+                        elegircarta(baraja, Ccolor);
+                        cartasdealer();
+                        if (Sum0DE == Sum0US) { //Si ambos tienen el mismo numero
+                            Resultado.Empate emp = new Resultado.Empate(user);
                         }
                     }
-                
+                }
+
             }
             if (Sum0US == 21) { //Panel de GANO
                 Pedir1Carta.setEnabled(false);
@@ -724,7 +733,6 @@ public class Mesa1 extends javax.swing.JFrame {
             valdRepartir.setText(" Reparte las cartas para iniciar");
         }
     }//GEN-LAST:event_RepartirActionPerformed
-
 
     int valorCarta;
     int columna, fila;
@@ -836,39 +844,57 @@ public class Mesa1 extends javax.swing.JFrame {
                     Doble.setEnabled(false);
                     VolveraJugar.setEnabled(true);
                     cartasdealer();
+                    //Si tambien se pasa de 21
                     if (Sum0DE > 21) { //Se mira quien esta mas cerca a 21
-                        if (Sum0US < Sum0DE) {
-                            Resultado.Ganador g = new Resultado.Ganador(user);
-                            g.t1.setText("¡Me ganaste!");
-                            g.t2.setText("¡No me rendiré tan fácilmente!");
-                            g.stellares.setIcon(stellatriste);
+                        boolean r = false;
+                        do {
+                            if (Sum0US < Sum0DE) {
+                                Resultado.Ganador g = new Resultado.Ganador(user);
+                                g.t1.setText("¡Me ganaste!");
+                                g.t2.setText("¡No me rendiré tan fácilmente!");
+                                g.stellares.setIcon(stellatriste);
 
-                        } else {
-                            if (Sum0US > Sum0DE) {
-                                Resultado.Perdedor g = new Resultado.Perdedor(user);
-                                g.t1.setText("¡Te gané!");
-                                g.t2.setText("¿Qué tal eso? ¡Soy la mejor!");
-                                g.stellares.setIcon(stellafeliz);
                             } else {
-
-                                cont++;
-                                ConteoCartaSinUsar(C, cont);
-                                elegircarta(baraja, Ccolor);
-                                cartasdealer();
-                                if (Sum0DE == Sum0US) { //Si ambos tienen el mismo numero
-                                    Resultado.Empate emp = new Resultado.Empate(user);
+                                if (Sum0US > Sum0DE) {
+                                    Resultado.Perdedor g = new Resultado.Perdedor(user);
+                                    g.t1.setText("¡Te gané!");
+                                    g.t2.setText("¿Qué tal eso? ¡Soy la mejor!");
+                                    g.stellares.setIcon(stellafeliz);
+                                } else {
+                                    if (s <= 5) {
+                                        cont++;
+                                        ConteoCartaSinUsar(C, cont);
+                                        elegircarta(baraja, Ccolor);
+                                        cartasdealer();
+                                        r = true;
+                                    } else {
+                                        if (Sum0DE == Sum0US) { //Si ambos tienen el mismo numero
+                                            Resultado.Empate emp = new Resultado.Empate(user);
+                                        }
+                                    }
                                 }
                             }
+                            r = false;
+                        } while (r);
+                    } else {
+                        if (Sum0DE == Sum0US) { //Si ambos tienen el mismo numero
+                            Resultado.Empate emp = new Resultado.Empate(user);
+                        } else {//Si estella no se pasa de 21 pero el usuario si gana stella
+                            Resultado.Perdedor g = new Resultado.Perdedor(user);
+                            g.t1.setText("¡Te gané!");
+                            g.t2.setText("¿Qué tal eso? ¡Soy la mejor!");
+                            g.stellares.setIcon(stellafeliz);
                         }
                     }
+
                 }
 
             } else {
                 Mensajito.setText("Ya no puede pedir mas cartas");
+                //mensajito de se lleno, ya no puede pedir mas
 
                 Pedir1Carta.setEnabled(false);
 
-                //mensajito de se lleno, ya no puede pedir mas
                 if (Sum0US > 21) { //Si sigue sin llegar a 21 que se evalue las cartas del dealer
                     Pedir1Carta.setEnabled(false);
                     Doble.setEnabled(false);
