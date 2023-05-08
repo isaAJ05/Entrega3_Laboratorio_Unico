@@ -38,7 +38,6 @@ public class Mesa1 extends javax.swing.JFrame {
 
     boolean repartir = false;
     Random ran = new Random();
-    String Ganador, perdedor;
 
     //Variambles que llevan la suma de las cartas
     int sumU = 0, sumD = 0;
@@ -431,16 +430,86 @@ public class Mesa1 extends javax.swing.JFrame {
         ConteoCartas.setText(Integer.toString(C)); //Imprimir numero de cartas actual sin usar
     }
 
-    private void PararActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PararActionPerformed
-        if (repartir) {
+    public void cartasdealer() {
         CartaBlanca(cartaD1); //Se revela la carta oculta de estela
         TipoDeCarta(Dtipodibujo1, C1DE, CartaDe1);
         SumCartasDE.setText(String.valueOf(Sum0DE));
         Pedir1Carta.setEnabled(false);
         Parar.setEnabled(false);
         VolveraJugar.setEnabled(true);
-        }else{
-            
+        s = 3;
+        while (Sum0DE < 17) {
+            if (s <= 5) {
+                cont++;
+                ConteoCartaSinUsar(C, cont);
+
+                elegircarta(baraja, Ccolor); //Subrutina para la eleccion de carta al azar 
+                switch (s) {
+                    case 3:
+                        CartaDe3 = valorCarta;
+                        Dtipodibujo3 = fila;
+                        colorDB3 = colorB;
+                        DColum3 = columna;
+                        Sum0DE = CartaDe3 + Sum0DE;
+                        if (Sum0US > 21 & CartaUs3 == 11) { //Si sale un as se tomara como 11 siempre y cuando no se pase de 21
+                            //as=1;
+                            CartaDe3 = 1;
+                            Sum0DE = CartaDe3 + (Sum0DE - 11);
+                        }
+                        ConteoCartaSinUsar(C, cont);
+                        //Mostrar carta
+                        CartaBlanca(cartaD3);
+                        TipoDeCarta(Dtipodibujo3, C3DE, CartaDe3);
+                        break;
+                    case 4:
+                        CartaDe4 = valorCarta;
+                        Dtipodibujo4 = fila;
+                        colorDB4 = colorB;
+                        DColum4 = columna;
+                        Sum0DE = CartaDe4 + Sum0US;
+                        if (Sum0DE > 21 & CartaDe4 == 11) { //Si sale un as se tomara como 11 siempre y cuando no se pase de 21
+                            //as=1;
+                            CartaDe4 = 1;
+                            Sum0DE = CartaDe4 + (Sum0DE - 11);
+                        }
+                        ConteoCartaSinUsar(C, cont);
+                        //Mostrar carta
+                        CartaBlanca(cartaD4);
+                        TipoDeCarta(Dtipodibujo4, C4DE, CartaDe4);
+                        break;
+                    case 5:
+                        CartaDe5 = valorCarta;
+                        Dtipodibujo5 = fila;
+                        colorDB5 = colorB;
+                        DColum5 = columna;
+                        Sum0DE = CartaDe5 + Sum0DE;
+                        if (Sum0DE > 21 & CartaDe5 == 11) { //Si sale un as se tomara como 11 siempre y cuando no se pase de 21
+                            //as=1;
+                            CartaDe5 = 1;
+                            Sum0DE = CartaDe5 + (Sum0DE - 11);
+                        }
+                        ConteoCartaSinUsar(C, cont);
+                        //Mostrar carta
+                        CartaBlanca(cartaD5);
+                        TipoDeCarta(Dtipodibujo5, C5DE, CartaDe5);
+                        break;
+                }
+                SumCartasDE.setText(String.valueOf(Sum0DE));
+                s++;
+            }
+        }
+
+    }
+    private void PararActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PararActionPerformed
+        if (repartir) {
+            cartasdealer();
+            if(Sum0US==Sum0DE){
+                
+            }
+            if(Sum0US==21 &(Sum0DE<21|Sum0DE>21)){
+                
+            }
+        } else {
             Pedir1Carta.setEnabled(false);
             Parar.setEnabled(false);
             Doble.setEnabled(false);
@@ -450,30 +519,7 @@ public class Mesa1 extends javax.swing.JFrame {
 
     }//GEN-LAST:event_PararActionPerformed
 
-    public void Comparar() {
-        if (Sum0DE > Sum0US) {
-            Ganador = "Stella";
-            perdedor = user;
-        } else {
-            if (Sum0DE < Sum0US) {
-                Ganador = user;
-                perdedor = "Stella";
-            } else {
-                Ganador = "Empate";
-            }
-        }
-    }
-
-    public void Comprobar21() {
-        if (Sum0DE > 21 | Sum0US > 21) { //Si se pasa de 21 cualquiera de los dos
-
-        } else {
-            if (Sum0DE == 21 | Sum0US == 21) { //Si llegan a 21 exacto (BLACKJACK)
-                Comparar();
-            }
-        }
-    }
-
+    boolean Ganador;
     public void ColorBarajaMostrar(String cB, JLabel label) {
         switch (cB) {
             case "r": //Baraja Roja
@@ -529,12 +575,13 @@ public class Mesa1 extends javax.swing.JFrame {
     String colorB1, colorB2;
 
     int CartaDe1 = 0, CartaDe2 = 0, Dtipodibujo1 = 0, Dtipodibujo2 = 0, DColum1 = 0, DColum2 = 0;
-    String colorDB1 = "n", colorDB2 = "n";
+    int CartaDe3, CartaDe5, CartaDe4 = 0, Dtipodibujo3 = 0, Dtipodibujo5 = 0, Dtipodibujo4 = 0, DColum3 = 0, DColum4 = 0, DColum5;
+    String colorDB1, colorDB2, colorDB3, colorDB4, colorDB5;
 
     int a = 0; //Variable que verifica si antes de jugar ya repartio las cartas
     private void RepartirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RepartirActionPerformed
         ocultarPanelAjustes();
-           VolveraJugar.setEnabled(false);
+        VolveraJugar.setEnabled(false);
         if (a == 0) {
             HabilitarbtnGame();
             repartir = true;
@@ -598,13 +645,13 @@ public class Mesa1 extends javax.swing.JFrame {
             //Validacion del sistema
             if (Sum0DE > 21 & (CartaDe1 == 11 | CartaDe2 == 11)) { //Si sale un as se tomara como 11 siempre y cuando no se pase de 21
                 //as=1;
-                    if (CartaDe1 == 11) {
-                        CartaDe1 = 1;
-                    } else {
-                        if (CartaDe2 == 11) {
-                            CartaDe2 = 1;
-                        }
+                if (CartaDe1 == 11) {
+                    CartaDe1 = 1;
+                } else {
+                    if (CartaDe2 == 11) {
+                        CartaDe2 = 1;
                     }
+                }
                 Sum0US = CartaDe1 + CartaDe2;
             }
             ConteoCartaSinUsar(C, cont);
@@ -616,11 +663,24 @@ public class Mesa1 extends javax.swing.JFrame {
             TipoDeCarta(Dtipodibujo2, C2DE, CartaDe2);
 
             SumCartasDE.setText(String.valueOf(CartaDe2));
-            
+
             Pedir1Carta.setVisible(true); //Activar botones de juego
             a = 1;
             Repartir.setEnabled(false); //Desspues de repatir que el boton se desactive
-             VolveraJugar.setEnabled(false);
+            VolveraJugar.setEnabled(false);
+
+            if (Sum0US > 21) { //Si el usuario se pasa
+                Pedir1Carta.setEnabled(false);
+                Doble.setEnabled(false);
+                VolveraJugar.setEnabled(true);
+                cartasdealer();
+            }
+            if (Sum0US == 21) { //Panel de GANO
+                Pedir1Carta.setEnabled(false);
+                Doble.setEnabled(false);
+                VolveraJugar.setEnabled(true);
+                cartasdealer();
+            }
         } else {
             deshabilitarbtnGame();
             valdRepartir.setText(" Reparte las cartas para iniciar");
@@ -662,7 +722,6 @@ public class Mesa1 extends javax.swing.JFrame {
             if (s <= 5) {
                 cont++;
                 ConteoCartaSinUsar(C, cont);
-
                 elegircarta(baraja, Ccolor); //Subrutina para la eleccion de carta al azar 
                 switch (s) {
                     case 3:
@@ -716,8 +775,21 @@ public class Mesa1 extends javax.swing.JFrame {
                 }
                 SumCartasU.setText(String.valueOf(Sum0US));
                 s++;
+
+                if (Sum0US > 21) {
+                    Pedir1Carta.setEnabled(false);
+                    Doble.setEnabled(false);
+                    VolveraJugar.setEnabled(true);
+                    cartasdealer();
+                }
+                if (Sum0US == 21) { //Ya Gano
+                    Pedir1Carta.setEnabled(false);
+                    Doble.setEnabled(false);
+                    VolveraJugar.setEnabled(true);
+                    cartasdealer();
+                }
             } else {
-                Mensajito.setText("Ya no puede  pedir mas cartas");
+                Mensajito.setText("Ya no puede pedir mas cartas");
 
                 Pedir1Carta.setEnabled(false);
                 //mensajito de se lleno, ya no puede pedir mas
@@ -796,7 +868,7 @@ public class Mesa1 extends javax.swing.JFrame {
     }
 
     private void MostrarAjustesBlackJackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MostrarAjustesBlackJackActionPerformed
-        h = 1;
+        
         if (h == 0) { //Se ve y se oculta
             ocultarA();
             h = 1;// Estado del panel A : No visible
@@ -805,6 +877,7 @@ public class Mesa1 extends javax.swing.JFrame {
             h = 0;//Estado del panel A : Visible
             deshabilitarbtnGame();
         }
+        
     }//GEN-LAST:event_MostrarAjustesBlackJackActionPerformed
 
     private void btnVolver1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVolver1MouseEntered
@@ -869,6 +942,7 @@ public class Mesa1 extends javax.swing.JFrame {
         ocultarA();
         HabilitarbtnGame();
         h = 0;
+        MostrarAjustesBlackJack.setEnabled(false);
 
         //Creacion de matriz 2 Barajas EJEMPLO
         /*int baraja[][] = {
@@ -935,29 +1009,42 @@ public class Mesa1 extends javax.swing.JFrame {
             Repartir.setEnabled(false);
             Doble.setEnabled(false);
             VolveraJugar.setEnabled(false);
-            if (s == 3) {
-                Pedir1Carta.setEnabled(false);
-                String colorB3;
-                int CartaUs3, tipodibujo3, Ucolum3;
-                elegircarta(baraja, Ccolor);
-                CartaUs3 = valorCarta;
-                tipodibujo3 = fila;
-                colorB3 = colorB;
-                Ucolum3 = columna;
-                Sum0US = CartaUs3 + Sum0US;
-                if (Sum0US > 21 & CartaUs3 == 11) { //Si sale un as se tomara como 11 siempre y cuando no se pase de 21
-                    //as=1;
-                    CartaUs3 = 1;
-                    Sum0US = CartaUs3 + (Sum0US - 11);
-                }
-                ConteoCartaSinUsar(C, cont);
-                //Mostrar carta
-                CartaBlanca(cartaU3);
-                TipoDeCarta(tipodibujo3, C3US, CartaUs3);
-                SumCartasU.setText(String.valueOf(Sum0US));
-            } else {
-                Doble.setEnabled(false);
+
+            Pedir1Carta.setEnabled(false);
+            String colorB3;
+            int CartaUs3, tipodibujo3, Ucolum3;
+            elegircarta(baraja, Ccolor);
+            CartaUs3 = valorCarta;
+            tipodibujo3 = fila;
+            colorB3 = colorB;
+            Ucolum3 = columna;
+            Sum0US = CartaUs3 + Sum0US;
+            if (Sum0US > 21 & CartaUs3 == 11) { //Si sale un as se tomara como 11 siempre y cuando no se pase de 21
+                //as=1;
+                CartaUs3 = 1;
+                Sum0US = CartaUs3 + (Sum0US - 11);
             }
+            ConteoCartaSinUsar(C, cont);
+            //Mostrar carta
+            CartaBlanca(cartaU3);
+            TipoDeCarta(tipodibujo3, C3US, CartaUs3);
+            SumCartasU.setText(String.valueOf(Sum0US));
+
+            Doble.setEnabled(false);
+
+            if (Sum0US > 21) { //Si el usuario se pasa
+                Pedir1Carta.setEnabled(false);
+                Doble.setEnabled(false);
+                VolveraJugar.setEnabled(true);
+                cartasdealer();
+            }
+            if (Sum0US == 21) { //Panel de GANO
+                Pedir1Carta.setEnabled(false);
+                Doble.setEnabled(false);
+                VolveraJugar.setEnabled(true);
+                cartasdealer();
+            }
+
         } else {
             Pedir1Carta.setEnabled(false);
             Parar.setEnabled(false);
@@ -968,15 +1055,29 @@ public class Mesa1 extends javax.swing.JFrame {
     }//GEN-LAST:event_DobleActionPerformed
 
     private void VolveraJugarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VolveraJugarActionPerformed
-         if (repartir) {//Validación de repartir las cartas iniciales
-             
-         }else{
-              Pedir1Carta.setEnabled(false);
+        if (repartir) {//Validación de repartir las cartas iniciales
+           mostrarA();
+            MostrarAjustesBlackJack.setEnabled(true);
+            h = 0;//Estado del panel A : Visible
+            deshabilitarbtnGame();
+            NumerodeMasos = 1; cont=0;Sum0US=0;Sum0DE=0;C=0;
+            cartaU1.setIcon(null);cartaU2.setIcon(null);cartaU3.setIcon(null);cartaU4.setIcon(null);cartaU5.setIcon(null);
+            cartaD1.setIcon(null); cartaD2.setIcon(null); cartaD3.setIcon(null); cartaD4.setIcon(null); cartaD5.setIcon(null);
+            C1US.setIcon(null);C2US.setIcon(null);C3US.setIcon(null);C4US.setIcon(null);C5US.setIcon(null);
+            C1DE.setIcon(null); C2DE.setIcon(null); C3DE.setIcon(null); C4DE.setIcon(null); C5DE.setIcon(null);
+            cartaU1.setText("");cartaU2.setText("");cartaU3.setText("");cartaU4.setText("");cartaU5.setText("");
+            cartaD1.setText(""); cartaD2.setText(""); cartaD3.setText(""); cartaD4.setText(""); cartaD5.setText("");
+            C1US.setText("");C2US.setText("");C3US.setText("");C4US.setText("");C5US.setText("");
+            C1DE.setText(""); C2DE.setText(""); C3DE.setText(""); C4DE.setText(""); C5DE.setText("");
+            SumCartasU.setText("");SumCartasDE.setText("");
+            HabilitarbtnGame();
+        } else {
+            Pedir1Carta.setEnabled(false);
             Parar.setEnabled(false);
             Doble.setEnabled(false);
             VolveraJugar.setEnabled(false);
             JOptionPane.showMessageDialog(null, "No se han repartido cartas", "BlackJack∙", 2);
-         }
+        }
     }//GEN-LAST:event_VolveraJugarActionPerformed
 
     void ocultarPanelAjustes() { //Subrutina Deshabiliatar Ajustes del todo 
@@ -1023,7 +1124,6 @@ public class Mesa1 extends javax.swing.JFrame {
             }
         });
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Ajustespanel;
     private javax.swing.JButton BTNbarajaConfirmar;
