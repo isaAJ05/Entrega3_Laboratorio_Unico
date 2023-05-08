@@ -193,9 +193,6 @@ public class Mesa1 extends javax.swing.JFrame {
 
         MovJugadas.setBackground(new java.awt.Color(107, 138, 91));
         MovJugadas.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        Mensajito.setFont(new java.awt.Font("Monospaced", 1, 12)); // NOI18N
-        Mensajito.setForeground(new java.awt.Color(255, 0, 0));
         MovJugadas.add(Mensajito, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 100, 200, 50));
 
         MostrarAjustesBlackJack.setBackground(new java.awt.Color(102, 255, 153));
@@ -238,6 +235,7 @@ public class Mesa1 extends javax.swing.JFrame {
         MovJugadas.add(Pedir1Carta, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 260, 120, 36));
 
         ConteoCartas.setFont(new java.awt.Font("Engravers MT", 1, 24)); // NOI18N
+        ConteoCartas.setForeground(new java.awt.Color(0, 0, 0));
         ConteoCartas.setText("104");
         MovJugadas.add(ConteoCartas, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 20, 70, 30));
 
@@ -315,20 +313,17 @@ public class Mesa1 extends javax.swing.JFrame {
         labelStellaNombre.setText("Stella:");
         MesaCartas.add(labelStellaNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 100, 30));
 
-        SumCartasU.setBackground(new java.awt.Color(102, 255, 102));
-        SumCartasU.setFont(new java.awt.Font("Felix Titling", 1, 24)); // NOI18N
-        SumCartasU.setForeground(new java.awt.Color(0, 153, 0));
+        SumCartasU.setBackground(new java.awt.Color(0, 51, 0));
+        SumCartasU.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 0, 36)); // NOI18N
+        SumCartasU.setForeground(new java.awt.Color(255, 255, 153));
         SumCartasU.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        SumCartasU.setBorder(javax.swing.BorderFactory.createMatteBorder(3, 3, 3, 3, new java.awt.Color(0, 153, 0)));
-        SumCartasU.setOpaque(true);
+        SumCartasU.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         MesaCartas.add(SumCartasU, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 260, 70, 35));
 
-        SumCartasDE.setBackground(new java.awt.Color(102, 255, 102));
-        SumCartasDE.setFont(new java.awt.Font("Felix Titling", 1, 24)); // NOI18N
-        SumCartasDE.setForeground(new java.awt.Color(0, 153, 0));
+        SumCartasDE.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 0, 36)); // NOI18N
+        SumCartasDE.setForeground(new java.awt.Color(255, 255, 153));
         SumCartasDE.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        SumCartasDE.setBorder(javax.swing.BorderFactory.createMatteBorder(3, 3, 3, 3, new java.awt.Color(0, 153, 0)));
-        SumCartasDE.setOpaque(true);
+        SumCartasDE.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         MesaCartas.add(SumCartasDE, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 30, 70, 35));
 
         C5DE.setFont(new java.awt.Font("Snap ITC", 0, 14)); // NOI18N
@@ -901,8 +896,6 @@ public class Mesa1 extends javax.swing.JFrame {
             HabilitarbtnGame();
             if (s == 3) {
                 Pedir1Carta.setEnabled(false);
-                Doble.setEnabled(false);
-                Repartir.setEnabled(false);
                 String colorB3;
                 int CartaUs3, tipodibujo3, Ucolum3;
                 elegircarta(baraja, Ccolor);
@@ -920,7 +913,6 @@ public class Mesa1 extends javax.swing.JFrame {
                 //Mostrar carta
                 CartaBlanca(cartaU3);
                 TipoDeCarta(tipodibujo3, C3US, CartaUs3);
-                SumCartasU.setText(String.valueOf(Sum0US));
             } else {
                 Doble.setEnabled(false);
             }
