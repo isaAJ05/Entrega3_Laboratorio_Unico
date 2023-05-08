@@ -80,6 +80,8 @@ public class Pista extends javax.swing.JFrame {
     }
 
     public Pista(String name) {
+        setIconImage(new ImageIcon(getClass().getResource("general/stellaicono.png")).getImage());
+        setIconImage(new ImageIcon(getClass().getResource("general/stellaicono.png")).getImage());
         this.user = name;
 
         initComponents();

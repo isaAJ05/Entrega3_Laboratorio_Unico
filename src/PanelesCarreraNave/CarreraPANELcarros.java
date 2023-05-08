@@ -50,13 +50,13 @@ public class CarreraPANELcarros extends javax.swing.JPanel {
     }
 
     public class Utilidades {
-    public static void detenerMusica() {
-        if (clip != null) {
-            clip.stop();
+
+        public static void detenerMusica() {
+            if (clip != null) {
+                clip.stop();
+            }
         }
     }
-}
-
 
     ClassLoader CL = getClass().getClassLoader();
     ImageIcon naranja = new ImageIcon(CL.getResource("IMGcars/naranjacarro_1.png"));
@@ -70,7 +70,6 @@ public class CarreraPANELcarros extends javax.swing.JPanel {
         this.setFocusable(true);
         this.requestFocusInWindow();
         this.nave = nave;
-
         addKeyListener(new KeyListener() { //EVENTOS DEL TECLADO 
             @Override
             public void keyPressed(KeyEvent e) {
@@ -306,7 +305,7 @@ public class CarreraPANELcarros extends javax.swing.JPanel {
                         if (carrousuario.getBounds().intersects(BonoAzul1.getBounds()) || carrousuario.getBounds().intersects(BonoAzul2.getBounds()) || carrousuario.getBounds().intersects(BonoAzul3.getBounds())) {
                             bolita = 3; // Si toca una boolita AZUL obtiene bono se movera el triple de casillas
                             sonido("/Sonidos/bonus.wav");//Sonido bonus
-                            
+
                         }
                         if (carrousuario.getBounds().intersects(ObsRojo1.getBounds()) || carrousuario.getBounds().intersects(ObsRojo2.getBounds()) | carrousuario.getBounds().intersects(ObsRojo3.getBounds())) {
                             bolita = -1; // Si toca una boolita ROJA obtiene retrocedara una casilla y no podra avanzar si vuelve a tocarla
@@ -412,28 +411,24 @@ public class CarreraPANELcarros extends javax.swing.JPanel {
             }
             //si llegan a una casilla con valor 2 ( linea de meta)
             if ((espaciopista[AY / casilla][(AX / casilla)] == 2) || (espaciopista[VY / casilla][(VX / casilla)] == 2) || (espaciopista[NY / casilla][(NX / casilla)] == 2)) {
-                
+
                 timer.stop();
                 Utilidades.detenerMusica();
                 PermisoParaMover = 1;
-
+/////
                 if (AX > VX & AX > NX) {
                     Resultado.Ganador g = new Resultado.Ganador(name);
-                    
-                    // JOptionPane.showMessageDialog(null, "\t!FELICIDADES " + name + "\n! HA GANADO LA CARRERA:D");
 
                 }
                 if ((NX > VX & NX > AX) | (VX > AX & VX > NX) | (VX == NX)) {
+                    
                     Resultado.Perdedor g = new Resultado.Perdedor(name);
-                    //JOptionPane.showMessageDialog(null, "\t Game Over " + name);
 
                 } else {
                     if (AX == NX) {
-                        Resultado.Empate emp = new Resultado.Empate(name);
                         //JOptionPane.showMessageDialog(null, "\t Empate " + name);
                     } else if (AX == VX) {
                         Resultado.Empate emp = new Resultado.Empate(name);
-                        //JOptionPane.showMessageDialog(null, "\t Empate " + name);
 
                     }
                 }

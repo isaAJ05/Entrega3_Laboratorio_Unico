@@ -69,6 +69,7 @@ public class Principal3 extends javax.swing.JFrame {
     private String name = null;
 
     public Principal3(String user) {
+        setIconImage(new ImageIcon(getClass().getResource("general/stellaicono.png")).getImage());
         initComponents();
         this.setLocationRelativeTo(null);
         this.name = user;
