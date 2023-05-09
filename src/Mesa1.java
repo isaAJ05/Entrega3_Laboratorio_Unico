@@ -1319,6 +1319,8 @@ public class Mesa1 extends javax.swing.JFrame {
                         Resultado.Empate emp = new Resultado.Empate(user);
                     }
                 }
+            }else{
+                Parar.setEnabled(true);
             }
         } else {
             Pedir1Carta.setEnabled(false);
