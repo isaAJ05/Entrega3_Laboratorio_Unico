@@ -434,7 +434,7 @@ public class Mesa1 extends javax.swing.JFrame {
 
     public void cartasdealer() {
         CartaBlanca(cartaD1); //Se revela la carta oculta de estela
-        TipoDeCarta(Dtipodibujo1, C1DE, CartaDe1);
+        TipoDeCarta(Dtipodibujo1, C1DE, CartaDe1, DColum1);
         SumCartasDE.setText(String.valueOf(Sum0DE));
         Pedir1Carta.setEnabled(false);
         Parar.setEnabled(false);
@@ -461,7 +461,7 @@ public class Mesa1 extends javax.swing.JFrame {
                         ConteoCartaSinUsar(C, cont);
                         //Mostrar carta
                         CartaBlanca(cartaD3);
-                        TipoDeCarta(Dtipodibujo3, C3DE, CartaDe3);
+                        TipoDeCarta(Dtipodibujo3, C3DE, CartaDe3, DColum3);
                         break;
                     case 4:
                         CartaDe4 = valorCarta;
@@ -477,7 +477,7 @@ public class Mesa1 extends javax.swing.JFrame {
                         ConteoCartaSinUsar(C, cont);
                         //Mostrar carta
                         CartaBlanca(cartaD4);
-                        TipoDeCarta(Dtipodibujo4, C4DE, CartaDe4);
+                        TipoDeCarta(Dtipodibujo4, C4DE, CartaDe4, DColum4);
                         break;
                     case 5:
                         CartaDe5 = valorCarta;
@@ -493,7 +493,7 @@ public class Mesa1 extends javax.swing.JFrame {
                         ConteoCartaSinUsar(C, cont);
                         //Mostrar carta
                         CartaBlanca(cartaD5);
-                        TipoDeCarta(Dtipodibujo5, C5DE, CartaDe5);
+                        TipoDeCarta(Dtipodibujo5, C5DE, CartaDe5, DColum5);
                         break;
                 }
                 SumCartasDE.setText(String.valueOf(Sum0DE));
@@ -592,37 +592,128 @@ public class Mesa1 extends javax.swing.JFrame {
         label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagenesBJK/cartablanca (1).png")));
     }
 
-    public void TipoDeCarta(int tipodibujo, JLabel label, int valor) {
+    public void TipoDeCarta(int tipodibujo, JLabel label, int valor, int colum) {
+        if (colum < 10) { //Si son de las cartas de no son Q , J ,K 
+            switch (tipodibujo) {
+                case 0:
+                case 4:
+                case 8://Corazon
+                    label.setForeground(new java.awt.Color(204, 0, 0)); //Rojo
+                    label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagenesBJK/IMGcorazón (1).png")));
+                    label.setText(String.valueOf(valor));
+                    break;
+                case 1:
+                case 5:
+                case 9: //Picas
+                    label.setForeground(new java.awt.Color(0, 0, 0)); //Negro
+                    label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagenesBJK/IMGpicas-removebg-preview (1).png")));
+                    label.setText(String.valueOf(valor));
+                    break;
+                case 2:
+                case 6:
+                case 10://Trebol
+                    label.setForeground(new java.awt.Color(0, 0, 0));//Negro
+                    label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagenesBJK/IMGtrebol-removebg-preview (1).png")));
+                    label.setText(String.valueOf(valor));
+                    break;
+                case 3:
+                case 7:
+                case 11://Diamante
+                    label.setForeground(new java.awt.Color(204, 0, 0)); //Rojo
+                    label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagenesBJK/IMGdiamante-removebg-preview (1).png")));
+                    label.setText(String.valueOf(valor));
+                    break;
+            }
+        } else { //q j k
+            switch (tipodibujo) {
+                case 0:
+                case 4:
+                case 8://Corazon = ROJO
+                    switch (colum) {
+                        case 10: //Jack
+                            label.setForeground(new java.awt.Color(204, 0, 0)); //Rojo
+                            label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagenesBJK/jackR.png")));
+                            label.setText(String.valueOf(valor));
+                            break;
+                        case 11: // Queen
+                            label.setForeground(new java.awt.Color(204, 0, 0)); //Rojo
+                            label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagenesBJK/reinaR.png")));
+                            label.setText(String.valueOf(valor));
+                            break;
+                        case 12: //King
+                            label.setForeground(new java.awt.Color(204, 0, 0)); //Rojo
+                            label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagenesBJK/reyR.png")));
+                            label.setText(String.valueOf(valor));
+                            break;
+                    }
 
-        switch (tipodibujo) {
-            case 0:
-            case 4:
-            case 8://Corazon
-                label.setForeground(new java.awt.Color(204, 0, 0)); //Rojo
-                label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagenesBJK/IMGcorazón (1).png")));
-                label.setText(String.valueOf(valor));
-                break;
-            case 1:
-            case 5:
-            case 9: //Picas
-                label.setForeground(new java.awt.Color(0, 0, 0)); //Negro
-                label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagenesBJK/IMGpicas-removebg-preview (1).png")));
-                label.setText(String.valueOf(valor));
-                break;
-            case 2:
-            case 6:
-            case 10://Trebol
-                label.setForeground(new java.awt.Color(0, 0, 0));//Negro
-                label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagenesBJK/IMGtrebol-removebg-preview (1).png")));
-                label.setText(String.valueOf(valor));
-                break;
-            case 3:
-            case 7:
-            case 11://Diamante
-                label.setForeground(new java.awt.Color(204, 0, 0)); //Rojo
-                label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagenesBJK/IMGdiamante-removebg-preview (1).png")));
-                label.setText(String.valueOf(valor));
-                break;
+                    break;
+                case 1:
+                case 5:
+                case 9: //Picas NEGRO
+                    switch (colum) {
+                        case 10: //Jack
+                            label.setForeground(new java.awt.Color(0, 0, 0)); //negro
+                            label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagenesBJK/JackN.png")));
+                            label.setText(String.valueOf(valor));
+                            break;
+                        case 11: // Queen
+                            label.setForeground(new java.awt.Color(0, 0, 0)); //negro
+                            label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagenesBJK/reinaN.png")));
+                            label.setText(String.valueOf(valor));
+                            break;
+                        case 12: //King
+                            label.setForeground(new java.awt.Color(0, 0, 0)); //negro
+                            label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagenesBJK/reyN.png")));
+                            label.setText(String.valueOf(valor));
+                            break;
+                    }
+
+                    break;
+                case 2:
+                case 6:
+                case 10://Trebol NEGRO
+                    switch (colum) {
+                        case 10: //Jack
+                            label.setForeground(new java.awt.Color(0, 0, 0)); //negro
+                            label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagenesBJK/JackN.png")));
+                            label.setText(String.valueOf(valor));
+                            break;
+                        case 11: // Queen
+                            label.setForeground(new java.awt.Color(0, 0, 0)); //negro
+                            label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagenesBJK/reinaN.png")));
+                            label.setText(String.valueOf(valor));
+                            break;
+                        case 12: //King
+                            label.setForeground(new java.awt.Color(0, 0, 0)); //negro
+                            label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagenesBJK/reyN.png")));
+                            label.setText(String.valueOf(valor));
+                            break;
+                    }
+                    break;
+                case 3:
+                case 7:
+                case 11://Diamante ROJO
+                    switch (colum) {
+                        case 10: //Jack
+                            label.setForeground(new java.awt.Color(204, 0, 0)); //Rojo
+                            label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagenesBJK/jackR.png")));
+                            label.setText(String.valueOf(valor));
+                            break;
+                        case 11: // Queen
+                            label.setForeground(new java.awt.Color(204, 0, 0)); //Rojo
+                            label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagenesBJK/reinaR.png")));
+                            label.setText(String.valueOf(valor));
+                            break;
+                        case 12: //King
+                            label.setForeground(new java.awt.Color(204, 0, 0)); //Rojo
+                            label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagenesBJK/reyR.png")));
+                            label.setText(String.valueOf(valor));
+                            break;
+                    }
+
+                    break;
+            }
         }
     }
     int Sum0US = 0;//Suma contador de cartas del usuario
@@ -677,10 +768,10 @@ public class Mesa1 extends javax.swing.JFrame {
             ConteoCartaSinUsar(C, cont);
             //Mostrar primera carta
             CartaBlanca(cartaU1);
-            TipoDeCarta(tipodibujo1, C1US, CartaUs1);
+            TipoDeCarta(tipodibujo1, C1US, CartaUs1, Ucolum1);
             //Mostrar segunda carta
             CartaBlanca(cartaU2);
-            TipoDeCarta(tipodibujo2, C2US, CartaUs2);
+            TipoDeCarta(tipodibujo2, C2US, CartaUs2, Ucolum2);
 
             SumCartasU.setText(String.valueOf(Sum0US));
 
@@ -720,7 +811,7 @@ public class Mesa1 extends javax.swing.JFrame {
 
             //Mostrar segunda carta
             CartaBlanca(cartaD2);
-            TipoDeCarta(Dtipodibujo2, C2DE, CartaDe2);
+            TipoDeCarta(Dtipodibujo2, C2DE, CartaDe2, DColum2);
 
             SumCartasDE.setText(String.valueOf(CartaDe2));
 
@@ -773,6 +864,13 @@ public class Mesa1 extends javax.swing.JFrame {
                     }
                 }
             }
+//            if (Sum0US < 21 & (Sum0DE == 21 | (Sum0DE < 21 & Sum0DE > Sum0US))) {
+//                Resultado.Perdedor g = new Resultado.Perdedor(user);
+//                g.t1.setText("¡Te gané!");
+//                g.t2.setText("¿Qué tal eso? ¡Soy la mejor!");
+//                g.stellares.setIcon(stellafeliz);
+//            }
+            Parar.setEnabled(true);
         } else {
             deshabilitarbtnGame();
             valdRepartir.setText(" Reparte las cartas para iniciar");
@@ -834,7 +932,7 @@ public class Mesa1 extends javax.swing.JFrame {
                         ConteoCartaSinUsar(C, cont);
                         //Mostrar carta
                         CartaBlanca(cartaU3);
-                        TipoDeCarta(tipodibujo3, C3US, CartaUs3);
+                        TipoDeCarta(tipodibujo3, C3US, CartaUs3, Ucolum3);
                         break;
                     case 4:
                         CartaUs4 = valorCarta;
@@ -850,7 +948,7 @@ public class Mesa1 extends javax.swing.JFrame {
                         ConteoCartaSinUsar(C, cont);
                         //Mostrar carta
                         CartaBlanca(cartaU4);
-                        TipoDeCarta(tipodibujo4, C4US, CartaUs4);
+                        TipoDeCarta(tipodibujo4, C4US, CartaUs4, Ucolum4);
                         break;
                     case 5:
                         CartaUs5 = valorCarta;
@@ -866,7 +964,7 @@ public class Mesa1 extends javax.swing.JFrame {
                         ConteoCartaSinUsar(C, cont);
                         //Mostrar carta
                         CartaBlanca(cartaU5);
-                        TipoDeCarta(tipodibujo5, C5US, CartaUs5);
+                        TipoDeCarta(tipodibujo5, C5US, CartaUs5, Ucolum5);
                         break;
                 }
                 SumCartasU.setText(String.valueOf(Sum0US));
@@ -1204,7 +1302,7 @@ public class Mesa1 extends javax.swing.JFrame {
             ConteoCartaSinUsar(C, cont);
             //Mostrar carta
             CartaBlanca(cartaU3);
-            TipoDeCarta(tipodibujo3, C3US, CartaUs3);
+            TipoDeCarta(tipodibujo3, C3US, CartaUs3, Ucolum3);
             SumCartasU.setText(String.valueOf(Sum0US));
 
             Doble.setEnabled(false);
@@ -1221,10 +1319,7 @@ public class Mesa1 extends javax.swing.JFrame {
                         Resultado.Empate emp = new Resultado.Empate(user);
                     }
                 }
-            } else {
-
             }
-
         } else {
             Pedir1Carta.setEnabled(false);
             Parar.setEnabled(false);
