@@ -1,11 +1,16 @@
 
 import PanelesSP.inicio;
+import PanelesSP.inicio.Utilidades2;
 import java.awt.BorderLayout;
 import java.awt.Cursor;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.Toolkit;
+import java.net.URL;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -13,6 +18,21 @@ import javax.swing.JPanel;
 public class ASOPAstar extends javax.swing.JFrame {
 
     FondoPanel fondo = new FondoPanel();
+    private void sonido(String cadena) {
+        try {
+            Clip clip = AudioSystem.getClip();
+            URL url = getClass().getResource(cadena);
+            AudioInputStream audioIn = AudioSystem.getAudioInputStream(url);
+            clip.open(audioIn);
+            clip.start();
+
+        } catch (Exception e) {
+           // System.err.println(e.getMessage());
+        }
+        
+       
+
+    }
     private String user;
 
     public ASOPAstar(String name) {
@@ -135,6 +155,9 @@ public class ASOPAstar extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVolver2MouseExited
 
     private void btnVolver2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolver2ActionPerformed
+        
+        sonido("/Sonidos/boop.wav");
+        Utilidades2.detenerMusica2();
         Principal3 p = new Principal3(user);
         p.setVisible(true);
         this.dispose();
