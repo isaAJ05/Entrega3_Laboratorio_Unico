@@ -10,6 +10,10 @@ import java.awt.Image;
 import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.Toolkit;
+import java.net.URL;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.JLabel;
 
 /**
@@ -17,6 +21,43 @@ import javax.swing.JLabel;
  * @author Paula Núñez, Isabella Arrieta y Natalia Carpintero
  */
 public class Mesa1 extends javax.swing.JFrame {
+// - subrutina sonido
+    private void sonido(String cadena) {
+        try {
+            Clip clip = AudioSystem.getClip();
+            URL url = getClass().getResource(cadena);
+            AudioInputStream audioIn = AudioSystem.getAudioInputStream(url);
+            clip.open(audioIn);
+            clip.start();
+
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+
+    }
+    //sonido mientras juega
+    public static Clip clip;
+
+    private void sonido2(String cadena) {
+        try {
+            URL url = getClass().getResource(cadena);
+            AudioInputStream audioIn = AudioSystem.getAudioInputStream(url);
+            clip = AudioSystem.getClip();
+            clip.open(audioIn);
+            clip.start();
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+    }
+
+    public class Utilidades3 {
+
+        public static void detenerMusica3() {
+            if (clip != null) {
+                clip.stop();
+            }
+        }
+    }
 
     private String user;
     ClassLoader CL = getClass().getClassLoader();
@@ -36,6 +77,7 @@ public class Mesa1 extends javax.swing.JFrame {
         Ajustespanel.setVisible(true);
         labelNombreUser.setText(user + ":");
         deshabilitarbtnGame();
+        sonido2("/Sonidos/hugo.wav");
 
     }
 
@@ -503,6 +545,7 @@ public class Mesa1 extends javax.swing.JFrame {
 
     }
     private void PararActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PararActionPerformed
+sonido("/Sonidos/boop.wav");
         if (repartir) {
             cartasdealer();
             Pedir1Carta.setEnabled(false);
@@ -1155,6 +1198,8 @@ public class Mesa1 extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVolver1MouseExited
 
     private void btnVolver1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolver1ActionPerformed
+        Utilidades3.detenerMusica3();
+        sonido("/Sonidos/boop.wav");
         Principal3 p = new Principal3(user); //Para volver al menu
         p.setVisible(true);
         this.dispose();
@@ -1200,6 +1245,7 @@ public class Mesa1 extends javax.swing.JFrame {
         return B;
     }
     private void BTNbarajaConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTNbarajaConfirmarActionPerformed
+sonido("/Sonidos/boop.wav");
         n = 4 * NumerodeMasos;//Filas = tipo de carta
         C = n * m; //Numero de cartas por baraja ( fila x columnas -> 8 x 13)
         ConteoCartas.setText(Integer.toString(C));
@@ -1250,6 +1296,7 @@ public class Mesa1 extends javax.swing.JFrame {
     }//GEN-LAST:event_BTNbarajaConfirmarActionPerformed
 //Botones de los masos (+)/(-)
     private void masbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_masbtnActionPerformed
+        sonido("/Sonidos/boop.wav");
         NumerodeMasos = NumerodeMasos + 1; //Aumenta 1
         valdmasos.setText("");
         if (NumerodeMasos > 3) {
@@ -1263,6 +1310,7 @@ public class Mesa1 extends javax.swing.JFrame {
     }//GEN-LAST:event_masbtnActionPerformed
 
     private void menosbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menosbtnActionPerformed
+sonido("/Sonidos/boop.wav");
         NumerodeMasos = NumerodeMasos - 1; //dISMINUYE 1
         valdmasos.setText("");
         if (NumerodeMasos <= 0) {
@@ -1332,7 +1380,7 @@ public class Mesa1 extends javax.swing.JFrame {
     }//GEN-LAST:event_DobleActionPerformed
 
     private void VolveraJugarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VolveraJugarActionPerformed
-
+sonido("/Sonidos/boop.wav");
         mostrarA();
         h = 0;//Estado del panel A : Visible
         deshabilitarbtnGame();
