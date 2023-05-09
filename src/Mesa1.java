@@ -615,7 +615,9 @@ sonido("/Sonidos/boop.wav");
             Parar.setEnabled(false);
             Doble.setEnabled(false);
             VolveraJugar.setEnabled(false);
+            sonido("/Sonidos/error.wav");
             JOptionPane.showMessageDialog(null, "No se han repartido cartas", "BlackJack∙", 2);
+            
         }
 
     }//GEN-LAST:event_PararActionPerformed
@@ -1107,7 +1109,9 @@ sonido("/Sonidos/boop.wav");
             Parar.setEnabled(false);
             Doble.setEnabled(false);
             VolveraJugar.setEnabled(false);
+            sonido("/Sonidos/error.wav");
             JOptionPane.showMessageDialog(null, "No se han repartido cartas", "BlackJack∙", 2);
+            
         }
     }//GEN-LAST:event_Pedir1CartaActionPerformed
 
@@ -1375,7 +1379,9 @@ sonido("/Sonidos/boop.wav");
             Parar.setEnabled(false);
             Doble.setEnabled(false);
             VolveraJugar.setEnabled(false);
+            sonido("/Sonidos/error.wav");
             JOptionPane.showMessageDialog(null, "No se han repartido cartas", "BlackJack∙", 2);
+            
         }
     }//GEN-LAST:event_DobleActionPerformed
 
