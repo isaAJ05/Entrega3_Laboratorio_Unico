@@ -8,6 +8,10 @@ import java.awt.Cursor;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.Toolkit;
+import java.net.URL;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -21,6 +25,18 @@ public class instruccionesep extends javax.swing.JPanel {
     /**
      * Creates new form instruccionesep
      */
+    public void sonidosp(String cadena) {
+        try {
+            Clip clip = AudioSystem.getClip();
+            URL url = getClass().getResource(cadena);
+            AudioInputStream audioIn = AudioSystem.getAudioInputStream(url);
+            clip.open(audioIn);
+            clip.start();
+
+        } catch (Exception e) {
+           System.err.println(e.getMessage());
+        }
+}
     private String name = null;
     public instruccionesep(String user) {
         initComponents();
@@ -591,6 +607,7 @@ public class instruccionesep extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonokActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonokActionPerformed
+sonidosp("/Sonidos/boop.wav");
         panelito.removeAll();
         easy e = new easy(name);//Una instancia
         e.setSize(800, 496);
@@ -628,6 +645,7 @@ public class instruccionesep extends javax.swing.JPanel {
     }//GEN-LAST:event_btnVolver4MouseExited
 
     private void btnVolver4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolver4ActionPerformed
+sonidosp("/Sonidos/boop.wav");
         panelito.removeAll();
         tema h = new tema(name);//Una instancia
         h.setSize(800, 496);

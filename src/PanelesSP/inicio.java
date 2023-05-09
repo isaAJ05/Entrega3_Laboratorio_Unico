@@ -4,14 +4,60 @@ package PanelesSP;
 import java.awt.Cursor;
 import java.awt.Point;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.net.URL;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
 
 public class inicio extends javax.swing.JPanel {
+//SUBRUTINA PARA APLICAR SONIDO
+    public static Clip clips;
+    private void sonido(String cadena) {
+        try {
+            Clip clip = AudioSystem.getClip();
+            URL url = getClass().getResource(cadena);
+            AudioInputStream audioIn = AudioSystem.getAudioInputStream(url);
+            clip.open(audioIn);
+            clip.start();
 
+        } catch (Exception e) {
+           System.err.println(e.getMessage());
+        }
+        
+       
+
+    }
     private String user = null;
+        public static class Utilidades2 {
+
+        public static void detenerMusica2() {
+            if (clips != null) {
+                clips.stop();
+                clips.close();
+            }
+        }
+    }
     public inicio(String name) {
         initComponents();
         this.user = name;
+        try {
+            clips = AudioSystem.getClip();
+            URL url = getClass().getResource("/Sonidos/galaxia.wav");
+            AudioInputStream audioIn = AudioSystem.getAudioInputStream(url);
+            clips.open(audioIn);
+            clips.start();
+            botoncomenzar.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    clips.stop();
+
+                }
+            });
+        } catch (Exception e) {
+            //System.err.println(e.getMessage());
+        }
         
     }
 
@@ -120,6 +166,7 @@ public class inicio extends javax.swing.JPanel {
 
     private void botoncomenzarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botoncomenzarActionPerformed
         //Anthony Zabs helped :)
+        sonido("/Sonidos/boop.wav");
         tema t = new tema(user);
         t.setSize(800, 496);
         t.setLocation(0, 0);

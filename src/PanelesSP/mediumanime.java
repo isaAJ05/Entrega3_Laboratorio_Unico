@@ -10,8 +10,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.net.URL;
 import java.util.HashSet;
 import java.util.Random;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -51,7 +55,11 @@ public class mediumanime extends javax.swing.JPanel {
             public void actionPerformed(ActionEvent e) {
                 int f;
                 entre++;
-
+if (botonesAfectados.contains(boton ) ||cont==4) {
+                            return; // si el botón ya ha sido afectado, no suena
+                        } else {
+                    sonidosp("/Sonidos/seleccion.wav");
+                }
                 f = comprobacion(entre);//Funcion para saber si he presionado botones dos veces o multiplos de 2
                 //La idea es que cada vez que presione dos botones guarde ese movimiento (con contadores) y verifique si esos dos son una seleccion correcta
 
@@ -91,6 +99,7 @@ public class mediumanime extends javax.swing.JPanel {
     private void verifiquemos(int movimientos[][], int f, JButton botones[][], JButton vector1[], JButton vector2[], JButton vector3[], JButton vector4[], JLabel chulito1, JLabel chulito2, JLabel chulito3, JLabel chulito4) {
         int i;
         if (movimientos[f][0] == correctos[0][0] && movimientos[f][1] == correctos[0][1]) {
+           sonidosp("/Sonidos/pastella.wav");
             for (i = 0; i < vector1.length; i++) {
                 vector1[i].setBackground(Color.green);
                 botonesAfectados.add(vector1[i]);
@@ -103,6 +112,7 @@ public class mediumanime extends javax.swing.JPanel {
             yaloencontre1 = true;
         }
         if (movimientos[f][0] == correctos[1][0] && movimientos[f][1] == correctos[1][1]) {
+            sonidosp("/Sonidos/pastella.wav");
             for (i = 0; i < vector2.length; i++) {
                 vector2[i].setBackground(Color.green);
                 botonesAfectados.add(vector2[i]);
@@ -115,6 +125,7 @@ public class mediumanime extends javax.swing.JPanel {
             yaloencontre2 = true;
         }
         if (movimientos[f][0] == correctos[2][0] && movimientos[f][1] == correctos[2][1]) {
+            sonidosp("/Sonidos/pastella.wav");
             for (i = 0; i < vector3.length; i++) {
                 vector3[i].setBackground(Color.green);
                 botonesAfectados.add(vector3[i]);
@@ -127,6 +138,7 @@ public class mediumanime extends javax.swing.JPanel {
             yaloencontre3 = true;
         }
         if (movimientos[f][0] == correctos[3][0] && movimientos[f][1] == correctos[3][1]) {
+            sonidosp("/Sonidos/pastella.wav");
             for (i = 0; i < vector4.length; i++) {
                 vector4[i].setBackground(Color.green);
                 botonesAfectados.add(vector4[i]);
@@ -168,7 +180,6 @@ public class mediumanime extends javax.swing.JPanel {
             //para que no pueda pedir mas pistas ver la solucion o instrucciones
             pista.setEnabled(false);
             solucion.setEnabled(false);
-            instrucciones.setEnabled(false);
 
         }
 
@@ -208,6 +219,18 @@ private void cambiarcolor(JButton botones[][]) {
             botones[i][j].addMouseListener(listener);
         }
     }
+}
+public void sonidosp(String cadena) {
+        try {
+            Clip clip = AudioSystem.getClip();
+            URL url = getClass().getResource(cadena);
+            AudioInputStream audioIn = AudioSystem.getAudioInputStream(url);
+            clip.open(audioIn);
+            clip.start();
+
+        } catch (Exception e) {
+           System.err.println(e.getMessage());
+        }
 }
     //FUNCIONES
 
@@ -377,7 +400,6 @@ private void cambiarcolor(JButton botones[][]) {
         pista = new javax.swing.JButton();
         solucion = new javax.swing.JButton();
         palabrasencontradas = new javax.swing.JLabel();
-        instrucciones = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         chulito1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -717,17 +739,6 @@ private void cambiarcolor(JButton botones[][]) {
         palabrasencontradas.setForeground(new java.awt.Color(255, 255, 255));
         palabrasencontradas.setText("0/4");
 
-        instrucciones.setBackground(new java.awt.Color(255, 153, 255));
-        instrucciones.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
-        instrucciones.setForeground(new java.awt.Color(0, 0, 51));
-        instrucciones.setText("Instrucciones");
-        instrucciones.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        instrucciones.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                instruccionesActionPerformed(evt);
-            }
-        });
-
         jLabel2.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("PERSONAJES DE ANIME");
@@ -922,12 +933,10 @@ private void cambiarcolor(JButton botones[][]) {
                 .addGap(44, 44, 44)
                 .addComponent(btnVolver3, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(instrucciones)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(pista, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(solucion)
-                .addGap(46, 46, 46)
+                .addGap(65, 65, 65)
                 .addComponent(palabrasencontradas, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(121, 121, 121))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contenido5Layout.createSequentialGroup()
@@ -951,8 +960,7 @@ private void cambiarcolor(JButton botones[][]) {
                         .addGroup(contenido5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(pista)
                             .addComponent(solucion)
-                            .addComponent(palabrasencontradas, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(instrucciones))
+                            .addComponent(palabrasencontradas, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(73, 73, 73))
                     .addGroup(contenido5Layout.createSequentialGroup()
                         .addContainerGap()
@@ -1064,6 +1072,7 @@ private void cambiarcolor(JButton botones[][]) {
     }//GEN-LAST:event_contenido5MouseMoved
 
     private void btnVolver3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolver3ActionPerformed
+        sonidosp("/Sonidos/boop.wav");
         contenido5.removeAll();
         tema h = new tema(name);//Una instancia
         h.setSize(800, 496);
@@ -1082,23 +1091,6 @@ private void cambiarcolor(JButton botones[][]) {
     private void btnVolver3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVolver3MouseEntered
         labelvolver.setText(" Menú");
     }//GEN-LAST:event_btnVolver3MouseEntered
-
-    private void instruccionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_instruccionesActionPerformed
-        //Mostrar Joption pane de instrucciones
-        JOptionPane.showMessageDialog(null, "𝐅𝐔𝐍𝐂𝐈𝐎𝐍𝐀𝐌𝐈𝐄𝐍𝐓𝐎 𝐃𝐄𝐋 𝐉𝐔𝐄𝐆𝐎:\nEste nivel está compuesto por una sopa de letras de dimensiones 8x6 donde encontrarás 4 palabras ocultas"
-                + "\nrelacionadas a nombres de personajes de anime."
-                + "\nAl lado derecho de la pantalla visualizarás la lista de palabras que debes buscar."
-                + "\n𝐏𝐚𝐫𝐚 𝐣𝐮𝐠𝐚𝐫: "
-                + "\n  ⭐Busca las letras de las palabras en cualquier dirección: horizontal, vertical o diagonal, en sentido normal"
-                + "\n     o inverso."
-                + "\n  ⭐Una vez que encuentres una letra de una palabra, selecciona la letra inicial y ultima"
-                + "\n      para que el sistema verifique tu elección.\n"
-                + "  ⭐Si tu selección es correcta se cambiará el fondo de la palabra en la sopa de letras y aparecerá "
-                + "\n      una estrella al lado de la palabra de la lista.\n"
-                + "  ⭐Continúa buscando hasta que hayas encontrado todas las palabras de la lista."
-                + "\n\n𝐏𝐋𝐔𝐒: Si lo deseas puedes pedir pistas o revelar la solución de la sopa de letras al seleccionar dichas opciones."
-                + "\n\n                             ¡𝗗𝗜𝗩𝗜𝗘𝗥𝗧𝗘𝗧𝗘 𝗝𝗨𝗚𝗔𝗡𝗗𝗢 𝗟𝗔 𝗦𝗢𝗣𝗔 𝗗𝗘 𝗟𝗘𝗧𝗥𝗔𝗦 𝗦𝗧𝗔𝗥: 𝗩𝗘𝗥𝗦𝗜𝗢𝗡 𝗔𝗡𝗜𝐌𝗘!", "STAR GAMES: Sopa de letras STAR", JOptionPane.INFORMATION_MESSAGE);
-    }//GEN-LAST:event_instruccionesActionPerformed
 
     private void solucionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_solucionActionPerformed
         //Al presionar este boton se podra visualizar la solución de la sopa de letras al ver con un fondo verde las letras de las palabras propuestas al usuario
@@ -1133,6 +1125,25 @@ private void cambiarcolor(JButton botones[][]) {
         chulito2.setVisible(true);
         chulito3.setVisible(true);
         chulito4.setVisible(true);
+        //DESHABILITAR BOTONES
+        pista.setEnabled(false);
+        solucion.setEnabled(false);
+        //verificacion 2.0
+        cont=4;
+        Timer timer = new Timer(500, new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Establecer la visibilidad del JPanel después del tiempo establecido
+                Resultado.Perdedor g = new Resultado.Perdedor(name);
+                g.setVisible(true);
+                //DESHABILITAR BOTONES
+        pista.setEnabled(false);
+        solucion.setEnabled(false);
+            }
+        });
+        
+        // Iniciar el temporizador
+        timer.setRepeats(false); // solo se ejecutará una vez
+        timer.start();
     }//GEN-LAST:event_solucionActionPerformed
 
     private void pistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pistaActionPerformed
@@ -1141,20 +1152,25 @@ private void cambiarcolor(JButton botones[][]) {
         //la pista consiste en crear un fondo verde en la inicial de la letra de una palabra que no haya encontrado el usuario
         if (yaloencontre1 == false) { //pista letra inicial DEKU
             boton76.setBackground(new Color(153, 255, 153));
+            sonidosp("/Sonidos/pista.wav");
 
         } else if (yaloencontre2 == false) {//pista letra inicial KIRITO
             boton71.setBackground(new Color(153, 255, 153));
+            sonidosp("/Sonidos/pista.wav");
 
         } else if (yaloencontre3 == false) {//pista letra inicial EREN
             boton12.setBackground(new Color(153, 255, 153));
+            sonidosp("/Sonidos/pista.wav");
 
         } else if (yaloencontre4 == false) {//pista letra inicial ITACHI
             boton81.setBackground(new Color(153, 255, 153));
+            sonidosp("/Sonidos/pista.wav");
 
         }
     }//GEN-LAST:event_pistaActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        sonidosp("/Sonidos/boop.wav");
         contenido5.removeAll();
         hardanime h = new hardanime(name);
         h.setSize(800, 496);
@@ -1366,7 +1382,6 @@ private void cambiarcolor(JButton botones[][]) {
     private javax.swing.JLabel chulito3;
     private javax.swing.JLabel chulito4;
     private javax.swing.JPanel contenido5;
-    private javax.swing.JButton instrucciones;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;

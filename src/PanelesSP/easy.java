@@ -13,8 +13,12 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.net.URL;
 import java.util.HashSet;
 import java.util.Random;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -26,7 +30,6 @@ import javax.swing.Timer;
  */
 public class easy extends javax.swing.JPanel {
 
-    
     //Variables globales
     // - Contadores
     int entre = 0;//para contabilizar las veces que el usuario presione los botones
@@ -40,7 +43,7 @@ public class easy extends javax.swing.JPanel {
     boolean yaloencontre1 = false;
     boolean yaloencontre2 = false;
     boolean yaloencontre3 = false;
-    
+
     //HashSet: Un HashSet es una colección de elementos en Java que no permite elementos duplicados.
     private HashSet<JButton> botonesAfectados = new HashSet<>();
 
@@ -51,11 +54,12 @@ public class easy extends javax.swing.JPanel {
             public void actionPerformed(ActionEvent e) {
                 int f;
                 entre++;
-                
-                    
-                    
-               
-                
+                if (botonesAfectados.contains(boton) || cont == 4) {
+                    return; // si el botón ya ha sido afectado, no suena
+                } else {
+                    sonidosp("/Sonidos/seleccion.wav");
+                }
+
                 f = comprobacion(entre);//Funcion para saber si he presionado botones dos veces o multiplos de 2
                 //La idea es que cada vez que presione dos botones guarde ese movimiento (con contadores) y verifique si esos dos son una seleccion correcta
 
@@ -90,6 +94,7 @@ public class easy extends javax.swing.JPanel {
     private void verifiquemos(int movimientos[][], int f, JButton botones[][], JButton vector1[], JButton vector2[], JButton vector3[], JLabel chulito1, JLabel chulito2, JLabel chulito3) {
         int i;
         if (movimientos[f][0] == correctos[0][0] && movimientos[f][1] == correctos[0][1]) {
+            sonidosp("/Sonidos/pastella.wav");
             for (i = 0; i < vector1.length; i++) {
                 vector1[i].setBackground(Color.green);
                 botonesAfectados.add(vector1[i]);
@@ -100,8 +105,8 @@ public class easy extends javax.swing.JPanel {
                 comprobacion2(chulito1);
             }
             yaloencontre1 = true;
-        }
-        if (movimientos[f][0] == correctos[1][0] && movimientos[f][1] == correctos[1][1]) {
+        } else if (movimientos[f][0] == correctos[1][0] && movimientos[f][1] == correctos[1][1]) {
+            sonidosp("/Sonidos/pastella.wav");
             for (i = 0; i < vector2.length; i++) {
                 vector2[i].setBackground(Color.green);
                 botonesAfectados.add(vector2[i]);
@@ -112,8 +117,8 @@ public class easy extends javax.swing.JPanel {
                 comprobacion2(chulito2);
             }
             yaloencontre2 = true;
-        }
-        if (movimientos[f][0] == correctos[2][0] && movimientos[f][1] == correctos[2][1]) {
+        } else if (movimientos[f][0] == correctos[2][0] && movimientos[f][1] == correctos[2][1]) {
+            sonidosp("/Sonidos/pastella.wav");
             for (i = 0; i < vector3.length; i++) {
                 vector3[i].setBackground(Color.green);
                 botonesAfectados.add(vector3[i]);
@@ -152,55 +157,62 @@ public class easy extends javax.swing.JPanel {
             //para que no pueda pedir mas pistas ver la solucion o instrucciones
             pista.setEnabled(false);
             solucion.setEnabled(false);
-            instrucciones.setEnabled(false);
-            
-             
 
         }
 
     }
 
 //subrutina para cambiar color de las letras cuando se pasa el mouse por ellas
-private MouseAdapter listener;
+    private MouseAdapter listener;
 
-private void cambiarcolor(JButton botones[][]) {
-    for (int i = 0; i < 7; i++) {
-        for (int j = 0; j < 5; j++) {
-            final int finalI = i;
-            final int finalJ = j;
-            listener = new MouseAdapter() {
-                @Override
-                public void mouseEntered(MouseEvent evt) {
-                    if (botonesAfectados.contains(botones[finalI][finalJ]) || cont==4) {
-                return; // si el botón ya ha sido afectado, salimos del método sin hacer nada
-            } else {
-                    botones[finalI][finalJ].setBackground(new Color(255, 153, 255));
-                    botones[finalI][finalJ].setFont(new Font("Segoe UI", Font.PLAIN, 11));
-                    Timer timer = new Timer(2000, new ActionListener() {
-                        public void actionPerformed(ActionEvent e) {
-                            botones[finalI][finalJ].setFont(new Font("Segoe UI", Font.PLAIN, 12));
-                            if (botonesAfectados.contains(botones[finalI][finalJ])) {
-                return; // si el botón ya ha sido afectado, salimos del método sin hacer nada
-            } else {
-                            
-                            botones[finalI][finalJ].setBackground(new Color(255, 255, 255));
+    private void cambiarcolor(JButton botones[][]) {
+        for (int i = 0; i < 7; i++) {
+            for (int j = 0; j < 5; j++) {
+                final int finalI = i;
+                final int finalJ = j;
+                listener = new MouseAdapter() {
+                    @Override
+                    public void mouseEntered(MouseEvent evt) {
+                        if (botonesAfectados.contains(botones[finalI][finalJ]) || cont == 4) {
+                            return; // si el botón ya ha sido afectado, salimos del método sin hacer nada
+                        } else {
+                            botones[finalI][finalJ].setBackground(new Color(255, 153, 255));
+                            botones[finalI][finalJ].setFont(new Font("Segoe UI", Font.PLAIN, 11));
+                            Timer timer = new Timer(2000, new ActionListener() {
+                                public void actionPerformed(ActionEvent e) {
+                                    botones[finalI][finalJ].setFont(new Font("Segoe UI", Font.PLAIN, 12));
+                                    if (botonesAfectados.contains(botones[finalI][finalJ])) {
+                                        return; // si el botón ya ha sido afectado, salimos del método sin hacer nada
+                                    } else {
+
+                                        botones[finalI][finalJ].setBackground(new Color(255, 255, 255));
+                                    }
+                                }
+                            });
+                            timer.setRepeats(false);
+                            timer.start();
                         }
                     }
-                    });
-                    timer.setRepeats(false);
-                    timer.start();
-                }
+                };
+                botones[i][j].addMouseListener(listener);
             }
-            };
-            botones[i][j].addMouseListener(listener);
         }
     }
-}
 
+    public void sonidosp(String cadena) {
+        try {
+            Clip clip = AudioSystem.getClip();
+            URL url = getClass().getResource(cadena);
+            AudioInputStream audioIn = AudioSystem.getAudioInputStream(url);
+            clip.open(audioIn);
+            clip.start();
 
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+    }
 
-   //FUNCIONES
-
+    //FUNCIONES
     // - Funcion para saber si he presionado botones dos veces o multiplos de 2
     private int comprobacion(int entre) {
         int res = entre;
@@ -346,7 +358,6 @@ private void cambiarcolor(JButton botones[][]) {
         siguiente = new javax.swing.JButton();
         solucion = new javax.swing.JButton();
         palabrasencontradas = new javax.swing.JLabel();
-        instrucciones = new javax.swing.JButton();
         pista = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         chulito1 = new javax.swing.JLabel();
@@ -584,17 +595,6 @@ private void cambiarcolor(JButton botones[][]) {
         palabrasencontradas.setForeground(new java.awt.Color(255, 255, 255));
         palabrasencontradas.setText("0/3");
 
-        instrucciones.setBackground(new java.awt.Color(255, 153, 255));
-        instrucciones.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
-        instrucciones.setForeground(new java.awt.Color(0, 0, 51));
-        instrucciones.setText("Instrucciones");
-        instrucciones.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        instrucciones.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                instruccionesActionPerformed(evt);
-            }
-        });
-
         pista.setBackground(new java.awt.Color(255, 153, 255));
         pista.setFont(new java.awt.Font("Berlin Sans FB Demi", 0, 12)); // NOI18N
         pista.setForeground(new java.awt.Color(0, 0, 51));
@@ -777,12 +777,10 @@ private void cambiarcolor(JButton botones[][]) {
                     .addComponent(labelvolver, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnVolver3, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(instrucciones)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(pista, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(solucion)
-                .addGap(78, 78, 78)
+                .addGap(113, 113, 113)
                 .addComponent(palabrasencontradas, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(83, 83, 83))
         );
@@ -790,16 +788,12 @@ private void cambiarcolor(JButton botones[][]) {
             contenido4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(contenido4Layout.createSequentialGroup()
                 .addGroup(contenido4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(contenido4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contenido4Layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addGroup(contenido4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(solucion)
-                                .addComponent(pista)
-                                .addComponent(palabrasencontradas, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(contenido4Layout.createSequentialGroup()
-                            .addGap(27, 27, 27)
-                            .addComponent(instrucciones)))
+                    .addGroup(contenido4Layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addGroup(contenido4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(solucion)
+                            .addComponent(pista)
+                            .addComponent(palabrasencontradas, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(contenido4Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(btnVolver3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -901,35 +895,20 @@ private void cambiarcolor(JButton botones[][]) {
         //Para mostrar pistas:
 
         //la pista consiste en crear un fondo verde en la inicial de la letra de una palabra que no haya encontrado el usuario
-
         if (yaloencontre1 == false) { //pista letra inicial TIERRA
             boton73.setBackground(new Color(153, 255, 153));
+            sonidosp("/Sonidos/pista.wav");
 
         } else if (yaloencontre2 == false) {//pista letra inicial CERES
             boton21.setBackground(new Color(153, 255, 153));
+            sonidosp("/Sonidos/pista.wav");
 
         } else if (yaloencontre3 == false) {//pista letra inicial VENUS
             boton11.setBackground(new Color(153, 255, 153));
+            sonidosp("/Sonidos/pista.wav");
 
         }
     }//GEN-LAST:event_pistaActionPerformed
-
-    private void instruccionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_instruccionesActionPerformed
-        //Mostrar Joption pane de instrucciones
-        JOptionPane.showMessageDialog(null, "𝐅𝐔𝐍𝐂𝐈𝐎𝐍𝐀𝐌𝐈𝐄𝐍𝐓𝐎 𝐃𝐄𝐋 𝐉𝐔𝐄𝐆𝐎:\nEste nivel está compuesto por una sopa de letras de dimensiones 7x5 donde encontrarás 3 palabras ocultas"
-                + "\nrelacionadas a nombres de planetas del sistema solar."
-                + "\nAl lado derecho de la pantalla visualizarás la lista de palabras que debes buscar."
-                + "\n𝐏𝐚𝐫𝐚 𝐣𝐮𝐠𝐚𝐫: "
-                + "\n  ⭐Busca las letras de las palabras en cualquier dirección: horizontal, vertical o diagonal, en sentido normal"
-                + "\n     o inverso."
-                + "\n  ⭐Una vez que encuentres una letra de una palabra, selecciona la letra inicial y ultima"
-                + "\n      para que el sistema verifique tu elección.\n"
-                + "  ⭐Si tu selección es correcta se cambiará el fondo de la palabra en la sopa de letras y aparecerá "
-                + "\n      una estrella al lado de la palabra de la lista.\n"
-                + "  ⭐Continúa buscando hasta que hayas encontrado todas las palabras de la lista."
-                + "\n\n𝐏𝐋𝐔𝐒: Si lo deseas puedes pedir pistas o revelar la solución de la sopa de letras al seleccionar dichas opciones."
-                + "\n\n                             ¡𝗗𝗜𝗩𝗜𝗘𝗥𝗧𝗘𝗧𝗘 𝗝𝗨𝗚𝗔𝗡𝗗𝗢 𝗟𝗔 𝗦𝗢𝗣𝗔 𝗗𝗘 𝗟𝗘𝗧𝗥𝗔𝗦 𝗦𝗧𝗔𝗥: 𝗩𝗘𝗥𝗦𝗜𝗢𝗡 𝗣𝗟𝗔𝗡𝗘𝗧𝗔𝗦!", "STAR GAMES: Sopa de letras STAR", JOptionPane.INFORMATION_MESSAGE);
-    }//GEN-LAST:event_instruccionesActionPerformed
 
     private void solucionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_solucionActionPerformed
         //Al presionar este boton se podra visualizar la solución de la sopa de letras al ver con un fondo verde las letras de las palabras propuestas al usuario
@@ -962,11 +941,29 @@ private void cambiarcolor(JButton botones[][]) {
         //DESHABILITAR BOTONES
         pista.setEnabled(false);
         solucion.setEnabled(false);
-        instrucciones.setEnabled(false);
-        
+        //verificacion 2.0
+        cont = 4;
+        // Crear un temporizador con una duración de 3 segundos
+
+        Timer timer = new Timer(500, new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Establecer la visibilidad del JPanel después del tiempo establecido
+                Resultado.Perdedor g = new Resultado.Perdedor(name);
+                g.setVisible(true);
+                //DESHABILITAR BOTONES
+                pista.setEnabled(false);
+                solucion.setEnabled(false);
+            }
+        });
+
+        // Iniciar el temporizador
+        timer.setRepeats(false); // solo se ejecutará una vez
+        timer.start();
+
     }//GEN-LAST:event_solucionActionPerformed
 
     private void siguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_siguienteActionPerformed
+        sonidosp("/Sonidos/boop.wav");
         contenido4.removeAll();
 
         medium m = new medium(name);
@@ -1079,6 +1076,7 @@ private void cambiarcolor(JButton botones[][]) {
     }//GEN-LAST:event_btnVolver3MouseExited
 
     private void btnVolver3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolver3ActionPerformed
+        sonidosp("/Sonidos/boop.wav");
         contenido4.removeAll();
         tema h = new tema(name);//Una instancia
         h.setSize(800, 496);
@@ -1089,7 +1087,7 @@ private void cambiarcolor(JButton botones[][]) {
         contenido4.revalidate();
         contenido4.repaint();
     }//GEN-LAST:event_btnVolver3ActionPerformed
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton boton11;
@@ -1132,7 +1130,6 @@ private void cambiarcolor(JButton botones[][]) {
     private javax.swing.JLabel chulito2;
     private javax.swing.JLabel chulito3;
     private javax.swing.JPanel contenido4;
-    private javax.swing.JButton instrucciones;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
