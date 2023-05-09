@@ -318,7 +318,7 @@ public class Mesa1 extends javax.swing.JFrame {
                 DobleActionPerformed(evt);
             }
         });
-        MovJugadas.add(Doble, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 260, 160, 36));
+        MovJugadas.add(Doble, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 265, 160, 36));
 
         valdRepartir.setFont(new java.awt.Font("Monospaced", 0, 14)); // NOI18N
         MovJugadas.add(valdRepartir, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 60, 200, 21));
@@ -545,8 +545,9 @@ public class Mesa1 extends javax.swing.JFrame {
 
     }
     private void PararActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PararActionPerformed
-sonido("/Sonidos/boop.wav");
+
         if (repartir) {
+            sonido("/Sonidos/boop.wav");
             cartasdealer();
             Pedir1Carta.setEnabled(false);
             Parar.setEnabled(false);
@@ -779,6 +780,7 @@ sonido("/Sonidos/boop.wav");
         ocultarPanelAjustes();
         VolveraJugar.setEnabled(false);
         if (a == 0) {
+            sonido("/Sonidos/cartas.wav");
             HabilitarbtnGame();
             repartir = true;
             // Cartas iniciales para el usuario
@@ -953,6 +955,7 @@ sonido("/Sonidos/boop.wav");
     private void Pedir1CartaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Pedir1CartaActionPerformed
 
         if (repartir) { //Validación de repartir las cartas iniciales
+            sonido("/Sonidos/carta.wav");
             HabilitarbtnGame();
             Doble.setEnabled(false);
             Repartir.setEnabled(false);
@@ -1332,6 +1335,7 @@ sonido("/Sonidos/boop.wav");
 
     private void DobleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DobleActionPerformed
         if (repartir) { //Validación de repartir las cartas iniciales
+            sonido("/Sonidos/carta.wav");
             HabilitarbtnGame();
             Repartir.setEnabled(false);
             Doble.setEnabled(false);
