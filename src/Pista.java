@@ -341,14 +341,16 @@ public class Pista extends javax.swing.JFrame {
     private void atrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atrasActionPerformed
         sonido("/Sonidos/boop.wav");
         Utilidades.detenerMusica();
-        PanelInfo InfoPANEL = new PanelInfo();
-        ShowPanel(InfoPANEL);//Llamar el metodo para mostrar el panel 
+        SeleccionNavePanel NavePanel = new SeleccionNavePanel(user, nave);
+        ShowPanel(NavePanel);//Llamar el metodo para mostrar el panel 
         atras.setEnabled(false);
         atras.setVisible(false);
         SelectNAVEbtn.setEnabled(true);
         SelectNAVEbtn.setVisible(true);
         btnStart.setEnabled(true);
         btnStart.setVisible(true);
+        InfoBTN.setEnabled(true);
+        InfoBTN.setVisible(true);
         PanelesCarreraNave.NaveJugador.nave = 0;
     }//GEN-LAST:event_atrasActionPerformed
 
