@@ -85,7 +85,7 @@ public class rompecabezas01 extends javax.swing.JFrame implements ActionListener
         //cursor
         Cursor cursor = Toolkit.getDefaultToolkit().createCustomCursor(new ImageIcon(getClass().getResource("cursor/cursorimg.png")).getImage(), new Point(0, 0), "Custom Cursor");
         this.setCursor(cursor);
-
+//MATRICES
         imagenes = new ImageIcon[][]{{pp1, pp2, pp3}, {pp4, pp5, pp6}, {pp7, pp8, pp9}};
         status = new JLabel[][]{{pieza1, pieza2, pieza3}, {pieza4, pieza5, pieza6}, {pieza7, pieza8, pieza9}};
         piezas = new JButton[][]{{p1, p2, p3}, {p4, p5, p6}, {p7, p8, p9}};
@@ -113,11 +113,14 @@ public class rompecabezas01 extends javax.swing.JFrame implements ActionListener
     int contador, f, c;
     JButton btn;
 
+    
+    //SUBRUTINA - SELECCIÓN DE BOTONES
     public void actionPerformed(ActionEvent e) {
 
         btn = (JButton) e.getSource();
 
         vbtn.setText(null);
+        //VECTORES
         int[] filas = {0, 0, 0, 1, 1, 1, 2, 2, 2};
         int[] columnas = {0, 1, 2, 0, 1, 2, 0, 1, 2};
 
@@ -144,7 +147,7 @@ public class rompecabezas01 extends javax.swing.JFrame implements ActionListener
         }
 
     }
-
+// SUBRUTINA - RESULTADO
     public void rompecabezas(int c, JLabel[][] labels, ImageIcon[][] images, JButton[][] buttons, String user, String punt, int p) {
         boolean k = true;
         int i, j;

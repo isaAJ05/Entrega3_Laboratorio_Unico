@@ -1,7 +1,8 @@
-USUARIO      NIVEL	REINTENTOS
+USUARIO        NIVEL        REINTENTOS
 
 
 Isabella    |    Perfecto    |    0
 Natalia    |    Medio    |    2
 Paula    |    Malo    |    5
 Paula    |    Medio    |    1
+gamer    |    Perfecto    |    0

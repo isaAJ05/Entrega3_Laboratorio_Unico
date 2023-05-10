@@ -66,7 +66,7 @@ public class Puntuacion extends javax.swing.JFrame {
         filearea1.setCaretColor(new java.awt.Color(204, 204, 255));
         jScrollPane3.setViewportView(filearea1);
 
-        jPanel1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 30, 220, 130));
+        jPanel1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 30, 220, 140));
 
         rompecabezas3.setFont(new java.awt.Font("Felix Titling", 1, 18)); // NOI18N
         rompecabezas3.setForeground(new java.awt.Color(204, 204, 255));
