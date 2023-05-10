@@ -191,7 +191,7 @@ public class rompecabezas01 extends javax.swing.JFrame implements ActionListener
 
                         //escribir en el archivo
                         linea.println("");
-                        linea.print(nombre + "\t" + nivel + "\t\t" + clicks);
+                        linea.print(nombre + "\t" + nivel + "\t" + clicks);
                         linea.close();
                         escribir.close();
                     } catch (IOException ex) {
@@ -207,7 +207,7 @@ public class rompecabezas01 extends javax.swing.JFrame implements ActionListener
 
                         //escribir en el archivo
                         linea.println("");
-                        linea.print(nombre + "  |\t" + nivel + "  |\t" + clicks);
+                        linea.print(nombre + "    |    " + nivel + "    |    " + clicks);
                         linea.close();
                         escribir.close();
                     } catch (IOException ex) {
@@ -246,8 +246,7 @@ public class rompecabezas01 extends javax.swing.JFrame implements ActionListener
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        filearea = new javax.swing.JTextArea();
+        jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         verimg = new javax.swing.JLabel();
         rompecabezas = new javax.swing.JLabel();
@@ -285,11 +284,16 @@ public class rompecabezas01 extends javax.swing.JFrame implements ActionListener
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        filearea.setColumns(20);
-        filearea.setRows(5);
-        jScrollPane1.setViewportView(filearea);
-
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 360, 310, 120));
+        jButton1.setBackground(new java.awt.Color(51, 51, 255));
+        jButton1.setFont(new java.awt.Font("Monospaced", 1, 12)); // NOI18N
+        jButton1.setText("Ver puntuación");
+        jButton1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 60, 110, 30));
 
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
@@ -651,6 +655,25 @@ public class rompecabezas01 extends javax.swing.JFrame implements ActionListener
         // TODO add your handling code here:
     }//GEN-LAST:event_p1ActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        sonido("/Sonidos/boop.wav");
+        Puntuacion p = new Puntuacion(user);
+        p.setVisible(true);
+        try {
+            FileReader leer = new FileReader("puntuacion.txt");
+            BufferedReader buffer = new BufferedReader(leer);
+            String lineaArchivo;
+            while ((lineaArchivo = buffer.readLine()) != null) {
+                p.filearea.append(lineaArchivo + "\n");
+            }
+            buffer.close();
+            leer.close();
+        } catch (IOException ex) {
+            Logger.getLogger(ReadFile.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     public static void main(String args[]) {
         rompecabezas01 a = new rompecabezas01(null);
         a.setVisible(true);
@@ -691,12 +714,11 @@ public class rompecabezas01 extends javax.swing.JFrame implements ActionListener
     private javax.swing.JPanel PIEZAS;
     private javax.swing.JPanel ROMPECABEZAS;
     private javax.swing.JButton btnVolver1;
-    public static javax.swing.JTextArea filearea;
     private javax.swing.JLabel fondo;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel label;
     private javax.swing.JLabel labelvolver;
     private javax.swing.JButton last;

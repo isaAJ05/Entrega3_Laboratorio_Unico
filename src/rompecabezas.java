@@ -307,10 +307,10 @@ public class rompecabezas extends javax.swing.JFrame {
     }//GEN-LAST:event_r2MouseExited
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
- 
+        sonido("/Sonidos/boop.wav");
         Puntuacion p = new Puntuacion(user);
         p.setVisible(true);
-               try {
+        try {
             FileReader leer = new FileReader("puntuacion.txt");
             BufferedReader buffer = new BufferedReader(leer);
             String lineaArchivo;

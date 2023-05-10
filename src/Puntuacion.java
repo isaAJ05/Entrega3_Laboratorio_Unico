@@ -1,18 +1,29 @@
+
+import java.awt.Cursor;
+import java.awt.Point;
+import java.awt.Toolkit;
+import javax.swing.ImageIcon;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-
 /**
  *
  * @author Usuario
  */
 public class Puntuacion extends javax.swing.JFrame {
- public static String user;
+
+    public static String user;
+
     public Puntuacion(String name) {
         initComponents();
         this.user = name;
+        setIconImage(new ImageIcon(getClass().getResource("general/stellaicono.png")).getImage());
         this.setLocationRelativeTo(null);
+        //cursor
+        Cursor cursor = Toolkit.getDefaultToolkit().createCustomCursor(new ImageIcon(getClass().getResource("cursor/cursorimg.png")).getImage(), new Point(0, 0), "Custom Cursor");
+        this.setCursor(cursor);
     }
 
     /**
@@ -25,6 +36,15 @@ public class Puntuacion extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        filearea1 = new javax.swing.JTextArea();
+        rompecabezas3 = new javax.swing.JLabel();
+        rompecabezas2 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        busqdata = new javax.swing.JTextArea();
+        jButton1 = new javax.swing.JButton();
+        buscar = new javax.swing.JTextField();
         volver = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         filearea = new javax.swing.JTextArea();
@@ -35,6 +55,73 @@ public class Puntuacion extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        filearea1.setEditable(false);
+        filearea1.setBackground(new java.awt.Color(204, 204, 255));
+        filearea1.setColumns(20);
+        filearea1.setFont(new java.awt.Font("Monospaced", 1, 12)); // NOI18N
+        filearea1.setRows(5);
+        filearea1.setText("De acuerdo con la cantidad\nde reintentos:\n[NIVEL]    [REINTENTOS]\nPERFECTO    \t0\n BUENO\t       1-3\n MALO\t\t4+\n");
+        filearea1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 3, true));
+        filearea1.setCaretColor(new java.awt.Color(204, 204, 255));
+        jScrollPane3.setViewportView(filearea1);
+
+        jPanel1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 30, 220, 130));
+
+        rompecabezas3.setFont(new java.awt.Font("Felix Titling", 1, 18)); // NOI18N
+        rompecabezas3.setForeground(new java.awt.Color(204, 204, 255));
+        rompecabezas3.setText("Buscar puntaje:");
+        jPanel1.add(rompecabezas3, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 190, -1, -1));
+
+        rompecabezas2.setFont(new java.awt.Font("Felix Titling", 1, 18)); // NOI18N
+        rompecabezas2.setForeground(new java.awt.Color(204, 204, 255));
+        rompecabezas2.setText("Puntajes (Ganadores):");
+        jPanel1.add(rompecabezas2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 160, -1, -1));
+
+        jLabel1.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 0, 0));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 280, 320, 20));
+
+        busqdata.setEditable(false);
+        busqdata.setBackground(new java.awt.Color(0, 0, 153));
+        busqdata.setColumns(20);
+        busqdata.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
+        busqdata.setForeground(new java.awt.Color(255, 255, 255));
+        busqdata.setRows(5);
+        busqdata.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 2, true));
+        busqdata.setCaretColor(new java.awt.Color(204, 204, 255));
+        jScrollPane2.setViewportView(busqdata);
+
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 300, 320, 120));
+
+        jButton1.setBackground(new java.awt.Color(0, 0, 153));
+        jButton1.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setText("Buscar");
+        jButton1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true));
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 220, 60, 30));
+
+        buscar.setBackground(new java.awt.Color(0, 0, 153));
+        buscar.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
+        buscar.setForeground(new java.awt.Color(255, 255, 255));
+        buscar.setText("Ingrese un nombre aquí");
+        buscar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true));
+        buscar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                buscarMouseClicked(evt);
+            }
+        });
+        buscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buscarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 220, 210, 30));
 
         volver.setBackground(new java.awt.Color(0, 0, 153));
         volver.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
@@ -55,18 +142,19 @@ public class Puntuacion extends javax.swing.JFrame {
         filearea.setCaretColor(new java.awt.Color(204, 204, 255));
         jScrollPane1.setViewportView(filearea);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 160, 380, 240));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, 380, 240));
 
         rompecabezas.setFont(new java.awt.Font("Elephant", 1, 24)); // NOI18N
         rompecabezas.setForeground(new java.awt.Color(204, 204, 255));
         rompecabezas.setText("Rompecabezas - Fácil");
-        jPanel1.add(rompecabezas, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 90, -1, -1));
+        jPanel1.add(rompecabezas, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 90, -1, -1));
 
         rompecabezas1.setFont(new java.awt.Font("Elephant", 1, 48)); // NOI18N
         rompecabezas1.setForeground(new java.awt.Color(51, 51, 255));
         rompecabezas1.setText("PUNTUACIÓN");
-        jPanel1.add(rompecabezas1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 30, -1, -1));
+        jPanel1.add(rompecabezas1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 30, -1, -1));
 
+        fondo.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
         fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGcars/fondoespacio(3) (1).png"))); // NOI18N
         fondo.setOpaque(true);
         jPanel1.add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 500));
@@ -86,11 +174,60 @@ public class Puntuacion extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void volverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_volverActionPerformed
- 
+
         rompecabezas a = new rompecabezas(user);
         a.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_volverActionPerformed
+
+    private void buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarActionPerformed
+
+    }//GEN-LAST:event_buscarActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        
+
+        String texto = filearea.getText();
+        String busq = buscar.getText();
+        String[] lineas = texto.split("\n"); // vector con cada linea del archivo
+
+        
+        if(busq.equalsIgnoreCase("")){
+            jLabel1.setText("Debe ingresar un nombre para buscar");
+        }
+       
+        //BUSQUEDA 
+        boolean existe = false;
+        for (int i = 3; i < lineas.length; i++) {
+            // if (pos < lineas.length && existe == false) {
+            System.out.println("Linea #" + i + ": " + lineas[i] + " ");
+            String linea = lineas[i];
+            int tab = linea.indexOf(" "); // posicion donde se encuentra tab
+            String sub = "";
+
+            if (linea.length() >= busq.length()) {
+                sub = lineas[i].substring(0, tab);
+                System.out.println("sub:" + sub);
+                if (busq.equalsIgnoreCase(sub)) {
+                    jLabel1.setText(null);
+                    busqdata.append(linea + "\n");
+                    existe = true;
+                    sub = "";
+                }
+            }
+        }
+        if (existe == false ) {
+            jLabel1.setText("No encontrado");
+
+        }
+
+
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void buscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buscarMouseClicked
+        buscar.setText(null);
+        busqdata.setText(null);
+    }//GEN-LAST:event_buscarMouseClicked
 
     /**
      * @param args the command line arguments
@@ -128,12 +265,21 @@ public class Puntuacion extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField buscar;
+    public static javax.swing.JTextArea busqdata;
     public static javax.swing.JTextArea filearea;
+    public static javax.swing.JTextArea filearea1;
     private javax.swing.JLabel fondo;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel rompecabezas;
     private javax.swing.JLabel rompecabezas1;
+    private javax.swing.JLabel rompecabezas2;
+    private javax.swing.JLabel rompecabezas3;
     private javax.swing.JButton volver;
     // End of variables declaration//GEN-END:variables
 }
