@@ -1,5 +1,4 @@
 
-
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
@@ -9,19 +8,26 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.IOException;
 import java.net.URL;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.border.LineBorder;
 
-
-
 public class rompecabezas extends javax.swing.JFrame {
-    //SUBRUTINAS PARA APLICAR SONIDO
 
+//SUBRUTINAS PARA APLICAR SONIDO
     private void sonido(String cadena) {
         try {
             Clip clip = AudioSystem.getClip();
@@ -37,26 +43,26 @@ public class rompecabezas extends javax.swing.JFrame {
     }
     // - subrutina 2
     private Clip clip;
-     public void sonido2(JButton boton, String archivoSonido) {
+
+    public void sonido2(JButton boton, String archivoSonido) {
         boton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
                 super.mouseEntered(e);
                 try {
-                    
+
                     clip = AudioSystem.getClip();
                     URL url = getClass().getResource(archivoSonido);
                     AudioInputStream audioIn = AudioSystem.getAudioInputStream(url);
                     clip.open(audioIn);
                     clip.start();
                     boton.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    clip.stop();
-                    sonido("/Sonidos/seleccion.wav");
-                    
+                        public void actionPerformed(ActionEvent e) {
+                            clip.stop();
+                            sonido("/Sonidos/seleccion.wav");
 
-                }
-            });
+                        }
+                    });
                 } catch (Exception ex) {
                     System.err.println(ex.getMessage());
                 }
@@ -71,7 +77,8 @@ public class rompecabezas extends javax.swing.JFrame {
             }
         });
     }
-  private String user;
+    private String user;
+
     public rompecabezas(String name) {
         setIconImage(new ImageIcon(getClass().getResource("general/stellaicono.png")).getImage());
         this.user = name;
@@ -83,13 +90,12 @@ public class rompecabezas extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.setResizable(false);
         //cursor
-        Cursor cursor = Toolkit.getDefaultToolkit().createCustomCursor(new ImageIcon(getClass().getResource("cursor/cursorimg.png")).getImage(),new Point(0,0),"Custom Cursor");
+        Cursor cursor = Toolkit.getDefaultToolkit().createCustomCursor(new ImageIcon(getClass().getResource("cursor/cursorimg.png")).getImage(), new Point(0, 0), "Custom Cursor");
         this.setCursor(cursor);
         this.setResizable(false);
         //APLIOAR SONIDOS
-         sonido2(r1,"/Sonidos/nivel1.wav");
-         sonido2(r2,"/Sonidos/nivel2.wav");
-
+        sonido2(r1, "/Sonidos/nivel1.wav");
+        sonido2(r2, "/Sonidos/nivel2.wav");
 
     }
 
@@ -97,6 +103,7 @@ public class rompecabezas extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jButton1 = new javax.swing.JButton();
         labelvolver = new javax.swing.JLabel();
         btnVolver1 = new javax.swing.JButton();
         r1 = new javax.swing.JButton();
@@ -110,6 +117,17 @@ public class rompecabezas extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jButton1.setBackground(new java.awt.Color(51, 51, 255));
+        jButton1.setFont(new java.awt.Font("Monospaced", 1, 12)); // NOI18N
+        jButton1.setText("Ver puntuación");
+        jButton1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 40, 110, 30));
 
         labelvolver.setFont(new java.awt.Font("Monospaced", 1, 12)); // NOI18N
         labelvolver.setForeground(new java.awt.Color(255, 255, 255));
@@ -234,8 +252,8 @@ public class rompecabezas extends javax.swing.JFrame {
     }//GEN-LAST:event_r1ActionPerformed
 
     private void r2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_r2ActionPerformed
-        rompecabezas02 a = new rompecabezas02(user);
-        a.setVisible(true);
+        rompecabezas02 b = new rompecabezas02(user);
+        b.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_r2ActionPerformed
 
@@ -259,34 +277,53 @@ public class rompecabezas extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVolver1MouseEntered
 
     private void r1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_r1MouseEntered
-        r1.setBorder(new LineBorder(Color.CYAN,4));
+        r1.setBorder(new LineBorder(Color.CYAN, 4));
         facil.setForeground(Color.CYAN);
     }//GEN-LAST:event_r1MouseEntered
 
     private void r1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_r1MousePressed
-        r1.setBorder(new LineBorder(Color.CYAN,5));
+        r1.setBorder(new LineBorder(Color.CYAN, 5));
         facil.setForeground(Color.CYAN);
     }//GEN-LAST:event_r1MousePressed
 
     private void r2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_r2MouseEntered
-        r2.setBorder(new LineBorder(Color.CYAN,4));
+        r2.setBorder(new LineBorder(Color.CYAN, 4));
         dificil.setForeground(Color.CYAN);
     }//GEN-LAST:event_r2MouseEntered
 
     private void r2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_r2MousePressed
-       r2.setBorder(new LineBorder(Color.CYAN,5));
-       dificil.setForeground(Color.CYAN);
+        r2.setBorder(new LineBorder(Color.CYAN, 5));
+        dificil.setForeground(Color.CYAN);
     }//GEN-LAST:event_r2MousePressed
 
     private void r1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_r1MouseExited
-        r1.setBorder(new LineBorder(Color.WHITE,2));
+        r1.setBorder(new LineBorder(Color.WHITE, 2));
         facil.setForeground(Color.WHITE);
     }//GEN-LAST:event_r1MouseExited
 
     private void r2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_r2MouseExited
-         r2.setBorder(new LineBorder(Color.WHITE,2));
-         dificil.setForeground(Color.WHITE);
+        r2.setBorder(new LineBorder(Color.WHITE, 2));
+        dificil.setForeground(Color.WHITE);
     }//GEN-LAST:event_r2MouseExited
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+ 
+        Puntuacion p = new Puntuacion(user);
+        p.setVisible(true);
+               try {
+            FileReader leer = new FileReader("puntuacion.txt");
+            BufferedReader buffer = new BufferedReader(leer);
+            String lineaArchivo;
+            while ((lineaArchivo = buffer.readLine()) != null) {
+                p.filearea.append(lineaArchivo + "\n");
+            }
+            buffer.close();
+            leer.close();
+        } catch (IOException ex) {
+            Logger.getLogger(ReadFile.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -332,6 +369,7 @@ public class rompecabezas extends javax.swing.JFrame {
     private javax.swing.JLabel dificil;
     private javax.swing.JLabel facil;
     private javax.swing.JLabel fondo;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel labelvolver;
     private javax.swing.JPanel panelpuzzle;

@@ -1,0 +1,6 @@
+USUARIO      NIVEL	REINTENTOS
+
+
+Paula  |	Perfecto  |	0
+Natalia  |	Malo  |	4
+Isabella  |	Medio  |	2

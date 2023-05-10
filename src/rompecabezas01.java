@@ -1,4 +1,5 @@
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
@@ -7,21 +8,41 @@ import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.URL;
+import java.util.StringTokenizer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.UIManager;
 import javax.swing.border.LineBorder;
+import javax.swing.table.DefaultTableModel;
 
 // Créditos gif ganador: https://tenor.com/view/cute-panda-happy-love-yay-gif-16763329
 // Créditos gif perdedor: https://images.app.goo.gl/FLzFLSCFVXRhy6NX8
 public class rompecabezas01 extends javax.swing.JFrame implements ActionListener {
 
+    boolean gana;
+    public static String user;
+    private int retryc = 0;
+    public static String[] puntaje = new String[100];
+    public static String punt;
+    public static int p = 0;
     JLabel[][] status;
     JButton[][] piezas;
     ImageIcon[][] imagenes;
@@ -51,10 +72,10 @@ public class rompecabezas01 extends javax.swing.JFrame implements ActionListener
         }
 
     }
-    private String user;
 
     public rompecabezas01(String name) {
-       setIconImage(new ImageIcon(getClass().getResource("general/stellaicono.png")).getImage());
+
+        setIconImage(new ImageIcon(getClass().getResource("general/stellaicono.png")).getImage());
         this.user = name;
         initComponents();
         this.setSize(800, 500);
@@ -74,7 +95,6 @@ public class rompecabezas01 extends javax.swing.JFrame implements ActionListener
                 piezas[i][j].addActionListener(this);
             }
         }
-
         p1.setIcon(pp5);
         p2.setIcon(pp8);
         p3.setIcon(pp4);
@@ -96,6 +116,7 @@ public class rompecabezas01 extends javax.swing.JFrame implements ActionListener
     public void actionPerformed(ActionEvent e) {
 
         btn = (JButton) e.getSource();
+
         vbtn.setText(null);
         int[] filas = {0, 0, 0, 1, 1, 1, 2, 2, 2};
         int[] columnas = {0, 1, 2, 0, 1, 2, 0, 1, 2};
@@ -116,7 +137,7 @@ public class rompecabezas01 extends javax.swing.JFrame implements ActionListener
             }
 
         }
-        rompecabezas(contador, status, imagenes, piezas);
+        rompecabezas(contador, status, imagenes, piezas, user, punt, p);
         if (contador == 9) {
             contador = 0;
             btn = null;
@@ -124,7 +145,7 @@ public class rompecabezas01 extends javax.swing.JFrame implements ActionListener
 
     }
 
-    public void rompecabezas(int c, JLabel[][] labels, ImageIcon[][] images, JButton[][] buttons) {
+    public void rompecabezas(int c, JLabel[][] labels, ImageIcon[][] images, JButton[][] buttons, String user, String punt, int p) {
         boolean k = true;
         int i, j;
         if (c == 9) {
@@ -135,38 +156,98 @@ public class rompecabezas01 extends javax.swing.JFrame implements ActionListener
                     }
                 }
             }
-            UIManager.put("OptionPane.messageFont", new Font("Monospaced", Font.BOLD, 20));
             if (k) {
+                gana = true;
+                if (puntaje[0] == null && puntaje[1] == null && puntaje[2] == null) {
+                    puntaje[0] = user;
+                    puntaje[1] = "Perfecto";
+                    puntaje[2] = "0";
+                }
+                System.out.println(puntaje[0] + "\t" + puntaje[1] + "\t" + puntaje[2]);
+
                 Resultado.Ganador g = new Resultado.Ganador(user);
-//                ImageIcon ganaste = new ImageIcon(CL.getResource("imagenes/happy.gif"));
-//                JOptionPane.showMessageDialog(null, "¡FELICIDADES!\nEres todo un ganador.", "ROMPECABEZAS", JOptionPane.PLAIN_MESSAGE, ganaste);
                 for (i = 0; i < 3; i++) {
                     for (j = 0; j < 3; j++) {
                         buttons[i][j].setEnabled(true);
                         labels[i][j].setIcon(null);
                     }
                 }
+                retryc = 0;
                 c = 0;
+
+                File archivo;
+                FileWriter escribir;
+                PrintWriter linea;
+                String nombre = "", nivel = "", clicks = "", pt = "";
+                archivo = new File("puntuacion.txt");
+                if (!archivo.exists()) {
+                    try {
+                        archivo.createNewFile();
+                        nombre = rompecabezas01.puntaje[0];
+                        nivel = rompecabezas01.puntaje[1];
+                        clicks = rompecabezas01.puntaje[2];
+                        escribir = new FileWriter(archivo, true); // escribir en una linea de texto
+                        linea = new PrintWriter(escribir); // escribir en varias lineas de texto
+
+                        //escribir en el archivo
+                        linea.println("");
+                        linea.print(nombre + "\t" + nivel + "\t\t" + clicks);
+                        linea.close();
+                        escribir.close();
+                    } catch (IOException ex) {
+                        Logger.getLogger(ReadFile.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                } else {
+                    try {
+                        nombre = rompecabezas01.puntaje[0];
+                        nivel = rompecabezas01.puntaje[1];
+                        clicks = rompecabezas01.puntaje[2];
+                        escribir = new FileWriter(archivo, true); // escribir en una linea de texto
+                        linea = new PrintWriter(escribir); // escribir en varias lineas de texto
+
+                        //escribir en el archivo
+                        linea.println("");
+                        linea.print(nombre + "  |\t" + nivel + "  |\t" + clicks);
+                        linea.close();
+                        escribir.close();
+                    } catch (IOException ex) {
+                        Logger.getLogger(ReadFile.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+//                    try {
+//                        FileReader leer = new FileReader("puntuacion.txt");
+//                        BufferedReader buffer = new BufferedReader(leer);
+//                        String lineaArchivo;
+//                        while ((lineaArchivo = buffer.readLine()) != null) {
+//                            Puntuacion.filearea.append(lineaArchivo + "\n");
+//                        }
+//                        buffer.close();
+//                        leer.close();
+//                    } catch (IOException ex) {
+//                        Logger.getLogger(ReadFile.class.getName()).log(Level.SEVERE, null, ex);
+//                    }
+                }
             } else {
                 Resultado.Perdedor g = new Resultado.Perdedor(user);
-
-//                ImageIcon perdiste = new ImageIcon(CL.getResource("imagenes/sad.gif"));
-//                JOptionPane.showMessageDialog(null, "GAME OVER\nPerdiste esta vez,\nsuerte para la próxima.", "ROMPECABEZAS", JOptionPane.PLAIN_MESSAGE, perdiste);
                 for (i = 0; i < 3; i++) {
                     for (j = 0; j < 3; j++) {
                         buttons[i][j].setEnabled(true);
                         labels[i][j].setIcon(null);
                     }
                 }
+                retryc = 0;
                 c = 0;
+
             }
         }
     }
 
+    //  retryc = 0;
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        filearea = new javax.swing.JTextArea();
         jLabel1 = new javax.swing.JLabel();
         verimg = new javax.swing.JLabel();
         rompecabezas = new javax.swing.JLabel();
@@ -203,6 +284,12 @@ public class rompecabezas01 extends javax.swing.JFrame implements ActionListener
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        filearea.setColumns(20);
+        filearea.setRows(5);
+        jScrollPane1.setViewportView(filearea);
+
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 360, 310, 120));
 
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
@@ -421,7 +508,7 @@ public class rompecabezas01 extends javax.swing.JFrame implements ActionListener
     }// </editor-fold>//GEN-END:initComponents
 
     private void volverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_volverActionPerformed
-sonido("/Sonidos/boop.wav");
+        sonido("/Sonidos/boop.wav");
         rompecabezas a = new rompecabezas(user);
         a.setVisible(true);
         this.dispose();
@@ -431,8 +518,9 @@ sonido("/Sonidos/boop.wav");
         if (contador == 0 || btn == null) {
             sonido("/Sonidos/error.wav");
             vbtn.setText("Debe iniciar para usar esta función.");
-            
+            retryc = 0;
         } else {
+            retryc = 0;
             sonido("/Sonidos/boop.wav");
             for (int i = 0; i < 3; i++) {
                 for (int j = 0; j < 3; j++) {
@@ -442,10 +530,11 @@ sonido("/Sonidos/boop.wav");
                 }
             }
         }
+
     }//GEN-LAST:event_limpiarActionPerformed
 
     private void btnVolver1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolver1ActionPerformed
-       sonido("/Sonidos/boop.wav");
+        sonido("/Sonidos/boop.wav");
         Principal3 p = new Principal3(user);
         p.setVisible(true);
         this.dispose();
@@ -459,8 +548,10 @@ sonido("/Sonidos/boop.wav");
         labelvolver.setText("");
     }//GEN-LAST:event_btnVolver1MouseExited
 
+
     private void lastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lastActionPerformed
-        
+        retryc++;
+
         int lastf = -1, lastc = -1, f, c, i, j;
         int[] filas = {0, 0, 0, 1, 1, 1, 2, 2, 2};
         int[] columnas = {0, 1, 2, 0, 1, 2, 0, 1, 2};
@@ -468,6 +559,7 @@ sonido("/Sonidos/boop.wav");
         if (contador == 0 || btn == null) {
             sonido("/Sonidos/error.wav");
             vbtn.setText("Debe iniciar para usar esta función.");
+            retryc = retryc - 1;
         } else {
             sonido("/Sonidos/boop.wav");
             for (i = 0; i < 9; i++) {
@@ -478,11 +570,6 @@ sonido("/Sonidos/boop.wav");
                 if (status[f][c].getIcon() != null) {
                     lastf = f;
                     lastc = c;
-                    System.out.println("labelf" + lastf);
-                    System.out.println("labelc" + lastc);
-//                if (piezas[f][c].getIcon() != null && piezas[f][c].getIcon() == status[lastf][lastc].getIcon()) {
-//                    lastbtn = piezas[f][c];
-//                }
 
                 }
 
@@ -494,8 +581,6 @@ sonido("/Sonidos/boop.wav");
 
                     lastbtn = piezas[f][c];
                 }
-                System.out.println("btnf" + f);
-                System.out.println("btnc" + c);
             }
             if (lastbtn != null) {
                 status[lastf][lastc].setIcon(null);
@@ -505,8 +590,26 @@ sonido("/Sonidos/boop.wav");
             if (contador < 0) {
                 contador = 0;
             }
-            rompecabezas(contador, status, imagenes, piezas);
+            // rompecabezas(contador, status, imagenes, piezas, user, punt, p);
         }
+        System.out.println("RRRR" + retryc);
+        if (retryc == 0) {
+
+            puntaje[0] = user;
+            puntaje[1] = "Perfecto";
+            puntaje[2] = "0";
+        } else if (retryc >= 1 && retryc < 4) {
+            puntaje[0] = user;
+            puntaje[1] = "Medio";
+            puntaje[2] = Integer.toString(retryc);
+        } else if (retryc >= 4) {
+            puntaje[0] = user;
+            puntaje[1] = "Malo";
+            puntaje[2] = Integer.toString(retryc);
+        }
+
+        rompecabezas(contador, status, imagenes, piezas, user, punt, p);
+
     }//GEN-LAST:event_lastActionPerformed
 
     private void lastMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lastMouseEntered
@@ -541,7 +644,7 @@ sonido("/Sonidos/boop.wav");
     }//GEN-LAST:event_verMouseExited
 
     private void verActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verActionPerformed
-        
+
     }//GEN-LAST:event_verActionPerformed
 
     private void p1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_p1ActionPerformed
@@ -549,6 +652,8 @@ sonido("/Sonidos/boop.wav");
     }//GEN-LAST:event_p1ActionPerformed
 
     public static void main(String args[]) {
+        rompecabezas01 a = new rompecabezas01(null);
+        a.setVisible(true);
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -581,14 +686,17 @@ sonido("/Sonidos/boop.wav");
         });
     }
 
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PIEZAS;
     private javax.swing.JPanel ROMPECABEZAS;
     private javax.swing.JButton btnVolver1;
+    public static javax.swing.JTextArea filearea;
     private javax.swing.JLabel fondo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel label;
     private javax.swing.JLabel labelvolver;
     private javax.swing.JButton last;
