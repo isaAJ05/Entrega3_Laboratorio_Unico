@@ -468,12 +468,12 @@ public class Mesa1 extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+//SUbrutina
     public void ConteoCartaSinUsar(int C, int cont) {
         C = C - cont;//Toatl de cartas menos las que se repartieron
         ConteoCartas.setText(Integer.toString(C)); //Imprimir numero de cartas actual sin usar
     }
-
+//Subrutina
     public void cartasdealer() {
         CartaBlanca(cartaD1); //Se revela la carta oculta de estela
         TipoDeCarta(Dtipodibujo1, C1DE, CartaDe1, DColum1);
@@ -622,7 +622,7 @@ public class Mesa1 extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_PararActionPerformed
-
+//Subrutina
     public void ColorBarajaMostrar(String cB, JLabel label) {
         switch (cB) {
             case "r": //Baraja Roja
@@ -633,11 +633,11 @@ public class Mesa1 extends javax.swing.JFrame {
                 break;
         }
     }
-
+//Subrutina
     public void CartaBlanca(JLabel label) {
         label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImagenesBJK/cartablanca (1).png")));
     }
-
+//Subrutina
     public void TipoDeCarta(int tipodibujo, JLabel label, int valor, int colum) {
         if (colum < 10) { //Si son de las cartas de no son Q , J ,K 
             switch (tipodibujo) {
@@ -952,6 +952,7 @@ public class Mesa1 extends javax.swing.JFrame {
     String colorB3, colorB4, colorB5;
     int CartaUs5 = 0, CartaUs3 = 0, CartaUs4 = 0, tipodibujo3 = 0, tipodibujo4 = 0, tipodibujo5 = 0, Ucolum3 = 0, Ucolum4 = 0, Ucolum5 = 0;
 
+    //Subrutina
     private void Pedir1CartaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Pedir1CartaActionPerformed
 
         if (repartir) { //Validación de repartir las cartas iniciales
