@@ -64,6 +64,7 @@ public class CarreraPANELcarros extends javax.swing.JPanel {
     ImageIcon verde = new ImageIcon(CL.getResource("IMGcars/verdecarro (2).png"));
     private String name = null;
     int nave = NaveJugador.nave;
+    int bolita;
 
     public CarreraPANELcarros(int[][] espaciopista, int nave) {
         initComponents();
@@ -280,18 +281,16 @@ public class CarreraPANELcarros extends javax.swing.JPanel {
 
         // Inicia el Timer
         timer2.start();
-
-
+        
+        int boliX=ran.nextInt((limiteF*casilla)-casilla);
+        int boliY=ran.nextInt((limiteC*casilla));
     }//GEN-LAST:event_InicioBTNActionPerformed
-    int bolita;
+  
 // auto del usuario
     private void carrousuarioKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_carrousuarioKeyReleased
 
         int x = carrousuario.getX(), y = carrousuario.getY();
         //En la matriz si es 0 el auto se movera, si no, no avanzara en esa casilla.
-
-//        if ((AZULc.getLocation().x < (limiteC - 1) * casilla) && (NARANJAc.getLocation().x < (limiteC - 1) * casilla)
-//                    && (VERDEc.getLocation().x < (limiteC - 1) * casilla)) {
         if (PermisoParaMover == 0) {
 
             switch (evt.getKeyCode()) {
@@ -338,7 +337,7 @@ public class CarreraPANELcarros extends javax.swing.JPanel {
                     break;
 
             }
-            
+
             System.out.println("\n USUARIO x= " + x + " , y= " + y); //Valor Coorenada Usuario
 
             //valor de casilla en la matriz
@@ -385,7 +384,7 @@ public class CarreraPANELcarros extends javax.swing.JPanel {
                     && (carro1.getLocation().x < (limiteC) * casilla)) {
                 /* Condicianl para que se muevan si aun no ha
                     llegado a la linea de meta( o al final de la matriz */
-                 PermisoParaMover=0;
+                PermisoParaMover = 0;
                 //Nave Naranja ---------------------
                 int[] xy = movimiento(NX, NY, casilla, espaciopista, Pos, Vel);
                 NX = xy[0];
@@ -403,35 +402,34 @@ public class CarreraPANELcarros extends javax.swing.JPanel {
 
                 System.out.println("\n VERDE VX= " + VX + " , y= " + VY); //Valor Coorenada VERDE
                 System.out.println("casila  V " + espaciopista[VY / casilla][(VX / casilla)]);
-               
+
             } else {
 
                 PermisoParaMover = 1;
                 Utilidades.detenerMusica();
                 timer.stop();
             }
-            //si llegan a una casilla con valor 2 ( linea de meta)
-            if ((espaciopista[AY / casilla][(AX / casilla)] == 2) || (espaciopista[VY / casilla][(VX / casilla)] == 2) || (espaciopista[NY / casilla][(NX / casilla)] == 2)||
-                   (carrousuario.getLocation().x >= (limiteC) * casilla) || (carro2.getLocation().x >= (limiteC) * casilla)
-                    || (carro1.getLocation().x >=(limiteC) * casilla) ) {
+            //si llegan a una casilla con valor 2 ( linea de meta) o supera el limite de la pista (supera el limite de la matriz)
+            if ((espaciopista[AY / casilla][(AX / casilla)] == 2) || (espaciopista[VY / casilla][(VX / casilla)] == 2) || (espaciopista[NY / casilla][(NX / casilla)] == 2)
+                    || (carrousuario.getLocation().x >= (limiteC) * casilla) || (carro2.getLocation().x >= (limiteC) * casilla)
+                    || (carro1.getLocation().x >= (limiteC) * casilla)) {
 
-                timer.stop();
+                timer.stop(); //detener timer para los carritos x
                 Utilidades.detenerMusica();
                 PermisoParaMover = 1;
-                if (AX > VX & AX > NX) {
+                //ver quien gano
+                if (AX > VX & AX > NX) { //si el usuario gana
                     Resultado.Ganador g = new Resultado.Ganador(name);
-
-                }
-                if ((NX > VX & NX > AX) | (VX > AX & VX > NX) | (VX == NX)) {
-                    
-                    Resultado.Perdedor g = new Resultado.Perdedor(name);
-
                 } else {
-                    if (AX == NX) {
-                        //JOptionPane.showMessageDialog(null, "\t Empate " + name);
-                    } else if (AX == VX) {
-                        Resultado.Empate emp = new Resultado.Empate(name);
+                    if ((NX > VX & NX > AX) | (VX > AX & VX > NX) | (VX == NX)) {
+                        Resultado.Perdedor g = new Resultado.Perdedor(name);
+                    } else {
+                        if (AX == NX) {
+                            //JOptionPane.showMessageDialog(null, "\t Empate " + name);
+                        } else if (AX == VX) {
+                            Resultado.Empate emp = new Resultado.Empate(name);
 
+                        }
                     }
                 }
 
