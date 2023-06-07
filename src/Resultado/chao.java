@@ -41,7 +41,6 @@ public class chao extends javax.swing.JFrame {
     public chao( String name) {
         initComponents();
         this.name = name;
-        this.setSize(800,500);
         this.dispose();
         this.setUndecorated(true);
         this.setLocationRelativeTo(null);
@@ -66,7 +65,7 @@ public class chao extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/general/bye.gif"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/general/202306071213 (1).gif"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 500));
 
         pack();
