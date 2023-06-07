@@ -28,7 +28,7 @@
     <Component class="javax.swing.JLabel" name="stellita">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/general/pruebita.gif"/>
+          <Image iconType="3" name="/general/esperoquesi.gif"/>
         </Property>
       </Properties>
       <Constraints>

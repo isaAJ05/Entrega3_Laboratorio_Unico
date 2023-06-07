@@ -66,7 +66,7 @@ public class chao extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        stellita.setIcon(new javax.swing.ImageIcon(getClass().getResource("/general/pruebita.gif"))); // NOI18N
+        stellita.setIcon(new javax.swing.ImageIcon(getClass().getResource("/general/esperoquesi.gif"))); // NOI18N
         getContentPane().add(stellita, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 500));
 
         pack();
