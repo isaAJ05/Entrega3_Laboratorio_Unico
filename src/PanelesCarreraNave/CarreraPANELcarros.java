@@ -418,7 +418,6 @@ public class CarreraPANELcarros extends javax.swing.JPanel {
                 timer.stop();
                 Utilidades.detenerMusica();
                 PermisoParaMover = 1;
-/////
                 if (AX > VX & AX > NX) {
                     Resultado.Ganador g = new Resultado.Ganador(name);
 
