@@ -99,6 +99,12 @@ public class Principal2 extends javax.swing.JFrame {
 
         nombre.setBackground(new java.awt.Color(204, 153, 255));
         nombre.setFont(new java.awt.Font("Monospaced", 0, 14)); // NOI18N
+        nombre.setText("Player");
+        nombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nombreActionPerformed(evt);
+            }
+        });
         nombre.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 nombreKeyTyped(evt);
@@ -207,6 +213,10 @@ public class Principal2 extends javax.swing.JFrame {
         a.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_volverActionPerformed
+
+    private void nombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nombreActionPerformed
     @Override
     public void paint(Graphics g) {
         super.paint(g);
