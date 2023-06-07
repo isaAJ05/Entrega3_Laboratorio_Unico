@@ -259,7 +259,7 @@ public class Mesa1 extends javax.swing.JFrame {
                 VolveraJugarActionPerformed(evt);
             }
         });
-        MovJugadas.add(VolveraJugar, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 360, 180, 34));
+        MovJugadas.add(VolveraJugar, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 360, 160, 34));
 
         Repartir.setBackground(new java.awt.Color(0, 102, 51));
         Repartir.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
