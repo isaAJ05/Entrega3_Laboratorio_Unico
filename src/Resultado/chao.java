@@ -64,19 +64,10 @@ public class chao extends javax.swing.JFrame {
         stellita = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        stellita.setIcon(new javax.swing.ImageIcon(getClass().getResource("/general/pruebita.gif"))); // NOI18N
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(stellita)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(stellita)
-        );
+        stellita.setIcon(new javax.swing.ImageIcon(getClass().getResource("/general/esperoquesi.gif"))); // NOI18N
+        getContentPane().add(stellita, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 500));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
