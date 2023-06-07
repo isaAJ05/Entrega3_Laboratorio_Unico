@@ -155,7 +155,7 @@ public class Pista extends javax.swing.JFrame {
                 SelectNAVEbtnActionPerformed(evt);
             }
         });
-        Visible.add(SelectNAVEbtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 450, 90, -1));
+        Visible.add(SelectNAVEbtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 450, 90, -1));
 
         val.setFont(new java.awt.Font("Monospaced", 0, 14)); // NOI18N
         val.setForeground(new java.awt.Color(255, 0, 0));
