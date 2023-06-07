@@ -338,6 +338,7 @@ public class CarreraPANELcarros extends javax.swing.JPanel {
                     break;
 
             }
+            
             System.out.println("\n USUARIO x= " + x + " , y= " + y); //Valor Coorenada Usuario
 
             //valor de casilla en la matriz
@@ -384,7 +385,7 @@ public class CarreraPANELcarros extends javax.swing.JPanel {
                     && (carro1.getLocation().x < (limiteC) * casilla)) {
                 /* Condicianl para que se muevan si aun no ha
                     llegado a la linea de meta( o al final de la matriz */
-
+                 PermisoParaMover=0;
                 //Nave Naranja ---------------------
                 int[] xy = movimiento(NX, NY, casilla, espaciopista, Pos, Vel);
                 NX = xy[0];
@@ -402,7 +403,7 @@ public class CarreraPANELcarros extends javax.swing.JPanel {
 
                 System.out.println("\n VERDE VX= " + VX + " , y= " + VY); //Valor Coorenada VERDE
                 System.out.println("casila  V " + espaciopista[VY / casilla][(VX / casilla)]);
-
+               
             } else {
 
                 PermisoParaMover = 1;
@@ -410,7 +411,9 @@ public class CarreraPANELcarros extends javax.swing.JPanel {
                 timer.stop();
             }
             //si llegan a una casilla con valor 2 ( linea de meta)
-            if ((espaciopista[AY / casilla][(AX / casilla)] == 2) || (espaciopista[VY / casilla][(VX / casilla)] == 2) || (espaciopista[NY / casilla][(NX / casilla)] == 2)) {
+            if ((espaciopista[AY / casilla][(AX / casilla)] == 2) || (espaciopista[VY / casilla][(VX / casilla)] == 2) || (espaciopista[NY / casilla][(NX / casilla)] == 2)||
+                   (carrousuario.getLocation().x >= (limiteC) * casilla) || (carro2.getLocation().x >= (limiteC) * casilla)
+                    || (carro1.getLocation().x >=(limiteC) * casilla) ) {
 
                 timer.stop();
                 Utilidades.detenerMusica();
