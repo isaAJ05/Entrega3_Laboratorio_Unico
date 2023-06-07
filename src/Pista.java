@@ -3,7 +3,6 @@ import PanelesCarreraNave.SeleccionNavePanel;
 import PanelesCarreraNave.PanelInfo;
 import PanelesCarreraNave.CarreraPANELcarros;
 import PanelesCarreraNave.CarreraPANELcarros.Utilidades;
-import PanelesCarreraNave.CarreraPANELcarrosConArduino;
 import PanelesCarreraNave.NaveJugador;
 import java.awt.BorderLayout;
 import java.awt.Cursor;
@@ -334,8 +333,8 @@ public class Pista extends javax.swing.JFrame {
     private void ArduinoPistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ArduinoPistaActionPerformed
         sonido("/Sonidos/boop.wav");
         Utilidades.detenerMusica();
-        CarreraPANELcarrosConArduino NavePanel = new CarreraPANELcarrosConArduino(user);
-        ShowPanel(NavePanel);//Llamar el metodo para mostrar el panel 
+      //  CarreraPANELcarrosConArduino NavePanel = new CarreraPANELcarrosConArduino(user);
+       // ShowPanel(NavePanel);//Llamar el metodo para mostrar el panel 
     }//GEN-LAST:event_ArduinoPistaActionPerformed
 
     private void atrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atrasActionPerformed
