@@ -5,13 +5,17 @@
 package Resultado;
 
 import java.awt.Cursor;
+import java.awt.Frame;
 import java.awt.Point;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.net.URL;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
+import javax.swing.Timer;
 
 /**
  *
@@ -48,7 +52,16 @@ public class chao extends javax.swing.JFrame {
         Cursor cursor = Toolkit.getDefaultToolkit().createCustomCursor(new ImageIcon(getClass().getResource("cursorimg.png")).getImage(),new Point(0,0),"Custom Cursor");
         this.setCursor(cursor);
         this.setVisible(true);
-        sonido("/Sonidos/empate.wav");
+        sonido("/Sonidos/satellite.wav");
+        chao thisFrame = this;
+        Timer timer3 = new Timer(4000, new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        thisFrame.dispose();
+                    }
+                });
+                timer3.setRepeats(false);
+                timer3.start();
         
     }
 
