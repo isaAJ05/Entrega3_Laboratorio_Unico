@@ -127,7 +127,7 @@ public class Principal3 extends javax.swing.JFrame {
         LabelSerpEscl.setBackground(new java.awt.Color(0, 0, 51));
         LabelSerpEscl.setFont(new java.awt.Font("Swis721 BlkCn BT", 0, 18)); // NOI18N
         LabelSerpEscl.setForeground(new java.awt.Color(204, 204, 255));
-        panel.add(LabelSerpEscl, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 360, 160, 40));
+        panel.add(LabelSerpEscl, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 360, 200, 40));
 
         LabelSopaLetras.setBackground(new java.awt.Color(0, 0, 51));
         LabelSopaLetras.setFont(new java.awt.Font("Swis721 BlkCn BT", 0, 18)); // NOI18N
@@ -360,7 +360,7 @@ public class Principal3 extends javax.swing.JFrame {
 
     private void cyanMouseEntered(java.awt.event.MouseEvent evt) {
 
-        LabelSerpEscl.setText("Escaleras y Serpintes");
+        LabelSerpEscl.setText("Escaleras y Serpientes");
     }
 
     private void cyanMouseExited(java.awt.event.MouseEvent evt) {
