@@ -1,4 +1,5 @@
 //GEN-FIRST:event_magentaActionPerformed
+import Resultado.chao;
 import java.awt.Color;//GEN-LAST:event_magentaActionPerformed
 import java.awt.Cursor;
 import java.awt.Font;
@@ -9,6 +10,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.net.URL;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -46,11 +49,11 @@ public class Principal3 extends javax.swing.JFrame {
                     clip.open(audioIn);
                     clip.start();
                     boton.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    clip.stop();
+                        public void actionPerformed(ActionEvent e) {
+                            clip.stop();
 
-                }
-            });
+                        }
+                    });
                 } catch (Exception ex) {
                     System.err.println(ex.getMessage());
                 }
@@ -73,18 +76,32 @@ public class Principal3 extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.name = user;
-         this.setTitle("Star Games");
+        this.setTitle("Star Games");
         volver.setBackground(new Color(153, 51, 255));
         //cursor
         Cursor cursor = Toolkit.getDefaultToolkit().createCustomCursor(new ImageIcon(getClass().getResource("cursor/cursorimg.png")).getImage(), new Point(0, 0), "Custom Cursor");
         this.setCursor(cursor);
         this.setResizable(false);
         //APLIOAR SONIDOS
-         sonido2(cyan,"/Sonidos/cascabel.wav");
-         sonido2(magenta,"/Sonidos/carrera.wav");
-         sonido2(red,"/Sonidos/cartas.wav");
-         sonido2(green,"/Sonidos/fichas.wav");
-         sonido2(blue,"/Sonidos/burbujas.wav");
+        sonido2(cyan, "/Sonidos/cascabel.wav");
+        sonido2(magenta, "/Sonidos/carrera.wav");
+        sonido2(red, "/Sonidos/cartas.wav");
+        sonido2(green, "/Sonidos/fichas.wav");
+        sonido2(blue, "/Sonidos/burbujas.wav");
+        //cierre
+        this.setDefaultCloseOperation(this.DO_NOTHING_ON_CLOSE);
+        Principal3 thisFrame = this;
+// Agregar un WindowListener al frame principal
+        this.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                // Mostrar el nuevo frame cuando se cierra el frame principal
+             
+                chao c = new chao(); // Crea una instancia de chao
+                c.setVisible(true);
+                thisFrame.dispose();
+            }
+        });
 
     }
 
