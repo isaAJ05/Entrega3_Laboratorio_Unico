@@ -65,7 +65,7 @@ public class chao extends javax.swing.JFrame {
 
         chao thisFrame = this;
                     // Carga el archivo GIF en un ImageIcon
-            ImageIcon icon = new ImageIcon(getClass().getResource("/general/prueba2.gif"));
+            ImageIcon icon = new ImageIcon(getClass().getResource("/general/idk.gif"));
 
             // Establece el tamaño preferido del JLabel para que coincida con el tamaño del GIF original
             stellita.setPreferredSize(new Dimension(icon.getIconWidth(), icon.getIconHeight()));
