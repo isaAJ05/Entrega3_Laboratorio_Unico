@@ -1,4 +1,6 @@
 
+
+import Resultado.chao;
 import Resultado.usuario;
 import java.awt.Color;
 import java.awt.Cursor;
@@ -9,6 +11,8 @@ import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.net.URL;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -69,6 +73,20 @@ public class Principal2 extends javax.swing.JFrame {
         this.setCursor(cursor);
 
         this.setResizable(false);
+        //cierre
+        this.setDefaultCloseOperation(this.DO_NOTHING_ON_CLOSE);
+        Principal2 thisFrame = this;
+// Agregar un WindowListener al frame principal
+        this.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                // Mostrar el nuevo frame cuando se cierra el frame principal
+               
+                chao c = new chao(); // Crea una instancia de chao
+                c.setVisible(true);
+                thisFrame.dispose();
+            }
+        });
     }
 
     @SuppressWarnings("unchecked")
