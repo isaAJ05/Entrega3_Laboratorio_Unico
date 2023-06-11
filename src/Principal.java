@@ -1,6 +1,8 @@
 
+import Resultado.chao;
 import java.awt.Color;
 import java.awt.Cursor;
+import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -8,6 +10,9 @@ import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.net.URL;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -15,6 +20,7 @@ import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
+import javax.swing.Timer;
 
 /**
  *
@@ -23,6 +29,7 @@ import javax.swing.JProgressBar;
 public class Principal extends javax.swing.JFrame {
 
     FondoPanel fondo = new FondoPanel();
+
     //SUBRUTINA PARA APLICAR SONIDO
     private void sonido(String cadena) {
         try {
@@ -31,15 +38,29 @@ public class Principal extends javax.swing.JFrame {
             AudioInputStream audioIn = AudioSystem.getAudioInputStream(url);
             clip.open(audioIn);
             clip.start();
-
         } catch (Exception e) {
-           // System.err.println(e.getMessage());
+            // System.err.println(e.getMessage());
         }
-        
-       
 
     }
-
+     //sonido mientras juega
+    public static Clip clip;
+    private void sonido2(String cadena) {
+        try {
+            URL url = getClass().getResource(cadena);
+            AudioInputStream audioIn = AudioSystem.getAudioInputStream(url);
+            clip = AudioSystem.getClip();
+            clip.open(audioIn);
+            clip.start();
+            continuar.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    clip.stop();
+                }
+            });
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+    }
     public Principal() {
         setIconImage(new ImageIcon(getClass().getResource("general/stellaicono.png")).getImage());
         initComponents();
@@ -49,27 +70,22 @@ public class Principal extends javax.swing.JFrame {
         this.setCursor(cursor);
         this.setResizable(false);
         this.setTitle("Star Games");
-        try {
-            Clip clip = AudioSystem.getClip();
-            URL url = getClass().getResource("/Sonidos/satellite.wav");
-            AudioInputStream audioIn = AudioSystem.getAudioInputStream(url);
-            clip.open(audioIn);
-            clip.start();
-            continuar.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    clip.stop();
+        sonido2("/Sonidos/satellite.wav");
+        this.setDefaultCloseOperation(this.DO_NOTHING_ON_CLOSE);
+        Principal thisFrame = this;
+// Agregar un WindowListener al frame principal
+        this.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                // Mostrar el nuevo frame cuando se cierra el frame principal
+                clip.stop();
+                chao c = new chao(); // Crea una instancia de chao
+                c.setVisible(true);
+                thisFrame.dispose();
+            }
+        });
 
-                }
-            });
-            
-        } catch (Exception e) {
-            //System.err.println(e.getMessage());
-        }
-        
-        
     }
-
-    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -135,7 +151,7 @@ public class Principal extends javax.swing.JFrame {
         Principal2 a = new Principal2();
         a.setVisible(true);
         sonido("/Sonidos/boop.wav");
-        
+
         this.dispose();
     }//GEN-LAST:event_continuarActionPerformed
 
@@ -227,7 +243,7 @@ public class Principal extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                        new Principal().setVisible(true);
+                new Principal().setVisible(true);
 
             }
         });
