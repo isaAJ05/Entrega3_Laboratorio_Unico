@@ -5,8 +5,12 @@
 package Resultado;
 
 import java.awt.Cursor;
+import java.awt.Dimension;
 import java.awt.Frame;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Point;
+import java.awt.RenderingHints;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,6 +19,7 @@ import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.Timer;
 
 /**
@@ -26,8 +31,9 @@ public class chao extends javax.swing.JFrame {
     /**
      * Creates new form Empate
      */
-     String name;
      //SUBRUTINAS PARA APLICAR SONIDO
+
+    
 
     private void sonido(String cadena) {
         try {
@@ -42,19 +48,41 @@ public class chao extends javax.swing.JFrame {
         }
 
     }
-    public chao( String name) {
+    public chao( ) {
+        setIconImage(new ImageIcon(getClass().getResource("/general/stellaicono.png")).getImage());
         initComponents();
-        this.name = name;
+        this.setSize(768,480);
         this.dispose();
         this.setUndecorated(true);
         this.setLocationRelativeTo(null);
-        this.setSize(800,500);
+        
         Cursor cursor = Toolkit.getDefaultToolkit().createCustomCursor(new ImageIcon(getClass().getResource("cursorimg.png")).getImage(),new Point(0,0),"Custom Cursor");
         this.setCursor(cursor);
         this.setVisible(true);
-        sonido("/Sonidos/satellite.wav");
+        sonido("/Sonidos/cierre.wav");
+     
+
+
         chao thisFrame = this;
-        Timer timer3 = new Timer(4000, new ActionListener() {
+                    // Carga el archivo GIF en un ImageIcon
+            ImageIcon icon = new ImageIcon(getClass().getResource("/general/prueba2.gif"));
+
+            // Establece el tamaño preferido del JLabel para que coincida con el tamaño del GIF original
+            stellita.setPreferredSize(new Dimension(icon.getIconWidth(), icon.getIconHeight()));
+
+            // Establece el ImageIcon en el JLabel
+            stellita.setIcon(icon);
+
+            // Sobreescribe el método paintComponent del JLabel para configurar el renderizado de calidad
+            stellita = new JLabel() {
+                @Override
+                protected void paintComponent(Graphics g) {
+                    Graphics2D g2 = (Graphics2D) g;
+                    g2.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+                    super.paintComponent(g2);
+                }
+            };
+        Timer timer3 = new Timer(3300, new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         thisFrame.dispose();
@@ -77,10 +105,9 @@ public class chao extends javax.swing.JFrame {
         stellita = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(768, 480));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        stellita.setIcon(new javax.swing.ImageIcon(getClass().getResource("/general/esperoquesi.gif"))); // NOI18N
-        getContentPane().add(stellita, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 500));
+        getContentPane().add(stellita, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 768, 480));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -115,10 +142,11 @@ public class chao extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new chao(null).setVisible(true);
-            }
-        });
+    public void run() {
+        new chao().setVisible(true);
+    }
+});
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
