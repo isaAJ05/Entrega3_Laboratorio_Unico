@@ -15,13 +15,14 @@ public class PanelInfo extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
+        jLabel2 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(0, 0, 51));
         setOpaque(false);
         setPreferredSize(new java.awt.Dimension(710, 400));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Swis721 BlkEx BT", 3, 12)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Arial Black", 3, 12)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(204, 204, 255));
         jLabel1.setText("INSTRUCCIONES DE USO ");
         add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(37, 22, -1, -1));
@@ -44,7 +45,7 @@ public class PanelInfo extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 407, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -54,11 +55,15 @@ public class PanelInfo extends javax.swing.JPanel {
         );
 
         add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 410, 310));
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMGcars/STAR_GAMES-removebg-preview (2).png"))); // NOI18N
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 30, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
