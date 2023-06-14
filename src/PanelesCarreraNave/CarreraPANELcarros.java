@@ -91,7 +91,6 @@ public class CarreraPANELcarros extends javax.swing.JPanel {
         initComponents();
         this.setFocusable(true);
         this.requestFocusInWindow();
-                
         System.out.println("CARRO" + NaveJugador.nave);
         switch (NaveJugador.nave) {
             case 1:
