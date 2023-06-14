@@ -6,3 +6,5 @@ Natalia    |    Medio    |    2
 Paula    |    Malo    |    5
 Paula    |    Medio    |    1
 gamer    |    Perfecto    |    0
+Player    |    Perfecto    |    0
+Player    |    Medio    |    1

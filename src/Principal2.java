@@ -118,6 +118,11 @@ public class Principal2 extends javax.swing.JFrame {
         nombre.setBackground(new java.awt.Color(204, 153, 255));
         nombre.setFont(new java.awt.Font("Monospaced", 0, 14)); // NOI18N
         nombre.setText("Player");
+        nombre.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                nombreMouseClicked(evt);
+            }
+        });
         nombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nombreActionPerformed(evt);
@@ -235,6 +240,10 @@ public class Principal2 extends javax.swing.JFrame {
     private void nombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombreActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_nombreActionPerformed
+
+    private void nombreMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nombreMouseClicked
+        nombre.setText(null);
+    }//GEN-LAST:event_nombreMouseClicked
     @Override
     public void paint(Graphics g) {
         super.paint(g);

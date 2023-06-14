@@ -11,6 +11,7 @@ import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.Timer;
 
 /**
@@ -20,6 +21,7 @@ import javax.swing.Timer;
 public class CarreraPANELcarros extends javax.swing.JPanel {
 //SUBRUTINAS PARA APLICAR SONIDO
 
+    // - subrutina sonido
     private void sonido(String cadena) {
         try {
             Clip clip = AudioSystem.getClip();
@@ -118,7 +120,7 @@ public class CarreraPANELcarros extends javax.swing.JPanel {
 
     //El numero de columanas y filas multiplicado por el valor de la casilla debe dar valores 
     //cercanos o aproximas (segun el gusto) a las dimensiones del panel (Ancho, alto )
-    private int[][] espaciopista;
+    public int[][] espaciopista;
     //Creacion de la matriz de la pista
     //Pista donde los carros se moveran de 19x12, se rellenara con ceros y unos
 
@@ -218,25 +220,13 @@ public class CarreraPANELcarros extends javax.swing.JPanel {
         add(pistafondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 780, 390));
     }// </editor-fold>//GEN-END:initComponents
 
-//    public void PosBolitas(int x1, int y1, int x2, int y2) {
-//        if ((x1 == x2) & (y1 == y2)) {
-//            x2 = ran.nextInt(limiteF - 2) + 1;
-//            y2 = ran.nextInt(limiteC - 2) + 1;
-//        }
-//      
-//    }
+
     int PermisoParaMover = 1;
     int rx1, rx2, ry1, ry2, ax1, ax2, ay1, ay2;
-//    private void reubicarBolitas(JLabel bolita){
-//       int x=bolita.getX();
-//       int y=bolita.getY();
-//        System.out.println(" x "+x+ " y "+y);
-//       
-//       int X=780-bolita.getWidth()-(bolita.getWidth()*ran.nextInt(limiteF-2)+1);
-//       int Y=370-bolita.getHeight()-(bolita.getHeight()*ran.nextInt(limiteC-2)+1);
-//        System.out.println(" Y ");
-//        bolita.setLocation(X, Y);
-//    }
+    int H=0, W=0, contb=0;
+    int posicionesbolitasX[]=new int [6],posicionesbolitasY[]=new int [6];
+    boolean allgood=true;
+
     private void InicioBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InicioBTNActionPerformed
         sonido("/Sonidos/boop.wav");
         InicioBTN.setVisible(false);
@@ -268,7 +258,15 @@ public class CarreraPANELcarros extends javax.swing.JPanel {
                         carro1.setLocation(0, carro1.getLocation().y);
 
                         espaciopista = Hacerespaciopista(); //llamar al que crea la matriz
-
+                        
+                        //Ubicar las bolitas
+                        //ReubicarBolitas(ObsRojo1,0,posicionesbolitasX,posicionesbolitasY, 20);
+                        int boliX=0, boliY=0, comprobar=0;
+       boliX=ran.nextInt(800);
+       boliY=ran.nextInt(500);
+                        
+        ObsRojo1.setLocation(boliX, boliY);
+        
                         carrousuario.requestFocus(); //CENTRAR EL MOVIMIENTO CON TECLAS A LA NAVE DEL USUARIO
                         timer.start(); //Iniciar el timer para las otras dos naves competidores
                     }
@@ -282,10 +280,57 @@ public class CarreraPANELcarros extends javax.swing.JPanel {
         // Inicia el Timer
         timer2.start();
         
-        int boliX=ran.nextInt((limiteF*casilla)-casilla);
-        int boliY=ran.nextInt((limiteC*casilla));
+        
     }//GEN-LAST:event_InicioBTNActionPerformed
-  
+    public void ReubicarBolitas(JLabel bolita,int contb, int[]posicionesbolitasX,int[]posicionesbolitasY, int casilla){
+       contb=contb+1; 
+       TamañodeBolitas(bolita);
+       int boliX=0, boliY=0, comprobar=0;
+       boliX=ran.nextInt(800);
+       boliY=ran.nextInt(500);
+       
+       compararbolitasvector(comprobar,boliX,boliY, contb,posicionesbolitasX,posicionesbolitasY);
+       
+      
+        while(espaciopista[boliY / casilla][(boliX / casilla)] == 1 |espaciopista[boliY / casilla][(boliX / casilla)] == 2|comprobar !=0){
+        boliX=ran.nextInt(800);
+        boliY=ran.nextInt(500);
+        compararbolitasvector(comprobar,boliX,boliY, contb,posicionesbolitasX,posicionesbolitasY);
+      
+        } 
+        posicionesbolitasX[contb-1]=boliX;
+        bolita.setLocation(boliX, boliY);
+    }
+    
+    public void compararbolitasvector(int comprobar, int boliX,int boliY, int contb,int[]posicionesbolitasX, int []posicionesbolitasY){
+         for (int i = 0; i < contb-1; i++) {
+            if(boliX==posicionesbolitasX[i]|boliY==posicionesbolitasY[i]){
+                comprobar=1;
+                break;
+            }
+        }
+    }
+    public void TamañodeBolitas(JLabel bolita) { 
+    H=bolita.getHeight();
+    W=bolita.getWidth();
+    }
+//    public void PosBolitas(int x1, int y1, int x2, int y2) {
+//        if ((x1 == x2) & (y1 == y2)) {
+//            x2 = ran.nextInt(limiteF - 2) + 1;
+//            y2 = ran.nextInt(limiteC - 2) + 1;
+//        }
+//      
+//    }
+    //    private void reubicarBolitas(JLabel bolita){
+//       int x=bolita.getX();
+//       int y=bolita.getY();
+//       System.out.println(" x "+x+ " y "+y);
+//       
+//       int X=780-bolita.getWidth()-(bolita.getWidth()*ran.nextInt(limiteF-2)+1);
+//       int Y=370-bolita.getHeight()-(bolita.getHeight()*ran.nextInt(limiteC-2)+1);
+//        System.out.println(" Y ");
+//        bolita.setLocation(X, Y);
+//    }
 // auto del usuario
     private void carrousuarioKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_carrousuarioKeyReleased
 
