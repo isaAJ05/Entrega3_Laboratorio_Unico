@@ -24,7 +24,7 @@
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Swis721 BlkEx BT" size="12" style="3"/>
+          <Font name="Arial Black" size="12" style="3"/>
         </Property>
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="33" green="66" red="ff" type="rgb"/>
@@ -37,19 +37,22 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+    <Container class="javax.swing.JScrollPane" name="jScrollPane3">
+      <Properties>
+        <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+      </Properties>
       <AuxValues>
         <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
       </AuxValues>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="20" y="60" width="720" height="330"/>
+          <AbsoluteConstraints x="20" y="60" width="440" height="310"/>
         </Constraint>
       </Constraints>
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTextArea" name="jTextArea1">
+        <Component class="javax.swing.JTextArea" name="jTextArea3">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -57,10 +60,10 @@
             </Property>
             <Property name="columns" type="int" value="20"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Monospaced" size="13" style="1"/>
+              <Font name="Microsoft JhengHei UI Light" size="13" style="1"/>
             </Property>
             <Property name="rows" type="int" value="5"/>
-            <Property name="text" type="java.lang.String" value="&#xa1;Bienvenido a &quot;Escaleras y Serpientes versi&#xf3;n Espacial&quot;! &#xa;&#xa;En este juego, tendr&#xe1;s la oportunidad de escoger tu avatar alien y recorrer un tablero &#xa;espacial donde competir&#xe1;s contra nuestra adorada Stella por el primer lugar.&#xa;&#xa;Por favor ten en cuenta las siguientes instrucciones: &#xa;1. Antes de comenzar, aseg&#xfa;rate de elegir tu avatar. &#xa;   Recuerda que el avatar del jugador es un alien, as&#xed; que elige aquel que refleje &#xa;   mejor tu personalidad extraterrestre.&#xa;2. Selecciona la opci&#xf3;n de &quot;Jugar&quot; para dirigirte a nuestro tablero espacial.&#xa;3. &#xbf;Listo para empezar? Lanza el dado para comenzar tu turno. &#xa;   &#xa1;Que la suerte del universo est&#xe9; de tu lado!&#xa;4. Si caes en una casilla con una escalera, tu avatar despegar&#xe1; hacia arriba. &#xa;   &#xa1;Prep&#xe1;rate para llegar m&#xe1;s r&#xe1;pido a la l&#xed;nea final!&#xa;5. Pero ten cuidado, si caes en una casilla con una serpiente, tu avatar espacial &#xa;   ser&#xe1; atrapada y descender&#xe1;s de golpe. &#xa1;Intenta evitar esas serpientes espaciales! &#xa;7. Recuerda, debes avanzar por 35 casillas para llegar a la l&#xed;nea final y ganar. &#xa;   &#xa1;Mant&#xe9;n tu concentraci&#xf3;n y no pierdas de vista tu objetivo final!&#xa;&#xa;&#xa1;Que la fuerza alien&#xed;gena te acompa&#xf1;e! &#xa;&#xa1;Divi&#xe9;rtete jugando a &quot;Escaleras y Serpientes versi&#xf3;n Espacial&quot;!"/>
+            <Property name="text" type="java.lang.String" value="&#xa1;Bienvenido a &quot;Escaleras y Serpientes versi&#xf3;n Espacial&quot;!&#xa;&#xa;En este juego, tendr&#xe1;s la oportunidad de escoger tu avatar alien &#xa;y recorrer un tablero espacial donde competir&#xe1;s contra nuestra &#xa;adorada Stella por el primer lugar.&#xa;&#xa;Por favor ten en cuenta las siguientes instrucciones: &#xa;&#xa;1. Antes de comenzar, aseg&#xfa;rate de elegir tu avatar. &#xa;   Recuerda elegir aquel que refleje mejor tu personalidad &#xa;   extraterrestre ;)&#xa;&#xa;2. Selecciona la opci&#xf3;n de &quot;Jugar&quot; para dirigirte a nuestro tablero.&#xa;&#xa;3. &#xbf;Listo para empezar? Lanza el dado para comenzar tu turno. &#xa;   &#xa1;Que la suerte del universo est&#xe9; de tu lado!&#xa;&#xa;4. Si caes en una casilla con una escalera, tu avatar despegar&#xe1; &#xa;   hacia arriba. &#xa1;Prep&#xe1;rate para llegar m&#xe1;s r&#xe1;pido a la l&#xed;nea final!&#xa;&#xa;5. Pero ten cuidado, si caes en una casilla con una serpiente, tu &#xa;   avatar espacial ser&#xe1; atrapado y descender&#xe1;s de golpe. &#xa;   &#xa1;Intenta evitar esas serpientes espaciales! &#xa;&#xa;6. Recuerda, debes avanzar por 35 casillas para llegar a la &#xa;   l&#xed;nea final y ganar. &#xa;   &#xa1;Mant&#xe9;n tu concentraci&#xf3;n y no pierdas de vista tu objetivo final!&#xa;&#xa;&#xa1;Que la suerte espacial te acompa&#xf1;e!&#xa;"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.SoftBevelBorderInfo">
                 <BevelBorder/>
@@ -70,5 +73,17 @@
         </Component>
       </SubComponents>
     </Container>
+    <Component class="javax.swing.JLabel" name="jLabel3">
+      <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/general/paraescalera.png"/>
+        </Property>
+      </Properties>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="310" y="40" width="-1" height="-1"/>
+        </Constraint>
+      </Constraints>
+    </Component>
   </SubComponents>
 </Form>

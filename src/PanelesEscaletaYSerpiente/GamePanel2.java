@@ -325,7 +325,7 @@ public class GamePanel2 extends javax.swing.JPanel {
         }
         TirarDados.setPreferredSize(new Dimension(90, 26));
         TirarDados.setHorizontalAlignment(SwingConstants.CENTER);
-
+InfoPanel.Utilidades4.detenerMusica4();
     }
 
 //    private MouseListener ML() {
