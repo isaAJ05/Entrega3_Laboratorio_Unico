@@ -1,11 +1,15 @@
 
 package PanelesSP;
 
+
+import Resultado.chao;
 import java.awt.Cursor;
 import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.net.URL;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -32,7 +36,6 @@ public class inicio extends javax.swing.JPanel {
     }
     private String user = null;
         public static class Utilidades2 {
-
         public static void detenerMusica2() {
             if (clips != null) {
                 clips.stop();
@@ -58,6 +61,7 @@ public class inicio extends javax.swing.JPanel {
         } catch (Exception e) {
             //System.err.println(e.getMessage());
         }
+                     
         
     }
 
