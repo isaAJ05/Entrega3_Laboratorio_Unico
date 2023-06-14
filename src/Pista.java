@@ -5,6 +5,8 @@ import PanelesCarreraNave.CarreraPANELcarros;
 import PanelesCarreraNave.CarreraPANELcarros.Utilidades;
 import PanelesCarreraNave.CarreraPANELcarrosConArduino;
 import PanelesCarreraNave.NaveJugador;
+import PanelesSP.inicio;
+import Resultado.chao;
 import java.awt.BorderLayout;
 import java.awt.Cursor;
 import java.awt.Graphics;
@@ -15,6 +17,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.net.URL;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -104,7 +108,7 @@ public class Pista extends javax.swing.JFrame {
         atras.setEnabled(false);
         atras.setVisible(false);
 
-        
+          
 
     }
 

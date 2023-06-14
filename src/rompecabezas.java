@@ -1,4 +1,5 @@
 
+import Resultado.chao;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
@@ -8,6 +9,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -96,7 +99,20 @@ public class rompecabezas extends javax.swing.JFrame {
         //APLIOAR SONIDOS
         sonido2(r1, "/Sonidos/nivel1.wav");
         sonido2(r2, "/Sonidos/nivel2.wav");
-
+        //cierre
+        this.setDefaultCloseOperation(this.DO_NOTHING_ON_CLOSE);
+        rompecabezas thisFrame = this;
+// Agregar un WindowListener al frame principal
+        this.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                // Mostrar el nuevo frame cuando se cierra el frame principal
+                clip.stop();
+                chao c = new chao(); // Crea una instancia de chao
+                c.setVisible(true);
+                thisFrame.dispose();
+            }
+        });
     }
 
     @SuppressWarnings("unchecked")

@@ -1,12 +1,15 @@
 
 import PanelesSP.inicio;
 import PanelesSP.inicio.Utilidades2;
+import Resultado.chao;
 import java.awt.BorderLayout;
 import java.awt.Cursor;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.Toolkit;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.net.URL;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -34,7 +37,6 @@ public class ASOPAstar extends javax.swing.JFrame {
 
     }
     private String user;
-
     public ASOPAstar(String name) {
         setIconImage(new ImageIcon(getClass().getResource("general/stellaicono.png")).getImage());
         initComponents();
@@ -59,6 +61,23 @@ public class ASOPAstar extends javax.swing.JFrame {
         Cursor cursor = Toolkit.getDefaultToolkit().createCustomCursor(new ImageIcon(getClass().getResource("cursor/cursorimg.png")).getImage(),new Point(0,0),"Custom Cursor");
         this.setCursor( cursor);
         this.setResizable(false);
+                    //cierre
+        this.setDefaultCloseOperation(this.DO_NOTHING_ON_CLOSE);
+        ASOPAstar thisFrame = this;
+       
+// Agregar un WindowListener al frame principal
+        this.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                // Mostrar el nuevo frame cuando se cierra el frame principal
+              
+                Utilidades2.detenerMusica2();
+                chao c = new chao(); // Crea una instancia de chao
+                c.setVisible(true);
+                thisFrame.dispose();
+                
+            }
+        });
 
 
 //        inicio ini = new inicio();

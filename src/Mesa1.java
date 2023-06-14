@@ -1,4 +1,5 @@
 
+import Resultado.chao;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Font;
@@ -10,6 +11,8 @@ import java.awt.Image;
 import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.Toolkit;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.net.URL;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -59,6 +62,7 @@ public class Mesa1 extends javax.swing.JFrame {
         }
     }
 
+
     private String user;
     ClassLoader CL = getClass().getClassLoader();
     ImageIcon stellafeliz = new ImageIcon(CL.getResource("resultado/stellafeliz.png"));
@@ -78,6 +82,20 @@ public class Mesa1 extends javax.swing.JFrame {
         labelNombreUser.setText(user + ":");
         deshabilitarbtnGame();
         sonido2("/Sonidos/hugo.wav");
+                    //cierre
+        this.setDefaultCloseOperation(this.DO_NOTHING_ON_CLOSE);
+        Mesa1 thisFrame = this;
+// Agregar un WindowListener al frame principal
+        this.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                // Mostrar el nuevo frame cuando se cierra el frame principal
+                clip.stop();
+                chao c = new chao(); // Crea una instancia de chao
+                c.setVisible(true);
+                thisFrame.dispose();
+            }
+        });
 
     }
 

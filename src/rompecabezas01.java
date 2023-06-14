@@ -1,4 +1,5 @@
 
+import Resultado.chao;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Cursor;
@@ -8,6 +9,8 @@ import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -81,7 +84,19 @@ public class rompecabezas01 extends javax.swing.JFrame implements ActionListener
         this.setSize(800, 500);
         this.setVisible(true);
         this.setResizable(false);
-
+        //cierre
+        this.setDefaultCloseOperation(this.DO_NOTHING_ON_CLOSE);
+ rompecabezas01 thisFrame = this;
+// Agregar un WindowListener al frame principal
+        this.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                // Mostrar el nuevo frame cuando se cierra el frame principal
+                chao c = new chao(); // Crea una instancia de chao
+                c.setVisible(true);
+                thisFrame.dispose();
+            }
+        });
         //cursor
         Cursor cursor = Toolkit.getDefaultToolkit().createCustomCursor(new ImageIcon(getClass().getResource("cursor/cursorimg.png")).getImage(), new Point(0, 0), "Custom Cursor");
         this.setCursor(cursor);
